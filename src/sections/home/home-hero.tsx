@@ -23,13 +23,16 @@ import Iconify from 'src/components/iconify';
 import { RouterLink } from 'src/routes/components';
 import { MotionContainer, varFade } from 'src/components/animate';
 
+// wave
+import wave from 'src/assets/images/other/wave.png'
+
 // ----------------------------------------------------------------------
 
 const StyledRoot = styled('div')(({ theme }) => ({
-  ...bgGradient({
-    color: alpha(theme.palette.background.default, theme.palette.mode === 'light' ? 0.9 : 0.94),
-    imgUrl: '/assets/background/overlay_3.jpg',
-  }),
+  // ...bgGradient({
+  //   color: alpha(theme.palette.background.default, theme.palette.mode === 'light' ? 0.9 : 0.94),
+  //   imgUrl: '/assets/background/overlay_3.jpg',
+  // }),
   width: '100%',
   height: '100vh',
   position: 'relative',
@@ -91,38 +94,38 @@ const StyledEllipseBottom = styled('div')(({ theme }) => ({
   backgroundColor: alpha(theme.palette.primary.darker, 0.12),
 }));
 
-type StyledPolygonProps = {
-  opacity?: number;
-  anchor?: 'left' | 'right';
-};
+// type StyledPolygonProps = {
+//   opacity?: number;
+//   anchor?: 'left' | 'right';
+// };
 
-const StyledPolygon = styled('div')<StyledPolygonProps>(
-  ({ opacity = 1, anchor = 'left', theme }) => ({
-    ...bgBlur({
-      opacity,
-      color: theme.palette.background.default,
-    }),
-    zIndex: 9,
-    bottom: 0,
-    height: 80,
-    width: '50%',
-    position: 'absolute',
-    clipPath: 'polygon(0% 0%, 100% 100%, 0% 100%)',
-    ...(anchor === 'left' && {
-      left: 0,
-      ...(theme.direction === 'rtl' && {
-        transform: 'scale(-1, 1)',
-      }),
-    }),
-    ...(anchor === 'right' && {
-      right: 0,
-      transform: 'scaleX(-1)',
-      ...(theme.direction === 'rtl' && {
-        transform: 'scaleX(1)',
-      }),
-    }),
-  })
-);
+// const StyledPolygon = styled('div')<StyledPolygonProps>(
+//   ({ opacity = 1, anchor = 'left', theme }) => ({
+//     ...bgBlur({
+//       opacity,
+//       color: theme.palette.background.default,
+//     }),
+//     zIndex: 9,
+//     bottom: 0,
+//     height: 80,
+//     width: '50%',
+//     position: 'absolute',
+//     clipPath: 'polygon(0% 0%, 100% 100%, 0% 100%)',
+//     ...(anchor === 'left' && {
+//       left: 0,
+//       ...(theme.direction === 'rtl' && {
+//         transform: 'scale(-1, 1)',
+//       }),
+//     }),
+//     ...(anchor === 'right' && {
+//       right: 0,
+//       transform: 'scaleX(-1)',
+//       ...(theme.direction === 'rtl' && {
+//         transform: 'scaleX(1)',
+//       }),
+//     }),
+//   })
+// );
 
 // ----------------------------------------------------------------------
 
@@ -182,6 +185,13 @@ export default function HomeHero() {
         },
       }}
     >
+      <video style={{ zIndex: -1, top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', position: 'absolute' }} autoPlay muted loop playsInline preload="auto" poster="" id="homeVideo">
+        <source
+          src="src/assets/videos/background.mp4"
+          type="video/mp4"
+        />
+        Your browser does not support HTML5 video.
+      </video>
       <m.div variants={varFade().in}>
         <Typography
           variant="h2"
@@ -189,8 +199,8 @@ export default function HomeHero() {
             textAlign: 'center',
           }}
         >
-          Start a <br />
-          New Project with
+          Blockchain based <br />
+          Investment Platform
         </Typography>
       </m.div>
 
@@ -204,14 +214,13 @@ export default function HomeHero() {
             repeat: Infinity,
           }}
         >
-          Minimal
+          SAYFER
         </StyledTextGradient>
       </m.div>
 
       <m.div variants={varFade().in}>
         <Typography variant="body2" sx={{ textAlign: 'center' }}>
-          The starting point for your next project is based on MUI.Easy customization Helps you
-          build apps faster and better.
+        Customer payouts are over $739,091
         </Typography>
       </m.div>
 
@@ -224,7 +233,7 @@ export default function HomeHero() {
           sx={{ my: 3 }}
         >
           <Rating readOnly value={4.95} precision={0.1} max={5} />
-          <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+          <Typography variant="caption" sx={{ color: 'text.secondary',  }}>
             <Box component="strong" sx={{ mr: 0.5, color: 'text.primary' }}>
               4.96/5
             </Box>
@@ -244,10 +253,10 @@ export default function HomeHero() {
               variant="contained"
               startIcon={<Iconify icon="eva:flash-fill" width={24} />}
             >
-              Live Preview
+              Join the Club Free
             </Button>
 
-            <Link
+            {/* <Link
               color="inherit"
               variant="caption"
               target="_blank"
@@ -261,7 +270,7 @@ export default function HomeHero() {
             >
               <Iconify icon="eva:external-link-fill" width={16} sx={{ mr: 0.5 }} />
               Get Free Version
-            </Link>
+            </Link> */}
           </Stack>
 
           <Button
@@ -274,7 +283,7 @@ export default function HomeHero() {
             href={paths.figma}
             sx={{ borderColor: 'text.primary' }}
           >
-            Design Preview
+            YouTube Preview
           </Button>
         </Stack>
       </m.div>
@@ -282,17 +291,17 @@ export default function HomeHero() {
       <Stack spacing={3} sx={{ textAlign: 'center' }}>
         <m.div variants={varFade().in}>
           <Typography variant="overline" sx={{ opacity: 0.4 }}>
-            Available For
+            We work with
           </Typography>
         </m.div>
 
         <Stack spacing={2} direction="row" justifyContent="center">
-          {['figma', 'js', 'ts', 'nextjs', 'vite'].map((platform) => (
+          {['ethereum-eth-logo', 'bitcoin-btc-logo', 'tether-usdt-logo', 'bnb-bnb-logo', 'litecoin-ltc-logo'].map((platform) => (
             <m.div key={platform} variants={varFade().in}>
               <Box
                 component="img"
-                src={`/assets/icons/platforms/ic_${platform}.svg`}
-                sx={{ width: 24, height: 24 }}
+                src={`src/assets/icons/svg/coins/${platform}.svg`}
+                sx={{ width: 36, height: 36 }}
               />
             </m.div>
           ))}
@@ -302,93 +311,95 @@ export default function HomeHero() {
   );
 
   const renderSlides = (
-    <Stack
-      direction="row"
-      alignItems="flex-start"
-      sx={{
-        height: '150%',
-        position: 'absolute',
-        opacity: opacity > 0 ? opacity : 0,
-        transform: `skew(${-16 - percent / 24}deg, ${4 - percent / 16}deg)`,
-        ...(theme.direction === 'rtl' && {
-          transform: `skew(${16 + percent / 24}deg, ${4 + percent / 16}deg)`,
-        }),
-      }}
-    >
-      <Stack
-        component={m.div}
-        variants={varFade().in}
-        sx={{
-          width: 344,
-          position: 'relative',
-        }}
-      >
-        <Box
-          component={m.img}
-          animate={{ y: ['0%', '100%'] }}
-          transition={transition}
-          alt={isLight ? 'light_1' : 'dark_1'}
-          src={
-            isLight
-              ? `/assets/images/home/hero/light_1.webp`
-              : `/assets/images/home/hero/dark_1.webp`
-          }
-          sx={{ position: 'absolute', mt: -5 }}
-        />
-        <Box
-          component={m.img}
-          animate={{ y: ['-100%', '0%'] }}
-          transition={transition}
-          alt={isLight ? 'light_1' : 'dark_1'}
-          src={
-            isLight
-              ? `/assets/images/home/hero/light_1.webp`
-              : `/assets/images/home/hero/dark_1.webp`
-          }
-          sx={{ position: 'absolute' }}
-        />
-      </Stack>
+    <></>
+    // <Stack
+    //   direction="row"
+    //   alignItems="flex-start"
+    //   sx={{
+    //     height: '150%',
+    //     position: 'absolute',
+    //     opacity: opacity > 0 ? opacity : 0,
+    //     transform: `skew(${-16 - percent / 24}deg, ${4 - percent / 16}deg)`,
+    //     ...(theme.direction === 'rtl' && {
+    //       transform: `skew(${16 + percent / 24}deg, ${4 + percent / 16}deg)`,
+    //     }),
+    //   }}
+    // >
+    //   <Stack
+    //     component={m.div}
+    //     variants={varFade().in}
+    //     sx={{
+    //       width: 344,
+    //       position: 'relative',
+    //     }}
+    //   >
+    //     <Box
+    //       component={m.img}
+    //       animate={{ y: ['0%', '100%'] }}
+    //       transition={transition}
+    //       alt={isLight ? 'light_1' : 'dark_1'}
+    //       src={
+    //         isLight
+    //           ? `/assets/images/home/hero/light_1.webp`
+    //           : `/assets/images/home/hero/dark_1.webp`
+    //       }
+    //       sx={{ position: 'absolute', mt: -5 }}
+    //     />
+    //     <Box
+    //       component={m.img}
+    //       animate={{ y: ['-100%', '0%'] }}
+    //       transition={transition}
+    //       alt={isLight ? 'light_1' : 'dark_1'}
+    //       src={
+    //         isLight
+    //           ? `/assets/images/home/hero/light_1.webp`
+    //           : `/assets/images/home/hero/dark_1.webp`
+    //       }
+    //       sx={{ position: 'absolute' }}
+    //     />
+    //   </Stack>
 
-      <Stack
-        component={m.div}
-        variants={varFade().in}
-        sx={{ width: 720, position: 'relative', ml: -5 }}
-      >
-        <Box
-          component={m.img}
-          animate={{ y: ['100%', '0%'] }}
-          transition={transition}
-          alt={isLight ? 'light_2' : 'dark_2'}
-          src={
-            isLight
-              ? `/assets/images/home/hero/light_2.webp`
-              : `/assets/images/home/hero/dark_2.webp`
-          }
-          sx={{ position: 'absolute', mt: -5 }}
-        />
-        <Box
-          component={m.img}
-          animate={{ y: ['0%', '-100%'] }}
-          transition={transition}
-          alt={isLight ? 'light_2' : 'dark_2'}
-          src={
-            isLight
-              ? `/assets/images/home/hero/light_2.webp`
-              : `/assets/images/home/hero/dark_2.webp`
-          }
-          sx={{ position: 'absolute' }}
-        />
-      </Stack>
-    </Stack>
+    //   <Stack
+    //     component={m.div}
+    //     variants={varFade().in}
+    //     sx={{ width: 720, position: 'relative', ml: -5 }}
+    //   >
+    //     <Box
+    //       component={m.img}
+    //       animate={{ y: ['100%', '0%'] }}
+    //       transition={transition}
+    //       alt={isLight ? 'light_2' : 'dark_2'}
+    //       src={
+    //         isLight
+    //           ? `/assets/images/home/hero/light_2.webp`
+    //           : `/assets/images/home/hero/dark_2.webp`
+    //       }
+    //       sx={{ position: 'absolute', mt: -5 }}
+    //     />
+    //     <Box
+    //       component={m.img}
+    //       animate={{ y: ['0%', '-100%'] }}
+    //       transition={transition}
+    //       alt={isLight ? 'light_2' : 'dark_2'}
+    //       src={
+    //         isLight
+    //           ? `/assets/images/home/hero/light_2.webp`
+    //           : `/assets/images/home/hero/dark_2.webp`
+    //       }
+    //       sx={{ position: 'absolute' }}
+    //     />
+    //   </Stack>
+    // </Stack>
   );
 
   const renderPolygons = (
-    <>
-      <StyledPolygon />
+    <Stack style={{ position: 'absolute', bottom: 0 }}>
+        <img src={wave} height={80} width={screen.width} />
+      {/* <StyledPolygon />
       <StyledPolygon anchor="right" opacity={0.48} />
       <StyledPolygon anchor="right" opacity={0.48} sx={{ height: 48, zIndex: 10 }} />
-      <StyledPolygon anchor="right" sx={{ zIndex: 11, height: 24 }} />
-    </>
+      <StyledPolygon anchor="right" sx={{ zIndex: 11, height: 24 }} /> */}
+    </Stack>
   );
 
   const renderEllipses = (
