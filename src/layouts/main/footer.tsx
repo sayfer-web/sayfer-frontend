@@ -206,66 +206,57 @@ export default function Footer() {
 
         </div>
 
-        <div className='flex flex-wrap lg:flex-1 justify-between gap-5'
-          style={{ display: 'flex', flexWrap: 'wrap', flex: 1, justifyContent: 'space-between' }}
+        <Stack
+          sx={{ display: 'flex', flexDirection: { mobile: 'column', sm: 'row' }, flexWrap: 'wrap', flex: 1, 
+          justifyContent: {
+            sm: 'space-evenly',
+            mobile: 'center'
+          }, 
+          alignItems: {
+            sm: 'space-evenly',
+            mobile: 'center'
+          },
+          // gap: 1  
+        }}
         >
 
-          <div style={{ listStyle: "none", display: 'flex', flexDirection: 'column', color: '#fff', gap: 0 }} className='max-[436px]:w-full w-[168]'>
+          <div style={{ listStyle: "none", display: 'flex', flexDirection: 'column', color: '#fff', gap: 0, width: 250 }} className='max-[436px]:w-full w-[168]'>
 
-            <span style={{ fontWeight: '500', color: '#02a30c' }} className='text-xl max-[436px]:text-2xl'>Пользователь</span>
+            <span style={{ fontWeight: '500', color: '#02a30c', fontSize: 20 }} className='text-xl max-[436px]:text-2xl'>Пользователь</span>
             <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column' }}>
-              <li className='font-light max-[436px]:text-xl text-lg'>» Мой профиль</li>
+              <li style={{ listStyle: 'none'}}>» Мой профиль</li>
               <li className='font-light max-[436px]:text-xl text-lg'>» Мой портфель</li>
               <li className='font-light max-[436px]:text-xl text-lg'>» Настройки</li>
               <li className='font-light max-[436px]:text-xl text-lg'>» Выход</li>
             </ul>
 
-            {/* <h3 style={{ fontWeight: '500', fontSize: 22, color: '#02a30c' }}>My Account</h3>
-      <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column' }}>
-        <li className='font-light max-[436px]:text-xl text-lg'>Privacy Notice »</li>
-        <li className='font-light max-[436px]:text-xl text-lg'>Security »</li>
-        <li className='font-light max-[436px]:text-xl text-lg'>Terms of Service »</li>
-        <li className='font-light max-[436px]:text-xl text-lg'>Become Affiliate »</li>
-      </ul> */}
           </div>
 
 
-          <div style={{ listStyle: "none", display: 'flex', flexDirection: 'column', color: '#fff', gap: 0 }} className='max-[436px]:w-full w-[168]'>
-            <span style={{ fontWeight: '500', color: '#02a30c' }} className='text-xl max-[436px]:text-2xl'>Платформа</span>
+          <div style={{ listStyle: "none", display: 'flex', flexDirection: 'column', color: '#fff', gap: 0, width: 250 }} className='max-[436px]:w-full w-[168]'>
+            <span style={{ fontWeight: '500', color: '#02a30c', fontSize: 20 }} className='text-xl max-[436px]:text-2xl'>Платформа</span>
             <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column' }}>
               <li className='font-light max-[436px]:text-xl text-lg'>» Кто мы</li>
               <li className='font-light max-[436px]:text-xl text-lg'>» Наши цели</li>
               <li className='font-light max-[436px]:text-xl text-lg'>» Преимущества</li>
               <li className='font-light max-[436px]:text-xl text-lg'>» С чего начать</li>
             </ul>
-            {/* <h3 style={{ fontWeight: '500', fontSize: 22, color: '#02a30c' }}>Legal Info</h3>
-      <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column' }}>
-        <li className='font-light max-[436px]:text-xl text-lg'>Privacy Notice »</li>
-        <li className='font-light max-[436px]:text-xl text-lg'>Security »</li>
-        <li className='font-light max-[436px]:text-xl text-lg'>Terms of Service »</li>
-        <li className='font-light max-[436px]:text-xl text-lg'>Become Affiliate »</li>
-      </ul> */}
+
           </div>
 
-          <div style={{ listStyle: "none", display: 'flex', flexDirection: 'column', color: '#fff', gap: 0 }} className='max-[436px]:w-full w-[168]'>
-            <span style={{ fontWeight: '500', color: '#02a30c' }} className='text-xl max-[436px]:text-2xl'>Справочник</span>
+          <div style={{ listStyle: "none", display: 'flex', flexDirection: 'column', color: '#fff', gap: 0, width: 250 }} className='max-[436px]:w-full w-[168]'>
+            <span style={{ fontWeight: '500', color: '#02a30c', fontSize: 20 }} className='text-xl max-[436px]:text-2xl'>Справочник</span>
             <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column' }}>
               <li className='font-light max-[436px]:text-xl text-lg'>» Приватность</li>
               <li className='font-light max-[436px]:text-xl text-lg'>» Безопасность</li>
               <li className='font-light max-[436px]:text-xl text-lg'>» Правила сервиса</li>
               <li className='font-light max-[436px]:text-xl text-lg'>» Сотрудничество</li>
             </ul>
-            {/* <h3 style={{ fontWeight: '500', fontSize: 22, color: '#02a30c' }}>Legal Info</h3>
-      <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column' }}>
-        <li className='font-light max-[436px]:text-xl text-lg'>Privacy Notice »</li>
-        <li className='font-light max-[436px]:text-xl text-lg'>Security »</li>
-        <li className='font-light max-[436px]:text-xl text-lg'>Terms of Service »</li>
-        <li className='font-light max-[436px]:text-xl text-lg'>Become Affiliate »</li>
-      </ul> */}
+
           </div>
 
-          <div style={{ listStyle: "none", display: 'flex', flexDirection: 'column', color: '#fff', gap: 0 }} className='max-[436px]:w-full w-[168]'>
-            <span style={{ fontWeight: '500', color: '#02a30c' }} className='text-xl max-[436px]:text-2xl'>Legal Info</span>
+          <div style={{ listStyle: "none", display: 'flex', flexDirection: 'column', color: '#fff', gap: 0, width: 250 }} className='max-[436px]:w-full w-[168]'>
+            <span style={{ fontWeight: '500', color: '#02a30c', fontSize: 20 }} className='text-xl max-[436px]:text-2xl'>Legal Info</span>
             <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column' }}>
               <li className='font-light max-[436px]:text-xl text-lg'>» Privacy Notice</li>
               <li className='font-light max-[436px]:text-xl text-lg'>» Security</li>
@@ -273,25 +264,48 @@ export default function Footer() {
               <li className='font-light max-[436px]:text-xl text-lg'>» Become Affiliate</li>
             </ul>
           </div>
-        </div>
+        </Stack>
       </div>
 
     </div>
 
-    <div className='pl-10 pr-10 lg:pl-20 lg:pr-20'
+    {/* <div className='pl-10 pr-10 lg:pl-20 lg:pr-20'
     style={{ paddingLeft: 20, paddingRight: 20 }}
-    >
+    > */}
       <hr />
-      <div style={{ gap: 10, display: 'flex', paddingTop: 0, paddingBottom: 0,  }} className='flex pt-2 pb-2 justify-between items-center sm:flex-row flex-col'
+      <Stack
+      sx={{ gap: 1, 
+        display: 'flex', 
+        paddingLeft: 10, paddingRight: 10, 
+        // flexDirection: 'row',
+        flexDirection: {
+          mobile: 'column',
+          md: 'row'
+        }, 
+        flexWrap: 'wrap', 
+        justifyContent: {
+          mobile: 'center',
+          md: 'space-between'
+        }, 
+        alignItems: 'center', 
+        marginLeft: {
+          mobile: 4,
+          md: '10'
+        }, 
+        marginRight: {
+          mobile: 4,
+          md: '10'
+        }
+        }}
       >
         <div className='text-white w-full justify-between sm:justify-start flex flex-row gap-2 font-light text-lg max-[436px]:text-xl'
-        style={{ display: 'flex', width: '100%', gap: 10, alignItems: 'center' }}
+        style={{ display: 'flex', justifyContent: 'center', gap: 10, alignItems: 'center' }}
         >
-          <p>© 2023 Sayfer. </p>
-          <p>Все права защищены.</p>
+          <span style={{  }}>© 2023 Sayfer. </span>
+          <span style={{ }}>Все права защищены.</span>
         </div>
         <ul className='flex flex-row gap-5 text-white justify-center sm:justify-end w-full'
-        style={{ display: 'flex', flexDirection: 'row', gap: 5, justifyContent: 'flex-end', width: '100%', listStyle: 'none', alignItems: 'center' }}
+        style={{ display: 'flex', flexDirection: 'row', gap: 5, justifyContent: 'center', listStyle: 'none', alignItems: 'center', paddingLeft: 0 }}
         >
           <li><IconYoutube /></li>
           <li><IconFacebook /></li>
@@ -300,8 +314,8 @@ export default function Footer() {
           <li><IconVk /></li>
           <li><IconLinkedin /></li>
         </ul>
-      </div>
-    </div>
+      </Stack>
+    {/* </div> */}
 
     
   </div>

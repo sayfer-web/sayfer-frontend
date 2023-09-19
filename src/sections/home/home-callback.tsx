@@ -1,4 +1,8 @@
+import Button from "@mui/material/Button"
+import Stack from "@mui/material/Stack"
+import { m } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
+import Iconify from "src/components/iconify"
 
 const USER_REGEX = /^[a-zA-Zа-яА-Я ]+$/
 // const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/
@@ -73,31 +77,41 @@ export const HomeCallback = () => {
       <h1 style={{ fontSize: 28, fontWeight: '500', color: '#fff', textAlign: 'center', fontStyle: 'initial' }}
         className="text-3xl pb-2 px-5">Запишитесь на бесплатную онлайн консультацию</h1>
       {/* <h2 style={{ fontSize: 24, fontWeight: '300', color: '#fff'}}></h2> */}
-      <form 
-      className="flex gap-10 flex-col w-full px-2 lg:w-[70%] justify-center items-center"
-      style={{ display: 'flex', gap: 20, flexDirection: 'column', width: '50%', paddingLeft: 6, paddingRight: 6, justifyItems: 'center', alignItems: 'center' }}
-      >
-    
-        <div 
+
+      <Stack
+      sx={{ display: 'flex', gap: 2, flexDirection: 'column', width: {
+        mobile: '100%',
+        md: 600
+      }, paddingLeft: 2, paddingRight: 2, justifyItems: 'center', alignItems: 'center', minWidth: 400 }}
+    >
+
+      <form style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 30}}>
+
+
+
+        <Stack
           className="flex w-full gap-8 flex-col lg:flex-row" 
           /* @ts-ignore */ 
-          style={{    
-            display: 'flex', 
+          sx={{    
+          display: 'flex',
           flex: 1,
           width: '100%', 
-          flexDirection: 'row',
+          flexDirection: {
+            mobile: 'column',
+            sm: 'row'
+          },
           alignItems: 'center',
-          gap: 20
+          gap: 2
           }}>
 
           <div className="flex flex-col gap-2 w-full"
-          style={{ display: 'flex', flexDirection: 'column', justifyItems: 'center', gap: 4, flex: 1 }}
+          style={{ display: 'flex', flexDirection: 'column', justifyItems: 'center', gap: 4, flex: 1, width: '100%' }}
           >
             <label 
             className="text-white text-xl font-medium" 
             style={{ color: 'white', fontSize: 20}}
             htmlFor="name">Имя</label>
-            <div style={{ borderRadius: 50, borderWidth: 2, borderColor: isValidName ? '#0f0' : '#f00', boxShadow: isValidName ? isFocusNameField ? '0px 0px 15px #0f0' : '0px 0px 6px #0f0' : '0px 0px 6px #f00', display: 'flex', flex: 1, position: 'relative', backgroundColor: '#001102', color: '#fff' }}
+            <div style={{ borderRadius: 10, borderWidth: 2, borderColor: isValidName ? '#0f0' : '#f00', boxShadow: isValidName ? isFocusNameField ? '0px 0px 12px #0f0' : '0px 0px 6px #0f0' : '0px 0px 6px #f00', display: 'flex', flex: 1, position: 'relative', backgroundColor: '#001102', color: '#fff' }}
             >
               <input
                 ref={refName}
@@ -107,18 +121,18 @@ export const HomeCallback = () => {
                 onBlur={() => setIsFocusNameField(false)}
                 style={styles.input}
                 className="bg-transparent focus:text-white h-14 flex-1 flex pl-6 text-xl autofill:bg-transparent" type="text" id="name" placeholder="Андрей Викторович" />
-              {isValidName ? '' : <p style={{ color: '#fc503d', position: 'absolute', left: 0, bottom: -30, fontSize: 16  }}>Введены некорректные данные.</p>}
+              {isValidName ? '' : <p style={{ color: '#fc503d', position: 'absolute', left: 0, bottom: -45, fontSize: 16  }}>Введены некорректные данные.</p>}
             </div>
           </div>
 
           <div className="flex flex-col gap-2 w-full" 
-          style={{ display: 'flex', flexDirection: 'column', justifyItems: 'center', gap: 4, flex: 1 }}
+          style={{ display: 'flex', flexDirection: 'column', justifyItems: 'center', gap: 4, flex: 1, width: '100%' }}
           >
             <label className="text-white text-xl font-medium"
             style={styles.inputLabel} htmlFor="name">
               Номер
             </label>
-            <div style={{ borderRadius: 50, borderWidth: 2, borderColor: isValidPhone ? '#0f0' : '#f00', boxShadow: isValidPhone ? isFocusPhoneField ? '0px 0px 15px #0f0' : '0px 0px 6px #0f0' : '0px 0px 6px #f00', display: 'flex', flex: 1, position: 'relative', color: "#fff", backgroundColor: '#001102' }}
+            <div style={{ borderRadius: 10, borderWidth: 2, borderColor: isValidPhone ? '#0f0' : '#f00', boxShadow: isValidPhone ? isFocusPhoneField ? '0px 0px 12px #0f0' : '0px 0px 6px #0f0' : '0px 0px 6px #f00', display: 'flex', flex: 1, position: 'relative', color: "#fff", backgroundColor: '#001102' }}
               // className={`bg-[#001102]`}
               
             >
@@ -129,26 +143,26 @@ export const HomeCallback = () => {
                 onBlur={() => setIsFocusPhoneField(false)}
                 style={styles.input}
                 className={`bg-transparent focus:text-white h-14 flex-1 pl-6 text-xl autofill:bg-none autofill:border-hidden" type="text" id="name" placeholder="+0999999" ${isValidPhone}`} />
-              {isValidPhone ? '' : <p style={{ color: '#fc503d', position: 'absolute', left: 0, bottom: -30, fontSize: 16 }}>Введите корректный номер телефона</p>}
+              {isValidPhone ? '' : <p style={{ color: '#fc503d', position: 'absolute', left: 0, bottom: -45, fontSize: 16 }}>Введите корректный номер телефона</p>}
             </div>
           </div>
 
 
 
-        </div>
+        </Stack>
 
         <div className="flex gap-8 w-full justify-center flex-col lg:flex-row"
-        style={{ display: 'flex', flexDirection: 'column', width: '100%', gap: 20, justifyItems: 'center' }}
+        style={{ display: 'flex', flexDirection: 'column', gap: 20, justifyItems: 'center', width: '100%' }}
         >
 
           <div className="flex flex-col gap-2 w-full"
-          style={{ display: 'flex', flexDirection: 'column', justifyItems: 'center', gap: 4, flex: 1 }}
+          style={{ display: 'flex', flexDirection: 'column', justifyItems: 'center', gap: 4, flex: 1, width: '100%' }}
           >
             <label 
               className="text-white text-xl font-medium" 
               style={styles.inputLabel}
               htmlFor="name">Электронная почта</label>
-            <div style={{ borderRadius: 50, borderWidth: 2, borderColor: isValidEmail ? '#0f0' : '#f00', boxShadow: isValidEmail ? isFocusEmailField ? '0px 0px 15px #0f0' : '0px 0px 6px #0f0' : '0px 0px 6px #f00', display: 'flex', flex: 1, position: 'relative', backgroundColor: '#001102', color: '#fff' }}
+            <div style={{ borderRadius: 10, borderWidth: 2, borderColor: isValidEmail ? '#0f0' : '#f00', boxShadow: isValidEmail ? isFocusEmailField ? '0px 0px 12px #0f0' : '0px 0px 6px #0f0' : '0px 0px 6px #f00', display: 'flex', flex: 1, position: 'relative', backgroundColor: '#001102', color: '#fff' }}
             >
               <input
                 value={fieldEmail}
@@ -157,7 +171,7 @@ export const HomeCallback = () => {
                 onBlur={() => setIsFocusEmailField(false)}
                 style={styles.input}
                 className="bg-transparent focus:text-white h-14 flex-1 pl-6 text-xl" type="email" id="name" placeholder="mail@gmail.com" />
-              {isValidEmail ? '' : <p style={{ color: '#fc503d', position: 'absolute', left: 0, bottom: -30, fontSize: 16 }}>Введите корректный адрес электронной почты</p>}
+              {isValidEmail ? '' : <p style={{ color: '#fc503d', position: 'absolute', left: 0, bottom: -45, fontSize: 16 }}>Введите корректный адрес электронной почты</p>}
             </div>
           </div>
 
@@ -166,7 +180,7 @@ export const HomeCallback = () => {
           style={{ display: 'flex', flexDirection: 'column', justifyItems: 'center', gap: 4, flex: 1 }}
           >
             <label className="text-white text-xl font-medium" htmlFor="name">Сумма инвестирования</label>
-            <div style={{ borderRadius: 50, borderWidth: 2, borderColor: isValidInvest ? '#0f0' : '#f00', boxShadow: isValidInvest ? isFocusInvestField ? '0px 0px 15px #0f0' : '0px 0px 6px #0f0' : '0px 0px 6px #f00', display: 'flex', flex: 1, position: 'relative', backgroundColor: '#001102', color: '#fff' }}
+            <div style={{ borderRadius: 10, borderWidth: 2, borderColor: isValidInvest ? '#0f0' : '#f00', boxShadow: isValidInvest ? isFocusInvestField ? '0px 0px 12px #0f0' : '0px 0px 6px #0f0' : '0px 0px 6px #f00', display: 'flex', flex: 1, position: 'relative', backgroundColor: '#001102', color: '#fff' }}
             >
               <input
                 value={fieldInvest}
@@ -175,7 +189,7 @@ export const HomeCallback = () => {
                 onBlur={() => setIsFocusInvestField(false)}
                 style={styles.input}
                 className="bg-transparent focus:text-white h-14 flex-1 pl-6 text-xl" type="email" id="name" placeholder="100000" />
-              {isValidInvest ? '' : <p style={{ color: '#fc503d', position: 'absolute', left: 0, bottom: -30, fontSize: 16 }}>Введите числовое значение от 1 и более</p>}
+              {isValidInvest ? '' : <p style={{ color: '#fc503d', position: 'absolute', left: 0, bottom: -45, fontSize: 16 }}>Введите числовое значение от 1 и более</p>}
             </div>
           </div>
 
@@ -189,7 +203,7 @@ export const HomeCallback = () => {
           style={{ display: 'flex', flexDirection: 'column', gap: 10, justifyItems: 'center', width: '100%'}}
           >
             <label className="text-white text-xl font-medium" htmlFor="name">Сопроводительное письмо</label>
-            <div style={{ borderRadius: 25, borderWidth: 2, borderColor: isValidMessage ? '#0f0' : '#f00', boxShadow: isValidMessage ? isFocusMessageField ? '0px 0px 15px #0f0' : '0px 0px 6px #0f0' : '0px 0px 6px #f00', display: 'flex', flex: 1, position: 'relative', backgroundColor: '#001102', color: '#fff' }}
+            <div style={{ borderRadius: 10, borderWidth: 2, borderColor: isValidMessage ? '#0f0' : '#f00', boxShadow: isValidMessage ? isFocusMessageField ? '0px 0px 15px #0f0' : '0px 0px 6px #0f0' : '0px 0px 6px #f00', display: 'flex', flex: 1, position: 'relative', backgroundColor: '#001102', color: '#fff' }}
             >
               <textarea
                 value={fieldMessage}
@@ -205,11 +219,32 @@ export const HomeCallback = () => {
         </div>
 
         {/* <button
-          style={{ marginTop: 20, borderRadius: 50, borderWidth: 2, borderColor: '#0f0', boxShadow: '0px 0px 6px #0f0', padding: 2, height: 56, paddingLeft: 20, paddingRight: 20, color: '#fff' }}
+          style={{ marginTop: 20, borderRadius: 10, borderWidth: 2, borderColor: '#0f0', boxShadow: '0px 0px 6px #0f0', padding: 2, height: 56, paddingLeft: 20, paddingRight: 20, color: '#fff' }}
           className="hover:bg-emerald-900 bg-['#0f0'] text-2xl"
           onClick={() => { }} disabled>Записаться</button> */}
 
+          <m.div style={{ display: 'flex', justifyContent: 'center'}}>
+        <Button
+          color="inherit"
+          size="large"
+          variant="outlined"
+          endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}
+          target="_blank"
+          rel="noopener"
+          href='/'
+        >
+          
+          Записаться
+        </Button>
+
+        </m.div>
+
       </form>
+
+
+      </Stack>
+
+
     </section>
   )
 }
