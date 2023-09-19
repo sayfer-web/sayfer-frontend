@@ -27,9 +27,40 @@ import { useNavigate } from 'react-router';
 import { useLoginMutation } from 'src/features/auth/authApiSlice';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from 'src/features/auth/authSlice';
-import { TextField, makeStyles } from '@mui/material';
+import { TextField, makeStyles, withStyles } from '@mui/material';
 
 // ----------------------------------------------------------------------
+
+
+// const ValidationTextField = withStyles({
+//   root: {
+//     '& input:valid + fieldset': {
+//       borderColor: 'orange',
+//       borderWidth: 1,
+//     },
+//     '& .MuiOutlinedInput-root':{
+//       '&:hover fieldset': {
+//         borderColor: 'orange'
+//       },
+//       '&.Mui-focused fieldset': {
+//         borderColor: 'orange',
+//       },
+//     },
+//     '& input:invalid + fieldset': {
+//       borderColor: 'orange',
+//       borderWidth: 1,
+//       backgroundColor: 'black',
+//     },
+
+//     '& input:valid:focus + fieldset': {
+//       borderColor: 'orange',
+//       borderLeftWidth: 5,
+//       padding: '4px !important', // override inline-style
+//     },
+//   },
+// })(TextField);
+
+//Style MUI
 
 // const useStyles = makeStyles((theme: any) => ({
 //   input: {
@@ -46,7 +77,7 @@ export default function JwtLoginView() {
 
   /* @ts-ingore */
   // const classes = useStyles('dark');
-
+  
 
   const userRef = useRef(null)
   const errRef = useRef(null)
@@ -174,6 +205,12 @@ export default function JwtLoginView() {
         value={user}
         autoComplete="on"
         InputLabelProps={{}}
+        sx={{ 
+          "& input:-webkit-autofill": {
+            '-webkit-box-shadow': '0 0 0 100px #000 inset',
+            '-webkit-text-fill-color': '#fff',
+          }
+        }}
         // className={classes.input}
         required
         onChange={(value) => setUser(value.target.value)}
@@ -188,7 +225,12 @@ export default function JwtLoginView() {
         value={pwd}
         autoComplete="on"
         InputLabelProps={{}}
-        // className={classes.input}
+        sx={{ 
+          "& input:-webkit-autofill": {
+            '-webkit-box-shadow': '0 0 0 100px #000 inset',
+            '-webkit-text-fill-color': '#fff',
+          }
+        }}
         required
         onChange={(value) => setPwd(value.target.value)}
         onFocus={() => toggleFocusPwd(true)}
