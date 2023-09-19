@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -23,58 +23,134 @@ import { useAuthContext } from 'src/auth/hooks';
 // components
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
+import { useNavigate } from 'react-router';
+import { useLoginMutation } from 'src/features/auth/authApiSlice';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from 'src/features/auth/authSlice';
+import { TextField, makeStyles } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
+// const useStyles = makeStyles((theme: any) => ({
+//   input: {
+//     '&:-webkit-autofill': {
+//       /* Установите новый цвет фона, границы и цвет текста */
+//       backgroundColor: '#fff',
+//       border: '1px solid #000',
+//       color: '#your-text-color',
+//     },
+//   },
+// }));
+
 export default function JwtLoginView() {
-  const { login } = useAuthContext();
+
+  /* @ts-ingore */
+  // const classes = useStyles('dark');
+
+
+  const userRef = useRef(null)
+  const errRef = useRef(null)
+  const [user, setUser] = useState('')
+  // const [validUser, toggleValidUser] = useState(true)
+  const [focusUser, toggleFocusUser] = useState(false)
+  const [pwd, setPwd] = useState('')
+  const [focusPwd, toggleFocusPwd] = useState(false)
+  const [errMsg, setErrMsg] = useState('')
+  const navigate = useNavigate()
+
+  const [login, { isLoading }] = useLoginMutation()
+  const dispatch = useDispatch()
+
+  // useEffect(() => {
+    /* @ts-ignore */
+  //   useRef.current.focus()
+  // }, [])
+
+  useEffect(() => {
+    setErrMsg('')
+  }, [user, pwd])
+
+  const handleSubmit2 = async (e: any) => {
+    e.preventDefault()
+
+    try {
+      // setUser('1')
+      const userData = await login({ username: user, password: pwd }).unwrap()
+      // setUser('2')
+      dispatch(setCredentials({ ...userData, user }))
+      // setUser(userData.token)
+      // setPwd('')
+      router.push(returnTo || PATH_AFTER_LOGIN);
+      // navigate('/dashboard')
+    } catch (err: any) {
+      if (!err.originalStatus) {
+        setErrMsg('No Server Response')
+      } else if (err.response?.status === 400) {
+        setErrMsg('Missing Username or Password')
+      } else if (err.response?.status === 401) {
+        setErrMsg('Unauthorized')
+      } else {
+        setErrMsg('Login Failed')
+      }
+      /* @ts-ignore */
+      // errRef.current.focus()
+    }
+  }
+
+  // const { login } = useAuthContext();
 
   const router = useRouter();
 
-  const [errorMsg, setErrorMsg] = useState('');
+  // const [errorMsg, setErrorMsg] = useState('');
 
   const searchParams = useSearchParams();
 
   const returnTo = searchParams.get('returnTo');
 
-  const password = useBoolean();
+  // const password = useBoolean();
 
-  const LoginSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
-    password: Yup.string().required('Password is required'),
-  });
+  // const LoginSchema = Yup.object().shape({
+  //   username: Yup.string().required('Username is required'),
+  //   password: Yup.string().required('Password is required'),
+  // });
 
-  const defaultValues = {
-    email: 'demo@minimals.cc',
-    password: 'demo1234',
-  };
+  // const defaultValues = {
+  //   email: 'demo@minimals.cc',
+  //   password: 'demo1234',
+  // };
 
-  const methods = useForm({
-    resolver: yupResolver(LoginSchema),
-    defaultValues,
-  });
+  // const methods = useForm({
+  // resolver: yupResolver(LoginSchema),
+  // defaultValues,
+  // });
 
-  const {
-    reset,
-    handleSubmit,
-    formState: { isSubmitting },
-  } = methods;
+  // const {
+  //   reset,
+  //   handleSubmit,
+  //   formState: { isSubmitting },
+  // } = methods;
 
-  const onSubmit = handleSubmit(async (data) => {
-    try {
-      await login?.(data.email, data.password);
-
-      router.push(returnTo || PATH_AFTER_LOGIN);
-    } catch (error) {
-      console.error(error);
-      reset();
-      setErrorMsg(typeof error === 'string' ? error : error.message);
-    }
-  });
+  // const onSubmit = handleSubmit(async (data) => {
+  //   try {
+  //     await  login({ username: data.username, password: data.password }).unwrap()
+      // setUser('1')
+      // const userData = await login({ username: user, password: pwd }).unwrap()
+      // setUser('2')
+      // dispatch(setCredentials({ ...userData, user }))
+      // setUser(userData.token)
+      // setPwd('')
+      // navigate('/welcome')
+      // router.push(returnTo || PATH_AFTER_LOGIN);
+      // } catch (error) {
+      // console.error(error);
+      // reset();
+      // setErrorMsg(typeof error === 'string' ? error : error.message);
+      // }
+  // });
 
   const renderHead = (
     <Stack spacing={2} sx={{ mb: 5 }}>
-      <Typography variant="h4">Sign in to Minimal</Typography>
+      <Typography variant="h4">Sign in to Sayfer Inv.</Typography>
 
       <Stack direction="row" spacing={0.5}>
         <Typography variant="body2">New user?</Typography>
@@ -88,11 +164,41 @@ export default function JwtLoginView() {
 
   const renderForm = (
     <Stack spacing={2.5}>
-      {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
+      {/* {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>} */}
 
-      <RHFTextField name="email" label="Email address" />
+      <TextField
+        type="text"
+        id="username"
+        label="Username"
+        ref={userRef}
+        value={user}
+        autoComplete="on"
+        InputLabelProps={{}}
+        // className={classes.input}
+        required
+        onChange={(value) => setUser(value.target.value)}
+        onFocus={() => toggleFocusUser(true)}
+        onBlur={() => toggleFocusUser(false)}
+      />
 
-      <RHFTextField
+      <TextField
+        type="password"
+        id="password"
+        label="Password"
+        value={pwd}
+        autoComplete="on"
+        InputLabelProps={{}}
+        // className={classes.input}
+        required
+        onChange={(value) => setPwd(value.target.value)}
+        onFocus={() => toggleFocusPwd(true)}
+        onBlur={() => toggleFocusPwd(false)}
+      />
+
+        
+      {/* <RHFTextField name="email" label="Email address" /> */}
+
+      {/* <RHFTextField
         name="password"
         label="Password"
         type={password.value ? 'text' : 'password'}
@@ -105,7 +211,7 @@ export default function JwtLoginView() {
             </InputAdornment>
           ),
         }}
-      />
+      /> */}
 
       <Link variant="body2" color="inherit" underline="always" sx={{ alignSelf: 'flex-end' }}>
         Forgot password?
@@ -117,7 +223,7 @@ export default function JwtLoginView() {
         size="large"
         type="submit"
         variant="contained"
-        loading={isSubmitting}
+        loading={isLoading}
       >
         Login
       </LoadingButton>
@@ -125,14 +231,14 @@ export default function JwtLoginView() {
   );
 
   return (
-    <FormProvider methods={methods} onSubmit={onSubmit}>
+    <form onSubmit={handleSubmit2}>
       {renderHead}
 
       <Alert severity="info" sx={{ mb: 3 }}>
-        Use email : <strong>demo@minimals.cc</strong> / password :<strong> demo1234</strong>
+        Use username: <strong>Tester12</strong> / password :<strong> Tester12</strong>
       </Alert>
 
       {renderForm}
-    </FormProvider>
+    </form>
   );
 }

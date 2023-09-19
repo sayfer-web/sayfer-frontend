@@ -8,9 +8,9 @@ export default function RegisterPage() {
   return (
     <>
       <Helmet>
-        <title> Jwt: Register</title>
+        <title>Register</title>
       </Helmet>
-
+{/* < div>lol</div> */}
       <JwtRegisterView />
     </>
   );

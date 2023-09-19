@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
-// sections
 import { FirebaseLoginView } from 'src/sections/auth/firebase';
+// sections
+// import { FirebaseLoginView } from 'src/sections/auth/firebase';
 
 // ----------------------------------------------------------------------
 

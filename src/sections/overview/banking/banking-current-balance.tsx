@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 // @mui
 import { Theme, useTheme, alpha, SxProps } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -34,6 +34,9 @@ type Props = {
 };
 
 export default function BankingCurrentBalance({ list, sx }: Props) {
+
+  const [balanceVisible, toggleBalanceVisible] = useState(true)
+
   const theme = useTheme();
 
   const carousel = useCarousel({
@@ -138,7 +141,7 @@ function CardItem({ card }: CardItemProps) {
 
         <div>
           <Typography sx={{ mb: 2, typography: 'subtitle2', opacity: 0.48 }}>
-            Current Balance
+            {cardType} Balance
           </Typography>
 
           <Stack direction="row" alignItems="center" spacing={1}>
@@ -152,7 +155,7 @@ function CardItem({ card }: CardItemProps) {
           </Stack>
         </div>
 
-        <Stack
+        {/* <Stack
           direction="row"
           alignItems="center"
           justifyContent="flex-end"
@@ -171,17 +174,17 @@ function CardItem({ card }: CardItemProps) {
             {cardType === 'visa' && <Iconify width={24} icon="logos:visa" />}
           </Box>
           {cardNumber}
-        </Stack>
+        </Stack> */}
 
         <Stack direction="row" spacing={5}>
           <Stack spacing={1}>
-            <Typography sx={{ typography: 'caption', opacity: 0.48 }}>Card Holder</Typography>
+            <Typography sx={{ typography: 'caption', opacity: 0.48 }}>Token Holder</Typography>
             <Typography sx={{ typography: 'subtitle1' }}>{cardHolder}</Typography>
           </Stack>
-          <Stack spacing={1}>
+          {/* <Stack spacing={1}>
             <Typography sx={{ typography: 'caption', opacity: 0.48 }}>Valid Dates</Typography>
             <Typography sx={{ typography: 'subtitle1' }}>{cardValid}</Typography>
-          </Stack>
+          </Stack> */}
         </Stack>
       </Stack>
 

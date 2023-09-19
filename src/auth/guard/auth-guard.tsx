@@ -4,6 +4,8 @@ import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
 //
 import { useAuthContext } from '../hooks';
+import { useSelector } from 'react-redux';
+import { selectCurrentToken } from 'src/features/auth/authSlice';
 
 // ----------------------------------------------------------------------
 
@@ -23,7 +25,9 @@ type Props = {
 export default function AuthGuard({ children }: Props) {
   const router = useRouter();
 
-  const { authenticated, method } = useAuthContext();
+  const { authenticated: authenticated2, method } = useAuthContext();
+  // const authenticated = true
+  const authenticated = useSelector(selectCurrentToken)
 
   const [checked, setChecked] = useState(false);
 

@@ -116,7 +116,7 @@ export default function BankingWidgetSummary({
       />
 
       <Stack spacing={1} sx={{ p: 3 }}>
-        <Typography variant="subtitle2">{title}</Typography>
+        <Typography variant="subtitle1">{title}</Typography>
 
         <Typography variant="h3">{fCurrency(total)}</Typography>
 

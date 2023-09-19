@@ -15,6 +15,8 @@ import { paths } from 'src/routes/paths';
 // components
 import Iconify from 'src/components/iconify';
 import { MotionViewport, varFade } from 'src/components/animate';
+import { HomePresent } from './home-present';
+import { Style } from 'util';
 
 // ----------------------------------------------------------------------
 
@@ -27,7 +29,7 @@ export default function HomeForDesigner() {
     <Box sx={{ textAlign: { xs: 'center', md: 'unset' }, mt: { xs: 10, md: 20 } }}>
       <m.div variants={varFade().inUp}>
         <Typography component="div" variant="overline" sx={{ color: 'text.disabled' }}>
-          Professional Kit
+          Seriously?
         </Typography>
       </m.div>
 
@@ -42,7 +44,7 @@ export default function HomeForDesigner() {
             ),
           }}
         >
-          For Designer
+          SAYFER TOKEN
         </Typography>
       </m.div>
 
@@ -56,14 +58,15 @@ export default function HomeForDesigner() {
           rel="noopener"
           href={paths.figma}
         >
-          Figma Workspace
+          Take it free!
         </Button>
       </m.div>
     </Box>
   );
 
   const renderImg = (
-    <Box
+    <div style={{ zIndex: 20}}>
+    {/* <Box
       component={m.img}
       src="/assets/images/home/for_designer.webp"
       variants={varFade().in}
@@ -78,23 +81,27 @@ export default function HomeForDesigner() {
             : alpha(theme.palette.common.black, 0.24)
         }`,
       }}
-    />
+    /> */}
+    <HomePresent />
+    </div>
   );
 
   return (
     <Box
       sx={{
         minHeight: 560,
-        overflow: 'hidden',
+        // overflow: 'hidden',
         position: 'relative',
+        zIndex: 1,
         ...bgGradient({
           startColor: `${theme.palette.grey[900]} 25%`,
-          endColor: alpha(theme.palette.grey[900], 0),
-          imgUrl: '/assets/images/home/for_designer.webp',
+          endColor: alpha(theme.palette.grey[900], 1),
+          // imgUrl: '/assets/images/home/for_designer.webp',
         }),
         ...(mdUp && {
           ...bgGradient({
-            color: alpha(theme.palette.background.default, 0.8),
+            // color: alpha(theme.palette.background.default, 0.8),
+            color: alpha('#000', 0.9),
             imgUrl: '/assets/background/overlay_4.jpg',
           }),
         }),
@@ -107,6 +114,8 @@ export default function HomeForDesigner() {
           </Grid>
 
           {mdUp && <Grid md={6}>{renderImg}</Grid>}
+          {!mdUp && <div style={{ left: -500}}><HomePresent /></div>}
+          
         </Grid>
       </Container>
     </Box>

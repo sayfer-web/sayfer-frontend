@@ -18,6 +18,16 @@ import { _socials } from 'src/_mock';
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
 
+
+import IconYoutube from 'src/assets/icons/socials/IconYoutube'
+import IconFacebook from 'src/assets/icons/socials/IconFacebook'
+import IconInstagram from 'src/assets/icons/socials/IconInstagram'
+import IconTelegram from 'src/assets/icons/socials/IconTelegram'
+import IconVk from 'src/assets/icons/socials/IconVk'
+import IconLinkedin from 'src/assets/icons/socials/IconLinkedin'
+import IconLogo from 'src/assets/icons/menu/IconLogo'
+
+
 // ----------------------------------------------------------------------
 
 const LINKS = [
@@ -169,5 +179,132 @@ export default function Footer() {
     </Box>
   );
 
-  return isHome ? simpleFooter : mainFooter;
+  // return isHome ? simpleFooter : mainFooter;
+
+  return (
+    <div className='bg-[#000] py-2' style={{ paddingTop: 0,  }}>
+    <div style={{ display: 'flex' }} className='flex md:flex md:flex-col'>
+      <div className='flex flex-col lg:flex-row flex-1 gap-8 p-6 pl-10 lg:pl-20 pr-10 lg:pr-20 justify-between'
+      style={{ display: 'flex', flexDirection: 'column', flex: 1, gap: 40, padding: 30, paddingLeft: 20, paddingRight: 20 }}
+      >
+
+        <div className='list-none flex flex-row md:flex-col max-[436px]:flex-col gap-4 text-[#fff] lg:flex-1'
+        style={{ display: 'flex', flexDirection: 'column', gap: 10 }}
+        >
+          <div className='flex flex-col md:flex-row items-center max-[436px]:items-center max-[436px]:flex-row justify-center gap-2 lg:justify-start'>
+            {/* <IconLogo className='h-12 w-12' color='#fff' /> */}
+            <div style={{ color: '#fff', fontWeight: '300' }} className='text-2xl max-[436px]:text-4xl'>SAYFER</div>
+
+
+          </div>
+
+          <div className='max-w-full font-light max-[436px]:text-2xl text-lg max-[436px]:text-center'
+          style={{ width: '100%', fontSize: 20, fontWeight: '200' }}
+          >
+            Уникальная сетевая инвестиционная платформа, основанная на блокчейне. Кровеносной системой проекта является личная криптовалюта, выдаваемая инвесторам в качестве токенов. Токены являются удобным средством для проведения операций в приложениях внутри нашей сети.
+          </div>
+
+        </div>
+
+        <div className='flex flex-wrap lg:flex-1 justify-between gap-5'
+          style={{ display: 'flex', flexWrap: 'wrap', flex: 1, justifyContent: 'space-between' }}
+        >
+
+          <div style={{ listStyle: "none", display: 'flex', flexDirection: 'column', color: '#fff', gap: 0 }} className='max-[436px]:w-full w-[168]'>
+
+            <span style={{ fontWeight: '500', color: '#02a30c' }} className='text-xl max-[436px]:text-2xl'>Пользователь</span>
+            <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column' }}>
+              <li className='font-light max-[436px]:text-xl text-lg'>» Мой профиль</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» Мой портфель</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» Настройки</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» Выход</li>
+            </ul>
+
+            {/* <h3 style={{ fontWeight: '500', fontSize: 22, color: '#02a30c' }}>My Account</h3>
+      <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column' }}>
+        <li className='font-light max-[436px]:text-xl text-lg'>Privacy Notice »</li>
+        <li className='font-light max-[436px]:text-xl text-lg'>Security »</li>
+        <li className='font-light max-[436px]:text-xl text-lg'>Terms of Service »</li>
+        <li className='font-light max-[436px]:text-xl text-lg'>Become Affiliate »</li>
+      </ul> */}
+          </div>
+
+
+          <div style={{ listStyle: "none", display: 'flex', flexDirection: 'column', color: '#fff', gap: 0 }} className='max-[436px]:w-full w-[168]'>
+            <span style={{ fontWeight: '500', color: '#02a30c' }} className='text-xl max-[436px]:text-2xl'>Платформа</span>
+            <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column' }}>
+              <li className='font-light max-[436px]:text-xl text-lg'>» Кто мы</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» Наши цели</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» Преимущества</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» С чего начать</li>
+            </ul>
+            {/* <h3 style={{ fontWeight: '500', fontSize: 22, color: '#02a30c' }}>Legal Info</h3>
+      <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column' }}>
+        <li className='font-light max-[436px]:text-xl text-lg'>Privacy Notice »</li>
+        <li className='font-light max-[436px]:text-xl text-lg'>Security »</li>
+        <li className='font-light max-[436px]:text-xl text-lg'>Terms of Service »</li>
+        <li className='font-light max-[436px]:text-xl text-lg'>Become Affiliate »</li>
+      </ul> */}
+          </div>
+
+          <div style={{ listStyle: "none", display: 'flex', flexDirection: 'column', color: '#fff', gap: 0 }} className='max-[436px]:w-full w-[168]'>
+            <span style={{ fontWeight: '500', color: '#02a30c' }} className='text-xl max-[436px]:text-2xl'>Справочник</span>
+            <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column' }}>
+              <li className='font-light max-[436px]:text-xl text-lg'>» Приватность</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» Безопасность</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» Правила сервиса</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» Сотрудничество</li>
+            </ul>
+            {/* <h3 style={{ fontWeight: '500', fontSize: 22, color: '#02a30c' }}>Legal Info</h3>
+      <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column' }}>
+        <li className='font-light max-[436px]:text-xl text-lg'>Privacy Notice »</li>
+        <li className='font-light max-[436px]:text-xl text-lg'>Security »</li>
+        <li className='font-light max-[436px]:text-xl text-lg'>Terms of Service »</li>
+        <li className='font-light max-[436px]:text-xl text-lg'>Become Affiliate »</li>
+      </ul> */}
+          </div>
+
+          <div style={{ listStyle: "none", display: 'flex', flexDirection: 'column', color: '#fff', gap: 0 }} className='max-[436px]:w-full w-[168]'>
+            <span style={{ fontWeight: '500', color: '#02a30c' }} className='text-xl max-[436px]:text-2xl'>Legal Info</span>
+            <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column' }}>
+              <li className='font-light max-[436px]:text-xl text-lg'>» Privacy Notice</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» Security</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» Terms of Service</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» Become Affiliate</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div className='pl-10 pr-10 lg:pl-20 lg:pr-20'
+    style={{ paddingLeft: 20, paddingRight: 20 }}
+    >
+      <hr />
+      <div style={{ gap: 10, display: 'flex', paddingTop: 0, paddingBottom: 0,  }} className='flex pt-2 pb-2 justify-between items-center sm:flex-row flex-col'
+      >
+        <div className='text-white w-full justify-between sm:justify-start flex flex-row gap-2 font-light text-lg max-[436px]:text-xl'
+        style={{ display: 'flex', width: '100%', gap: 10, alignItems: 'center' }}
+        >
+          <p>© 2023 Sayfer. </p>
+          <p>Все права защищены.</p>
+        </div>
+        <ul className='flex flex-row gap-5 text-white justify-center sm:justify-end w-full'
+        style={{ display: 'flex', flexDirection: 'row', gap: 5, justifyContent: 'flex-end', width: '100%', listStyle: 'none', alignItems: 'center' }}
+        >
+          <li><IconYoutube /></li>
+          <li><IconFacebook /></li>
+          <li><IconInstagram /></li>
+          <li><IconTelegram /></li>
+          <li><IconVk /></li>
+          <li><IconLinkedin /></li>
+        </ul>
+      </div>
+    </div>
+
+    
+  </div>
+  )
+  
 }

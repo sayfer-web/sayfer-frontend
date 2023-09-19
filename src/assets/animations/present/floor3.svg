@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 243.36 140.3">
+  <defs>
+    <style>
+      .cls-1 {
+        isolation: isolate;
+      }
+
+      .cls-2 {
+        opacity: .8;
+      }
+
+      .cls-3 {
+        fill: url(#radial-gradient);
+        mix-blend-mode: multiply;
+        opacity: .6;
+      }
+    </style>
+    <radialGradient id="radial-gradient" cx="-736.4" cy="1115.98" fx="-736.4" fy="1115.98" r="87.32" gradientTransform="translate(738902.85 -141629.66) rotate(30) scale(1 440.97) skewX(-89.89)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#001d0f"/>
+      <stop offset=".22" stop-color="#00210f"/>
+      <stop offset=".47" stop-color="#002f0f"/>
+      <stop offset=".73" stop-color="#00460f"/>
+      <stop offset="1" stop-color="#00650f"/>
+    </radialGradient>
+  </defs>
+  <g class="cls-1">
+    <g id="Layer_2" data-name="Layer 2">
+      <g id="OBJECTS">
+        <g class="cls-2">
+          <path class="cls-3" d="m116.85,138.33L3.42,73.04c-5.07-2.93-4.43-8.09,1.43-11.47L106.65,2.8c5.85-3.38,14.79-3.75,19.86-.82l113.43,65.29c5.07,2.93,4.43,8.09-1.43,11.47l-101.81,58.78c-5.85,3.38-14.79,3.75-19.86.82Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

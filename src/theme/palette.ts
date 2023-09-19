@@ -30,6 +30,19 @@ const GREY = {
   600: '#637381',
   700: '#454F5B',
   800: '#212B36',
+  900: '#000000',
+};
+
+const GREEN = {
+  0: '#FFFFFF',
+  100: '#F9FAFB',
+  200: '#F4F6F8',
+  300: '#DFE3E8',
+  400: '#C4CDD5',
+  500: '#002102',
+  600: '#637381',
+  700: '#454F5B',
+  800: '#212B36',
   900: '#161C24',
 };
 
@@ -99,6 +112,7 @@ const COMMON = {
   warning: WARNING,
   error: ERROR,
   grey: GREY,
+  // green: GREEN,
   divider: alpha(GREY[500], 0.2),
   action: {
     hover: alpha(GREY[500], 0.08),

@@ -103,11 +103,11 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
       <Typography variant="h3" sx={{ maxWidth: 480, textAlign: 'center' }}>
         {title || 'Hi, Welcome back'}
       </Typography>
-
+{/* 
       <Box
         component="img"
         alt="auth"
-        src={image || '/assets/illustrations/illustration_dashboard.png'}
+        // src={image || '/assets/illustrations/illustration_dashboard.png'}
         sx={{
           maxWidth: {
             xs: 480,
@@ -115,9 +115,9 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
             xl: 720,
           },
         }}
-      />
+      /> */}
 
-      <Stack direction="row" spacing={2}>
+      {/* <Stack direction="row" spacing={2}>
         {METHODS.map((option) => (
           <Tooltip key={option.label} title={option.label}>
             <Link component={RouterLink} href={option.path}>
@@ -136,7 +136,7 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
             </Link>
           </Tooltip>
         ))}
-      </Stack>
+      </Stack> */}
     </Stack>
   );
 
@@ -152,7 +152,7 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
 
       {mdUp && renderSection}
 
-      {renderContent}
+      {renderContent}s
     </Stack>
   );
 }

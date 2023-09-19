@@ -51,6 +51,16 @@ const TourDetailsPage = lazy(() => import('src/pages/dashboard/tour/details'));
 const TourListPage = lazy(() => import('src/pages/dashboard/tour/list'));
 const TourCreatePage = lazy(() => import('src/pages/dashboard/tour/new'));
 const TourEditPage = lazy(() => import('src/pages/dashboard/tour/edit'));
+// GAMES
+const GamesDetailsPage = lazy(() => import('src/pages/dashboard/games/details'));
+const GamesListPage = lazy(() => import('src/pages/dashboard/games/list'));
+const GamesCreatePage = lazy(() => import('src/pages/dashboard/games/new'));
+const GamesEditPage = lazy(() => import('src/pages/dashboard/games/edit'));
+// TRANSACTIONS
+const TransactionsDetailsPage = lazy(() => import('src/pages/dashboard/transactions/details'));
+const TransactionsListPage = lazy(() => import('src/pages/dashboard/transactions/list'));
+const TransactionsCreatePage = lazy(() => import('src/pages/dashboard/transactions/new'));
+const TransactionsEditPage = lazy(() => import('src/pages/dashboard/transactions/edit'));
 // FILE MANAGER
 const FileManagerPage = lazy(() => import('src/pages/dashboard/file-manager'));
 // APP
@@ -79,11 +89,13 @@ export const dashboardRoutes = [
     ),
     children: [
       { element: <IndexPage />, index: true },
-      { path: 'ecommerce', element: <OverviewEcommercePage /> },
+      // { path: 'ecommerce', element: <OverviewEcommercePage /> },
       { path: 'analytics', element: <OverviewAnalyticsPage /> },
-      { path: 'banking', element: <OverviewBankingPage /> },
+      { path: 'wallet', element: <OverviewBankingPage /> },
       { path: 'booking', element: <OverviewBookingPage /> },
       { path: 'file', element: <OverviewFilePage /> },
+      { path: 'games', element: <OverviewFilePage /> },
+      { path: 'transactions', element: <OverviewFilePage /> },
       {
         path: 'user',
         children: [
@@ -152,6 +164,26 @@ export const dashboardRoutes = [
           { path: ':id', element: <TourDetailsPage /> },
           { path: 'new', element: <TourCreatePage /> },
           { path: ':id/edit', element: <TourEditPage /> },
+        ],
+      },
+      {
+        path: 'games',
+        children: [
+          { element: <GamesListPage />, index: true },
+          { path: 'list', element: <GamesListPage /> },
+          { path: ':id', element: <GamesDetailsPage /> },
+          { path: 'new', element: <GamesCreatePage /> },
+          { path: ':id/edit', element: <GamesEditPage /> },
+        ],
+      },
+      {
+        path: 'transactions',
+        children: [
+          { element: <TransactionsListPage />, index: true },
+          { path: 'list', element: <TransactionsListPage /> },
+          { path: ':id', element: <TransactionsDetailsPage /> },
+          { path: 'new', element: <TransactionsCreatePage /> },
+          { path: ':id/edit', element: <TransactionsEditPage /> },
         ],
       },
       { path: 'file-manager', element: <FileManagerPage /> },

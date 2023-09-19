@@ -62,6 +62,8 @@ export function textField(theme: Theme) {
           [`&.${inputBaseClasses.disabled}`]: {
             '& svg': {
               color: theme.palette.text.disabled,
+              // backgroundColor: theme.palette.text.disabled,
+              
             },
           },
         },
@@ -96,16 +98,21 @@ export function textField(theme: Theme) {
           [`&.${outlinedInputClasses.focused}`]: {
             [`& .${outlinedInputClasses.notchedOutline}`]: {
               borderColor: color.focused,
+              color: '#f00'
             },
           },
           [`&.${outlinedInputClasses.error}`]: {
             [`& .${outlinedInputClasses.notchedOutline}`]: {
               borderColor: theme.palette.error.main,
+              color: '#f00'
+
             },
           },
           [`&.${outlinedInputClasses.disabled}`]: {
             [`& .${outlinedInputClasses.notchedOutline}`]: {
               borderColor: theme.palette.action.disabledBackground,
+              color: '#f00'
+
             },
           },
         },

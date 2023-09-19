@@ -63,11 +63,11 @@ export default function App() {
   useScrollToTop();
 
   return (
-    <AuthProvider>
+    // <AuthProvider>
       <LocalizationProvider>
         <SettingsProvider
           defaultSettings={{
-            themeMode: 'light', // 'light' | 'dark'
+            themeMode: 'dark', // 'light' | 'dark'
             themeDirection: 'ltr', //  'rtl' | 'ltr'
             themeContrast: 'default', // 'default' | 'bold'
             themeLayout: 'vertical', // 'vertical' | 'horizontal' | 'mini'
@@ -81,15 +81,15 @@ export default function App() {
                 <CheckoutProvider>
                   <SettingsDrawer />
                   <ProgressBar />
-                  <AuthConsumer>
+                  {/* <AuthConsumer> */}
                     <Router />
-                  </AuthConsumer>
+                  {/* </AuthConsumer> */}
                 </CheckoutProvider>
               </SnackbarProvider>
             </MotionLazy>
           </ThemeProvider>
         </SettingsProvider>
       </LocalizationProvider>
-    </AuthProvider>
+    // </AuthProvider>
   );
 }

@@ -103,9 +103,11 @@ export const paths = {
       app: `${ROOTS.DASHBOARD}/app`,
       ecommerce: `${ROOTS.DASHBOARD}/ecommerce`,
       analytics: `${ROOTS.DASHBOARD}/analytics`,
-      banking: `${ROOTS.DASHBOARD}/banking`,
+      wallet: `${ROOTS.DASHBOARD}/wallet`,
       booking: `${ROOTS.DASHBOARD}/booking`,
       file: `${ROOTS.DASHBOARD}/file`,
+      games: `${ROOTS.DASHBOARD}/games`,
+      addressbook: `${ROOTS.DASHBOARD}/addressbook`,
     },
     user: {
       root: `${ROOTS.DASHBOARD}/user`,
@@ -117,6 +119,7 @@ export const paths = {
       edit: (id: string) => `${ROOTS.DASHBOARD}/user/${id}/edit`,
       demo: {
         edit: `${ROOTS.DASHBOARD}/user/${MOCK_ID}/edit`,
+        transactions: `${ROOTS.DASHBOARD}/user/${MOCK_ID}/transactions`,
       },
     },
     product: {
@@ -174,6 +177,28 @@ export const paths = {
       demo: {
         details: `${ROOTS.DASHBOARD}/tour/${MOCK_ID}`,
         edit: `${ROOTS.DASHBOARD}/tour/${MOCK_ID}/edit`,
+      },
+    },
+    games: {
+      root: `${ROOTS.DASHBOARD}/games`,
+      new: `${ROOTS.DASHBOARD}/games/new`,
+      details: (id: string) => `${ROOTS.DASHBOARD}/games/${id}`,
+      edit: (id: string) => `${ROOTS.DASHBOARD}/games/${id}/edit`,
+      demo: {
+        details: `${ROOTS.DASHBOARD}/games/${MOCK_ID}`,
+        edit: `${ROOTS.DASHBOARD}/games/${MOCK_ID}/edit`,
+      },
+    },
+    transactions: {
+      root: `${ROOTS.DASHBOARD}/transactions`,
+      new: `${ROOTS.DASHBOARD}/transactions/new`,
+      // userTransactions: (id: string) => `${ROOTS.DASHBOARD}/transactions/personal/${id}`,
+      details: (id: string) => `${ROOTS.DASHBOARD}/transactions/${id}`,
+      edit: (id: string) => `${ROOTS.DASHBOARD}/transactions/${id}/edit`,
+      demo: {
+        userTransactions: `${ROOTS.DASHBOARD}/transactions/personal/${MOCK_ID}`,
+        details: `${ROOTS.DASHBOARD}/transactions/${MOCK_ID}`,
+        edit: `${ROOTS.DASHBOARD}/transactions/${MOCK_ID}/edit`,
       },
     },
   },

@@ -16,6 +16,8 @@ import HomeAdvertisement from '../home-advertisement';
 import HomeCleanInterfaces from '../home-clean-interfaces';
 import HomeHugePackElements from '../home-hugepack-elements';
 import { HomeAdvantages } from '../home-advantages';
+import { HomePresent } from '../home-present';
+import { HomeCallback } from '../home-callback';
 
 // ----------------------------------------------------------------------
 
@@ -58,30 +60,35 @@ export default function HomeView() {
         sx={{
           overflow: 'hidden',
           position: 'relative',
-          bgcolor: 'background.default',
+          // bgcolor: 'background.default',
+          bgcolor: '#002102',
         }}
       >
         <HomeAdvantages />
 
+        {/* <HomePresent /> */}
+
         <HomeHugePackElements />
 
         <Box sx={{ position: 'relative' }}>
-          <StyledPolygon />
+          {/* <StyledPolygon style={{ zIndex: 2 }} /> */}
           <HomeForDesigner />
-          <StyledPolygon anchor="bottom" />
+          {/* <StyledPolygon anchor="bottom" /> */}
         </Box>
 
-        <HomeDarkMode />
+        {/* <HomeDarkMode /> */}
 
-        <HomeColorPresets />
+        {/* <HomeColorPresets /> */}
 
-        <HomeCleanInterfaces />
+        {/* <HomeCleanInterfaces /> */}
 
-        <HomePricing />
+        {/* <HomePricing /> */}
 
-        <HomeLookingFor />
+        <HomeCallback />
 
-        <HomeAdvertisement />
+        {/* <HomeLookingFor /> */}
+
+        {/* <HomeAdvertisement /> */}
       </Box>
     </>
   );

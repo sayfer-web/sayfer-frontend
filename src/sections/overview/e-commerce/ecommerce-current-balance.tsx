@@ -21,7 +21,8 @@ export default function EcommerceCurrentBalance({
   sx,
   ...other
 }: Props) {
-  const totalAmount = currentBalance - sentAmount;
+  const totalAmount = 123456
+  const dividends = 1234
 
   return (
     <Card sx={{ p: 3, ...sx }} {...other}>
@@ -34,23 +35,23 @@ export default function EcommerceCurrentBalance({
 
         <Stack direction="row" justifyContent="space-between">
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Order Total
+            Received
           </Typography>
           <Typography variant="body2">{fCurrency(currentBalance)}</Typography>
         </Stack>
 
         <Stack direction="row" justifyContent="space-between">
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Earning
+            Sent
           </Typography>
           <Typography variant="body2">- {fCurrency(sentAmount)}</Typography>
         </Stack>
 
         <Stack direction="row" justifyContent="space-between">
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Refunded
+            Dividends
           </Typography>
-          <Typography variant="subtitle1">{fCurrency(totalAmount)}</Typography>
+          <Typography variant="subtitle1">{fCurrency(dividends)}</Typography>
         </Stack>
 
         <Stack direction="row" spacing={1.5}>

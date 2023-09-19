@@ -25,31 +25,45 @@ import NavMobile from './nav/mobile';
 import NavDesktop from './nav/desktop';
 //
 import { SettingsButton, HeaderShadow, LoginButton } from '../_common';
+import { useNavigate, useNavigation } from 'react-router';
 
 // ----------------------------------------------------------------------
 
 export default function Header() {
   const theme = useTheme();
 
+  const navigate = useNavigate()
+
   const mdUp = useResponsive('up', 'md');
 
   const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
 
   return (
-    <AppBar>
+    <AppBar
+    color='transparent'
+    enableColorOnDark
+    sx={{
+      backgroundColor: '#00000000',
+      // opacity: 0.5
+    }}
+    >
       <Toolbar
         disableGutters
         sx={{
-          height: {
-            xs: HEADER.H_MOBILE,
-            md: HEADER.H_DESKTOP,
-          },
+          // backgroundColor: 'rgba(0, 0, 0, 0.2)', // Прозрачный фон
+          backdropFilter: 'blur(10px)', // Размытие
+          WebkitBackdropFilter: 'blur(10px)', // Для поддержки в Safari
+          // height: {
+          //   xs: HEADER.H_MOBILE,
+          //   md: HEADER.H_DESKTOP,
+          // },
           transition: theme.transitions.create(['height'], {
             easing: theme.transitions.easing.easeInOut,
             duration: theme.transitions.duration.shorter,
           }),
           ...(offsetTop && {
             ...bgBlur({
+              // color: '#00000055'
               color: theme.palette.background.default,
             }),
             height: {
@@ -75,12 +89,12 @@ export default function Header() {
                 sx={{ ml: 1 }}
               >
                 <Label color="info" sx={{ textTransform: 'unset', height: 22, px: 0.5 }}>
-                  v5.5.0
+                  v0.0.1
                 </Label>
               </Link>
             }
           >
-            <Logo />
+            {/* <Logo /> */}
           </Badge>
 
           <Box sx={{ flexGrow: 1 }} />
@@ -88,8 +102,13 @@ export default function Header() {
           {mdUp && <NavDesktop offsetTop={offsetTop} data={navConfig} />}
 
           <Stack alignItems="center" direction={{ xs: 'row', md: 'row-reverse' }}>
-            <Button variant="contained" target="_blank" rel="noopener" href={paths.minimalUI}>
-              Purchase Now
+            <Button variant="contained" rel="noopener" 
+            // target="_blank"
+            // href={paths.minimalUI}
+            // href="/auth/jwt/login"
+            onClick={() => { navigate('/auth/jwt/login') } }
+            >
+              Login
             </Button>
 
             {mdUp && <LoginButton />}

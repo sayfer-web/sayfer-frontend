@@ -187,7 +187,7 @@ export default function HomeHero() {
     >
       <video style={{ zIndex: -1, top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', position: 'absolute' }} autoPlay muted loop playsInline preload="auto" poster="" id="homeVideo">
         <source
-          src="src/assets/videos/background.mp4"
+          src="/assets/videos/background.mp4"
           type="video/mp4"
         />
         Your browser does not support HTML5 video.
@@ -278,14 +278,17 @@ export default function HomeHero() {
             size="large"
             variant="outlined"
             startIcon={<Iconify icon="eva:external-link-fill" width={24} />}
-            target="_blank"
+            // target="_blank"
             rel="noopener"
-            href={paths.figma}
+            href='/dashboard'
             sx={{ borderColor: 'text.primary' }}
           >
             YouTube Preview
           </Button>
+
         </Stack>
+
+        
       </m.div>
 
       <Stack spacing={3} sx={{ textAlign: 'center' }}>
@@ -300,7 +303,7 @@ export default function HomeHero() {
             <m.div key={platform} variants={varFade().in}>
               <Box
                 component="img"
-                src={`src/assets/icons/svg/coins/${platform}.svg`}
+                src={`/assets/icons/svg/coins/${platform}.svg`}
                 sx={{ width: 36, height: 36 }}
               />
             </m.div>

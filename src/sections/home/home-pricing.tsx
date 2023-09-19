@@ -144,11 +144,11 @@ export default function HomePricing() {
         bgcolor: (theme) => alpha(theme.palette.grey[500], 0.04),
       }}
     >
-      <Container component={MotionViewport}>
+      {/* <Container component={MotionViewport}>
         {renderDescription}
 
         {renderContent}
-      </Container>
+      </Container> */}
     </Box>
   );
 }

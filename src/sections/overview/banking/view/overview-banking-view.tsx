@@ -4,7 +4,11 @@ import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 // _mock
-import { _bankingContacts, _bankingCreditCard, _bankingRecentTransitions } from 'src/_mock';
+import { 
+  _bankingContacts, 
+  _bankingCreditCard, 
+  _bankingRecentTransitions 
+} from 'src/_mock';
 // components
 import { useSettingsContext } from 'src/components/settings';
 //
@@ -16,10 +20,103 @@ import BankingCurrentBalance from '../banking-current-balance';
 import BankingBalanceStatistics from '../banking-balance-statistics';
 import BankingRecentTransitions from '../banking-recent-transitions';
 import BankingExpensesCategories from '../banking-expenses-categories';
+import { useState } from 'react';
+import EcommerceCurrentBalance from '../../e-commerce/ecommerce-current-balance';
+import WalletRefillFounds from '../wallet-refill-founds';
+import { useSelector } from 'react-redux';
+import { selectCurrentUsername } from 'src/features/auth/authSlice';
 
 // ----------------------------------------------------------------------
 
 export default function OverviewBankingView() {
+
+  const [income, setIncome] = useState(
+    [
+      {
+        title: 'SFR',
+        icon: '',
+        series: [
+          { x: 2010, y: 88 },
+          { x: 2011, y: 120 },
+          { x: 2012, y: 156 },
+          { x: 2013, y: 123 },
+          { x: 2014, y: 88 },
+          { x: 2015, y: 66 },
+          { x: 2016, y: 45 },
+          { x: 2017, y: 29 },
+          { x: 2018, y: 45 },
+          { x: 2019, y: 88 },
+          { x: 2020, y: 132 },
+          { x: 2021, y: 146 },
+          { x: 2022, y: 169 },
+          { x: 2023, y: 184 },
+        ],
+        percent: 1,
+        total: 1000
+      },
+      {
+        title: 'SFRX',
+        icon: '',
+        series: [
+          { x: 2010, y: 88 },
+          { x: 2011, y: 120 },
+          { x: 2012, y: 156 },
+          { x: 2013, y: 123 },
+          { x: 2014, y: 88 },
+          { x: 2015, y: 66 },
+          { x: 2016, y: 45 },
+          { x: 2017, y: 29 },
+          { x: 2018, y: 45 },
+          { x: 2019, y: 88 },
+          { x: 2020, y: 132 },
+          { x: 2021, y: 146 },
+          { x: 2022, y: 169 },
+          { x: 2023, y: 184 },
+        ],
+        percent: 10,
+        total: 100
+      }
+    ]
+  )
+
+  const username = useSelector(selectCurrentUsername)
+
+  console.log('username: ', username)
+
+
+  const _bankingCreditCard = [
+    {
+      id: 1,
+      balance: 0,
+      cardType: 'SFR',
+      // cardHolder: _mock.fullName(2),
+      cardHolder: username,
+      cardNumber: '**** **** **** 3640',
+      cardValid: '',
+    },
+    {
+      id: 1,
+      balance: 18000.23,
+      cardType: 'SFRX',
+      // cardHolder: _mock.fullName(3),
+      cardHolder: username,
+      cardNumber: '**** **** **** 8864',
+      cardValid: '',
+    },
+    {
+      id: 3,
+      balance: 2000.89,
+      cardType: 'mastercard',
+      // cardHolder: _mock.fullName(4),
+      cardHolder: username,
+      cardNumber: '**** **** **** 7755',
+      cardValid: '',
+    },
+  ];
+  
+
+  // const expenses = useState()
+
   const theme = useTheme();
 
   const settings = useSettingsContext();
@@ -29,60 +126,45 @@ export default function OverviewBankingView() {
       <Grid container spacing={3}>
         <Grid xs={12} md={7}>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3}>
-            <BankingWidgetSummary
-              title="Income"
-              icon="eva:diagonal-arrow-left-down-fill"
-              percent={2.6}
-              total={18765}
+           
+            {income.map(item => (
+              <BankingWidgetSummary
+              key={item.title}
+              title={item.title}
+              icon={item.icon}
+              percent={item.percent}
+              total={item.total}
               chart={{
-                series: [
-                  { x: 2010, y: 88 },
-                  { x: 2011, y: 120 },
-                  { x: 2012, y: 156 },
-                  { x: 2013, y: 123 },
-                  { x: 2014, y: 88 },
-                  { x: 2015, y: 66 },
-                  { x: 2016, y: 45 },
-                  { x: 2017, y: 29 },
-                  { x: 2018, y: 45 },
-                  { x: 2019, y: 88 },
-                  { x: 2020, y: 132 },
-                  { x: 2021, y: 146 },
-                  { x: 2022, y: 169 },
-                  { x: 2023, y: 184 },
-                ],
+                series: item.series
               }}
-            />
+              />
+              )) }
+            
+            {/* <BankingWidgetSummary
+              title={income[0][1].title}
+              icon={income[0][1].icon}
+              percent={income[0][1].percent}
+              total={income[0][1].total}
+              chart={{
+                series: income[0][1].series
+              }}
+            /> */}
 
-            <BankingWidgetSummary
-              title="Expenses"
-              color="warning"
+            {/* <BankingWidgetSummary
+              title={expenses.title}
+              color="success"
               icon="eva:diagonal-arrow-right-up-fill"
-              percent={-0.5}
-              total={8938}
+              percent={expenses.percent}
+              total={expenses.total}
               chart={{
-                series: [
-                  { x: 2010, y: 88 },
-                  { x: 2011, y: 120 },
-                  { x: 2012, y: 156 },
-                  { x: 2013, y: 123 },
-                  { x: 2014, y: 88 },
-                  { x: 2015, y: 166 },
-                  { x: 2016, y: 145 },
-                  { x: 2017, y: 129 },
-                  { x: 2018, y: 145 },
-                  { x: 2019, y: 188 },
-                  { x: 2020, y: 132 },
-                  { x: 2021, y: 146 },
-                  { x: 2022, y: 169 },
-                  { x: 2023, y: 184 },
-                ],
+                series: expenses.series
               }}
-            />
+            /> */}
           </Stack>
         </Grid>
 
         <Grid xs={12} md={5}>
+          {/* @ts-ignore */}
           <BankingCurrentBalance list={_bankingCreditCard} />
         </Grid>
 
@@ -137,6 +219,8 @@ export default function OverviewBankingView() {
               }}
             />
 
+            
+
             <BankingExpensesCategories
               title="Expenses Categories"
               chart={{
@@ -179,15 +263,25 @@ export default function OverviewBankingView() {
           </Stack>
         </Grid>
 
+
         <Grid xs={12} md={4}>
           <Stack spacing={3}>
-            <BankingQuickTransfer title="Quick Transfer" list={_bankingContacts} />
+            
+          <WalletRefillFounds
+            title="Money turnover for all time"
+            currentBalance={187650}
+            sentAmount={25500}
+          />
 
-            <BankingContacts
-              title="Contacts"
-              subheader="You have 122 contacts"
-              list={_bankingContacts.slice(-5)}
-            />
+            <BankingQuickTransfer title="Quick Transfer" list={_bankingContacts} />
+            
+            {/* 
+              <BankingContacts
+                title="Contacts"
+                subheader="You have 122 contacts"
+                list={_bankingContacts.slice(-5)}
+              /> 
+            */}
 
             <BankingInviteFriends
               price="$50"

@@ -19,6 +19,8 @@ import { useAuthContext } from 'src/auth/hooks';
 import { varHover } from 'src/components/animate';
 import { useSnackbar } from 'src/components/snackbar';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
+import { logOut } from 'src/features/auth/authSlice';
+import { useDispatch } from 'react-redux';
 
 // ----------------------------------------------------------------------
 
@@ -50,9 +52,12 @@ export default function AccountPopover() {
 
   const popover = usePopover();
 
+  const dispatch = useDispatch()
+
   const handleLogout = async () => {
     try {
-      await logout();
+      await dispatch(logOut('works'))
+      // await logout();
       popover.onClose();
       router.replace('/');
     } catch (error) {
