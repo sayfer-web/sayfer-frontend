@@ -1,3 +1,4 @@
+import { useLocales } from 'src/locales';
 import { _mock } from './_mock';
 
 // ----------------------------------------------------------------------
@@ -52,7 +53,11 @@ export const _contacts = [...Array(20)].map((_, index) => {
 
 // ----------------------------------------------------------------------
 
-export const _notifications = [...Array(9)].map((_, index) => ({
+export const _notifications = () => {
+
+  const { t } = useLocales()
+
+  return [...Array(9)].map((_, index) => ({
   id: _mock.id(index),
   avatarUrl: [
     _mock.image.avatar(1),
@@ -70,20 +75,20 @@ export const _notifications = [...Array(9)].map((_, index) => ({
     index
   ],
   category: [
-    'Communication',
-    'Project UI',
-    'File Manager',
-    'File Manager',
-    'File Manager',
-    'Order',
-    'Order',
-    'Communication',
-    'Communication',
+    t('communication'),
+    t('project_ui'),
+    t('file_manager'),
+    t('file_manager'),
+    t('file_manager'),
+    t('order'),
+    t('order'),
+    t('communication'),
+    t('communication'),
   ][index],
   isUnRead: _mock.boolean(index),
   createdAt: _mock.time(index),
   title:
-    (index === 0 && `<p><strong>Deja Brady</strong> sent you a friend request</p>`) ||
+    (index === 0 && `<p><strong>Deja Brady</strong> ${t('sent_you_friend_request')}</p>`) ||
     (index === 1 &&
       `<p><strong>Jayvon Hull</strong> mentioned you in <strong><a href='#'>Minimal UI</a></strong></p>`) ||
     (index === 2 &&
@@ -98,6 +103,7 @@ export const _notifications = [...Array(9)].map((_, index) => ({
     (index === 8 && `<p>You have new mail`) ||
     '',
 }));
+}
 
 // ----------------------------------------------------------------------
 

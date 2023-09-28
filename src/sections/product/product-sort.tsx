@@ -5,6 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 // components
 import Iconify from 'src/components/iconify';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -18,6 +19,9 @@ type Props = {
 };
 
 export default function ProductSort({ sort, onSort, sortOptions }: Props) {
+
+  const { t } = useLocales()
+
   const popover = usePopover();
 
   const sortLabel = sortOptions.find((option) => option.value === sort)?.label;
@@ -35,7 +39,7 @@ export default function ProductSort({ sort, onSort, sortOptions }: Props) {
         }
         sx={{ fontWeight: 'fontWeightSemiBold' }}
       >
-        Sort By:
+        {t('sort_by')}
         <Box component="span" sx={{ ml: 0.5, fontWeight: 'fontWeightBold' }}>
           {sortLabel}
         </Box>

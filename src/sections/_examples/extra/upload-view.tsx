@@ -19,10 +19,14 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import Iconify from 'src/components/iconify';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 import { UploadAvatar, Upload, UploadBox } from 'src/components/upload';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function UploadView() {
+
+  const { t } = useLocales()
+
   const preview = useBoolean();
 
   const [files, setFiles] = useState<(File | string)[]>([]);
@@ -148,8 +152,8 @@ export default function UploadView() {
                       color: 'text.disabled',
                     }}
                   >
-                    Allowed *.jpeg, *.jpg, *.png, *.gif
-                    <br /> max size of {fData(3145728)}
+                    {t('allowed')} *.jpeg, *.jpg, *.png, *.gif
+                    <br /> {t('max_size_of')} {fData(3145728)}
                   </Typography>
                 }
               />

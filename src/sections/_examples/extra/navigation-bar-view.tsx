@@ -29,6 +29,7 @@ import {
   NavSectionHorizontal,
 } from 'src/components/nav-section';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
+import { t } from 'i18next';
 
 // ----------------------------------------------------------------------
 
@@ -234,7 +235,7 @@ function Controls({ config, onChangeConfig, canReset, onReset }: ControlsProps) 
         value={config.currentRole}
         onChange={(event) => onChangeConfig('currentRole', event.target.value)}
       >
-        <FormLabel>Role</FormLabel>
+        <FormLabel>{t('role')}</FormLabel>
         {['admin', 'user'].map((role) => (
           <FormControlLabel
             key={role}
@@ -321,7 +322,7 @@ const NAV_ITEMS = [
         ],
       },
       {
-        title: 'About',
+        title: '',
         path: '#',
         icon: <Iconify icon="carbon:airport-01" width={1} />,
       },

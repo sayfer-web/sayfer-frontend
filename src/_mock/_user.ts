@@ -2,15 +2,21 @@
 import { countries } from 'src/assets/data';
 //
 import { _mock } from './_mock';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
-export const USER_STATUS_OPTIONS = [
-  { value: 'active', label: 'Active' },
-  { value: 'pending', label: 'Pending' },
-  { value: 'banned', label: 'Banned' },
-  { value: 'rejected', label: 'Rejected' },
-];
+export const USER_STATUS_OPTIONS = () => {
+
+  const { t } = useLocales()
+
+  return [
+  { value: 'active', label: t('active') },
+  { value: 'pending', label: t('pending') },
+  { value: 'banned', label: t('banned') },
+  { value: 'rejected', label: t('rejected') },
+]
+}
 
 export const _userAbout = {
   id: _mock.id(1),

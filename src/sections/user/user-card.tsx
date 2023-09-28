@@ -19,6 +19,7 @@ import { AvatarShape } from 'src/assets/illustrations';
 // components
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -27,6 +28,9 @@ type Props = {
 };
 
 export default function UserCard({ user }: Props) {
+
+  const { t } = useLocales()
+
   const theme = useTheme();
 
   const { name, coverUrl, role, totalFollowers, totalPosts, avatarUrl, totalFollowing } = user;
@@ -101,14 +105,14 @@ export default function UserCard({ user }: Props) {
       >
         <div>
           <Typography variant="caption" component="div" sx={{ mb: 0.5, color: 'text.secondary' }}>
-            Follower
+            {t('follower')}
           </Typography>
           {fShortenNumber(totalFollowers)}
         </div>
 
         <div>
           <Typography variant="caption" component="div" sx={{ mb: 0.5, color: 'text.secondary' }}>
-            Following
+            {t('following')}
           </Typography>
 
           {fShortenNumber(totalFollowing)}

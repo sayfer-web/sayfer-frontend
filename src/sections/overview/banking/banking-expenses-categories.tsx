@@ -10,6 +10,7 @@ import Card, { CardProps } from '@mui/material/Card';
 import { useResponsive } from 'src/hooks/use-responsive';
 // components
 import Chart, { useChart } from 'src/components/chart';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -27,6 +28,9 @@ interface Props extends CardProps {
 }
 
 export default function BankingExpensesCategories({ title, subheader, chart, ...other }: Props) {
+
+  const { t } = useLocales()
+
   const theme = useTheme();
 
   const smUp = useResponsive('up', 'sm');
@@ -104,14 +108,14 @@ export default function BankingExpensesCategories({ title, subheader, chart, ...
       >
         <Stack sx={{ py: 2, borderRight: `dashed 1px ${theme.palette.divider}` }}>
           <Box component="span" sx={{ mb: 1, typography: 'body2', color: 'text.secondary' }}>
-            Categories
+            {t('categories')}
           </Box>
           9
         </Stack>
 
         <Stack sx={{ py: 2 }}>
           <Box component="span" sx={{ mb: 1, typography: 'body2', color: 'text.secondary' }}>
-            Categories
+            {t('categories')}
           </Box>
           $18,765
         </Stack>

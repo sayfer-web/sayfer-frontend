@@ -14,6 +14,7 @@ import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector
 import { bgGradient } from 'src/theme/css';
 // components
 import Iconify from 'src/components/iconify';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -172,6 +173,9 @@ function getStepContent(step: number) {
 }
 
 export default function CustomizedSteppers() {
+
+  const { t } = useLocales()
+
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
@@ -238,7 +242,7 @@ export default function CustomizedSteppers() {
 
           <Box sx={{ textAlign: 'right' }}>
             <Button disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
-              Back
+              {t('back')}
             </Button>
             <Button variant="contained" onClick={handleNext} sx={{ mr: 1 }}>
               {activeStep === STEPS.length - 1 ? 'Finish' : 'Next'}

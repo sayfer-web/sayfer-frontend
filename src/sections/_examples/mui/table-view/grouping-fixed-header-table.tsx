@@ -8,6 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 // components
 import Scrollbar from 'src/components/scrollbar';
 import { useTable, TablePaginationCustom } from 'src/components/table';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -71,6 +72,9 @@ const COLUMNS: Column[] = [
 // ----------------------------------------------------------------------
 
 export default function GroupingFixedHeaderTable() {
+
+  const { t } = useLocales()
+
   const table = useTable({ defaultRowsPerPage: 10 });
 
   return (
@@ -87,7 +91,7 @@ export default function GroupingFixedHeaderTable() {
                     background: (theme) => theme.palette.background.paper,
                   }}
                 >
-                  Country
+                  {t('country')}
                 </TableCell>
                 <TableCell
                   align="center"

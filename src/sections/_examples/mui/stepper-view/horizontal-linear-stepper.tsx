@@ -8,12 +8,16 @@ import Button from '@mui/material/Button';
 import Stepper from '@mui/material/Stepper';
 import StepLabel from '@mui/material/StepLabel';
 import Typography from '@mui/material/Typography';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad'];
 
 export default function HorizontalLinearStepper() {
+
+  const { t } = useLocales()
+
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set<number>());
 
@@ -64,7 +68,7 @@ export default function HorizontalLinearStepper() {
             optional?: React.ReactNode;
           } = {};
           if (isStepOptional(index)) {
-            labelProps.optional = <Typography variant="caption">Optional</Typography>;
+            labelProps.optional = <Typography variant="caption">{t('optional')}</Typography>;
           }
           if (isStepSkipped(index)) {
             stepProps.completed = false;
@@ -91,7 +95,7 @@ export default function HorizontalLinearStepper() {
 
           <Box sx={{ display: 'flex' }}>
             <Box sx={{ flexGrow: 1 }} />
-            <Button onClick={handleReset}>Reset</Button>
+            <Button onClick={handleReset}>{t('reset')}</Button>
           </Box>
         </>
       ) : (
@@ -108,12 +112,12 @@ export default function HorizontalLinearStepper() {
           </Paper>
           <Box sx={{ display: 'flex' }}>
             <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
-              Back
+              {t('back')}
             </Button>
             <Box sx={{ flexGrow: 1 }} />
             {isStepOptional(activeStep) && (
               <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                Skip
+                {t('skip')}
               </Button>
             )}
             <Button variant="contained" onClick={handleNext}>

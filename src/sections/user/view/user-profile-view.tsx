@@ -20,35 +20,46 @@ import ProfileCover from '../profile-cover';
 import ProfileFriends from '../profile-friends';
 import ProfileGallery from '../profile-gallery';
 import ProfileFollowers from '../profile-followers';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
-const TABS = [
+// const { t } = useLocales()
+
+const TABS = () => { 
+
+  const { t } = useLocales()
+
+  return [
   {
     value: 'profile',
-    label: 'Profile',
+    label: t('profile'),
     icon: <Iconify icon="solar:user-id-bold" width={24} />,
   },
   {
     value: 'followers',
-    label: 'Followers',
+    label: t('followers'),
     icon: <Iconify icon="solar:heart-bold" width={24} />,
   },
   {
     value: 'friends',
-    label: 'Friends',
+    label: t('friends'),
     icon: <Iconify icon="solar:users-group-rounded-bold" width={24} />,
   },
   {
     value: 'gallery',
-    label: 'Gallery',
+    label: t('gallery'),
     icon: <Iconify icon="solar:gallery-wide-bold" width={24} />,
   },
 ];
+}
 
 // ----------------------------------------------------------------------
 
 export default function UserProfileView() {
+
+  const { t } = useLocales()
+
   const settings = useSettingsContext();
 
   const { user } = useMockedUser();
@@ -68,7 +79,7 @@ export default function UserProfileView() {
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
       <CustomBreadcrumbs
-        heading="Profile"
+        heading={t('profile')}
         links={[
           { name: 'Dashboard', href: paths.dashboard.root },
           { name: 'User', href: paths.dashboard.user.root },
@@ -110,7 +121,7 @@ export default function UserProfileView() {
             },
           }}
         >
-          {TABS.map((tab) => (
+          {TABS().map((tab) => (
             <Tab key={tab.value} value={tab.value} icon={tab.icon} label={tab.label} />
           ))}
         </Tabs>

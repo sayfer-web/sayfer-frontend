@@ -21,6 +21,7 @@ import { IUserProfile, IUserProfilePost } from 'src/types/user';
 import Iconify from 'src/components/iconify';
 //
 import ProfilePostItem from './profile-post-item';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -30,6 +31,9 @@ type Props = {
 };
 
 export default function ProfileHome({ info, posts }: Props) {
+
+  const { t } = useLocales()
+
   const fileRef = useRef<HTMLInputElement>(null);
 
   const handleAttach = () => {
@@ -47,14 +51,14 @@ export default function ProfileHome({ info, posts }: Props) {
         <Stack width={1}>
           {fNumber(info.totalFollowers)}
           <Box component="span" sx={{ color: 'text.secondary', typography: 'body2' }}>
-            Follower
+            {t('follower')}
           </Box>
         </Stack>
 
         <Stack width={1}>
           {fNumber(info.totalFollowing)}
           <Box component="span" sx={{ color: 'text.secondary', typography: 'body2' }}>
-            Following
+            {t('following')}
           </Box>
         </Stack>
       </Stack>
@@ -63,7 +67,7 @@ export default function ProfileHome({ info, posts }: Props) {
 
   const renderAbout = (
     <Card>
-      <CardHeader title="About" />
+      <CardHeader title={t('about')} />
 
       <Stack spacing={2} sx={{ p: 3 }}>
         <Box sx={{ typography: 'body2' }}>{info.quote}</Box>
@@ -115,7 +119,7 @@ export default function ProfileHome({ info, posts }: Props) {
         multiline
         fullWidth
         rows={4}
-        placeholder="Share what you are thinking here..."
+        placeholder={t('share_what_you_are_thinking_here')}
         sx={{
           p: 2,
           mb: 3,
@@ -128,16 +132,16 @@ export default function ProfileHome({ info, posts }: Props) {
         <Stack direction="row" spacing={1} alignItems="center" sx={{ color: 'text.secondary' }}>
           <Fab size="small" color="inherit" variant="softExtended" onClick={handleAttach}>
             <Iconify icon="solar:gallery-wide-bold" width={24} sx={{ color: 'success.main' }} />
-            Image/Video
+            {t('image_video')}
           </Fab>
 
-          <Fab size="small" color="inherit" variant="softExtended">
+          {/* <Fab size="small" color="inherit" variant="softExtended">
             <Iconify icon="solar:videocamera-record-bold" width={24} sx={{ color: 'error.main' }} />
             Streaming
-          </Fab>
+          </Fab> */}
         </Stack>
 
-        <Button variant="contained">Post</Button>
+        <Button variant="contained">{t('post')}</Button>
       </Stack>
 
       <input ref={fileRef} type="file" style={{ display: 'none' }} />
@@ -146,7 +150,7 @@ export default function ProfileHome({ info, posts }: Props) {
 
   const renderSocials = (
     <Card>
-      <CardHeader title="Social" />
+      <CardHeader title={t('social')} />
 
       <Stack spacing={2} sx={{ p: 3 }}>
         {_socials.map((link) => (

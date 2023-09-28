@@ -12,6 +12,7 @@ import { paths } from 'src/routes/paths';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 //
 import ComponentBlock from '../component-block';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -20,6 +21,9 @@ const COLORS = ['info', 'success', 'warning', 'error'] as const;
 // ----------------------------------------------------------------------
 
 export default function AlertView() {
+
+  const { t } = useLocales()
+
   return (
     <>
       <Box
@@ -81,7 +85,7 @@ export default function AlertView() {
             ))}
           </ComponentBlock>
 
-          <ComponentBlock title="Description">
+          <ComponentBlock title={t('description')}>
             {COLORS.map((color) => (
               <Alert key={color} severity={color} onClose={() => {}} sx={{ width: 1 }}>
                 <AlertTitle sx={{ textTransform: 'capitalize' }}> {color} </AlertTitle>

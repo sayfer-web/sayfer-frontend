@@ -24,10 +24,10 @@ import { useAuthContext } from 'src/auth/hooks';
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useLoginMutation, useRegistrationMutation } from 'src/features/auth/authApiSlice';
+import { useLoginMutation, useRegistrationMutation } from 'src/app/features/auth/authApiSlice';
 import { useDispatch } from 'react-redux';
 // import { useRegistrationMutation } from 'src/features/registration/registrationApiSlice';
-import { setCredentials } from 'src/features/auth/authSlice';
+import { setCredentials } from 'src/app/features/auth/authSlice';
 import { TextField } from '@mui/material';
 
 // ----------------------------------------------------------------------

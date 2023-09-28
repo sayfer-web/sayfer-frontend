@@ -15,10 +15,14 @@ import { useMockedUser } from 'src/hooks/use-mocked-user';
 // components
 import Iconify from 'src/components/iconify';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function ChatNavAccount() {
+
+  const { t } = useLocales()
+
   const { user } = useMockedUser();
 
   const popover = usePopover();
@@ -101,12 +105,12 @@ export default function ChatNavAccount() {
 
           <MenuItem>
             <Iconify icon="solar:user-id-bold" width={24} />
-            Profile
+            {t('profile')}
           </MenuItem>
 
           <MenuItem>
             <Iconify icon="eva:settings-2-fill" width={24} />
-            Settings
+            {t('settings')}
           </MenuItem>
         </Stack>
       </CustomPopover>

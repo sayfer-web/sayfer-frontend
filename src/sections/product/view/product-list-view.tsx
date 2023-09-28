@@ -42,6 +42,7 @@ import { IProductItem, IProductTableFilters, IProductTableFilterValue } from 'sr
 import ProductTableRow from '../product-table-row';
 import ProductTableToolbar from '../product-table-toolbar';
 import ProductTableFiltersResult from '../product-table-filters-result';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -54,10 +55,15 @@ const TABLE_HEAD = [
   { id: '', width: 88 },
 ];
 
-const PUBLISH_OPTIONS = [
-  { value: 'published', label: 'Published' },
-  { value: 'draft', label: 'Draft' },
+const PUBLISH_OPTIONS = () => { 
+
+  const { t } = useLocales()
+
+  return [
+  { value: 'published', label: t('published') },
+  { value: 'draft', label: t('draft') },
 ];
+}
 
 const defaultFilters: IProductTableFilters = {
   name: '',
@@ -187,7 +193,7 @@ export default function ProductListView() {
             onFilters={handleFilters}
             //
             stockOptions={PRODUCT_STOCK_OPTIONS}
-            publishOptions={PUBLISH_OPTIONS}
+            publishOptions={PUBLISH_OPTIONS()}
           />
 
           {canReset && (

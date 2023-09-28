@@ -46,9 +46,12 @@ import OrderTableFiltersResult from '../order-table-filters-result';
 
 // ----------------------------------------------------------------------
 
-const STATUS_OPTIONS = [{ value: 'all', label: 'All' }, ...ORDER_STATUS_OPTIONS];
+const restVar = ORDER_STATUS_OPTIONS()
 
-const TABLE_HEAD = [
+const STATUS_OPTIONS = [{ value: 'all', label: 'All' }, ...restVar];
+
+const TABLE_HEAD = () => { 
+  return [
   { id: 'orderNumber', label: 'Order', width: 116 },
   { id: 'name', label: 'Customer' },
   { id: 'createdAt', label: 'Date', width: 140 },
@@ -57,6 +60,7 @@ const TABLE_HEAD = [
   { id: 'status', label: 'Status', width: 110 },
   { id: '', width: 88 },
 ];
+}
 
 const defaultFilters: IOrderTableFilters = {
   name: '',
@@ -263,7 +267,7 @@ export default function OrderListView() {
                 <TableHeadCustom
                   order={table.order}
                   orderBy={table.orderBy}
-                  headLabel={TABLE_HEAD}
+                  headLabel={TABLE_HEAD()}
                   rowCount={tableData.length}
                   numSelected={table.selected.length}
                   onSort={table.onSort}

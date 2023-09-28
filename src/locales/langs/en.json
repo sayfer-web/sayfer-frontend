@@ -33,7 +33,6 @@
   "management": "management",
   "menu_level": "menu level",
   "item_label": "item label",
-  "description": "description",
   "other_cases": "other cases",
   "item_caption": "item caption",
   "file_manager": "File Manager",
@@ -50,5 +49,346 @@
   "upgrade_to_pro": "Upgrade to Pro",
   "demo": {
     "title": "English"
-  }
+  },
+
+  "new_event": "New event",
+
+  "wallet": "Wallet",
+
+  "than_last_month": "than last month",
+  "balance": "Balance",
+
+  "token_holder": "Token holder",
+  "total_money_received": "Total money received",
+
+
+  "request": "request",
+  "transfer": "transfer",
+
+
+  "followers": "Followers",
+  "friends": "Friends",
+  "gallery": "Gallery",
+
+  "invite_friends": "Invite friends",
+  "and_earn": "and earn",
+  "present_egestas": "description",
+
+  "view_all": "View all",
+  "quick_transfer": "Quick Transfer",
+
+  "recent": "Recent",
+
+  "insert_amount": "Insert amount",
+
+  "your_balance": "Your Balance",
+
+  "balance_statistics": "Balance Statistics",
+
+  "expenses_categories": "Expenses Categories",
+
+  "year": "Year",
+  "month": "Month",
+  "week": "Week",
+
+  "jan": "Jan",
+  "feb": "Feb",
+  "mar": "Mar",
+  "apr": "Apr",
+  "may": "May", 
+  "jun": "Jun",
+  "jul": "Jul",
+  "aug": "Aug",
+  "sep": "Sep",
+  "oct": "Oct",
+  "dec": "Dec",
+
+  "income": "Income",
+  "outcome": "Outcome",
+
+  "categories": "Categories",
+
+  "invite": "Invite",
+  
+  "transfer_now": "Transfer Now",
+
+  "recent_transitions": "Recent Transitions",
+
+  
+  "description": "Description",
+  "date": "Date",
+  "amount": "Amount",
+  "status": "Status",
+
+  "received_money_from": "Received money from",
+  "payment_for": "Payment for",
+
+  "follower": "Follower",
+  "following": "Following",
+
+  "about": "About",
+  "social": "Social",
+  "all_users": "All users",
+
+  "all_transactions": "All Transactions",
+  "my_transactions": "My Transactions",
+
+  "news": "News",
+
+  "welcome_back": "Hi, Welcome back",
+  "welcome_back_desc": "If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything.",
+
+  "go_now": "Go Now",
+  
+  "menu_ap": "Admin Panel",
+
+  "quests": "Quests",
+
+  "game_room": "Game Room",
+
+  "roadmap": "Roadmap",
+
+  "settings": "Settings",
+
+  "mode": "Mode",
+
+  "contrast": "Contrast",
+
+  "direction": "Direction",
+
+  "layout": "Layout",
+
+  "stretch": "Stretch",
+
+  "presets": "Presets",
+
+  "fullscreen": "Fullscreen",
+
+  "exit_fullscreen": "Exit fullscreen",
+
+  "role": "Role",
+
+  "start_date": "Start date",
+
+  "search_customer_or_number": "Search customer or number...",
+
+  "all": "All",
+
+  "pending": "Pending",
+
+  "completed": "Completed",
+
+  "cancelled": "Cancelled",
+
+  "refunded": "Refunded",
+
+  "status_dots": "Status:",
+  "date_dots": "Date:",
+
+  "clear": "Clear",
+
+  "image_video": "Image/Video",
+
+  "write_a_comment": "Write a comment…",
+
+  "billing": "Billing",
+  "notifications": "Notifications",
+  "security": "Security",
+
+  "cancel": "Cancel",
+
+  "full_name": "Full name",
+
+  "email_address": "Email address",
+
+  "age": "Age",
+
+  "confirm_password": "Confirm Password",
+
+  "public_profile": "Public Profile",
+
+  "delete_user": "Delete user",
+
+  "save_changes": "Save Changes",
+
+  "address": "Address",
+
+  "allowed": "Allowed",
+
+  "max_size_of": "Max size of",
+
+  "dense": "Dense",
+
+  "published": "Published",
+
+  "draft": "Draft",
+
+  "latest": "Latest",
+
+  "popular": "Popular",
+
+  "oldest": "Oldest",
+
+  "unread": "Unread",
+
+  "archived": "Archived",
+
+  "accept": "Accept",
+
+  "decline": "decline",
+
+  "sort_by": "Sort by:",
+
+  "search_dots": "Search...",
+
+  "new_post": "New Post",
+
+  "sent_you_friend_request": "sent you a friend request",
+
+  "communication": "Communication",
+
+  "project_ui": "Project UI",
+
+  "create_new_tour": "Create a new tour",
+
+  "new_tour": "New tour",
+
+  "title_short_description_image": "Title, short description, image...",
+
+  "additional_functions_and_attributes": "Additional functions and attributes...",
+
+  "content": "Content",
+
+  "images": "Images",
+
+  "tour_guide": "Tour Guide",
+
+  "tour_guides": "tour guides",
+
+  "available": "Available",
+
+  "duration": "Duration",
+
+  "destination": "Destination",
+
+  "services": "Services",
+
+  "tags": "Tags",
+
+  "publish": "Publish",
+
+  "properties": "Properties",
+
+  "write_something_awesome": "Write something awesome...",
+
+  "ex_2_days": "Ex: 2 days, 4 days 3 nights...",
+  
+  "ex_adventure_seekers_expedition": "Ex: Adventure Seekers Expedition...",
+
+  "weekly_sales": "Weekly Sales",
+
+  "new_users": "New Users",
+
+  "item_orders": "Item Orders",
+
+  "bug_reports": "Bug Reports",
+
+  "website_visits": "Website Visits",
+
+  "than_last_year": "than last year",
+
+  "current_visits": "Current Visits",
+
+  "conversion_rates": "Conversion Rates",
+
+  "current_subject": "Current Subject",
+
+  "order_timeline": "Order Timeline",
+
+  "traffic_by_site": "Traffic by site",
+
+  "tasks": "Tasks",
+
+  "total_booking": "Total booking",
+
+  "sold": "Sold",
+
+  "total_incomes": "Total Incomes",
+
+  "booked": "Booked",
+
+  "tours_available": "Tours Available",
+
+  "statistics": "Statistics",
+
+  "customer_reviews": "Customer Review",
+
+  "newest_booking": "Newest Booking",
+
+  "twelve_booking": "12 Booking",
+  
+  "booking_details": "Booking Details",
+
+  "reject": "Reject",
+
+  "search_contacts_dots": "Search contacts...",
+
+  "simple": "Simple",
+
+  "inbox": "Inbox",
+
+  "drafts": "Drafts",
+
+  "trash": "Trash",
+
+  "spam": "Spam",
+
+  "nested": "Nested",
+
+  "nested_list_items": "Nested List Items",
+
+  "sent_mail": "Sent Mail",
+
+  "starred": "Starred",
+
+  "folder": "Folder",
+
+  "photos": "Photos",
+
+  "work": "Work",
+
+  "vacation": "Vacation",
+
+  "selected": "Selected",
+
+  "controls": "Controls",
+
+  "switch": "Switch",
+
+  "bluetooth": "Bluetooth",
+
+  "compose": "Compose",
+
+  "share_what_you_are_thinking_here": "Share what you are thinking here...",
+
+  "recent_posts": "Recent Posts",
+
+  "comments": "Comments",
+
+  "write_some_of_your_comments": "Write some of your comments...",
+
+  "post_comment": "Post comment",
+
+  "reply": "Reply",
+
+  "back": "Back",
+
+  "skip": "Skip",
+
+  "reset": "Reset",
+
+  "optional": "Optional"
+
+
+
 }

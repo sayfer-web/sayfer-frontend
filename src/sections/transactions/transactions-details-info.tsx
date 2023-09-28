@@ -18,6 +18,7 @@ import {
 } from 'src/types/order';
 // components
 import Iconify from 'src/components/iconify';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -29,6 +30,9 @@ type Props = {
 };
 
 export default function TransactionsDetailsInfo({ customer, delivery, payment, shippingAddress }: Props) {
+
+  const { t } = useLocales()
+
   const renderCustomer = (
     <>
       <CardHeader
@@ -119,7 +123,7 @@ export default function TransactionsDetailsInfo({ customer, delivery, payment, s
       <Stack spacing={1.5} sx={{ p: 3, typography: 'body2' }}>
         <Stack direction="row" alignItems="center">
           <Box component="span" sx={{ color: 'text.secondary', width: 120, flexShrink: 0 }}>
-            Address
+            {t('address')}
           </Box>
           {shippingAddress.fullAddress}
         </Stack>

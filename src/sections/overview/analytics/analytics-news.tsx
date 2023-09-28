@@ -11,6 +11,7 @@ import { fToNow } from 'src/utils/format-time';
 // components
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -29,6 +30,9 @@ interface Props extends CardProps {
 }
 
 export default function AnalyticsNews({ title, subheader, list, ...other }: Props) {
+
+  const { t } = useLocales()
+
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} sx={{ mb: 1 }} />
@@ -45,7 +49,7 @@ export default function AnalyticsNews({ title, subheader, list, ...other }: Prop
           color="inherit"
           endIcon={<Iconify icon="eva:arrow-ios-forward-fill" width={18} sx={{ ml: -0.5 }} />}
         >
-          View All
+          {t('view_all')}
         </Button>
       </Box>
     </Card>

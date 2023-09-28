@@ -16,6 +16,7 @@ import Dialog, { DialogProps } from '@mui/material/Dialog';
 // types
 // components
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -24,6 +25,9 @@ interface Props extends DialogProps {
 }
 
 export default function ProductReviewNewForm({ onClose, ...other }: Props) {
+
+  const { t } = useLocales()
+
   const ReviewSchema = Yup.object().shape({
     rating: Yup.number().min(1, 'Rating must be greater than or equal to 1'),
     review: Yup.string().required('Review is required'),
@@ -51,6 +55,7 @@ export default function ProductReviewNewForm({ onClose, ...other }: Props) {
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
+
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
@@ -102,11 +107,11 @@ export default function ProductReviewNewForm({ onClose, ...other }: Props) {
 
         <DialogActions>
           <Button color="inherit" variant="outlined" onClick={onCancel}>
-            Cancel
+            {t('cancel')}
           </Button>
 
           <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-            Post
+            {t('post')}
           </LoadingButton>
         </DialogActions>
       </FormProvider>

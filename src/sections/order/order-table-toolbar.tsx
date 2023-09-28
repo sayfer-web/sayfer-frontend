@@ -12,6 +12,7 @@ import { IOrderTableFilters, IOrderTableFilterValue } from 'src/types/order';
 // components
 import Iconify from 'src/components/iconify';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -30,6 +31,9 @@ export default function OrderTableToolbar({
   canReset,
   onResetFilters,
 }: Props) {
+
+  const { t } = useLocales()
+
   const popover = usePopover();
 
   const handleFilterName = useCallback(
@@ -82,7 +86,7 @@ export default function OrderTableToolbar({
         />
 
         <DatePicker
-          label="End date"
+          label={t('end_date')}
           value={filters.endDate}
           onChange={handleFilterEndDate}
           slotProps={{ textField: { fullWidth: true } }}
@@ -96,7 +100,7 @@ export default function OrderTableToolbar({
             fullWidth
             value={filters.name}
             onChange={handleFilterName}
-            placeholder="Search customer or order number..."
+            placeholder={t('search_customer_or_number')}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

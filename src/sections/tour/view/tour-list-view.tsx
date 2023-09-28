@@ -28,6 +28,7 @@ import TourSort from '../tour-sort';
 import TourSearch from '../tour-search';
 import TourFilters from '../tour-filters';
 import TourFiltersResult from '../tour-filters-result';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -42,6 +43,9 @@ const defaultFilters: ITourFilters = {
 // ----------------------------------------------------------------------
 
 export default function TourListView() {
+
+  const { t } = useLocales()
+
   const settings = useSettingsContext();
 
   const openFilters = useBoolean();
@@ -180,7 +184,7 @@ export default function TourListView() {
             variant="contained"
             startIcon={<Iconify icon="mingcute:add-line" />}
           >
-            New Tour
+            {t('new_tour')}
           </Button>
         }
         sx={{

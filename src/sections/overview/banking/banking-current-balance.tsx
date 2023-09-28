@@ -16,6 +16,7 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import Iconify from 'src/components/iconify';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
 import Carousel, { CarouselDots, useCarousel } from 'src/components/carousel';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -34,6 +35,7 @@ type Props = {
 };
 
 export default function BankingCurrentBalance({ list, sx }: Props) {
+
 
   const [balanceVisible, toggleBalanceVisible] = useState(true)
 
@@ -105,6 +107,8 @@ type CardItemProps = {
 function CardItem({ card }: CardItemProps) {
   const { id, cardType, balance, cardHolder, cardNumber, cardValid } = card;
 
+  const { t } = useLocales()
+
   const currency = useBoolean();
 
   const popover = usePopover();
@@ -141,7 +145,7 @@ function CardItem({ card }: CardItemProps) {
 
         <div>
           <Typography sx={{ mb: 2, typography: 'subtitle2', opacity: 0.48 }}>
-            {cardType} Balance
+            {cardType} {t('balance')}
           </Typography>
 
           <Stack direction="row" alignItems="center" spacing={1}>
@@ -178,7 +182,7 @@ function CardItem({ card }: CardItemProps) {
 
         <Stack direction="row" spacing={5}>
           <Stack spacing={1}>
-            <Typography sx={{ typography: 'caption', opacity: 0.48 }}>Token Holder</Typography>
+            <Typography sx={{ typography: 'caption', opacity: 0.48 }}>{t('token_holder')}</Typography>
             <Typography sx={{ typography: 'subtitle1' }}>{cardHolder}</Typography>
           </Stack>
           {/* <Stack spacing={1}>

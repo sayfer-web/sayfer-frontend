@@ -26,6 +26,7 @@ import { IPostItem, IPostFilters, IPostFilterValue } from 'src/types/blog';
 import PostSort from '../post-sort';
 import PostSearch from '../post-search';
 import PostListHorizontal from '../post-list-horizontal';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -36,6 +37,9 @@ const defaultFilters: IPostFilters = {
 // ----------------------------------------------------------------------
 
 export default function PostListView() {
+
+  const { t } = useLocales()
+
   const settings = useSettingsContext();
 
   const [sortBy, setSortBy] = useState('latest');
@@ -102,7 +106,7 @@ export default function PostListView() {
             variant="contained"
             startIcon={<Iconify icon="mingcute:add-line" />}
           >
-            New Post
+            {t('new_post')}
           </Button>
         }
         sx={{
@@ -127,7 +131,7 @@ export default function PostListView() {
           hrefItem={(title: string) => paths.dashboard.post.details(title)}
         />
 
-        <PostSort sort={sortBy} onSort={handleSortBy} sortOptions={POST_SORT_OPTIONS} />
+        <PostSort sort={sortBy} onSort={handleSortBy} sortOptions={POST_SORT_OPTIONS()} />
       </Stack>
 
       <Tabs
@@ -142,7 +146,11 @@ export default function PostListView() {
             key={tab}
             iconPosition="end"
             value={tab}
-            label={tab}
+            label={
+              tab === 'all' && t('all') ||
+              tab === 'published' && t('published') ||
+              tab === 'draft' && t('draft')
+            }
             icon={
               <Label
                 variant={((tab === 'all' || tab === filters.publish) && 'filled') || 'soft'}

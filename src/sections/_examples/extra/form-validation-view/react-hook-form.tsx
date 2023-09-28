@@ -33,6 +33,7 @@ import FormProvider, {
 //
 import { FormSchema } from './schema';
 import ValuesPreview from './values-preview';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -86,6 +87,9 @@ type Props = {
 };
 
 export default function ReactHookForm({ debug }: Props) {
+
+  const { t } = useLocales()
+
   const password = useBoolean();
 
   const methods = useForm({
@@ -165,15 +169,15 @@ export default function ReactHookForm({ debug }: Props) {
         >
           <Stack spacing={2}>
             <Block>
-              <RHFTextField name="fullName" label="Full Name" />
+              <RHFTextField name="fullName" label={t('full_name')} />
             </Block>
 
             <Block>
-              <RHFTextField name="email" label="Email address" />
+              <RHFTextField name="email" label={t('email_address')} />
             </Block>
 
             <Block>
-              <RHFTextField name="age" label="Age" type="number" />
+              <RHFTextField name="age" label={t('age')} type="number" />
             </Block>
 
             <Stack spacing={2} direction={{ xs: 'column', sm: 'row' }}>
@@ -183,7 +187,7 @@ export default function ReactHookForm({ debug }: Props) {
                 render={({ field, fieldState: { error } }) => (
                   <DatePicker
                     {...field}
-                    label="Start date"
+                    label={t('start_date')}
                     format="dd/MM/yyyy"
                     slotProps={{
                       textField: {
@@ -202,7 +206,7 @@ export default function ReactHookForm({ debug }: Props) {
                 render={({ field, fieldState: { error } }) => (
                   <DatePicker
                     {...field}
-                    label="End date"
+                    label={t('end_date')}
                     format="dd/MM/yyyy"
                     slotProps={{
                       textField: {
@@ -220,7 +224,7 @@ export default function ReactHookForm({ debug }: Props) {
               <Block>
                 <RHFTextField
                   name="password"
-                  label="Password"
+                  label={t('password')}
                   type={password.value ? 'text' : 'password'}
                   InputProps={{
                     endAdornment: (
@@ -239,7 +243,7 @@ export default function ReactHookForm({ debug }: Props) {
               <Block>
                 <RHFTextField
                   name="confirmPassword"
-                  label="Confirm Password"
+                  label={t('confirm_password')}
                   type={password.value ? 'text' : 'password'}
                   InputProps={{
                     endAdornment: (

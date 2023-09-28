@@ -67,21 +67,6 @@ export function useNavData() {
           //   path: paths.dashboard.general.ecommerce,
           //   icon: ICONS.ecommerce,
           // },
-          {
-            title: t('analytics'),
-            path: paths.dashboard.general.analytics,
-            icon: ICONS.analytics,
-          },
-          {
-            title: t('wallet'),
-            path: paths.dashboard.general.wallet,
-            icon: ICONS.banking,
-          },
-          {
-            title: t('booking'),
-            path: paths.dashboard.general.booking,
-            icon: ICONS.booking,
-          },
           // {
           //   title: t('file'),
           //   path: paths.dashboard.general.file,
@@ -89,22 +74,12 @@ export function useNavData() {
           // },
 
           {
-            title: t('quests'),
-            path: paths.dashboard.job.root,
-            icon: ICONS.job,
-          },
-
-          {
-            title: t('game room'),
-            path: paths.dashboard.general.games,
-            icon: ICONS.file,
-          },
-          
-          {
             title: t('news'),
             path: paths.dashboard.post.root,
             icon: ICONS.blog,
           },
+
+        
           // {
           //   title: t('Address book'),
           //   path: paths.dashboard.general.addressbook,
@@ -121,19 +96,12 @@ export function useNavData() {
         subheader: t('management'),
         items: [
           // USER
+          
+
           {
-            title: t('user'),
-            path: paths.dashboard.user.root,
-            icon: ICONS.user,
-            children: [
-              { title: t('all users'), path: paths.dashboard.user.list },
-              { title: t('profile'), path: paths.dashboard.user.root },
-              // { title: t('cards'), path: paths.dashboard.user.cards },
-              // { title: t('create'), path: paths.dashboard.user.new },
-              // { title: t('edit'), path: paths.dashboard.user.demo.edit },
-              { title: t('account'), path: paths.dashboard.user.account },
-              // { title: t('my transactions'), path: paths.dashboard.user.demo.transactions },
-            ],
+            title: t('wallet'),
+            path: paths.dashboard.general.wallet,
+            icon: ICONS.banking,
           },
           
           // TOUR
@@ -142,11 +110,27 @@ export function useNavData() {
             path: paths.dashboard.transactions.root,
             icon: ICONS.tour,
             children: [
-              { title: t('all transactions'), path: paths.dashboard.transactions.root },
-              { title: t('my transactions'), path: paths.dashboard.transactions.demo.userTransactions },
+              { title: t('all_transactions'), path: paths.dashboard.transactions.root },
+              { title: t('my_transactions'), path: paths.dashboard.transactions.demo.userTransactions },
               // { title: t('details'), path: paths.dashboard.transactions.demo.details },
               // { title: t('create'), path: paths.dashboard.transactions.new },
               // { title: t('edit'), path: paths.dashboard.transactions.demo.edit },
+            ],
+          },
+
+          {
+            title: t('user'),
+            path: paths.dashboard.user.root,
+            icon: ICONS.user,
+            children: [
+              
+              { title: t('profile'), path: paths.dashboard.user.root },
+              // { title: t('cards'), path: paths.dashboard.user.cards },
+              // { title: t('create'), path: paths.dashboard.user.new },
+              // { title: t('edit'), path: paths.dashboard.user.demo.edit },
+              { title: t('account'), path: paths.dashboard.user.account },
+              // { title: t('my transactions'), path: paths.dashboard.user.demo.transactions },
+              { title: t('all_users'), path: paths.dashboard.user.list },
             ],
           },
 
@@ -262,6 +246,186 @@ export function useNavData() {
           },
 
           // CHAT
+          // {
+          //   title: t('chat'),
+          //   path: paths.dashboard.chat,
+          //   icon: ICONS.chat,
+          // },
+
+          // CALENDAR
+          // {
+          //   title: t('calendar'),
+          //   path: paths.dashboard.calendar,
+          //   icon: ICONS.calendar,
+          // },
+
+          // KANBAN
+          // {
+          //   title: t('roadmap'),
+          //   path: paths.dashboard.kanban,
+          //   icon: ICONS.kanban,
+          // },
+        ],
+      },
+
+      {
+        subheader: t('activity'),
+        items: [
+
+          
+          {
+            title: t('game_room'),
+            path: paths.dashboard.general.games,
+            icon: ICONS.file,
+          },
+                    
+          {
+            title: t('quests'),
+            path: paths.dashboard.job.root,
+            icon: ICONS.job,
+          },
+          // USER
+          // {
+          //   title: t('user'),
+          //   path: paths.dashboard.user.root,
+          //   icon: ICONS.user,
+          //   children: [
+          //     { title: t('all_users'), path: paths.dashboard.user.list },
+          //     { title: t('profile'), path: paths.dashboard.user.root },
+          //     // { title: t('cards'), path: paths.dashboard.user.cards },
+          //     // { title: t('create'), path: paths.dashboard.user.new },
+          //     // { title: t('edit'), path: paths.dashboard.user.demo.edit },
+          //     { title: t('account'), path: paths.dashboard.user.account },
+          //     // { title: t('my transactions'), path: paths.dashboard.user.demo.transactions },
+          //   ],
+          // },
+          
+          // TOUR
+          // {
+          //   title: t('transactions'),
+          //   path: paths.dashboard.transactions.root,
+          //   icon: ICONS.tour,
+          //   children: [
+          //     { title: t('all_transactions'), path: paths.dashboard.transactions.root },
+          //     { title: t('my_transactions'), path: paths.dashboard.transactions.demo.userTransactions },
+          //     // { title: t('details'), path: paths.dashboard.transactions.demo.details },
+          //     // { title: t('create'), path: paths.dashboard.transactions.new },
+          //     // { title: t('edit'), path: paths.dashboard.transactions.demo.edit },
+          //   ],
+          // },
+
+
+          // PRODUCT
+          // {
+          //   title: t('product'),
+          //   path: paths.dashboard.product.root,
+          //   icon: ICONS.product,
+          //   children: [
+          //     { title: t('list'), path: paths.dashboard.product.root },
+          //     {
+          //       title: t('details'),
+          //       path: paths.dashboard.product.demo.details,
+          //     },
+          //     { title: t('create'), path: paths.dashboard.product.new },
+          //     { title: t('edit'), path: paths.dashboard.product.demo.edit },
+          //   ],
+          // },
+
+          // ORDER
+          // {
+          //   title: t('order'),
+          //   path: paths.dashboard.order.root,
+          //   icon: ICONS.order,
+          //   children: [
+          //     { title: t('list'), path: paths.dashboard.order.root },
+          //     { title: t('details'), path: paths.dashboard.order.demo.details },
+          //   ],
+          // },
+
+          // INVOICE
+          // {
+          //   title: t('invoice'),
+          //   path: paths.dashboard.invoice.root,
+          //   icon: ICONS.invoice,
+          //   children: [
+          //     { title: t('list'), path: paths.dashboard.invoice.root },
+          //     {
+          //       title: t('details'),
+          //       path: paths.dashboard.invoice.demo.details,
+          //     },
+          //     { title: t('create'), path: paths.dashboard.invoice.new },
+          //     { title: t('edit'), path: paths.dashboard.invoice.demo.edit },
+          //   ],
+          // },
+
+          // BLOG
+          // {
+          //   title: t('blog'),
+          //   path: paths.dashboard.post.root,
+          //   icon: ICONS.blog,
+          //   children: [
+          //     { title: t('list'), path: paths.dashboard.post.root },
+          //     { title: t('details'), path: paths.dashboard.post.demo.details },
+          //     { title: t('create'), path: paths.dashboard.post.new },
+          //     { title: t('edit'), path: paths.dashboard.post.demo.edit },
+          //   ],
+          // },
+
+          // JOB
+          // {
+          //   title: t('quests'),
+          //   path: paths.dashboard.job.root,
+          //   icon: ICONS.job,
+          //   children: [
+          //     { title: t('list'), path: paths.dashboard.job.root },
+          //     { title: t('details'), path: paths.dashboard.job.demo.details },
+          //     { title: t('create'), path: paths.dashboard.job.new },
+          //     { title: t('edit'), path: paths.dashboard.job.demo.edit },
+          //   ],
+          // },
+
+          // TOUR
+          // {
+          //   title: t('tour'),
+          //   path: paths.dashboard.tour.root,
+          //   icon: ICONS.tour,
+          //   children: [
+          //     { title: t('list'), path: paths.dashboard.tour.root },
+          //     { title: t('details'), path: paths.dashboard.tour.demo.details },
+          //     { title: t('create'), path: paths.dashboard.tour.new },
+          //     { title: t('edit'), path: paths.dashboard.tour.demo.edit },
+          //   ],
+          // },
+
+          // TOUR
+          // {
+          //   title: t('games'),
+          //   path: paths.dashboard.games.root,
+          //   icon: ICONS.tour,
+          //   children: [
+          //     { title: t('list'), path: paths.dashboard.games.root },
+          //     { title: t('details'), path: paths.dashboard.games.demo.details },
+          //     { title: t('create'), path: paths.dashboard.games.new },
+          //     { title: t('edit'), path: paths.dashboard.games.demo.edit },
+          //   ],
+          // },
+
+          // FILE MANAGER
+          // {
+          //   title: t('file_manager'),
+          //   path: paths.dashboard.fileManager,
+          //   icon: ICONS.folder,
+          // },
+
+          // MAIL
+          // {
+          //   title: t('mail'),
+          //   path: paths.dashboard.mail,
+          //   icon: ICONS.mail,
+          //   info: <Label color="error">+32</Label>,
+          // },
+
+          // CHAT
           {
             title: t('chat'),
             path: paths.dashboard.chat,
@@ -269,11 +433,11 @@ export function useNavData() {
           },
 
           // CALENDAR
-          {
-            title: t('calendar'),
-            path: paths.dashboard.calendar,
-            icon: ICONS.calendar,
-          },
+          // {
+          //   title: t('calendar'),
+          //   path: paths.dashboard.calendar,
+          //   icon: ICONS.calendar,
+          // },
 
           // KANBAN
           {
@@ -282,6 +446,37 @@ export function useNavData() {
             icon: ICONS.kanban,
           },
         ],
+      },
+
+      {
+        subheader: t('menu_ap'),
+        items: [
+          // USER
+          // {
+          //   title: t('user'),
+          //   path: paths.dashboard.user.root,
+          //   icon: ICONS.user,
+          //   children: [
+          //     { title: t('all_users'), path: paths.dashboard.user.list },
+          //     { title: t('profile'), path: paths.dashboard.user.root },
+          //     // { title: t('cards'), path: paths.dashboard.user.cards },
+          //     // { title: t('create'), path: paths.dashboard.user.new },
+          //     // { title: t('edit'), path: paths.dashboard.user.demo.edit },
+          //     { title: t('account'), path: paths.dashboard.user.account },
+          //     // { title: t('my transactions'), path: paths.dashboard.user.demo.transactions },
+          //   ],
+          // },
+          {
+            title: t('analytics'),
+            path: paths.dashboard.general.analytics,
+            icon: ICONS.analytics,
+          },
+          {
+            title: t('booking'),
+            path: paths.dashboard.general.booking,
+            icon: ICONS.booking,
+          },
+        ]
       },
 
       // DEMO MENU STATES

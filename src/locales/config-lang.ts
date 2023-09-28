@@ -1,6 +1,7 @@
 import merge from 'lodash/merge';
 import {
   enUS as enUSAdapter,
+  ru as ruRUAdapter,
   fr as frFRAdapter,
   vi as viVNAdapter,
   zhCN as zhCNAdapter,
@@ -9,6 +10,7 @@ import {
 // core
 import {
   enUS as enUSCore,
+  ruRU as ruRUCore,
   frFR as frFRCore,
   viVN as viVNCore,
   zhCN as zhCNCore,
@@ -17,6 +19,7 @@ import {
 // date-pickers
 import {
   enUS as enUSDate,
+  ruRU as ruRUDate,
   frFR as frFRDate,
   viVN as viVNDate,
   zhCN as zhCNDate,
@@ -24,6 +27,7 @@ import {
 // data-grid
 import {
   enUS as enUSDataGrid,
+  ruRU as ruRUDataGrid,
   frFR as frFRDataGrid,
   viVN as viVNDataGrid,
   zhCN as zhCNDataGrid,
@@ -40,6 +44,13 @@ export const allLangs = [
     systemValue: merge(enUSDate, enUSDataGrid, enUSCore),
     adapterLocale: enUSAdapter,
     icon: 'flagpack:gb-nir',
+  },
+  {
+    label: 'Russian',
+    value: 'ru',
+    systemValue: merge(ruRUDate, ruRUDataGrid, ruRUCore),
+    adapterLocale: ruRUAdapter,
+    icon: 'flagpack:ru',
   },
   {
     label: 'French',

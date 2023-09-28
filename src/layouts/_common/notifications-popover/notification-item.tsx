@@ -12,6 +12,7 @@ import { fToNow } from 'src/utils/format-time';
 // components
 import Label from 'src/components/label';
 import FileThumbnail from 'src/components/file-thumbnail';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -28,6 +29,9 @@ type NotificationItemProps = {
 };
 
 export default function NotificationItem({ notification }: NotificationItemProps) {
+
+  const { t } = useLocales()
+
   const renderAvatar = (
     <ListItemAvatar>
       {notification.avatarUrl ? (
@@ -103,10 +107,10 @@ export default function NotificationItem({ notification }: NotificationItemProps
   const friendAction = (
     <Stack spacing={1} direction="row" sx={{ mt: 1.5 }}>
       <Button size="small" variant="contained">
-        Accept
+        {t('accept')}
       </Button>
       <Button size="small" variant="outlined">
-        Decline
+        {t('decline')}
       </Button>
     </Stack>
   );
@@ -128,7 +132,7 @@ export default function NotificationItem({ notification }: NotificationItemProps
       </Box>
 
       <Button size="small" variant="contained">
-        Reply
+        {t('reply')}
       </Button>
     </Stack>
   );

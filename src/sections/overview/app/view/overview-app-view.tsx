@@ -23,10 +23,14 @@ import AppAreaInstalled from '../app-area-installed';
 import AppWidgetSummary from '../app-widget-summary';
 import AppCurrentDownload from '../app-current-download';
 import AppTopInstalledCountries from '../app-top-installed-countries';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function OverviewAppView() {
+
+  const { t } = useLocales()
+
   const { user } = useMockedUser();
 
   const theme = useTheme();
@@ -38,12 +42,12 @@ export default function OverviewAppView() {
       <Grid container spacing={3}>
         <Grid xs={12} md={8}>
           <AppWelcome
-            title={`Welcome back 👋 \n ${user?.displayName}`}
-            description="If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything."
+            title={`${t('welcome_back')} 👋 \n ${user?.displayName}`}
+            description={t('welcome_back_desc')}
             img={<SeoIllustration />}
             action={
               <Button variant="contained" color="primary">
-                Go Now
+                {t('go_now')}
               </Button>
             }
           />
@@ -108,18 +112,18 @@ export default function OverviewAppView() {
             subheader="(+43%) than last year"
             chart={{
               categories: [
-                'Jan',
-                'Feb',
-                'Mar',
-                'Apr',
-                'May',
-                'Jun',
-                'Jul',
-                'Aug',
-                'Sep',
-                'Oct',
-                'Nov',
-                'Dec',
+                t('jan'),
+                t('feb'),
+                t('mar'),
+                t('apr'),
+                t('may'),
+                t('jun'),
+                t('jul'),
+                t('aug'),
+                t('sep'),
+                t('oct'),
+                t('nov'),
+                t('dec'),
               ],
               series: [
                 {

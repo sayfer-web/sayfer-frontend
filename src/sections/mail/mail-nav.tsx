@@ -12,6 +12,7 @@ import { IMailLabel } from 'src/types/mail';
 //
 import MailNavItem from './mail-nav-item';
 import { MailNavItemSkeleton } from './mail-skeleton';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -38,6 +39,9 @@ export default function MailNav({
   //
   onToggleCompose,
 }: Props) {
+
+  const { t } = useLocales()
+ 
   const mdUp = useResponsive('up', 'md');
 
   const renderSkeleton = (
@@ -80,7 +84,7 @@ export default function MailNav({
           startIcon={<Iconify icon="solar:pen-bold" />}
           onClick={onToggleCompose}
         >
-          Compose
+          {t('compose')}
         </Button>
       </Stack>
 

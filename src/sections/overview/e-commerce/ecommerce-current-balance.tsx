@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Card, { CardProps } from '@mui/material/Card';
 // utils
 import { fCurrency } from 'src/utils/format-number';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -21,6 +22,9 @@ export default function EcommerceCurrentBalance({
   sx,
   ...other
 }: Props) {
+
+  const { t } = useLocales()
+
   const totalAmount = 123456
   const dividends = 1234
 
@@ -35,32 +39,32 @@ export default function EcommerceCurrentBalance({
 
         <Stack direction="row" justifyContent="space-between">
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Received
+            {t('received')}
           </Typography>
           <Typography variant="body2">{fCurrency(currentBalance)}</Typography>
         </Stack>
 
         <Stack direction="row" justifyContent="space-between">
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Sent
+            {t('sent')}
           </Typography>
           <Typography variant="body2">- {fCurrency(sentAmount)}</Typography>
         </Stack>
 
         <Stack direction="row" justifyContent="space-between">
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Dividends
+            {t('dividends')}
           </Typography>
           <Typography variant="subtitle1">{fCurrency(dividends)}</Typography>
         </Stack>
 
         <Stack direction="row" spacing={1.5}>
           <Button fullWidth variant="contained" color="warning">
-            Request
+            {t('request')}
           </Button>
 
           <Button fullWidth variant="contained" color="primary">
-            Transfer
+            {t('transfer')}
           </Button>
         </Stack>
       </Stack>

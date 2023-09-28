@@ -24,6 +24,7 @@ import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
 import { TableHeadCustom } from 'src/components/table';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -53,6 +54,9 @@ export default function BankingRecentTransitions({
   tableData,
   ...other
 }: Props) {
+
+  const { t } = useLocales()
+
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} sx={{ mb: 3 }} />
@@ -79,7 +83,7 @@ export default function BankingRecentTransitions({
           color="inherit"
           endIcon={<Iconify icon="eva:arrow-ios-forward-fill" width={18} sx={{ ml: -0.5 }} />}
         >
-          View All
+          {t('view_all')}
         </Button>
       </Box>
     </Card>

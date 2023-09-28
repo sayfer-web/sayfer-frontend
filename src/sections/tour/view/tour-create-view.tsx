@@ -7,16 +7,20 @@ import { useSettingsContext } from 'src/components/settings';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 //
 import TourNewEditForm from '../tour-new-edit-form';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function TourCreateView() {
+
+  const { t } = useLocales()
+
   const settings = useSettingsContext();
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
       <CustomBreadcrumbs
-        heading="Create a new tour"
+        heading={t('create_new_tour')}
         links={[
           {
             name: 'Dashboard',
@@ -26,7 +30,7 @@ export default function TourCreateView() {
             name: 'Tour',
             href: paths.dashboard.tour.root,
           },
-          { name: 'New tour' },
+          { name: t('new_tour') },
         ]}
         sx={{
           mb: { xs: 3, md: 5 },

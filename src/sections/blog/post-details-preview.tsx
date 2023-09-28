@@ -13,6 +13,7 @@ import Scrollbar from 'src/components/scrollbar';
 import EmptyContent from 'src/components/empty-content';
 //
 import PostDetailsHero from './post-details-hero';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -41,6 +42,9 @@ export default function PostDetailsPreview({
   onSubmit,
   isSubmitting,
 }: Props) {
+
+  const { t } = useLocales()
+
   const hasContent = title || description || content || coverUrl;
 
   const hasHero = title || coverUrl;
@@ -63,7 +67,7 @@ export default function PostDetailsPreview({
           loading={isSubmitting}
           onClick={onSubmit}
         >
-          Post
+          {t('post')}
         </LoadingButton>
       </DialogActions>
 

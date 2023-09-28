@@ -75,7 +75,7 @@ export default function PostListHomeView() {
           hrefItem={(title: string) => paths.post.details(title)}
         />
 
-        <PostSort sort={sortBy} onSort={handleSortBy} sortOptions={POST_SORT_OPTIONS} />
+        <PostSort sort={sortBy} onSort={handleSortBy} sortOptions={POST_SORT_OPTIONS()} />
       </Stack>
 
       <PostList posts={dataFiltered} loading={postsLoading} />

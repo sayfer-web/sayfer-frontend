@@ -9,6 +9,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Iconify from 'src/components/iconify';
 //
 import ComponentBlock from '../../component-block';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -34,6 +35,9 @@ type Props = {
 };
 
 export default function Textfield({ variant }: Props) {
+
+  const { t } = useLocales()
+
   const [currency, setCurrency] = useState('EUR');
 
   const [values, setValues] = useState<State>({
@@ -62,7 +66,7 @@ export default function Textfield({ variant }: Props) {
 
   return (
     <Masonry columns={{ xs: 1, md: 2 }} spacing={3}>
-      <ComponentBlock title="General">
+      <ComponentBlock title={t('general')}>
         <TextField variant={variant} fullWidth label="Inactive" />
 
         <TextField

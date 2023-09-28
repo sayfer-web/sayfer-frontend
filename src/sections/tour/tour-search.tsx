@@ -14,6 +14,7 @@ import { ITourItem } from 'src/types/tour';
 // components
 import Iconify from 'src/components/iconify';
 import SearchNotFound from 'src/components/search-not-found';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -25,6 +26,8 @@ type Props = {
 };
 
 export default function TourSearch({ query, results, onSearch, hrefItem }: Props) {
+
+  const { t } = useLocales()
   const router = useRouter();
 
   const handleClick = (id: string) => {
@@ -69,7 +72,7 @@ export default function TourSearch({ query, results, onSearch, hrefItem }: Props
       renderInput={(params) => (
         <TextField
           {...params}
-          placeholder="Search..."
+          placeholder={t('search_dots')}
           onKeyUp={handleKeyUp}
           InputProps={{
             ...params.InputProps,

@@ -20,6 +20,7 @@ import { ITourFilters, ITourGuide, ITourFilterValue } from 'src/types/tour';
 // components
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -63,6 +64,9 @@ export default function TourFilters({
   //
   dateError,
 }: Props) {
+
+  const { t } = useLocales()
+
   const handleFilterServices = useCallback(
     (newValue: string) => {
       const checked = filters.services.includes(newValue)
@@ -132,10 +136,10 @@ export default function TourFilters({
         Durations
       </Typography>
       <Stack spacing={2.5}>
-        <DatePicker label="Start date" value={filters.startDate} onChange={handleFilterStartDate} />
+        <DatePicker label={t('start_date')} value={filters.startDate} onChange={handleFilterStartDate} />
 
         <DatePicker
-          label="End date"
+          label={t('end_date')}
           value={filters.endDate}
           onChange={handleFilterEndDate}
           slotProps={{

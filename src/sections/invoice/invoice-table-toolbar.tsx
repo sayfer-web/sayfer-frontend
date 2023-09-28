@@ -16,6 +16,7 @@ import { IInvoiceTableFilters, IInvoiceTableFilterValue } from 'src/types/invoic
 // components
 import Iconify from 'src/components/iconify';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -34,6 +35,9 @@ export default function InvoiceTableToolbar({
   dateError,
   serviceOptions,
 }: Props) {
+
+  const { t } = useLocales()
+
   const popover = usePopover();
 
   const handleFilterName = useCallback(
@@ -107,7 +111,7 @@ export default function InvoiceTableToolbar({
         </FormControl>
 
         <DatePicker
-          label="Start date"
+          label={t('start_date')}
           value={filters.startDate}
           onChange={handleFilterStartDate}
           slotProps={{ textField: { fullWidth: true } }}
@@ -117,7 +121,7 @@ export default function InvoiceTableToolbar({
         />
 
         <DatePicker
-          label="End date"
+          label={t('end_date')}
           value={filters.endDate}
           onChange={handleFilterEndDate}
           slotProps={{
@@ -136,7 +140,7 @@ export default function InvoiceTableToolbar({
             fullWidth
             value={filters.name}
             onChange={handleFilterName}
-            placeholder="Search customer or invoice number..."
+            placeholder={t('search_customer_or_number')}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

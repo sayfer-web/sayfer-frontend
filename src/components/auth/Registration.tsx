@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { useRegistrationMutation } from "src/features/registration/registrationApiSlice"
+import { useRegistrationMutation } from "src/app/features/registration/registrationApiSlice"
 import { useDispatch } from "react-redux"
-import { setCredentials } from "src/features/auth/authSlice"
-import { useLoginMutation } from "src/features/auth/authApiSlice"
+import { setCredentials } from "src/app/features/auth/authSlice"
+import { useLoginMutation } from "src/app/features/auth/authApiSlice"
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/

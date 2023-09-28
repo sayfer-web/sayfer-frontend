@@ -10,6 +10,7 @@ import Card, { CardProps } from '@mui/material/Card';
 import Iconify from 'src/components/iconify';
 import Chart, { useChart } from 'src/components/chart';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -18,11 +19,14 @@ interface Props extends CardProps {
   subheader?: string;
   chart: {
     categories?: string[];
+    categoriesLabels?: string[];
     colors?: string[];
     series: {
       type: string;
+      label: string;
       data: {
         name: string;
+        label: string;
         data: number[];
       }[];
     }[];
@@ -31,7 +35,9 @@ interface Props extends CardProps {
 }
 
 export default function BankingBalanceStatistics({ title, subheader, chart, ...other }: Props) {
-  const { categories, colors, series, options } = chart;
+  const { categories, categoriesLabels, colors, series, options } = chart;
+
+  const { t } = useLocales()
 
   const popover = usePopover();
 
@@ -45,7 +51,7 @@ export default function BankingBalanceStatistics({ title, subheader, chart, ...o
       colors: ['transparent'],
     },
     xaxis: {
-      categories,
+      categories: [t('jan'), t('Feb'), t('mar'), t('apr'), t('may'), t('jun'), t('jul'), t('aug'), t('sep')],
     },
     tooltip: {
       y: {
@@ -81,7 +87,11 @@ export default function BankingBalanceStatistics({ title, subheader, chart, ...o
                 bgcolor: 'background.neutral',
               }}
             >
-              {seriesData}
+              {
+                seriesData === 'Year' && t('year') ||
+                seriesData === 'Month' && t('month') ||
+                seriesData === 'Week' && t('week')
+              }
 
               <Iconify
                 width={16}
@@ -108,7 +118,7 @@ export default function BankingBalanceStatistics({ title, subheader, chart, ...o
             selected={option.type === seriesData}
             onClick={() => handleChangeSeries(option.type)}
           >
-            {option.type}
+            {option.label}
           </MenuItem>
         ))}
       </CustomPopover>

@@ -14,6 +14,7 @@ import Scrollbar from 'src/components/scrollbar';
 //
 import MailItem from './mail-item';
 import { MailItemSkeleton } from './mail-skeleton';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -40,6 +41,9 @@ export default function MailList({
   selectedLabelId,
   selectedMailId,
 }: Props) {
+
+  const { t } = useLocales()
+
   const mdUp = useResponsive('up', 'md');
 
   const renderSkeleton = (
@@ -70,7 +74,7 @@ export default function MailList({
       <Stack sx={{ p: 2 }}>
         {mdUp ? (
           <TextField
-            placeholder="Search..."
+            placeholder={t('search_dots')}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

@@ -20,6 +20,7 @@ import { ICalendarFilters, ICalendarFilterValue, ICalendarEvent } from 'src/type
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 import { ColorPicker } from 'src/components/color-utils';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -57,6 +58,9 @@ export default function CalendarFilters({
   colorOptions,
   onClickEvent,
 }: Props) {
+
+  const { t } = useLocales()
+
   const handleFilterColors = useCallback(
     (newValue: string | string[]) => {
       onFilters('colors', newValue as string[]);
@@ -119,10 +123,10 @@ export default function CalendarFilters({
       <Typography variant="subtitle2">Range</Typography>
 
       <Stack spacing={2}>
-        <DatePicker label="Start date" value={filters.startDate} onChange={handleFilterStartDate} />
+        <DatePicker label={t('start_date')} value={filters.startDate} onChange={handleFilterStartDate} />
 
         <DatePicker
-          label="End date"
+          label={t('end_date')}
           value={filters.endDate}
           onChange={handleFilterEndDate}
           slotProps={{

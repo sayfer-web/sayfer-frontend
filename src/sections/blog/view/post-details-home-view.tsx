@@ -27,6 +27,7 @@ import PostCommentList from '../post-comment-list';
 import PostCommentForm from '../post-comment-form';
 import PostDetailsHero from '../post-details-hero';
 import { PostDetailsSkeleton } from '../post-skeleton';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -35,6 +36,9 @@ type Props = {
 };
 
 export default function PostDetailsHomeView({ title }: Props) {
+
+  const { t } = useLocales()
+
   const { post, postError, postLoading } = useGetPost(title);
 
   const { latestPosts, latestPostsLoading } = useGetLatestPosts(title);
@@ -142,7 +146,7 @@ export default function PostDetailsHomeView({ title }: Props) {
           </Stack>
 
           <Stack direction="row" sx={{ mb: 3, mt: 5 }}>
-            <Typography variant="h4">Comments</Typography>
+            <Typography variant="h4">{t('comments')}</Typography>
 
             <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
               ({post.comments.length})
@@ -162,7 +166,7 @@ export default function PostDetailsHomeView({ title }: Props) {
   const renderLatestPosts = (
     <>
       <Typography variant="h4" sx={{ mb: 5 }}>
-        Recent Posts
+        {t('recent_posts')}
       </Typography>
 
       <PostList

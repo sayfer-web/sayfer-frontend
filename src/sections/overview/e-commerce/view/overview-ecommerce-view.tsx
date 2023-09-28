@@ -26,10 +26,14 @@ import EcommerceSalesOverview from '../ecommerce-sales-overview';
 import EcommerceWidgetSummary from '../ecommerce-widget-summary';
 import EcommerceLatestProducts from '../ecommerce-latest-products';
 import EcommerceCurrentBalance from '../ecommerce-current-balance';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function OverviewEcommerceView() {
+
+  const { t } = useLocales()
+
   const { user } = useMockedUser();
 
   const theme = useTheme();
@@ -46,7 +50,7 @@ export default function OverviewEcommerceView() {
             img={<MotivationIllustration />}
             action={
               <Button variant="contained" color="primary">
-                Go Now
+                {t('go_now')}
               </Button>
             }
           />

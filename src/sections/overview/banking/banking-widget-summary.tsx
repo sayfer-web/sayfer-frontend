@@ -13,6 +13,7 @@ import { bgGradient } from 'src/theme/css';
 // components
 import Iconify from 'src/components/iconify';
 import Chart, { useChart } from 'src/components/chart';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -41,6 +42,9 @@ export default function BankingWidgetSummary({
   sx,
   ...other
 }: Props) {
+
+  const { t } = useLocales()
+
   const theme = useTheme();
 
   const { series, options } = chart;
@@ -134,7 +138,7 @@ export default function BankingWidgetSummary({
             {fPercent(percent)}
           </Box>
 
-          <Box sx={{ opacity: 0.8 }}>than last month</Box>
+          <Box sx={{ opacity: 0.8 }}>{t('than_last_month')}</Box>
         </Stack>
       </Stack>
 

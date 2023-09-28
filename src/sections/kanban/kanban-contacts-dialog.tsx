@@ -20,6 +20,7 @@ import { IKanbanAssignee } from 'src/types/kanban';
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 import SearchNotFound from 'src/components/search-not-found';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -32,6 +33,9 @@ type Props = {
 };
 
 export default function KanbanContactsDialog({ assignee = [], open, onClose }: Props) {
+
+  const { t } = useLocales()
+
   const [searchContact, setSearchContact] = useState('');
 
   const handleSearchContacts = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,7 +60,7 @@ export default function KanbanContactsDialog({ assignee = [], open, onClose }: P
           fullWidth
           value={searchContact}
           onChange={handleSearchContacts}
-          placeholder="Search..."
+          placeholder={t('search_dots')}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">

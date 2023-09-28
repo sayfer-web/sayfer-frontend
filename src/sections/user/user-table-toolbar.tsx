@@ -15,6 +15,7 @@ import { IUserTableFilters, IUserTableFilterValue } from 'src/types/user';
 // components
 import Iconify from 'src/components/iconify';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -31,6 +32,9 @@ export default function UserTableToolbar({
   //
   roleOptions,
 }: Props) {
+
+  const { t } = useLocales()
+
   const popover = usePopover();
 
   const handleFilterName = useCallback(
@@ -70,7 +74,7 @@ export default function UserTableToolbar({
             width: { xs: 1, md: 200 },
           }}
         >
-          <InputLabel>Role</InputLabel>
+          <InputLabel>{t('role')}</InputLabel>
 
           <Select
             multiple
@@ -98,7 +102,7 @@ export default function UserTableToolbar({
             fullWidth
             value={filters.name}
             onChange={handleFilterName}
-            placeholder="Search..."
+            placeholder={t('search_dots')}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

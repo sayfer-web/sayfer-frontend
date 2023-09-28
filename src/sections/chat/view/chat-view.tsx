@@ -22,10 +22,14 @@ import ChatMessageList from '../chat-message-list';
 import ChatMessageInput from '../chat-message-input';
 import ChatHeaderDetail from '../chat-header-detail';
 import ChatHeaderCompose from '../chat-header-compose';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function ChatView() {
+
+  const { t } = useLocales()
+
   const router = useRouter();
 
   const { user } = useMockedUser();
@@ -114,7 +118,7 @@ export default function ChatView() {
           mb: { xs: 3, md: 5 },
         }}
       >
-        Chat
+        {t('chat')}
       </Typography>
 
       <Stack component={Card} direction="row" sx={{ height: '72vh' }}>

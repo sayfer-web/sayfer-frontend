@@ -35,6 +35,7 @@ import FormProvider, {
 } from 'src/components/hook-form';
 // types
 import { ITourGuide, ITourItem } from 'src/types/tour';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -43,6 +44,9 @@ type Props = {
 };
 
 export default function GamesNewEditForm({ currentTour }: Props) {
+
+  const { t } = useLocales()
+
   const router = useRouter();
 
   const mdUp = useResponsive('up', 'md');
@@ -156,10 +160,10 @@ export default function GamesNewEditForm({ currentTour }: Props) {
       {mdUp && (
         <Grid md={4}>
           <Typography variant="h6" sx={{ mb: 0.5 }}>
-            Details
+            {t('details')}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Title, short description, image...
+            {t('title_short_description_image')}
           </Typography>
         </Grid>
       )}
@@ -170,17 +174,17 @@ export default function GamesNewEditForm({ currentTour }: Props) {
 
           <Stack spacing={3} sx={{ p: 3 }}>
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Name</Typography>
-              <RHFTextField name="name" placeholder="Ex: Adventure Seekers Expedition..." />
+              <Typography variant="subtitle2">{t('name')}</Typography>
+              <RHFTextField name="name" placeholder={t('ex_adventure_seekers_expedition')} />
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Content</Typography>
+              <Typography variant="subtitle2">{t('content')}</Typography>
               <RHFEditor simple name="content" />
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Images</Typography>
+              <Typography variant="subtitle2">{t('images')}</Typography>
               <RHFUpload
                 multiple
                 thumbnail
@@ -203,7 +207,7 @@ export default function GamesNewEditForm({ currentTour }: Props) {
       {mdUp && (
         <Grid md={4}>
           <Typography variant="h6" sx={{ mb: 0.5 }}>
-            Properties
+            {t('properties')}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
             Additional functions and attributes...
@@ -297,12 +301,12 @@ export default function GamesNewEditForm({ currentTour }: Props) {
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Duration</Typography>
-              <RHFTextField name="durations" placeholder="Ex: 2 days, 4 days 3 nights..." />
+              <Typography variant="subtitle2">{t('duration')}</Typography>
+              <RHFTextField name="durations" placeholder={t('ex_2_days')} />
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Destination</Typography>
+              <Typography variant="subtitle2">{t('destination')}</Typography>
               <RHFAutocomplete
                 name="destination"
                 placeholder="+ Destination"

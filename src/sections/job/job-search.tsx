@@ -12,6 +12,7 @@ import { IJobItem } from 'src/types/job';
 import Iconify from 'src/components/iconify';
 import { useRouter } from 'src/routes/hooks';
 import SearchNotFound from 'src/components/search-not-found';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -23,6 +24,9 @@ type Props = {
 };
 
 export default function JobSearch({ query, results, onSearch, hrefItem }: Props) {
+
+  const { t } = useLocales()
+
   const router = useRouter();
 
   const handleClick = (id: string) => {
@@ -52,7 +56,7 @@ export default function JobSearch({ query, results, onSearch, hrefItem }: Props)
       renderInput={(params) => (
         <TextField
           {...params}
-          placeholder="Search..."
+          placeholder={t('search_dots')}
           onKeyUp={handleKeyUp}
           InputProps={{
             ...params.InputProps,

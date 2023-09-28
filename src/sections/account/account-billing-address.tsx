@@ -15,6 +15,7 @@ import Iconify from 'src/components/iconify';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
 //
 import { AddressNewForm, AddressItem } from '../address';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -23,6 +24,9 @@ type Props = {
 };
 
 export default function AccountBillingAddress({ addressBook }: Props) {
+
+  const { t } = useLocales()
+
   const [addressId, setAddressId] = useState('');
 
   const popover = usePopover();
@@ -58,7 +62,7 @@ export default function AccountBillingAddress({ addressBook }: Props) {
               startIcon={<Iconify icon="mingcute:add-line" />}
               onClick={addressForm.onTrue}
             >
-              Address
+              {t('address')}
             </Button>
           }
         />

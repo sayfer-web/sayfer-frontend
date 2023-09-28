@@ -20,6 +20,7 @@ import CheckoutSummary from './checkout-summary';
 import CheckoutDelivery from './checkout-delivery';
 import CheckoutBillingInfo from './checkout-billing-info';
 import CheckoutPaymentMethods from './checkout-payment-methods';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -66,6 +67,9 @@ const CARDS_OPTIONS: ICheckoutCardOption[] = [
 ];
 
 export default function CheckoutPayment() {
+
+  const { t } = useLocales()
+
   const checkout = useCheckoutContext();
 
   const PaymentSchema = Yup.object().shape({
@@ -115,7 +119,7 @@ export default function CheckoutPayment() {
             onClick={checkout.onBackStep}
             startIcon={<Iconify icon="eva:arrow-ios-back-fill" />}
           >
-            Back
+            {t('back')}
           </Button>
         </Grid>
 

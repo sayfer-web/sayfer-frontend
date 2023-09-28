@@ -13,6 +13,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { fDateTime } from 'src/utils/format-time';
 // components
 import Carousel, { CarouselArrows, useCarousel } from 'src/components/carousel';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -33,6 +34,9 @@ interface Props extends CardProps {
 }
 
 export default function BookingCustomerReviews({ title, subheader, list, ...other }: Props) {
+
+  const { t } = useLocales()
+
   const carousel = useCarousel({
     adaptiveHeight: true,
   });
@@ -62,7 +66,7 @@ export default function BookingCustomerReviews({ title, subheader, list, ...othe
           variant="soft"
           onClick={() => console.info('ACCEPT', customerInfo?.id)}
         >
-          Reject
+          {t('reject')}
         </Button>
 
         <Button
@@ -71,7 +75,7 @@ export default function BookingCustomerReviews({ title, subheader, list, ...othe
           variant="contained"
           onClick={() => console.info('REJECT', customerInfo?.id)}
         >
-          Accept
+          {t('accept')}
         </Button>
       </Stack>
     </Card>

@@ -1,5 +1,6 @@
 // components
 import Chart, { useChart } from 'src/components/chart';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -11,9 +12,22 @@ type Props = {
 };
 
 export default function ChartLine({ series }: Props) {
+
+  const { t } = useLocales()
+
   const chartOptions = useChart({
     xaxis: {
-      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+      categories: [
+        t('jan'), 
+        t('feb'), 
+        t('mar'),
+        t('apr'),
+        t('may'),
+        t('jun'),
+        t('jul'),
+        t('aug'),
+        t('sep'),
+      ]
     },
     tooltip: {
       x: {

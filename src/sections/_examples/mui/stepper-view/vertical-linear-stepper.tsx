@@ -9,6 +9,7 @@ import Stepper from '@mui/material/Stepper';
 import Typography from '@mui/material/Typography';
 import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -33,6 +34,9 @@ const steps = [
 ];
 
 export default function VerticalLinearStepper() {
+
+  const { t } = useLocales()
+
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
@@ -64,7 +68,7 @@ export default function VerticalLinearStepper() {
                   {index === steps.length - 1 ? 'Finish' : 'Continue'}
                 </Button>
                 <Button disabled={index === 0} onClick={handleBack}>
-                  Back
+                  {t('back')}
                 </Button>
               </Box>
             </StepContent>

@@ -13,6 +13,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 import { useResponsive } from 'src/hooks/use-responsive';
 //
 import { DateRangePickerProps } from './types';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -31,6 +32,9 @@ export default function CustomDateRangePicker({
   //
   error,
 }: DateRangePickerProps) {
+
+  const { t } = useLocales()
+
   const mdUp = useResponsive('up', 'md');
 
   const isCalendarView = variant === 'calendar';
@@ -91,9 +95,9 @@ export default function CustomDateRangePicker({
             </>
           ) : (
             <>
-              <DatePicker label="Start date" value={startDate} onChange={onChangeStartDate} />
+              <DatePicker label={t('start_date')} value={startDate} onChange={onChangeStartDate} />
 
-              <DatePicker label="End date" value={endDate} onChange={onChangeEndDate} />
+              <DatePicker label={t('end_date')} value={endDate} onChange={onChangeEndDate} />
             </>
           )}
         </Stack>

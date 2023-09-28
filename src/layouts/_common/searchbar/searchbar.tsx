@@ -24,10 +24,14 @@ import SearchNotFound from 'src/components/search-not-found';
 import ResultItem from './result-item';
 import { useNavData } from '../../dashboard/config-navigation';
 import { applyFilter, groupedData, getAllItems } from './utils';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 function Searchbar() {
+
+  const { t } = useLocales()
+
   const theme = useTheme();
 
   const router = useRouter();
@@ -144,7 +148,7 @@ function Searchbar() {
           <InputBase
             fullWidth
             autoFocus
-            placeholder="Search..."
+            placeholder={t('search_dots')}
             value={searchQuery}
             onChange={handleSearch}
             startAdornment={

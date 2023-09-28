@@ -23,6 +23,7 @@ import { fCurrency } from 'src/utils/format-number';
 // components
 import Iconify from 'src/components/iconify';
 import Carousel, { CarouselArrows, useCarousel } from 'src/components/carousel';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -48,6 +49,9 @@ interface Props extends CardProps {
 }
 
 export default function BankingQuickTransfer({ title, subheader, list, sx, ...other }: Props) {
+
+  const { t } = useLocales()
+
   const theme = useTheme();
 
   const carousel = useCarousel({
@@ -185,7 +189,7 @@ export default function BankingQuickTransfer({ title, subheader, list, sx, ...ot
   const renderInput = (
     <Stack spacing={3}>
       <Typography variant="overline" sx={{ color: 'text.secondary' }}>
-        insert amount
+        {t('insert_amount')}
       </Typography>
 
       <InputAmount
@@ -207,7 +211,7 @@ export default function BankingQuickTransfer({ title, subheader, list, sx, ...ot
 
       <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle1' }}>
         <Box component="span" sx={{ flexGrow: 1 }}>
-          Your Balance
+          {t('your_balance')}
         </Box>
         {fCurrency(34212)}
       </Stack>
@@ -219,7 +223,7 @@ export default function BankingQuickTransfer({ title, subheader, list, sx, ...ot
         disabled={amount === 0}
         onClick={confirm.onTrue}
       >
-        Transfer Now
+        {t('transfer_now')}
       </Button>
     </Stack>
   );
@@ -239,7 +243,7 @@ export default function BankingQuickTransfer({ title, subheader, list, sx, ...ot
         <Stack sx={{ p: 3 }}>
           <Stack direction="row" alignItems="center" justifyContent="space-between">
             <Typography variant="overline" sx={{ color: 'text.secondary' }}>
-              Recent
+              {t('recent')}
             </Typography>
 
             <Button
@@ -248,7 +252,7 @@ export default function BankingQuickTransfer({ title, subheader, list, sx, ...ot
               endIcon={<Iconify icon="eva:arrow-ios-forward-fill" width={18} sx={{ ml: -0.5 }} />}
               sx={{ mr: -1 }}
             >
-              View All
+              {t('view_all')}
             </Button>
           </Stack>
 

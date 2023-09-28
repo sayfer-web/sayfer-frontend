@@ -21,10 +21,14 @@ import AnalyticsWidgetSummary from '../analytics-widget-summary';
 import AnalyticsTrafficBySite from '../analytics-traffic-by-site';
 import AnalyticsCurrentSubject from '../analytics-current-subject';
 import AnalyticsConversionRates from '../analytics-conversion-rates';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function OverviewAnalyticsView() {
+
+  const { t } = useLocales()
+
   const settings = useSettingsContext();
 
   return (
@@ -35,13 +39,13 @@ export default function OverviewAnalyticsView() {
           mb: { xs: 3, md: 5 },
         }}
       >
-        Hi, Welcome back 👋
+        {t('welcome_back')} 👋
       </Typography>
 
       <Grid container spacing={3}>
         <Grid xs={12} sm={6} md={3}>
           <AnalyticsWidgetSummary
-            title="Weekly Sales"
+            title={t('weekly_sales')}
             total={714000}
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_bag.png" />}
           />
@@ -49,7 +53,7 @@ export default function OverviewAnalyticsView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AnalyticsWidgetSummary
-            title="New Users"
+            title={t('new_users')}
             total={1352831}
             color="info"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_users.png" />}
@@ -58,7 +62,7 @@ export default function OverviewAnalyticsView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AnalyticsWidgetSummary
-            title="Item Orders"
+            title={t('item_orders')}
             total={1723315}
             color="warning"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_buy.png" />}
@@ -67,7 +71,7 @@ export default function OverviewAnalyticsView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AnalyticsWidgetSummary
-            title="Bug Reports"
+            title={t('bug_reports')}
             total={234}
             color="error"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
@@ -76,8 +80,8 @@ export default function OverviewAnalyticsView() {
 
         <Grid xs={12} md={6} lg={8}>
           <AnalyticsWebsiteVisits
-            title="Website Visits"
-            subheader="(+43%) than last year"
+            title={t('website_visits')}
+            subheader={`(+43%) ${t('than_last_year')}`}
             chart={{
               labels: [
                 '01/01/2003',
@@ -118,7 +122,7 @@ export default function OverviewAnalyticsView() {
 
         <Grid xs={12} md={6} lg={4}>
           <AnalyticsCurrentVisits
-            title="Current Visits"
+            title={t('current_visits')}
             chart={{
               series: [
                 { label: 'America', value: 4344 },
@@ -132,8 +136,8 @@ export default function OverviewAnalyticsView() {
 
         <Grid xs={12} md={6} lg={8}>
           <AnalyticsConversionRates
-            title="Conversion Rates"
-            subheader="(+43%) than last year"
+            title={t('conversion_rates')}
+            subheader={`(+43%) ${t('than_last_year')}`}
             chart={{
               series: [
                 { label: 'Italy', value: 400 },
@@ -153,7 +157,7 @@ export default function OverviewAnalyticsView() {
 
         <Grid xs={12} md={6} lg={4}>
           <AnalyticsCurrentSubject
-            title="Current Subject"
+            title={t('current_subject')}
             chart={{
               categories: ['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math'],
               series: [
@@ -166,19 +170,19 @@ export default function OverviewAnalyticsView() {
         </Grid>
 
         <Grid xs={12} md={6} lg={8}>
-          <AnalyticsNews title="News" list={_analyticPosts} />
+          <AnalyticsNews title={t('news')} list={_analyticPosts} />
         </Grid>
 
         <Grid xs={12} md={6} lg={4}>
-          <AnalyticsOrderTimeline title="Order Timeline" list={_analyticOrderTimeline} />
+          <AnalyticsOrderTimeline title={t('order_timeline')} list={_analyticOrderTimeline} />
         </Grid>
 
         <Grid xs={12} md={6} lg={4}>
-          <AnalyticsTrafficBySite title="Traffic by Site" list={_analyticTraffic} />
+          <AnalyticsTrafficBySite title={t('traffic_by_site')} list={_analyticTraffic} />
         </Grid>
 
         <Grid xs={12} md={6} lg={8}>
-          <AnalyticsTasks title="Tasks" list={_analyticTasks} />
+          <AnalyticsTasks title={t('tasks')} list={_analyticTasks} />
         </Grid>
       </Grid>
     </Container>

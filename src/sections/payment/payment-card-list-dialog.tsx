@@ -13,6 +13,7 @@ import Iconify from 'src/components/iconify';
 import SearchNotFound from 'src/components/search-not-found';
 //
 import PaymentCardItem from './payment-card-item';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -25,6 +26,9 @@ type Props = {
 };
 
 export default function PaymentCardListDialog({ open, list, onClose, selected, onSelect }: Props) {
+
+  const { t } = useLocales()
+
   const [searchCard, setSearchCard] = useState('');
 
   const dataFiltered = applyFilter({
@@ -88,7 +92,7 @@ export default function PaymentCardListDialog({ open, list, onClose, selected, o
         <TextField
           value={searchCard}
           onChange={handleSearchAddress}
-          placeholder="Search..."
+          placeholder={t('search_dots')}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">

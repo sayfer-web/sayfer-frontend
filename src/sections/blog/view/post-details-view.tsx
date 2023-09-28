@@ -29,6 +29,7 @@ import PostCommentList from '../post-comment-list';
 import PostCommentForm from '../post-comment-form';
 import { PostDetailsSkeleton } from '../post-skeleton';
 import PostDetailsToolbar from '../post-details-toolbar';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -37,6 +38,9 @@ type Props = {
 };
 
 export default function PostDetailsView({ title }: Props) {
+
+  const { t } = useLocales()
+
   const [publish, setPublish] = useState('');
 
   const { post, postLoading, postError } = useGetPost(title);
@@ -81,7 +85,7 @@ export default function PostDetailsView({ title }: Props) {
         liveLink={paths.post.details(`${post?.title}`)}
         publish={publish || ''}
         onChangePublish={handleChangePublish}
-        publishOptions={POST_PUBLISH_OPTIONS}
+        publishOptions={POST_PUBLISH_OPTIONS()}
       />
 
       <PostDetailsHero title={post.title} coverUrl={post.coverUrl} />
@@ -144,7 +148,7 @@ export default function PostDetailsView({ title }: Props) {
         </Stack>
 
         <Stack direction="row" sx={{ mb: 3, mt: 5 }}>
-          <Typography variant="h4">Comments</Typography>
+          <Typography variant="h4">{t('comments')}</Typography>
 
           <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
             ({post.comments.length})

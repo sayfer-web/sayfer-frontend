@@ -6,6 +6,7 @@ import InputBase from '@mui/material/InputBase';
 import Box, { BoxProps } from '@mui/material/Box';
 // theme
 import { bgGradient } from 'src/theme/css';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -24,6 +25,9 @@ export default function BankingInviteFriends({
   sx,
   ...other
 }: Props) {
+
+  const { t } = useLocales()
+
   const theme = useTheme();
 
   return (
@@ -65,9 +69,9 @@ export default function BankingInviteFriends({
         <InputBase
           fullWidth
           placeholder="Email"
-          endAdornment={
-            <Button color="warning" variant="contained" size="small" sx={{ mr: 0.5 }}>
-              Invite
+          endAdornment={  
+            <Button color="warning" variant="contained" size="small" sx={{ mr: 0.5, pl: 2, pr: 2 }}>
+              {t('invite')}
             </Button>
           }
           sx={{

@@ -35,6 +35,7 @@ import FormProvider, {
 } from 'src/components/hook-form';
 // types
 import { ITourGuide, ITourItem } from 'src/types/tour';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -43,6 +44,9 @@ type Props = {
 };
 
 export default function TourNewEditForm({ currentTour }: Props) {
+
+  const { t } = useLocales()
+
   const router = useRouter();
 
   const mdUp = useResponsive('up', 'md');
@@ -156,10 +160,10 @@ export default function TourNewEditForm({ currentTour }: Props) {
       {mdUp && (
         <Grid md={4}>
           <Typography variant="h6" sx={{ mb: 0.5 }}>
-            Details
+            {t('details')}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Title, short description, image...
+            {t('title_short_description_image')}
           </Typography>
         </Grid>
       )}
@@ -170,17 +174,17 @@ export default function TourNewEditForm({ currentTour }: Props) {
 
           <Stack spacing={3} sx={{ p: 3 }}>
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Name</Typography>
-              <RHFTextField name="name" placeholder="Ex: Adventure Seekers Expedition..." />
+              <Typography variant="subtitle2">{t('name')}</Typography>
+              <RHFTextField name="name" placeholder={t('ex_adventure_seekers_expedition')} />
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Content</Typography>
+              <Typography variant="subtitle2">{t('content')}</Typography>
               <RHFEditor simple name="content" />
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Images</Typography>
+              <Typography variant="subtitle2">{t('images')}</Typography>
               <RHFUpload
                 multiple
                 thumbnail
@@ -203,10 +207,10 @@ export default function TourNewEditForm({ currentTour }: Props) {
       {mdUp && (
         <Grid md={4}>
           <Typography variant="h6" sx={{ mb: 0.5 }}>
-            Properties
+            {t('properties')}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Additional functions and attributes...
+            {t('additional_functions_and_attributes')}
           </Typography>
         </Grid>
       )}
@@ -218,13 +222,13 @@ export default function TourNewEditForm({ currentTour }: Props) {
           <Stack spacing={3} sx={{ p: 3 }}>
             <Stack>
               <Typography variant="subtitle2" sx={{ mb: 1.5 }}>
-                Tour Guide
+                {t('tour_guide')}
               </Typography>
 
               <RHFAutocomplete
                 multiple
                 name="tourGuides"
-                placeholder="+ Tour Guides"
+                placeholder={`+ ${t('tour_guides')}`}
                 disableCloseOnSelect
                 options={_tourGuides}
                 getOptionLabel={(option) => (option as ITourGuide).name}
@@ -257,7 +261,7 @@ export default function TourNewEditForm({ currentTour }: Props) {
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Available</Typography>
+              <Typography variant="subtitle2">{t('available')}</Typography>
               <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
                 <Controller
                   name="available.startDate"
@@ -297,15 +301,15 @@ export default function TourNewEditForm({ currentTour }: Props) {
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Duration</Typography>
-              <RHFTextField name="durations" placeholder="Ex: 2 days, 4 days 3 nights..." />
+              <Typography variant="subtitle2">{t('duration')}</Typography>
+              <RHFTextField name="durations" placeholder={t('ex_2_days')} />
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Destination</Typography>
+              <Typography variant="subtitle2">{t('destination')}</Typography>
               <RHFAutocomplete
                 name="destination"
-                placeholder="+ Destination"
+                placeholder={`+ ${t('destination')}`}
                 options={countries.map((option) => option.label)}
                 getOptionLabel={(option) => option}
                 renderOption={(props, option) => {
@@ -333,7 +337,7 @@ export default function TourNewEditForm({ currentTour }: Props) {
             </Stack>
 
             <Stack spacing={1}>
-              <Typography variant="subtitle2">Services</Typography>
+              <Typography variant="subtitle2">{t('services')}</Typography>
               <RHFMultiCheckbox
                 name="services"
                 options={TOUR_SERVICE_OPTIONS}
@@ -345,10 +349,10 @@ export default function TourNewEditForm({ currentTour }: Props) {
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Tags</Typography>
+              <Typography variant="subtitle2">{t('tags')}</Typography>
               <RHFAutocomplete
                 name="tags"
-                placeholder="+ Tags"
+                placeholder={`+ ${t('tags')}`} 
                 multiple
                 freeSolo
                 options={_tags.map((option) => option)}
@@ -384,7 +388,7 @@ export default function TourNewEditForm({ currentTour }: Props) {
       <Grid xs={12} md={8} sx={{ display: 'flex', alignItems: 'center' }}>
         <FormControlLabel
           control={<Switch defaultChecked />}
-          label="Publish"
+          label={t('publish')}
           sx={{ flexGrow: 1, pl: 3 }}
         />
 
@@ -395,7 +399,7 @@ export default function TourNewEditForm({ currentTour }: Props) {
           loading={isSubmitting}
           sx={{ ml: 2 }}
         >
-          {!currentTour ? 'Create Tour' : 'Save Changes'}
+          {!currentTour ? t('create_tour') : t('save_changes')}
         </LoadingButton>
       </Grid>
     </>

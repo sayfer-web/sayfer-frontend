@@ -13,6 +13,7 @@ import { useRouter } from 'src/routes/hooks';
 import SearchNotFound from 'src/components/search-not-found';
 // types
 import { IPostItem } from 'src/types/blog';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -25,6 +26,9 @@ type Props = {
 };
 
 export default function PostSearch({ query, results, onSearch, hrefItem, loading }: Props) {
+
+  const { t } = useLocales()
+
   const router = useRouter();
 
   const handleClick = (title: string) => {
@@ -68,7 +72,7 @@ export default function PostSearch({ query, results, onSearch, hrefItem, loading
       renderInput={(params) => (
         <TextField
           {...params}
-          placeholder="Search..."
+          placeholder={t('search_dots')}
           onKeyUp={handleKeyUp}
           InputProps={{
             ...params.InputProps,

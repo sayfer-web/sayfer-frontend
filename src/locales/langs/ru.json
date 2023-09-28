@@ -1,0 +1,427 @@
+{
+    "app": "Приложение",
+    "job": "Работа",
+    "user": "Пользователь",
+    "list": "Список",
+    "edit": "Редактировать",
+    "shop": "Магазин",
+    "transactions": "Транзакции",
+    "blog": "Блог",
+    "post": "Пост",
+    "mail": "Почта",
+    "chat": "Чат",
+    "file": "Файлы",
+    "tour": "Туры",
+    "cards": "Карточки",
+    "blank": "Пустой лист",
+    "order": "Заказ",
+    "lists": "Списки",
+    "create": "Создать",
+    "kanban": "Канбан",
+    "general": "Главная",
+    "banking": "Банкинг",
+    "booking": "Бронирование",
+    "profile": "Профиль",
+    "account": "Аккаунт",
+    "product": "Продукт",
+    "invoice": "Заявка",
+    "details": "Подробности",
+    "checkout": "Подтвердить покупку",
+    "calendar": "Календарь",
+    "overview": "Обзор",
+    "analytics": "Аналитика",
+    "ecommerce": "Коммерция",
+    "management": "Менеджмент",
+    "menu_level": "Уровень меню",
+    "item_label": "Название предмета",
+    "other_cases": "Другие случаи",
+    "item_caption": "Подпись предмета",
+    "file_manager": "Файловый менеджер",
+    "menu_level_1a": "menu level 1a",
+    "menu_level_1b": "menu level 1b",
+    "menu_level_2a": "menu level 2a",
+    "menu_level_2b": "menu level 2b",
+    "menu_level_3a": "menu level 3a",
+    "menu_level_3b": "menu level 4b",
+    "item_disabled": "Предмет отключён",
+    "item_by_roles": "Предметы по ролям",
+    "item_external_link": "Расширенная ссылка на предмет",
+    "only_admin_can_see_this_item": "Доступно только для администрации",
+    "upgrade_to_pro": "Повыситься до PRO",
+    "demo": {
+      "title": "Русский"
+    },
+
+
+    "new_event": "Новое событие",
+
+    "wallet": "Кошелёк",
+
+
+    "than_last_month": "за последний месяц",
+    "balance": "Баланс",
+
+    "token_holder": "Владелец токенов",
+    "total_money_received": "Всего пополнений",
+    
+    "request": "Пополнить",
+    "transfer": "Отправить",
+
+    "order_total": "Итого",
+
+    "followers": "Подписчики",
+    "friends": "Друзья",
+    "gallery": "Галерея",
+    
+  "invite_friends": "Пригласи друзей",
+  "and_earn": "получи бонус!",
+  "present_egestas": "Подробнее",
+
+  
+  "view_all": "Посмотреть всё",
+  "quick_transfer": "Быстрый Перевод",
+
+  "recent": "Последние",
+
+  "insert_amount": "Введите значение",
+
+  "your_balance": "Ваш баланс",
+  
+  "balance_statistics": "Статистика баланса (график движения активов?)",
+
+  "expenses_categories": "Расходы по категориям (график активов?)",
+
+  "year": "Год",
+  "month": "Месяц",
+  "week": "Неделя",
+
+  "jan": "Янв",
+  "feb": "Фев",
+  "mar": "Мар",
+  "apr": "Апр",
+  "may": "Май", 
+  "jun": "Июн",
+  "jul": "Июл",
+  "aug": "Авг",
+  "sep": "Сен",
+  "oct": "Окт",
+  "dec": "Дек",
+
+  "income": "Доходы",
+  "outcome": "Расходы",
+  "expenses": "Траты",
+
+  "categories": "Категории",
+
+  "invite": "Пригласить",
+
+  "transfer_now": "Быстрая отправка",
+
+  "recent_transitions": "Последние изменения на счетах",
+
+  "description": "Описание",
+  "date": "Дата",
+  "amount": "Количество",
+  "status": "Статус",
+
+  "received_money_from": "Поступило",
+  "payment_for": "Отправлено",
+
+  "progress": "Progress",
+  "completed": "Завершено",
+  "failed": "Failed",
+
+  
+  "follower": "Наблюдателей",
+  "following": "Наблюдает за",
+
+
+  "about": "Детали пользователя",
+  "social": "Социальные сети",
+  "all_users": "Все пользователи",
+
+  
+  "all_transactions": "Все транзакции",
+  "my_transactions": "Мои транзакции",
+  "news": "Новости",
+
+  "welcome_back": "Привет, рады видеть тебя снова!",
+  "welcome_back_desc": "Описание ближайшего значительного события",
+
+  "go_now": "Приступить сейчас",
+
+  "menu_ap": "Панель администратора",
+
+  "quests": "Задания",
+
+  "game_room": "Игровая комната",
+
+  "roadmap": "Дорожная карта",
+
+  "mode": "Режим",
+
+  "settings": "Настройки",
+
+  "contrast": "Контраст",
+
+  "direction": "Направление",
+
+  "layout": "Макет",
+
+  "stretch": "Резиновый",
+
+  "presets": "Палитра",
+
+  "fullscreen": "Полный экран",
+
+  "exit_fullscreen": "Закрыть полный экран",
+
+  "role": "Роль",
+
+  "customer": "Пользователь",
+
+  "items": "Количество",
+
+  "price": "Сумма",
+
+  "start_date": "Начальная дата",
+
+  "end_date": "Конечная дата",
+
+  "search_customer_or_number": "Поиск по пользователю или номеру...",
+
+  "all": "Все",
+
+  "pending": "Ожидание",
+  
+  "cancelled": "Отменено",
+
+  "refunded": "Возвращено",
+
+  "status_dots": "Статус:",
+  "date_dots": "Дата:",
+
+  "clear": "Очистить",
+
+  "image_video": "Изображение/Видео",
+
+  "write_a_comment": "Написать комментарий…",
+
+  "billing": "Платежи",
+  "notifications": "Оповещения",
+  "security": "Безопасность",
+
+  "cancel": "Отменить",
+
+  "confirm_password": "Подтвердите пароль",
+
+  "public_profile": "Публичный профиль",
+
+  "delete_user": "Удалить пользователя",
+
+  "save_changes": "Сохранить изменения",
+
+  "address": "Адрес",
+
+  "name": "Имя",
+
+  "email_address": "Почта Email",
+
+  "phone_number": "Номер телефона",
+
+  "country": "Страна",
+
+  "state_region": "Страна/Регион",
+
+  "city": "Город",
+
+  "zip_code": "Почтовый индекс",
+
+  "allowed": "Разрешено",
+
+  "max_size_of": "Максимальный размер",
+
+  "dense": "Компактность",
+
+  "published": "Опубликовано",
+
+  "draft": "Черновик",
+
+  
+  "latest": "Последние",
+
+  "popular": "Популярные",
+
+  "oldest": "Старейшие",
+
+  "unread": "Непрочитанные",
+
+  "archived": "Архивированные",
+
+  "accept": "Принять",
+
+  "decline": "Отклонить",
+
+  "sort_by": "Сортировать по:",
+
+  "search_dots": "Поиск...",
+
+  "new_post": "Новый пост",
+
+  "sent_you_friend_request": "отправил вам запрос на дружбу",
+
+  "communication": "Коммуникации",
+
+  "project_ui": "Интерфейс",
+
+  "create_new_tour": "Создать новый тур",
+
+  "new_tour": "Новый тур",
+
+  "title_short_description_image": "Заголовок, краткое описание, изображение...",
+
+  "additional_functions_and_attributes": "Дополнительные функции и атрибуты",
+
+  "content": "Контент",
+
+  "images": "Изображения",
+
+  "tour_guide": "Туристический гид",
+
+  "tour_guides": "Туристические гиды",
+
+  "available": "Доступно",
+
+  "duration": "Продолжительность",
+
+  "destination": "Пункт назначения",
+
+  "services": "Сервисы",
+
+  "tags": "Тэги",
+
+  "publish": "Опубликовать",
+
+  "properties": "Свойства",
+
+  "write_something_awesome": "Напишите что-нибудь интересное...",
+
+  "create_tour": "Создать тур",
+
+  "ex_2_days": "Пример: 2 дня, 3 дня и 2 ночи...",
+
+  "drop_or_select_file": "Перетащите или выберите файл",
+
+  "drop_files_here_or_click": "Переместите файлы сюда или нажмите",
+
+  "browse": "обзор",
+
+  "thorough_your_machine": "для выбора на своем устройстве",
+
+  "ex_adventure_seekers_expedition": "Пример: Экспедиция искателей приключений…",
+  
+  "weekly_sales": "Недельные продажи",
+
+  "new_users": "Новые пользователи",
+
+  "item_orders": "Совершено покупок",
+
+  "bug_reports": "Отчёты об ошибках",
+
+  "website_visits": "Посещения сайта",
+
+  "than_last_year": "чем в прошлом году",
+
+  "current_visits": "Текущие посетители",
+
+  "conversion_rates": "Коэффициенты конверсии",
+
+  "current_subject": "Текущий предмет",
+
+  "order_timeline": "График заказов",
+
+  "traffic_by_site": "Траффик по сайтам",
+
+  "tasks": "Задачи",
+
+  "total_booking": "Всего забронировано",
+
+  "sold": "Продано",
+
+  "total_incomes": "Всего поступлений",
+
+  "booked": "Забронировано",
+
+  "tours_available": "Доступно путёвок",
+
+  "statistics": "Статистика",
+
+  "customer_reviews": "Отзыв покупателя",
+
+  "newest_booking": "Новые бронирования",
+
+  "twelve_booking": "12 бронирований",
+  
+  "booking_details": "Детали бронирований",
+
+  "reject": "Отклонить",
+
+  "search_contacts_dots": "Поиск контактов...",
+
+  "simple": "Простой",
+
+  "inbox": "Входящие",
+
+  "drafts": "Черновики",
+
+  "trash": "Корзина",
+
+  "spam": "Спам",
+
+  "nested": "Вложенный",
+
+  "nested_list_items": "Вложенные элементы списка",
+
+  "sent_mail": "Отправить сообщение",
+
+  "starred": "Помеченное",
+
+  "folder": "Папка",
+
+  "photos": "Фотографии",
+
+  "work": "Работа",
+
+  "vacation": "Вакансия",
+
+  "selected": "Выбранный",
+
+  "controls": "Управление",
+
+  "switch": "Переключатель",
+
+  "bluetooth": "Bluetooth",
+
+  "compose": "Написать",
+
+  "share_what_you_are_thinking_here": "Расскажите, о чем вы сейчас думаете...",
+
+  "recent_posts": "Последние посты",
+
+  "comments": "Комментарии",
+
+  "write_some_of_your_comments": "Напишите собственный комментарий...",
+
+  "post_comment": "Написать комментарий",
+
+  "reply": "Ответить",
+
+  "back": "Назад",
+
+  "skip": "Пропустить",
+
+  "reset": "Сброс",
+
+  "optional": "Опционально"
+
+  }

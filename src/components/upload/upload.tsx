@@ -15,6 +15,7 @@ import { UploadProps } from './types';
 import RejectionFiles from './errors-rejection-files';
 import MultiFilePreview from './preview-multi-file';
 import SingleFilePreview from './preview-single-file';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -35,6 +36,9 @@ export default function Upload({
   sx,
   ...other
 }: UploadProps) {
+
+  const { t } = useLocales()
+
   const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
     multiple,
     disabled,
@@ -51,9 +55,9 @@ export default function Upload({
     <Stack spacing={3} alignItems="center" justifyContent="center" flexWrap="wrap">
       <UploadIllustration sx={{ width: 1, maxWidth: 200 }} />
       <Stack spacing={1} sx={{ textAlign: 'center' }}>
-        <Typography variant="h6">Drop or Select file</Typography>
+        <Typography variant="h6">{t('drop_or_select_file')}</Typography>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          Drop files here or click
+          {t('drop_files_here_or_click')}
           <Box
             component="span"
             sx={{
@@ -62,9 +66,9 @@ export default function Upload({
               textDecoration: 'underline',
             }}
           >
-            browse
+            {t('browse')}
           </Box>
-          thorough your machine
+          {t('thorough_your_machine')}
         </Typography>
       </Stack>
     </Stack>

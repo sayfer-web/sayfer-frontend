@@ -43,10 +43,16 @@ import { IUserItem, IUserTableFilters, IUserTableFilterValue } from 'src/types/u
 import UserTableRow from '../user-table-row';
 import UserTableToolbar from '../user-table-toolbar';
 import UserTableFiltersResult from '../user-table-filters-result';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
-const STATUS_OPTIONS = [{ value: 'all', label: 'All' }, ...USER_STATUS_OPTIONS];
+const STATUS_OPTIONS = [{ value: 'all', label: 'all' }, 
+  { value: 'active', label: 'all' },
+  { value: 'pending', label: 'all' },
+  { value: 'banned', label: 'all' },
+  { value: 'rejected', label: 'all' },];
+
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name' },

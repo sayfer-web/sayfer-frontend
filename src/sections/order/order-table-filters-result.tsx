@@ -9,6 +9,7 @@ import { IOrderTableFilters, IOrderTableFilterValue } from 'src/types/order';
 // components
 import Iconify from 'src/components/iconify';
 import { shortDateLabel } from 'src/components/custom-date-range-picker';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -30,6 +31,9 @@ export default function OrderTableFiltersResult({
   results,
   ...other
 }: Props) {
+
+  const { t } = useLocales()
+
   const shortLabel = shortDateLabel(filters.startDate, filters.endDate);
 
   const handleRemoveStatus = () => {
@@ -52,13 +56,13 @@ export default function OrderTableFiltersResult({
 
       <Stack flexGrow={1} spacing={1} direction="row" flexWrap="wrap" alignItems="center">
         {filters.status !== 'all' && (
-          <Block label="Status:">
+          <Block label={t('status_dots')}>
             <Chip size="small" label={filters.status} onDelete={handleRemoveStatus} />
           </Block>
         )}
 
         {filters.startDate && filters.endDate && (
-          <Block label="Date:">
+          <Block label={t('date_dots')}>
             <Chip size="small" label={shortLabel} onDelete={handleRemoveDate} />
           </Block>
         )}
@@ -68,7 +72,7 @@ export default function OrderTableFiltersResult({
           onClick={onResetFilters}
           startIcon={<Iconify icon="solar:trash-bin-trash-bold" />}
         >
-          Clear
+          {t('clear')}
         </Button>
       </Stack>
     </Stack>

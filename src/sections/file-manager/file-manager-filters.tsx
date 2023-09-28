@@ -16,6 +16,7 @@ import Iconify from 'src/components/iconify';
 import FileThumbnail from 'src/components/file-thumbnail';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
 import CustomDateRangePicker, { shortDateLabel } from 'src/components/custom-date-range-picker';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -42,6 +43,9 @@ export default function FileManagerFilters({
   dateError,
   typeOptions,
 }: Props) {
+
+  const { t } = useLocales()
+
   const popover = usePopover();
 
   const renderLabel = filters.type.length ? filters.type.slice(0, 2).join(',') : 'All type';
@@ -86,7 +90,7 @@ export default function FileManagerFilters({
     <TextField
       value={filters.name}
       onChange={handleFilterName}
-      placeholder="Search..."
+      placeholder={t('search_dots')}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">

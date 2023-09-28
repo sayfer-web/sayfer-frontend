@@ -23,6 +23,7 @@ import { ColorPicker } from 'src/components/color-utils';
 import FormProvider, { RHFTextField, RHFSwitch } from 'src/components/hook-form';
 // types
 import { ICalendarEvent, ICalendarDate } from 'src/types/calendar';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -33,6 +34,9 @@ type Props = {
 };
 
 export default function CalendarForm({ currentEvent, colorOptions, onClose }: Props) {
+
+  const { t } = useLocales()
+
   const { enqueueSnackbar } = useSnackbar();
 
   const EventSchema = Yup.object().shape({
@@ -144,7 +148,7 @@ export default function CalendarForm({ currentEvent, colorOptions, onClose }: Pr
                   field.onChange(fTimestamp(newValue));
                 }
               }}
-              label="End date"
+              label={t('end_date')}
               format="dd/MM/yyyy hh:mm a"
               slotProps={{
                 textField: {

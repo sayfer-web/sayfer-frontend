@@ -5,7 +5,7 @@ import { useRouter } from 'src/routes/hooks';
 //
 import { useAuthContext } from '../hooks';
 import { useSelector } from 'react-redux';
-import { selectCurrentToken } from 'src/features/auth/authSlice';
+import { selectCurrentToken } from 'src/app/features/auth/authSlice';
 
 // ----------------------------------------------------------------------
 

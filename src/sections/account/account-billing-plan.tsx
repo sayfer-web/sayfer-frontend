@@ -21,6 +21,7 @@ import Iconify from 'src/components/iconify';
 //
 import { AddressListDialog } from '../address';
 import PaymentCardListDialog from '../payment/payment-card-list-dialog';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -35,6 +36,9 @@ type Props = {
 };
 
 export default function AccountBillingPlan({ cardList, addressBook, plans }: Props) {
+
+  const { t } = useLocales()
+
   const openAddress = useBoolean();
 
   const openCards = useBoolean();
@@ -138,7 +142,7 @@ export default function AccountBillingPlan({ cardList, addressBook, plans }: Pro
         <Stack spacing={2} sx={{ p: 3, pt: 0, typography: 'body2' }}>
           <Grid container spacing={{ xs: 0.5, md: 2 }}>
             <Grid xs={12} md={4} sx={{ color: 'text.secondary' }}>
-              Plan
+              {t('plan')}
             </Grid>
             <Grid xs={12} md={8} sx={{ typography: 'subtitle2', textTransform: 'capitalize' }}>
               {selectedPlan || '-'}

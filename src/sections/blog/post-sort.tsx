@@ -5,6 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 // components
 import Iconify from 'src/components/iconify';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -18,6 +19,9 @@ type Props = {
 };
 
 export default function PostSort({ sort, sortOptions, onSort }: Props) {
+
+  const { t } = useLocales()
+
   const popover = usePopover();
 
   return (
@@ -33,9 +37,14 @@ export default function PostSort({ sort, sortOptions, onSort }: Props) {
         }
         sx={{ fontWeight: 'fontWeightSemiBold', textTransform: 'capitalize' }}
       >
-        Sort By:
+        {t('sort_by')}
         <Box component="span" sx={{ ml: 0.5, fontWeight: 'fontWeightBold' }}>
-          {sort}
+          {
+          sort === 'latest' && t('latest') ||
+          sort === 'popular' && t('popular') ||
+          sort === 'oldest' && t('oldest') || 
+          'lol'
+          }
         </Box>
       </Button>
 

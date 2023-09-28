@@ -22,6 +22,7 @@ import FormProvider, {
   RHFRadioGroup,
   RHFAutocomplete,
 } from 'src/components/hook-form';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -32,6 +33,9 @@ type Props = {
 };
 
 export default function AddressNewForm({ open, onClose, onCreate }: Props) {
+
+  const { t } = useLocales()
+
   const NewAddressSchema = Yup.object().shape({
     name: Yup.string().required('Fullname is required'),
     phoneNumber: Yup.string().required('Phone number is required'),
@@ -68,6 +72,7 @@ export default function AddressNewForm({ open, onClose, onCreate }: Props) {
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
+
     try {
       onCreate({
         name: data.name,
@@ -132,7 +137,7 @@ export default function AddressNewForm({ open, onClose, onCreate }: Props) {
 
             <RHFAutocomplete
               name="country"
-              label="Country"
+              label={t('contry')}
               options={countries.map((country) => country.label)}
               getOptionLabel={(option) => option}
               renderOption={(props, option) => {

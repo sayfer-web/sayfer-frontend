@@ -8,6 +8,7 @@ import Stack, { StackProps } from '@mui/material/Stack';
 import { RouterLink } from 'src/routes/components';
 // components
 import Iconify from 'src/components/iconify';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -30,6 +31,9 @@ export default function FileManagerPanel({
   sx,
   ...other
 }: Props) {
+
+  const { t } = useLocales()
+
   return (
     <Stack direction="row" alignItems="center" sx={{ mb: 3, ...sx }} {...other}>
       <Stack flexGrow={1}>
@@ -65,7 +69,7 @@ export default function FileManagerPanel({
           color="inherit"
           endIcon={<Iconify icon="eva:arrow-ios-forward-fill" width={18} sx={{ ml: -0.5 }} />}
         >
-          View All
+          {t('view_all')}
         </Button>
       )}
 

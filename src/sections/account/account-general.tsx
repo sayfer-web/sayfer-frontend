@@ -25,10 +25,14 @@ import FormProvider, {
   RHFUploadAvatar,
   RHFAutocomplete,
 } from 'src/components/hook-form';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function AccountGeneral() {
+
+  const { t } = useLocales()
+
   const { enqueueSnackbar } = useSnackbar();
 
   const { user } = useMockedUser();
@@ -118,8 +122,8 @@ export default function AccountGeneral() {
                     color: 'text.disabled',
                   }}
                 >
-                  Allowed *.jpeg, *.jpg, *.png, *.gif
-                  <br /> max size of {fData(3145728)}
+                  {t('allowed')} *.jpeg, *.jpg, *.png, *.gif
+                  <br /> {t('max_size_of')} {fData(3145728)}
                 </Typography>
               }
             />
@@ -127,12 +131,12 @@ export default function AccountGeneral() {
             <RHFSwitch
               name="isPublic"
               labelPlacement="start"
-              label="Public Profile"
+              label={t('public_profile')}
               sx={{ mt: 5 }}
             />
 
             <Button variant="soft" color="error" sx={{ mt: 3 }}>
-              Delete User
+              {t('delete_user')}
             </Button>
           </Card>
         </Grid>
@@ -148,14 +152,14 @@ export default function AccountGeneral() {
                 sm: 'repeat(2, 1fr)',
               }}
             >
-              <RHFTextField name="displayName" label="Name" />
-              <RHFTextField name="email" label="Email Address" />
-              <RHFTextField name="phoneNumber" label="Phone Number" />
-              <RHFTextField name="address" label="Address" />
+              <RHFTextField name="displayName" label={t('name')} />
+              <RHFTextField name="email" label={t('email_address')} />
+              <RHFTextField name="phoneNumber" label={t('phone_number')} />
+              <RHFTextField name="address" label={t('address')} />
 
               <RHFAutocomplete
                 name="country"
-                label="Country"
+                label={t('country')}
                 options={countries.map((country) => country.label)}
                 getOptionLabel={(option) => option}
                 renderOption={(props, option) => {
@@ -181,16 +185,16 @@ export default function AccountGeneral() {
                 }}
               />
 
-              <RHFTextField name="state" label="State/Region" />
-              <RHFTextField name="city" label="City" />
-              <RHFTextField name="zipCode" label="Zip/Code" />
+              <RHFTextField name="state" label={t('state_region')} />
+              <RHFTextField name="city" label={t('city')} />
+              <RHFTextField name="zipCode" label={t('zip_code')} />
             </Box>
 
             <Stack spacing={3} alignItems="flex-end" sx={{ mt: 3 }}>
-              <RHFTextField name="about" multiline rows={4} label="About" />
+              <RHFTextField name="about" multiline rows={4} label={t('about')} />
 
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                Save Changes
+                {t('save_changes')}
               </LoadingButton>
             </Stack>
           </Card>

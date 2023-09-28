@@ -36,6 +36,7 @@ import CalendarForm from '../calendar-form';
 import CalendarToolbar from '../calendar-toolbar';
 import CalendarFilters from '../calendar-filters';
 import CalendarFiltersResult from '../calendar-filters-result';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -48,6 +49,9 @@ const defaultFilters: ICalendarFilters = {
 // ----------------------------------------------------------------------
 
 export default function CalendarView() {
+
+  const { t } = useLocales()
+
   const theme = useTheme();
 
   const settings = useSettingsContext();
@@ -146,7 +150,7 @@ export default function CalendarView() {
             startIcon={<Iconify icon="mingcute:add-line" />}
             onClick={onOpenForm}
           >
-            New Event
+            {t('new_event')}
           </Button>
         </Stack>
 

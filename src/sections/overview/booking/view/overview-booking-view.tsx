@@ -22,12 +22,16 @@ import BookingTotalIncomes from '../booking-total-incomes';
 import BookingWidgetSummary from '../booking-widget-summary';
 import BookingCheckInWidgets from '../booking-check-in-widgets';
 import BookingCustomerReviews from '../booking-customer-reviews';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 const SPACING = 3;
 
 export default function OverviewBookingView() {
+
+  const { t } = useLocales()
+
   const theme = useTheme();
 
   const settings = useSettingsContext();
@@ -37,25 +41,25 @@ export default function OverviewBookingView() {
       <Grid container spacing={SPACING} disableEqualOverflow>
         <Grid xs={12} md={4}>
           <BookingWidgetSummary
-            title="Total Booking"
+            title={t('total_booking')}
             total={714000}
             icon={<BookingIllustration />}
           />
         </Grid>
 
         <Grid xs={12} md={4}>
-          <BookingWidgetSummary title="Sold" total={311000} icon={<CheckInIllustration />} />
+          <BookingWidgetSummary title={t('sold')} total={311000} icon={<CheckInIllustration />} />
         </Grid>
 
         <Grid xs={12} md={4}>
-          <BookingWidgetSummary title="Canceled" total={124000} icon={<CheckoutIllustration />} />
+          <BookingWidgetSummary title={t('cancelled')} total={124000} icon={<CheckoutIllustration />} />
         </Grid>
 
         <Grid container xs={12}>
           <Grid container xs={12} md={8}>
             <Grid xs={12} md={6}>
               <BookingTotalIncomes
-                title="Total Incomes"
+                title={t('total_incomes')}
                 total={18765}
                 percent={2.6}
                 chart={{
@@ -74,7 +78,7 @@ export default function OverviewBookingView() {
             </Grid>
 
             <Grid xs={12} md={6}>
-              <BookingBooked title="Booked" data={_bookingsOverview} />
+              <BookingBooked title={t('booked')} data={_bookingsOverview} />
             </Grid>
 
             <Grid xs={12}>
@@ -90,8 +94,8 @@ export default function OverviewBookingView() {
 
             <Grid xs={12}>
               <BookingStatistics
-                title="Statistics"
-                subheader="(+43% Sold | +12% Canceled) than last year"
+                title={t('statistics')}
+                subheader={`(+43% Sold | +12% Canceled) ${t('than_last_year')}`}
                 chart={{
                   colors: [theme.palette.primary.main, theme.palette.error.light],
                   categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
@@ -143,7 +147,7 @@ export default function OverviewBookingView() {
 
           <Grid xs={12} md={4}>
             <BookingAvailable
-              title="Tours Available"
+              title={t('tours_available')}
               chart={{
                 series: [
                   { label: 'Sold out', value: 120 },
@@ -153,7 +157,7 @@ export default function OverviewBookingView() {
             />
 
             <BookingCustomerReviews
-              title="Customer Reviews"
+              title={t('customer_reviews')}
               subheader={`${_bookingReview.length} Reviews`}
               list={_bookingReview}
               sx={{ mt: SPACING }}
@@ -162,12 +166,12 @@ export default function OverviewBookingView() {
         </Grid>
 
         <Grid xs={12}>
-          <BookingNewest title="Newest Booking" subheader="12 Booking" list={_bookingNew} />
+          <BookingNewest title={t('newest_booking')} subheader={t('twelve_booking')} list={_bookingNew} />
         </Grid>
 
         <Grid xs={12}>
           <BookingDetails
-            title="Booking Details"
+            title={t('booking_details')}
             tableData={_bookings}
             tableLabels={[
               { id: 'destination', label: 'Destination' },

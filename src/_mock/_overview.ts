@@ -1,4 +1,7 @@
+import { useLocales } from 'src/locales';
 import { _mock } from './_mock';
+
+// const { t } = useLocales()
 
 // APP
 // ----------------------------------------------------------------------
@@ -216,13 +219,17 @@ export const _bankingCreditCard = [
   },
 ];
 
-export const _bankingRecentTransitions = [
+export const _bankingRecentTransitions = () => { 
+
+  const { t } = useLocales()
+
+  return [
   {
     id: _mock.id(2),
     name: _mock.fullName(2),
     avatarUrl: _mock.image.avatar(2),
     type: 'Income',
-    message: 'Receive money from',
+    message: t('received_money_from'),
     category: 'Annette Black',
     date: _mock.time(2),
     status: 'progress',
@@ -233,7 +240,7 @@ export const _bankingRecentTransitions = [
     name: _mock.fullName(3),
     avatarUrl: _mock.image.avatar(3),
     type: 'Expenses',
-    message: 'Payment for',
+    message: t('payment_for'),
     category: 'Courtney Henry',
     date: _mock.time(3),
     status: 'completed',
@@ -244,7 +251,7 @@ export const _bankingRecentTransitions = [
     name: _mock.fullName(4),
     avatarUrl: _mock.image.avatar(4),
     type: 'Receive',
-    message: 'Payment for',
+    message: t('payment_for'),
     category: 'Theresa Webb',
     date: _mock.time(4),
     status: 'failed',
@@ -255,7 +262,7 @@ export const _bankingRecentTransitions = [
     name: null,
     avatarUrl: null,
     type: 'Expenses',
-    message: 'Payment for',
+    message: t('payment_for'),
     category: 'Beauty & Health',
     date: _mock.time(5),
     status: 'completed',
@@ -266,13 +273,14 @@ export const _bankingRecentTransitions = [
     name: null,
     avatarUrl: null,
     type: 'Expenses',
-    message: 'Payment for',
+    message: t('payment_for'),
     category: 'Books',
     date: _mock.time(6),
     status: 'progress',
     amount: _mock.number.price(6),
   },
-];
+  ]
+}
 
 // BOOKING
 // ----------------------------------------------------------------------

@@ -25,30 +25,41 @@ import Scrollbar from 'src/components/scrollbar';
 import { varHover } from 'src/components/animate';
 //
 import NotificationItem from './notification-item';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
-const TABS = [
+const TABS = () => {
+  
+  const { t } = useLocales()
+
+  return [
   {
     value: 'all',
-    label: 'All',
+    label: t('all'),
     count: 22,
   },
   {
     value: 'unread',
-    label: 'Unread',
+    label: t('unread'),
     count: 12,
   },
   {
     value: 'archived',
-    label: 'Archived',
+    label: t('archived'),
     count: 10,
   },
 ];
+}
+
+// const TABS = getTabs()
 
 // ----------------------------------------------------------------------
 
 export default function NotificationsPopover() {
+
+  const { t } = useLocales()
+
   const drawer = useBoolean();
 
   const smUp = useResponsive('up', 'sm');
@@ -59,7 +70,7 @@ export default function NotificationsPopover() {
     setCurrentTab(newValue);
   }, []);
 
-  const [notifications, setNotifications] = useState(_notifications);
+  const [notifications, setNotifications] = useState(_notifications());
 
   const totalUnRead = notifications.filter((item) => item.isUnRead === true).length;
 
@@ -75,7 +86,7 @@ export default function NotificationsPopover() {
   const renderHead = (
     <Stack direction="row" alignItems="center" sx={{ py: 2, pl: 2.5, pr: 1, minHeight: 68 }}>
       <Typography variant="h6" sx={{ flexGrow: 1 }}>
-        Notifications
+        {t('notifications')}
       </Typography>
 
       {!!totalUnRead && (
@@ -96,7 +107,7 @@ export default function NotificationsPopover() {
 
   const renderTabs = (
     <Tabs value={currentTab} onChange={handleChangeTab}>
-      {TABS.map((tab) => (
+      {TABS().map((tab) => (
         <Tab
           key={tab.value}
           iconPosition="end"
@@ -182,7 +193,7 @@ export default function NotificationsPopover() {
 
         <Box sx={{ p: 1 }}>
           <Button fullWidth size="large">
-            View All
+            {t('view_all')}
           </Button>
         </Box>
       </Drawer>

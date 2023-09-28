@@ -8,10 +8,14 @@ import IconButton from '@mui/material/IconButton';
 // components
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function PostCommentForm() {
+
+  const { t } = useLocales()
+
   const CommentSchema = Yup.object().shape({
     comment: Yup.string().required('Comment is required'),
     name: Yup.string().required('Name is required'),
@@ -50,7 +54,7 @@ export default function PostCommentForm() {
       <Stack spacing={3}>
         <RHFTextField
           name="comment"
-          placeholder="Write some of your comments..."
+          placeholder={t('write_some_of_your_comments')}
           multiline
           rows={4}
         />
@@ -71,7 +75,7 @@ export default function PostCommentForm() {
           </Stack>
 
           <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-            Post comment
+            {t('post_comment')}
           </LoadingButton>
         </Stack>
       </Stack>

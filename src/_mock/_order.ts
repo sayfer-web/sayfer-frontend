@@ -1,13 +1,19 @@
+import { useLocales } from 'src/locales';
 import { _mock } from './_mock';
 
 // ----------------------------------------------------------------------
 
-export const ORDER_STATUS_OPTIONS = [
-  { value: 'pending', label: 'Pending' },
-  { value: 'completed', label: 'Completed' },
-  { value: 'cancelled', label: 'Cancelled' },
-  { value: 'refunded', label: 'Refunded' },
+export const ORDER_STATUS_OPTIONS = () => { 
+
+  const { t } = useLocales()
+
+  return [
+  { value: 'pending', label: t('pending') },
+  { value: 'completed', label: t('completed') },
+  { value: 'cancelled', label: t('cancelled') },
+  { value: 'refunded', label: t('refunded') },
 ];
+}
 
 const ITEMS = [...Array(3)].map((_, index) => ({
   id: _mock.id(index),

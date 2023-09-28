@@ -16,6 +16,7 @@ import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 import { MotionViewport, varFade } from 'src/components/animate';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -55,6 +56,9 @@ const CATEGORIES = [
 // ----------------------------------------------------------------------
 
 export default function FaqsCategory() {
+
+  const { t } = useLocales()
+
   const mdUp = useResponsive('up', 'md');
 
   const nav = useBoolean();
@@ -65,7 +69,7 @@ export default function FaqsCategory() {
         <AppBar position="absolute">
           <Toolbar>
             <Button startIcon={<Iconify icon="solar:list-bold" />} onClick={nav.onTrue}>
-              Categories
+              {t('categories')}
             </Button>
           </Toolbar>
           <Divider />

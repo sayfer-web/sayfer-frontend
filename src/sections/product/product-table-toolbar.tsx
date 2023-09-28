@@ -15,6 +15,7 @@ import Iconify from 'src/components/iconify';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
 // types
 import { IProductTableFilters, IProductTableFilterValue } from 'src/types/product';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -39,6 +40,9 @@ export default function ProductTableToolbar({
   stockOptions,
   publishOptions,
 }: Props) {
+
+  const { t } = useLocales()
+
   const popover = usePopover();
 
   const handleFilterName = useCallback(
@@ -145,7 +149,7 @@ export default function ProductTableToolbar({
             fullWidth
             value={filters.name}
             onChange={handleFilterName}
-            placeholder="Search..."
+            placeholder={t('search_dots')}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

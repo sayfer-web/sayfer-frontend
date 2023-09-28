@@ -23,6 +23,7 @@ import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -31,6 +32,9 @@ type Props = {
 };
 
 export default function PostItemHorizontal({ post }: Props) {
+
+  const { t } = useLocales()
+
   const popover = usePopover();
 
   const router = useRouter();
@@ -59,7 +63,10 @@ export default function PostItemHorizontal({ post }: Props) {
         >
           <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 2 }}>
             <Label variant="soft" color={(publish === 'published' && 'info') || 'default'}>
-              {publish}
+              {
+              publish === 'draft' && t('draft') ||
+              publish === 'published' && t('published')
+              }
             </Label>
 
             <Box component="span" sx={{ typography: 'caption', color: 'text.disabled' }}>

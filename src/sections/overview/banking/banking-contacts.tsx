@@ -9,6 +9,7 @@ import Card, { CardProps } from '@mui/material/Card';
 import ListItemText from '@mui/material/ListItemText';
 // components
 import Iconify from 'src/components/iconify';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -24,6 +25,9 @@ interface Props extends CardProps {
 }
 
 export default function BankingContacts({ title, subheader, list, ...other }: Props) {
+
+  const { t } = useLocales()
+
   return (
     <Card {...other}>
       <CardHeader
@@ -35,7 +39,7 @@ export default function BankingContacts({ title, subheader, list, ...other }: Pr
             color="inherit"
             endIcon={<Iconify icon="eva:arrow-ios-forward-fill" width={18} sx={{ ml: -0.5 }} />}
           >
-            View All
+            {t('view_all')}
           </Button>
         }
       />
@@ -47,7 +51,7 @@ export default function BankingContacts({ title, subheader, list, ...other }: Pr
 
             <ListItemText primary={contact.name} secondary={contact.email} />
 
-            <Tooltip title="Quick Transfer">
+            <Tooltip title={t('quick_transfer')}>
               <IconButton>
                 <Iconify icon="eva:diagonal-arrow-right-up-fill" />
               </IconButton>

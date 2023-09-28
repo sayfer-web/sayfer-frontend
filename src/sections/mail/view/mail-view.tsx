@@ -21,12 +21,16 @@ import MailList from '../mail-list';
 import MailHeader from '../mail-header';
 import MailCompose from '../mail-compose';
 import MailDetails from '../mail-details';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 const LABEL_INDEX = 'inbox';
 
 export default function MailView() {
+
+  const { t } = useLocales()
+
   const router = useRouter();
 
   const searchParams = useSearchParams();
@@ -194,7 +198,7 @@ export default function MailView() {
             mb: { xs: 3, md: 5 },
           }}
         >
-          Mail
+          {t('mail')}
         </Typography>
 
         <Stack

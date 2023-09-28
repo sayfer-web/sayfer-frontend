@@ -25,6 +25,7 @@ import { fShortenNumber } from 'src/utils/format-number';
 // components
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -33,6 +34,9 @@ interface Props {
 }
 
 export default function ProfilePostItem({ post }: Props) {
+
+  const { t } = useLocales()
+
   const { user } = useMockedUser();
 
   const commentRef = useRef<HTMLInputElement>(null);
@@ -127,7 +131,7 @@ export default function ProfilePostItem({ post }: Props) {
         fullWidth
         value={message}
         inputRef={commentRef}
-        placeholder="Write a comment…"
+        placeholder={t('write_a_comment')}
         onChange={handleChangeMessage}
         endAdornment={
           <InputAdornment position="end" sx={{ mr: 1 }}>

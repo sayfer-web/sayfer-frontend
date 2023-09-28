@@ -14,6 +14,7 @@ import Iconify from 'src/components/iconify';
 import SearchNotFound from 'src/components/search-not-found';
 // types
 import { IProductItem } from 'src/types/product';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -26,6 +27,9 @@ type Props = {
 };
 
 export default function ProductSearch({ query, results, onSearch, hrefItem, loading }: Props) {
+
+  const { t } = useLocales()
+  
   const router = useRouter();
 
   const handleClick = (id: string) => {
@@ -71,7 +75,7 @@ export default function ProductSearch({ query, results, onSearch, hrefItem, load
       renderInput={(params) => (
         <TextField
           {...params}
-          placeholder="Search..."
+          placeholder={t('search_dots')}
           onKeyUp={handleKeyUp}
           InputProps={{
             ...params.InputProps,

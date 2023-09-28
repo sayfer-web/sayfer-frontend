@@ -12,6 +12,7 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import { fDate } from 'src/utils/format-time';
 // components
 import Iconify from 'src/components/iconify';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -32,6 +33,9 @@ export default function PostCommentItem({
   postedAt,
   hasReply,
 }: Props) {
+
+  const { t } = useLocales()
+
   const reply = useBoolean();
 
   return (
@@ -86,7 +90,7 @@ export default function PostCommentItem({
           onClick={reply.onToggle}
           sx={{ right: 0, position: 'absolute' }}
         >
-          Reply
+          {t('reply')}
         </Button>
       )}
     </ListItem>

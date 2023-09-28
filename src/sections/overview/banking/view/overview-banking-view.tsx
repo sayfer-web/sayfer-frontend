@@ -24,11 +24,14 @@ import { useState } from 'react';
 import EcommerceCurrentBalance from '../../e-commerce/ecommerce-current-balance';
 import WalletRefillFounds from '../wallet-refill-founds';
 import { useSelector } from 'react-redux';
-import { selectCurrentUsername } from 'src/features/auth/authSlice';
+import { selectCurrentUsername } from 'src/app/features/auth/authSlice';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function OverviewBankingView() {
+
+  const { t } = useLocales()
 
   const [income, setIncome] = useState(
     [
@@ -171,46 +174,56 @@ export default function OverviewBankingView() {
         <Grid xs={12} md={8}>
           <Stack spacing={3}>
             <BankingBalanceStatistics
-              title="Balance Statistics"
-              subheader="(+43% Income | +12% Expense) than last year"
+              title={t('balance_statistics')}
+              // subheader="(+43% Income | +12% Expense) than last year"
               chart={{
                 categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                // categoriesLabels: [t('jan'), t('Feb'), t('mar'), t('apr'), t('may'), t('jun'), t('jul'), t('aug'), t('sep')],
                 series: [
                   {
                     type: 'Week',
+                    label: t('week'),
                     data: [
                       {
-                        name: 'Income',
+                        label: 'Income',
+                        name: t('income'),
                         data: [10, 41, 35, 151, 49, 62, 69, 91, 48],
                       },
                       {
-                        name: 'Expenses',
+                        label: 'Expenses',
+                        name: t('expenses'),
                         data: [10, 34, 13, 56, 77, 88, 99, 77, 45],
                       },
                     ],
                   },
                   {
                     type: 'Month',
+                    label: t('month'),
                     data: [
                       {
-                        name: 'Income',
+                        label: 'Income',
+                        name: t('income'),
                         data: [148, 91, 69, 62, 49, 51, 35, 41, 10],
                       },
                       {
-                        name: 'Expenses',
+                        label: 'Expenses',
+                        name: t('expenses'),
                         data: [45, 77, 99, 88, 77, 56, 13, 34, 10],
                       },
                     ],
                   },
                   {
                     type: 'Year',
+                    label: t('year'),
                     data: [
                       {
-                        name: 'Income',
+                        label: 'Income',
+                        name: t('income'),
                         data: [76, 42, 29, 41, 27, 138, 117, 86, 63],
                       },
                       {
-                        name: 'Expenses',
+                        label: 'Expenses',
+                        name: t('expenses'),
                         data: [80, 55, 34, 114, 80, 130, 15, 28, 55],
                       },
                     ],
@@ -222,7 +235,7 @@ export default function OverviewBankingView() {
             
 
             <BankingExpensesCategories
-              title="Expenses Categories"
+              title={t('expenses_categories')}
               chart={{
                 series: [
                   { label: 'Category 1', value: 14 },
@@ -250,13 +263,13 @@ export default function OverviewBankingView() {
             />
 
             <BankingRecentTransitions
-              title="Recent Transitions"
-              tableData={_bankingRecentTransitions}
+              title={t('recent_transitions')}
+              tableData={_bankingRecentTransitions()}
               tableLabels={[
-                { id: 'description', label: 'Description' },
-                { id: 'date', label: 'Date' },
-                { id: 'amount', label: 'Amount' },
-                { id: 'status', label: 'Status' },
+                { id: 'description', label: t('description') },
+                { id: 'date', label: t('date') },
+                { id: 'amount', label: t('amount') },
+                { id: 'status', label: t('status') },
                 { id: '' },
               ]}
             />
@@ -268,12 +281,12 @@ export default function OverviewBankingView() {
           <Stack spacing={3}>
             
           <WalletRefillFounds
-            title="Money turnover for all time"
+            title={t('total_money_received')}
             currentBalance={187650}
             sentAmount={25500}
           />
 
-            <BankingQuickTransfer title="Quick Transfer" list={_bankingContacts} />
+            <BankingQuickTransfer title={t('quick_transfer')} list={_bankingContacts} />
             
             {/* 
               <BankingContacts
@@ -285,8 +298,8 @@ export default function OverviewBankingView() {
 
             <BankingInviteFriends
               price="$50"
-              title={`Invite friends \n and earn`}
-              description="Praesent egestas tristique nibh. Duis lobortis massa imperdiet quam."
+              title={`${t('invite_friends')} \n ${t('and_earn')}`}
+              description={t('present_egestas')}
               img="/assets/illustrations/characters/character_11.png"
             />
           </Stack>

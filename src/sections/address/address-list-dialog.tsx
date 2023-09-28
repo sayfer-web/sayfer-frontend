@@ -13,6 +13,7 @@ import { IAddressItem } from 'src/types/address';
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 import SearchNotFound from 'src/components/search-not-found';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -39,6 +40,9 @@ export default function AddressListDialog({
   selected,
   onSelect,
 }: Props) {
+
+  const { t } = useLocales()
+
   const [searchAddress, setSearchAddress] = useState('');
 
   const dataFiltered = applyFilter({
@@ -132,7 +136,7 @@ export default function AddressListDialog({
         <TextField
           value={searchAddress}
           onChange={handleSearchAddress}
-          placeholder="Search..."
+          placeholder={t('search_dots')}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">

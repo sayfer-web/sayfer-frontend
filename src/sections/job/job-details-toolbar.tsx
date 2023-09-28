@@ -11,6 +11,7 @@ import { RouterLink } from 'src/routes/components';
 // components
 import Iconify from 'src/components/iconify';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -36,6 +37,9 @@ export default function JobDetailsToolbar({
   sx,
   ...other
 }: Props) {
+
+  const { t } = useLocales()
+
   const popover = usePopover();
 
   return (
@@ -54,7 +58,7 @@ export default function JobDetailsToolbar({
           href={backLink}
           startIcon={<Iconify icon="eva:arrow-ios-back-fill" width={16} />}
         >
-          Back
+          {t('back')}
         </Button>
 
         <Box sx={{ flexGrow: 1 }} />

@@ -18,6 +18,7 @@ import { _socials } from 'src/_mock';
 import Iconify from 'src/components/iconify';
 import SearchNotFound from 'src/components/search-not-found';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -28,6 +29,9 @@ type Props = {
 };
 
 export default function ProfileFriends({ friends, searchFriends, onSearchFriends }: Props) {
+
+  const { t } = useLocales()
+
   const dataFiltered = applyFilter({
     inputData: friends,
     query: searchFriends,
@@ -43,7 +47,7 @@ export default function ProfileFriends({ friends, searchFriends, onSearchFriends
         direction={{ xs: 'column', sm: 'row' }}
         sx={{ my: 5 }}
       >
-        <Typography variant="h4">Friends</Typography>
+        <Typography variant="h4">{t('friends')}</Typography>
 
         <TextField
           value={searchFriends}

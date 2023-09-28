@@ -12,10 +12,14 @@ import Iconify from 'src/components/iconify';
 import { useCheckoutContext } from './context';
 import CheckoutSummary from './checkout-summary';
 import { AddressNewForm, AddressItem } from '../address';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function CheckoutBillingAddress() {
+
+  const { t } = useLocales()
+
   const checkout = useCheckoutContext();
 
   const addressForm = useBoolean();
@@ -60,7 +64,7 @@ export default function CheckoutBillingAddress() {
               onClick={checkout.onBackStep}
               startIcon={<Iconify icon="eva:arrow-ios-back-fill" />}
             >
-              Back
+              {t('back')}
             </Button>
 
             <Button

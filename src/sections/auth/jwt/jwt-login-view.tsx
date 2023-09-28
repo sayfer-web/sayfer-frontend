@@ -24,9 +24,9 @@ import { useAuthContext } from 'src/auth/hooks';
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import { useNavigate } from 'react-router';
-import { useLoginMutation } from 'src/features/auth/authApiSlice';
+import { useLoginMutation } from 'src/app/features/auth/authApiSlice';
 import { useDispatch } from 'react-redux';
-import { setCredentials } from 'src/features/auth/authSlice';
+import { setCredentials } from 'src/app/features/auth/authSlice';
 import { TextField, makeStyles, withStyles } from '@mui/material';
 
 // ----------------------------------------------------------------------

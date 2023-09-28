@@ -25,10 +25,11 @@ import List from '@mui/material/List';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import { StarBorder } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
-import { selectCurrentUsername } from 'src/features/auth/authSlice';
+import { selectCurrentUsername } from 'src/app/features/auth/authSlice';
 import React from 'react';
-import { useGetWalletAddressesMutation } from 'src/features/wallet/walletApiSlice';
+import { useGetWalletAddressesMutation } from 'src/app/features/wallet/walletApiSlice';
 import LoadingButton from '@mui/lab/LoadingButton';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -45,6 +46,8 @@ export default function WalletRefillFounds({
   sx,
   ...other
 }: Props) {
+
+  const { t } = useLocales()
 
   const username = useSelector(selectCurrentUsername)
 
@@ -156,11 +159,11 @@ export default function WalletRefillFounds({
 
         <Stack direction="row" spacing={1.5}>
           <Button fullWidth onClick={() => toggleDialogVisible(true)} variant="contained" color="warning">
-            Request
+            {t('request')}
           </Button>
 
           <Button onClick={() => toggleDialogVisible(true)} fullWidth variant="contained" color="primary">
-            Transfer
+            {t('transfer')}
           </Button>
 
           

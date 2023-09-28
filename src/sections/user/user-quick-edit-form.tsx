@@ -114,7 +114,7 @@ export default function UserQuickEditForm({ currentUser, open, onClose }: Props)
             }}
           >
             <RHFSelect name="status" label="Status">
-              {USER_STATUS_OPTIONS.map((status) => (
+              {USER_STATUS_OPTIONS().map((status) => (
                 <MenuItem key={status.value} value={status.value}>
                   {status.label}
                 </MenuItem>

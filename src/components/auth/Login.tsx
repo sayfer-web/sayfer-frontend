@@ -2,8 +2,8 @@ import { useRef, useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 import { useDispatch } from "react-redux"
-import { setCredentials } from "src/features/auth/authSlice"
-import { useLoginMutation } from "src/features/auth/authApiSlice"
+import { setCredentials } from "src/app/features/auth/authSlice"
+import { useLoginMutation } from "src/app/features/auth/authApiSlice"
 // import { IconBack } from "../assets/icons/Others/IconBack"
 
 

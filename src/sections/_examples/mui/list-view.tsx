@@ -24,6 +24,7 @@ import Iconify from 'src/components/iconify';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 //
 import ComponentBlock from '../component-block';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -32,6 +33,9 @@ function ListItemLink(props: ListItemButtonProps<'a', { button?: true }>) {
 }
 
 export default function ListView() {
+
+  const { t } = useLocales()
+
   const [open, setOpen] = useState(true);
 
   const [selectedIndex, setSelectedIndex] = useState(1);
@@ -100,20 +104,20 @@ export default function ListView() {
 
       <Container sx={{ my: 10 }}>
         <Masonry columns={{ xs: 1, md: 2 }} spacing={3}>
-          <ComponentBlock title="Simple">
+          <ComponentBlock title={t('simple')}>
             <Paper variant="outlined" sx={{ width: 1 }}>
               <List component="nav" aria-label="main mailbox folders">
                 <ListItemButton>
                   <ListItemIcon>
                     <Iconify icon="solar:inbox-in-bold" width={24} />
                   </ListItemIcon>
-                  <ListItemText primary="Inbox" />
+                  <ListItemText primary={t('inbox')} />
                 </ListItemButton>
                 <ListItemButton>
                   <ListItemIcon>
                     <Iconify icon="fluent:mail-24-filled" width={24} />
                   </ListItemIcon>
-                  <ListItemText primary="Drafts" />
+                  <ListItemText primary={t('drafts')} />
                 </ListItemButton>
               </List>
 
@@ -121,23 +125,23 @@ export default function ListView() {
 
               <List component="nav" aria-label="secondary mailbox folders">
                 <ListItemButton>
-                  <ListItemText primary="Trash" />
+                  <ListItemText primary={t('trash')} />
                 </ListItemButton>
                 <ListItemLink href="#simple-list">
-                  <ListItemText primary="Spam" />
+                  <ListItemText primary={t('spam')} />
                 </ListItemLink>
               </List>
             </Paper>
           </ComponentBlock>
 
-          <ComponentBlock title="Nested">
+          <ComponentBlock title={t('nested')}>
             <Paper variant="outlined" sx={{ width: 1 }}>
               <List
                 component="nav"
                 aria-labelledby="nested-list-subheader"
                 subheader={
                   <ListSubheader component="div" id="nested-list-subheader">
-                    Nested List Items
+                    {t('nested_list_items')}
                   </ListSubheader>
                 }
               >
@@ -145,19 +149,19 @@ export default function ListView() {
                   <ListItemIcon>
                     <Iconify icon="iconamoon:send-fill" width={24} />
                   </ListItemIcon>
-                  <ListItemText primary="Sent mail" />
+                  <ListItemText primary={t('sent_mail')} />
                 </ListItemButton>
                 <ListItemButton>
                   <ListItemIcon>
                     <Iconify icon="fluent:mail-24-filled" width={24} />
                   </ListItemIcon>
-                  <ListItemText primary="Drafts" />
+                  <ListItemText primary={t('drafts')} />
                 </ListItemButton>
                 <ListItemButton onClick={handleClick}>
                   <ListItemIcon>
                     <Iconify icon="solar:inbox-in-bold" width={24} />
                   </ListItemIcon>
-                  <ListItemText primary="Inbox" />
+                  <ListItemText primary={t('inbox')} />
                   {open ? (
                     <Iconify icon="eva:arrow-ios-upward-fill" />
                   ) : (
@@ -170,7 +174,7 @@ export default function ListView() {
                       <ListItemIcon>
                         <Iconify icon="ic:round-star-border" width={24} />
                       </ListItemIcon>
-                      <ListItemText primary="Starred" />
+                      <ListItemText primary={t('starred')} />
                     </ListItemButton>
                   </List>
                 </Collapse>
@@ -178,7 +182,7 @@ export default function ListView() {
             </Paper>
           </ComponentBlock>
 
-          <ComponentBlock title="Folder">
+          <ComponentBlock title={t('folder')}>
             <Paper variant="outlined" sx={{ width: 1 }}>
               <List>
                 <ListItemButton>
@@ -187,7 +191,7 @@ export default function ListView() {
                       <Iconify icon="ic:baseline-image" width={24} />
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary="Photos" secondary="Jan 9, 2014" />
+                  <ListItemText primary={t('photos')} secondary="Jan 9, 2014" />
                 </ListItemButton>
                 <ListItemButton>
                   <ListItemAvatar>
@@ -195,7 +199,7 @@ export default function ListView() {
                       <Iconify icon="ic:baseline-work" width={24} />
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary="Work" secondary="Jan 7, 2014" />
+                  <ListItemText primary={t('work')} secondary="Jan 7, 2014" />
                 </ListItemButton>
                 <ListItemButton>
                   <ListItemAvatar>
@@ -203,13 +207,13 @@ export default function ListView() {
                       <Iconify icon="ic:round-beach-access" width={24} />
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary="Vacation" secondary="July 20, 2014" />
+                  <ListItemText primary={t('vacation')} secondary="July 20, 2014" />
                 </ListItemButton>
               </List>
             </Paper>
           </ComponentBlock>
 
-          <ComponentBlock title="Selected">
+          <ComponentBlock title={'selected'}>
             <Paper variant="outlined" sx={{ width: 1 }}>
               <List component="nav" aria-label="main mailbox folders">
                 <ListItemButton
@@ -219,7 +223,7 @@ export default function ListView() {
                   <ListItemIcon>
                     <Iconify icon="solar:inbox-in-bold" width={24} />
                   </ListItemIcon>
-                  <ListItemText primary="Inbox" />
+                  <ListItemText primary={t('inbox')} />
                 </ListItemButton>
                 <ListItemButton
                   selected={selectedIndex === 1}
@@ -228,7 +232,7 @@ export default function ListView() {
                   <ListItemIcon>
                     <Iconify icon="fluent:mail-24-filled" width={24} />
                   </ListItemIcon>
-                  <ListItemText primary="Drafts" />
+                  <ListItemText primary={t('drafts')} />
                 </ListItemButton>
               </List>
 
@@ -239,19 +243,19 @@ export default function ListView() {
                   selected={selectedIndex === 2}
                   onClick={(event) => handleListItemClick(event, 2)}
                 >
-                  <ListItemText primary="Trash" />
+                  <ListItemText primary={t('trash')} />
                 </ListItemButton>
                 <ListItemButton
                   selected={selectedIndex === 3}
                   onClick={(event) => handleListItemClick(event, 3)}
                 >
-                  <ListItemText primary="Spam" />
+                  <ListItemText primary={t('spam')} />
                 </ListItemButton>
               </List>
             </Paper>
           </ComponentBlock>
 
-          <ComponentBlock title="Controls">
+          <ComponentBlock title={t('controls')}>
             <Paper variant="outlined" sx={{ width: 1 }}>
               <List>
                 {[0, 1, 2, 3].map((value) => {
@@ -282,9 +286,9 @@ export default function ListView() {
             </Paper>
           </ComponentBlock>
 
-          <ComponentBlock title="Switch">
+          <ComponentBlock title={t('switch')}>
             <Paper variant="outlined" sx={{ width: 1 }}>
-              <List subheader={<ListSubheader>Settings</ListSubheader>}>
+              <List subheader={<ListSubheader>{t('settings')}</ListSubheader>}>
                 <ListItemButton>
                   <ListItemIcon>
                     <Iconify icon="ic:baseline-wifi" width={24} />
@@ -305,7 +309,7 @@ export default function ListView() {
                   <ListItemIcon>
                     <Iconify icon="ic:baseline-bluetooth" width={24} />
                   </ListItemIcon>
-                  <ListItemText id="switch-list-label-bluetooth" primary="Bluetooth" />
+                  <ListItemText id="switch-list-label-bluetooth" primary={t('bluetooth')} />
                   <ListItemSecondaryAction>
                     <Switch
                       edge="end"

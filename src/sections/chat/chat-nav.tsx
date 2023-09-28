@@ -24,6 +24,7 @@ import ChatNavItem from './chat-nav-item';
 import ChatNavAccount from './chat-nav-account';
 import { ChatNavItemSkeleton } from './chat-skeleton';
 import ChatNavSearchResults from './chat-nav-search-results';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -44,6 +45,9 @@ export default function ChatNav({
   conversations,
   selectedConversationId,
 }: Props) {
+
+  const { t } = useLocales()
+
   const theme = useTheme();
 
   const router = useRouter();
@@ -185,7 +189,7 @@ export default function ChatNav({
         fullWidth
         value={searchContacts.query}
         onChange={(event) => handleSearchContacts(event.target.value)}
-        placeholder="Search contacts..."
+        placeholder={t('search_contacts_dots')}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">

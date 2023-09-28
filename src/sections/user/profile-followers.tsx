@@ -10,6 +10,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { IUserProfileFollower } from 'src/types/user';
 // components
 import Iconify from 'src/components/iconify';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -18,6 +19,9 @@ type Props = {
 };
 
 export default function ProfileFollowers({ followers }: Props) {
+
+  const { t } = useLocales()
+
   const _mockFollowed = followers.slice(4, 8).map((i) => i.id);
 
   const [followed, setFollowed] = useState<string[]>(_mockFollowed);
@@ -36,7 +40,7 @@ export default function ProfileFollowers({ followers }: Props) {
   return (
     <>
       <Typography variant="h4" sx={{ my: 5 }}>
-        Followers
+        {t('followers')}
       </Typography>
 
       <Box

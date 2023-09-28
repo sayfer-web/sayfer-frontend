@@ -8,6 +8,7 @@ import { MAPBOX_API } from 'src/config-global';
 // components
 import Iconify from 'src/components/iconify';
 import { MapControl, MapMarker, MapPopup } from 'src/components/map';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -35,6 +36,9 @@ type Props = {
 };
 
 export default function ContactMap({ contacts }: Props) {
+
+  const { t } = useLocales()
+
   const theme = useTheme();
 
   const isLight = theme.palette.mode === 'light';
@@ -82,7 +86,7 @@ export default function ContactMap({ contacts }: Props) {
             }}
           >
             <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-              Address
+              {t('address')}
             </Typography>
 
             <Typography component="div" variant="caption">

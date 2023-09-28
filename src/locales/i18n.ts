@@ -11,6 +11,7 @@ import translationFr from './langs/fr.json';
 import translationVi from './langs/vi.json';
 import translationCn from './langs/cn.json';
 import translationAr from './langs/ar.json';
+import translationRu from './langs/ru.json';
 
 // ----------------------------------------------------------------------
 
@@ -22,6 +23,7 @@ i18n
   .init({
     resources: {
       en: { translations: translationEn },
+      ru: { translations: translationRu },
       fr: { translations: translationFr },
       vi: { translations: translationVi },
       cn: { translations: translationCn },

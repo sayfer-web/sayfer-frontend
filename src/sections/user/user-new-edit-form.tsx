@@ -31,6 +31,7 @@ import FormProvider, {
   RHFUploadAvatar,
   RHFAutocomplete,
 } from 'src/components/hook-form';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -39,6 +40,9 @@ type Props = {
 };
 
 export default function UserNewEditForm({ currentUser }: Props) {
+
+  const { t } = useLocales()
+
   const router = useRouter();
 
   const { enqueueSnackbar } = useSnackbar();
@@ -96,6 +100,8 @@ export default function UserNewEditForm({ currentUser }: Props) {
   const values = watch();
 
   const onSubmit = handleSubmit(async (data) => {
+
+
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
@@ -156,8 +162,8 @@ export default function UserNewEditForm({ currentUser }: Props) {
                       color: 'text.disabled',
                     }}
                   >
-                    Allowed *.jpeg, *.jpg, *.png, *.gif
-                    <br /> max size of {fData(3145728)}
+                    {t('allowed')} *.jpeg, *.jpg, *.png, *.gif
+                    <br /> {t('max_size_of')} {fData(3145728)}
                   </Typography>
                 }
               />
@@ -238,7 +244,7 @@ export default function UserNewEditForm({ currentUser }: Props) {
 
               <RHFAutocomplete
                 name="country"
-                label="Country"
+                label={t('country')}
                 options={countries.map((country) => country.label)}
                 getOptionLabel={(option) => option}
                 isOptionEqualToValue={(option, value) => option === value}
