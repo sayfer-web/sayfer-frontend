@@ -5,16 +5,17 @@ import Pagination, { paginationClasses } from '@mui/material/Pagination';
 // routes
 import { paths } from 'src/routes/paths';
 // types
-import { ITourItem } from 'src/types/tour';
+// import { ITourItem } from 'src/types/tour';
 // components
 import { useRouter } from 'src/routes/hooks';
 //
-import TourItem from './tour-item';
+import GamesItem from './games-item';
+import { IGameItem } from 'src/types/games';
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  tours: ITourItem[];
+  tours: IGameItem[];
 };
 
 export default function GamesList({ tours }: Props) {
@@ -50,7 +51,7 @@ export default function GamesList({ tours }: Props) {
         }}
       >
         {tours.map((tour) => (
-          <TourItem
+          <GamesItem
             key={tour.id}
             tour={tour}
             onView={() => handleView(tour.id)}

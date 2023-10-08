@@ -95,7 +95,7 @@ export default function GamesDetailsToolbar({
         arrow="top-right"
         sx={{ width: 140 }}
       >
-        {publishOptions.map((option) => (
+        {/* {publishOptions.map((option) => (
           <MenuItem
             key={option.value}
             selected={option.value === publish}
@@ -108,7 +108,7 @@ export default function GamesDetailsToolbar({
             {option.value === 'draft' && <Iconify icon="solar:file-text-bold" />}
             {option.label}
           </MenuItem>
-        ))}
+        ))} */}
       </CustomPopover>
     </>
   );

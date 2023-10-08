@@ -81,8 +81,8 @@ export default function UserProfileView() {
       <CustomBreadcrumbs
         heading={t('profile')}
         links={[
-          { name: 'Dashboard', href: paths.dashboard.root },
-          { name: 'User', href: paths.dashboard.user.root },
+          { name: t('dashboard'), href: paths.dashboard.root },
+          { name: t('user'), href: paths.dashboard.user.root },
           { name: user?.displayName },
         ]}
         sx={{

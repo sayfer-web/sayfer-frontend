@@ -141,7 +141,7 @@ export default function CheckoutPayment() {
             variant="contained"
             loading={isSubmitting}
           >
-            Complete Order
+            {t('complete_order')}
           </LoadingButton>
         </Grid>
       </Grid>

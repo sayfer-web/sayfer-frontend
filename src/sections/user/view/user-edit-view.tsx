@@ -9,6 +9,7 @@ import { useSettingsContext } from 'src/components/settings';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 //
 import UserNewEditForm from '../user-new-edit-form';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -17,6 +18,9 @@ type Props = {
 };
 
 export default function UserEditView({ id }: Props) {
+
+  const { t } = useLocales()
+
   const settings = useSettingsContext();
 
   const currentUser = _userList.find((user) => user.id === id);
@@ -24,14 +28,14 @@ export default function UserEditView({ id }: Props) {
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
       <CustomBreadcrumbs
-        heading="Edit"
+        heading={t('edit')}
         links={[
           {
-            name: 'Dashboard',
+            name: t('dashboard'),
             href: paths.dashboard.root,
           },
           {
-            name: 'User',
+            name: t('user'),
             href: paths.dashboard.user.root,
           },
           { name: currentUser?.name },

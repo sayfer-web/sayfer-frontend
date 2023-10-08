@@ -9,6 +9,7 @@ import { useSettingsContext } from 'src/components/settings';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 //
 import InvoiceDetails from '../invoice-details';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -17,6 +18,9 @@ type Props = {
 };
 
 export default function InvoiceDetailsView({ id }: Props) {
+
+  const { t } = useLocales()
+
   const settings = useSettingsContext();
 
   const currentInvoice = _invoices.filter((invoice) => invoice.id === id)[0];
@@ -27,11 +31,11 @@ export default function InvoiceDetailsView({ id }: Props) {
         heading={currentInvoice?.invoiceNumber}
         links={[
           {
-            name: 'Dashboard',
+            name: t('dashboard'),
             href: paths.dashboard.root,
           },
           {
-            name: 'Invoice',
+            name: t('invoice'),
             href: paths.dashboard.invoice.root,
           },
           { name: currentInvoice?.invoiceNumber },

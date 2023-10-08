@@ -3,7 +3,7 @@
     "job": "Работа",
     "user": "Пользователь",
     "list": "Список",
-    "edit": "Редактировать",
+    "edit": "Изменить",
     "shop": "Магазин",
     "transactions": "Транзакции",
     "blog": "Блог",
@@ -51,50 +51,31 @@
     "demo": {
       "title": "Русский"
     },
-
-
     "new_event": "Новое событие",
-
     "wallet": "Кошелёк",
-
-
-    "than_last_month": "за последний месяц",
+    "than_last_month": "чем за предыдущий месяц",
     "balance": "Баланс",
-
     "token_holder": "Владелец токенов",
     "total_money_received": "Всего пополнений",
-    
     "request": "Пополнить",
     "transfer": "Отправить",
-
     "order_total": "Итого",
-
     "followers": "Подписчики",
     "friends": "Друзья",
     "gallery": "Галерея",
-    
   "invite_friends": "Пригласи друзей",
   "and_earn": "получи бонус!",
   "present_egestas": "Подробнее",
-
-  
   "view_all": "Посмотреть всё",
   "quick_transfer": "Быстрый Перевод",
-
   "recent": "Последние",
-
   "insert_amount": "Введите значение",
-
   "your_balance": "Ваш баланс",
-  
   "balance_statistics": "Статистика баланса (график движения активов?)",
-
   "expenses_categories": "Расходы по категориям (график активов?)",
-
   "year": "Год",
   "month": "Месяц",
   "week": "Неделя",
-
   "jan": "Янв",
   "feb": "Фев",
   "mar": "Мар",
@@ -106,322 +87,349 @@
   "sep": "Сен",
   "oct": "Окт",
   "dec": "Дек",
-
   "income": "Доходы",
   "outcome": "Расходы",
   "expenses": "Траты",
-
   "categories": "Категории",
-
   "invite": "Пригласить",
-
   "transfer_now": "Быстрая отправка",
-
   "recent_transitions": "Последние изменения на счетах",
-
   "description": "Описание",
   "date": "Дата",
   "amount": "Количество",
   "status": "Статус",
-
   "received_money_from": "Поступило",
   "payment_for": "Отправлено",
-
   "progress": "Progress",
   "completed": "Завершено",
   "failed": "Failed",
-
-  
   "follower": "Наблюдателей",
   "following": "Наблюдает за",
-
-
   "about": "Детали пользователя",
   "social": "Социальные сети",
   "all_users": "Все пользователи",
-
-  
   "all_transactions": "Все транзакции",
   "my_transactions": "Мои транзакции",
   "news": "Новости",
-
   "welcome_back": "Привет, рады видеть тебя снова!",
   "welcome_back_desc": "Описание ближайшего значительного события",
-
   "go_now": "Приступить сейчас",
-
   "menu_ap": "Панель администратора",
-
   "quests": "Задания",
-
   "game_room": "Игровая комната",
-
   "roadmap": "Дорожная карта",
-
   "mode": "Режим",
-
   "settings": "Настройки",
-
   "contrast": "Контраст",
-
   "direction": "Направление",
-
   "layout": "Макет",
-
   "stretch": "Резиновый",
-
   "presets": "Палитра",
-
   "fullscreen": "Полный экран",
-
   "exit_fullscreen": "Закрыть полный экран",
-
   "role": "Роль",
-
   "customer": "Пользователь",
-
   "items": "Количество",
-
   "price": "Сумма",
-
   "start_date": "Начальная дата",
-
   "end_date": "Конечная дата",
-
   "search_customer_or_number": "Поиск по пользователю или номеру...",
-
   "all": "Все",
-
   "pending": "Ожидание",
-  
   "cancelled": "Отменено",
-
   "refunded": "Возвращено",
-
   "status_dots": "Статус:",
   "date_dots": "Дата:",
-
   "clear": "Очистить",
-
   "image_video": "Изображение/Видео",
-
   "write_a_comment": "Написать комментарий…",
-
   "billing": "Платежи",
   "notifications": "Оповещения",
   "security": "Безопасность",
-
   "cancel": "Отменить",
-
   "confirm_password": "Подтвердите пароль",
-
   "public_profile": "Публичный профиль",
-
   "delete_user": "Удалить пользователя",
-
   "save_changes": "Сохранить изменения",
-
   "address": "Адрес",
-
   "name": "Имя",
-
   "email_address": "Почта Email",
-
   "phone_number": "Номер телефона",
-
   "country": "Страна",
-
   "state_region": "Страна/Регион",
-
   "city": "Город",
-
   "zip_code": "Почтовый индекс",
-
   "allowed": "Разрешено",
-
   "max_size_of": "Максимальный размер",
-
   "dense": "Компактность",
-
   "published": "Опубликовано",
-
   "draft": "Черновик",
-
-  
   "latest": "Последние",
-
   "popular": "Популярные",
-
   "oldest": "Старейшие",
-
   "unread": "Непрочитанные",
-
   "archived": "Архивированные",
-
   "accept": "Принять",
-
   "decline": "Отклонить",
-
   "sort_by": "Сортировать по:",
-
   "search_dots": "Поиск...",
-
   "new_post": "Новый пост",
-
   "sent_you_friend_request": "отправил вам запрос на дружбу",
-
   "communication": "Коммуникации",
-
   "project_ui": "Интерфейс",
-
-  "create_new_tour": "Создать новый тур",
-
   "new_tour": "Новый тур",
-
   "title_short_description_image": "Заголовок, краткое описание, изображение...",
-
   "additional_functions_and_attributes": "Дополнительные функции и атрибуты",
-
   "content": "Контент",
-
   "images": "Изображения",
-
   "tour_guide": "Туристический гид",
-
   "tour_guides": "Туристические гиды",
-
   "available": "Доступно",
-
   "duration": "Продолжительность",
-
   "destination": "Пункт назначения",
-
   "services": "Сервисы",
-
   "tags": "Тэги",
-
   "publish": "Опубликовать",
-
   "properties": "Свойства",
-
   "write_something_awesome": "Напишите что-нибудь интересное...",
-
   "create_tour": "Создать тур",
-
   "ex_2_days": "Пример: 2 дня, 3 дня и 2 ночи...",
-
   "drop_or_select_file": "Перетащите или выберите файл",
-
   "drop_files_here_or_click": "Переместите файлы сюда или нажмите",
-
   "browse": "обзор",
-
   "thorough_your_machine": "для выбора на своем устройстве",
-
   "ex_adventure_seekers_expedition": "Пример: Экспедиция искателей приключений…",
-  
   "weekly_sales": "Недельные продажи",
-
   "new_users": "Новые пользователи",
-
   "item_orders": "Совершено покупок",
-
   "bug_reports": "Отчёты об ошибках",
-
   "website_visits": "Посещения сайта",
-
   "than_last_year": "чем в прошлом году",
-
   "current_visits": "Текущие посетители",
-
   "conversion_rates": "Коэффициенты конверсии",
-
   "current_subject": "Текущий предмет",
-
   "order_timeline": "График заказов",
-
   "traffic_by_site": "Траффик по сайтам",
-
   "tasks": "Задачи",
-
   "total_booking": "Всего забронировано",
-
   "sold": "Продано",
-
   "total_incomes": "Всего поступлений",
-
   "booked": "Забронировано",
-
   "tours_available": "Доступно путёвок",
-
   "statistics": "Статистика",
-
   "customer_reviews": "Отзыв покупателя",
-
   "newest_booking": "Новые бронирования",
-
   "twelve_booking": "12 бронирований",
-  
   "booking_details": "Детали бронирований",
-
   "reject": "Отклонить",
-
   "search_contacts_dots": "Поиск контактов...",
-
   "simple": "Простой",
-
   "inbox": "Входящие",
-
   "drafts": "Черновики",
-
   "trash": "Корзина",
-
   "spam": "Спам",
-
   "nested": "Вложенный",
-
   "nested_list_items": "Вложенные элементы списка",
-
   "sent_mail": "Отправить сообщение",
-
   "starred": "Помеченное",
-
   "folder": "Папка",
-
   "photos": "Фотографии",
-
   "work": "Работа",
-
   "vacation": "Вакансия",
-
   "selected": "Выбранный",
-
   "controls": "Управление",
-
   "switch": "Переключатель",
-
   "bluetooth": "Bluetooth",
-
   "compose": "Написать",
-
   "share_what_you_are_thinking_here": "Расскажите, о чем вы сейчас думаете...",
-
   "recent_posts": "Последние посты",
-
   "comments": "Комментарии",
-
   "write_some_of_your_comments": "Напишите собственный комментарий...",
-
   "post_comment": "Написать комментарий",
-
   "reply": "Ответить",
-
   "back": "Назад",
-
   "skip": "Пропустить",
-
   "reset": "Сброс",
-
-  "optional": "Опционально"
-
+  "optional": "Опционально",
+  "new_user": "Новый пользователь",
+  "create_new_post": "Создать новый пост",
+  "post_title": "Заголовок поста",
+  "information": "Информация",
+  "attachments": "Вложения",
+  "type_a_message": "Напишите сообщение...",
+  "filters": "Фильтры",
+  "new_job": "Новое задание",
+  "posted_date": "Дата объявления",
+  "candidates": "кандидатов",
+  "create_a_new_invoice": "Создать новый счет",
+  "create_a_new_job": "Создать новое задание",
+  "create_a_new_product": "Создать новый продукт",
+  "create_a_new_user": "Создать нового пользователя",
+  "create_a_new_tour": "Создать новый тур",
+  "create_a_new_post": "Создать новый пост",
+  "employment_type": "Вид занятости",
+  "title": "Заголовок",
+  "experience": "Опыт",
+  "skills": "Умения",
+  "working_schedule": "Рабочее расписание",
+  "schedule": "Расписание",
+  "locations": "Локации",
+  "expired": "Просрочено",
+  "salary": "Заработная плата",
+  "salary_is_negotiable": "Заработная плата договорная",
+  "benefits": "Преимущества",
+  "create_job": "Создать работу",
+  "tour_content": "Содержание тура",
+  "booker": "Кто забронировал",
+  "ex_software_engineer": "Например: Разработчик приложений",
+  "dashboard": "Панель",
+  "permission_denied": "Ошибка прав доступа",
+  "invoice_details": "Детали счёта",
+  "invoice_edit": "Редактирование счёта",
+  "invoice_list": "Список счетов",
+  "job_edit": "Редактирование задачи",
+  "order_list": "Список покупок",
+  "post_details": "Детали поста",
+  "post_edit": "Редактирование поста",
+  "post_list": "Список постов",
+  "product_edit": "Редактирование продукта",
+  "product_list": "Список продуктов",
+  "cover": "Обложка",
+  "enable_comments": "Включить комментарии",
+  "preview": "Предпросмотр",
+  "create_post": "Создать пост",
+  "tour_list": "Список путёвок",
+  "account_settings": "Настройка аккаунта",
+  "user_cards": "Карточки пользователя",
+  "user_list": "Список пользователей",
+  "user_profile": "Профиль пользователя",
+  "no_data": "Нет данных",
+  "new_invoice": "Новый счёт",
+  "total": "Итого",
+  "paid": "Оплачено",
+  "overdue": "Просрочено",
+  "delete": "Удалить",
+  "are_you_sure_want_to_delete": "Вы точно хотите удалить",
+  "is_admin": "Администратор?",
+  "is_user": "Пользователь?",
+  "new_product": "Новый продукт",
+  "complete_order": "Заказ выполнен",
+  "current_balance": "Текущий баланс",
+  "sent": "Отправлено",
+  "order_time": "Время заказа",
+  "Payment_time": "Время оплаты",
+  "canceled": "Отменено",
+  "sold_out": "Распродано",
+  "check_in": "Check In",
+  "check_out": "Check Out",
+  "delivery_time_for_the_carrier": "Срок доставки перевозчиком",
+  "completion_time": "Время выполнения",
+  "order_summary": "Заказ на сумму",
+  "total_active_users": "Всего активных пользователей",
+  "total_installed": "Всего установлено",
+  "total_downloads": "Всего скачано",
+  "current_download": "Текущие скачивания",
+  "area_installed": "Места установок",
+  "top_related_applications": "Топ популярных приложений",
+  "top_installed_countries": "Топ установок по странам",
+  "top_authors": "Топ авторов",
+  "conversion": "Конверсия",
+  "applications": "Приложения",
+  "invoice_id": "ID счёта",
+  "category": "Категория",
+  "asia": "Азия",
+  "america": "Америка",
+  "featured_app": "Рекомендуемые приложения",
+  "total_amount": "Конечная сумма",
+  "customer_info": "Информация о покупателе",
+  "add_to_black_list": "Добавить в чёрный список",
+  "delivery": "Доставка",
+  "ship_by": "Доставляет",
+  "speedy": "Скорость",
+  "tracking_no": "Отслеживание",
+  "shipping": "Перевозка",
+  "payment": "Метод оплаты",
+  "history": "История",
+  "subtotal": "Промежуточный итог",
+  "discount": "Скидка",
+  "taxes": "Налоги",
+  "payment_time": "Время оплаты",
+  "print": "Печать",
+  "results_found": "результатов найдено",
+  "import": "Импорт",
+  "export": "Экспорт",
+  "social_links": "Социальные сети",
+  "banned": "Заблокирован",
+  "rejected": "Отменён",
+  "active": "Активный",
+  "company": "Компания",
+  "update_photo": "Обновить фото",
+  "upload_photo": "Загрузить фото",
+  "avatar": "Аватар",
+  "disabling_this_will_automatically_send_the_user_a_verification_email": " Отключение этого параметра автоматически отправит пользователю электронное письмо с подтверждением.",
+  "email_verified": "Электронная почта подтверждена",
+  "full_name": "Полное имя",
+  "mail_address": "Почтовый адрес",
+  "apply_disable_account": "Отключить аккаунт",
+  "create_user": "Создать пользователя",
+  "no_experience": "Опыт отсутствует",
+  "one_year_exp": "1 год опыта",
+  "two_year_exp": "2 года опыта",
+  "more_than_three_years_exp": "> 3 лет опыта",
+  "full_time": "Полный день",
+  "part_time": "Частичная занятость",
+  "on_demand": "По требованию",
+  "hegotiable": "Договорное",
+  "free_parking": "Свободная парковка",
+  "bonus_comission": "Бонусная комиссия",
+  "travel": "Путешествия",
+  "device_support": "Техническая поддержка",
+  "health_care": "Медицинская страховка",
+  "training": "Тренировки",
+  "health_insurance": "Больничные выплаты",
+  "retirement_plans": "Пенсионные накопления",
+  "paid_time_off": "Время оплаты вышло",
+  "flexible_work_schedule": "Гибкое рабочее расписание",
+  "close": "Закрыть",
+  "add_task": "Добавить задачу",
+  "delete_success": "Успешное удаление",
+  "update_success": "Успешное обновление",
+  "yearly_sales": "Годовые продажи",
+  "sale_by_gender": "Продажи по полу",
+  "sales_profit": "Прибыль от продаж",
+  "total_balance": "Итоговый баланс",
+  "congratulations": "Поздравляем",
+  "sales_overview": "Обзор продаж",
+  "total_income": "Доход всего",
+  "total_expenses": "Расход всего",
+  "best_salesman": "Лучший продавец",
+  "seller": "Продавец",
+  "rank": "Ранг",
+  "latest_products": "Последние товары",
+  "product_sold": "Товар продан",
+  "download": "Скачивание",
+  "share": "Поделиться",
+  "reviews": "Отзывов",
+  "back_to_list": "Назад к списку",
+  "thousands": "Тысяч",
+  "pending_for_payment": "В ожидании оплаты",
+  "tours": "Путёвок",
+  "delivery_successful": "Успешная доставка",
+  "transporting_to": "Транспортировка в пункт",
+  "the_shipping_unit_has_picked_up_the_goods": "Склад выдал товар",
+  "order_has_been_created": "Заказ был создан",
+  "sign_in_to_sayfer_inv": "Вход в личный кабинет Sayfer - инвестиционное приложение",
+  "login": "Войти",
+  "home": "Главная",
+  "components": "Компоненты",
+  "games": "Игры",
+  "new_game": "Новая игра",
+  "game_description": "Описание игры",
+  "players": "Игроки",
+  "free_coins": "Бесплатные монеты",
+  "view": "Смотреть",
+  "next_event": "Дата турнира",
+  "time_event": "Время турнира",
+  "players_event": "Количество участников",
+  "salary_event": "Приз"
   }

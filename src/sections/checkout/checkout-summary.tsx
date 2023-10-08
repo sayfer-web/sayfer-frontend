@@ -13,6 +13,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { fCurrency } from 'src/utils/format-number';
 // components
 import Iconify from 'src/components/iconify';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -35,16 +36,19 @@ export default function CheckoutSummary({
   onEdit,
   onApplyDiscount,
 }: Props) {
+
+  const { t } = useLocales()
+
   const displayShipping = shipping !== null ? 'Free' : '-';
 
   return (
     <Card sx={{ mb: 3 }}>
       <CardHeader
-        title="Order Summary"
+        title={t('order_summary')}
         action={
           onEdit && (
             <Button size="small" onClick={onEdit} startIcon={<Iconify icon="solar:pen-bold" />}>
-              Edit
+              {t('edit')}
             </Button>
           )
         }
@@ -54,7 +58,7 @@ export default function CheckoutSummary({
         <Stack spacing={2}>
           <Stack direction="row" justifyContent="space-between">
             <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              Sub Total
+              {t('sub_total')}
             </Typography>
             <Typography variant="subtitle2">{fCurrency(subTotal)}</Typography>
           </Stack>

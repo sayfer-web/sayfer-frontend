@@ -16,11 +16,12 @@ import Typography from '@mui/material/Typography';
 import Autocomplete from '@mui/material/Autocomplete';
 import FormControlLabel from '@mui/material/FormControlLabel';
 // types
-import { ITourFilters, ITourGuide, ITourFilterValue } from 'src/types/tour';
+// import { ITourFilters, ITourGuide, ITourFilterValue } from 'src/types/tour';
 // components
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 import { useLocales } from 'src/locales';
+import { IGameFilterValue, IGameFilters, IGameGuide } from 'src/types/games';
 
 // ----------------------------------------------------------------------
 
@@ -29,14 +30,14 @@ type Props = {
   onOpen: VoidFunction;
   onClose: VoidFunction;
   //
-  filters: ITourFilters;
-  onFilters: (name: string, value: ITourFilterValue) => void;
+  filters: IGameFilters;
+  onFilters: (name: string, value: IGameFilterValue) => void;
   //
   canReset: boolean;
   onResetFilters: VoidFunction;
   //
   serviceOptions: string[];
-  tourGuideOptions: ITourGuide[];
+  gameGuideOptions: IGameGuide[];
   destinationOptions: {
     code: string;
     label: string;
@@ -59,7 +60,7 @@ export default function GamesFilters({
   onResetFilters,
   //
   destinationOptions,
-  tourGuideOptions,
+  gameGuideOptions,
   serviceOptions,
   //
   dateError,
@@ -99,7 +100,7 @@ export default function GamesFilters({
   );
 
   const handleFilterTourGuide = useCallback(
-    (newValue: ITourGuide[]) => {
+    (newValue: IGameGuide[]) => {
       onFilters('tourGuides', newValue);
     },
     [onFilters]
@@ -113,7 +114,7 @@ export default function GamesFilters({
       sx={{ py: 2, pr: 1, pl: 2.5 }}
     >
       <Typography variant="h6" sx={{ flexGrow: 1 }}>
-        Filters
+        {t('filters')}
       </Typography>
 
       <Tooltip title="Reset">
@@ -212,8 +213,8 @@ export default function GamesFilters({
       <Autocomplete
         multiple
         disableCloseOnSelect
-        options={tourGuideOptions}
-        value={filters.tourGuides}
+        options={gameGuideOptions}
+        value={filters.gameGuides}
         onChange={(event, newValue) => handleFilterTourGuide(newValue)}
         getOptionLabel={(option) => option.name}
         renderInput={(params) => <TextField placeholder="Select Tour Guides" {...params} />}
@@ -277,7 +278,7 @@ export default function GamesFilters({
         }
         onClick={onOpen}
       >
-        Filters
+        {t('filters')}
       </Button>
 
       <Drawer

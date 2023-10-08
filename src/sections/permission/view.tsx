@@ -14,10 +14,14 @@ import { RoleBasedGuard } from 'src/auth/guard';
 // components
 import { useSettingsContext } from 'src/components/settings';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function PermissionDeniedView() {
+
+  const { t } = useLocales()
+
   const settings = useSettingsContext();
 
   const [role, setRole] = useState('admin');
@@ -34,14 +38,14 @@ export default function PermissionDeniedView() {
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
       <CustomBreadcrumbs
-        heading="Permission Denied"
+        heading={t('permission_denied')}
         links={[
           {
-            name: 'Dashboard',
+            name: t('dashboard'),
             href: paths.dashboard.root,
           },
           {
-            name: 'Permission Denied',
+            name: t('permission_denied'),
           },
         ]}
         sx={{
@@ -57,11 +61,11 @@ export default function PermissionDeniedView() {
         sx={{ mb: 5 }}
       >
         <ToggleButton value="admin" aria-label="admin role">
-          isAdmin
+          {t('is_admin')}
         </ToggleButton>
 
         <ToggleButton value="user" aria-label="user role">
-          isUser
+          {t('is_user')}
         </ToggleButton>
       </ToggleButtonGroup>
 

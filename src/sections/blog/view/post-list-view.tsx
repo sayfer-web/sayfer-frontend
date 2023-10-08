@@ -54,8 +54,57 @@ export default function PostListView() {
 
   const { searchResults, searchLoading } = useSearchPosts(debouncedQuery);
 
+  
+  const newPosts = [{
+    id: 'string;',
+    title: 'First News',
+    tags: ['string'],
+    publish: 'published',
+    content: 'string, string, string, string, string, string, string, string, string, string, string, string, string, string, ',
+    coverUrl: 'https://w.forfun.com/fetch/b4/b4d430320229744245679e19e50b6f03.jpeg',
+    totalViews: 1,
+    totalShares: 1,
+    description: 'string, string, string, string, string, string, string, string, string, string, string, string, string',
+    totalComments: 1,
+    totalFavorites: 1,
+    metaTitle: 'string;',
+    metaKeywords: ['string'],
+    metaDescription: 'string;',
+    comments: [
+      {
+        id: 'string',
+        name: 'string',
+        avatarUrl: 'string',
+        message: 'string',
+        postedAt: new Date(),
+        users: [{
+            id: 'string',
+            name: 'string',
+            avatarUrl: 'string',
+        }],
+        replyComment: [{
+            id: 'string',
+            userId: 'string',
+            message: 'string',
+            postedAt: new Date(),
+            tagUser: 'string',
+        }],
+    }
+    ],
+    createdAt: new Date(),
+    favoritePerson: [{
+      name: 'string;',
+      avatarUrl: 'string;',
+    }],
+    author: {
+      name: 'string;',
+      avatarUrl: 'string;',
+    },
+  },
+]
+
   const dataFiltered = applyFilter({
-    inputData: posts,
+    inputData: newPosts,
     filters,
     sortBy,
   });
@@ -85,18 +134,18 @@ export default function PostListView() {
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
       <CustomBreadcrumbs
-        heading="List"
+        heading={t('list')}
         links={[
           {
-            name: 'Dashboard',
+            name: t('dashboard'),
             href: paths.dashboard.root,
           },
           {
-            name: 'Blog',
+            name: t('blog'),
             href: paths.dashboard.post.root,
           },
           {
-            name: 'List',
+            name: t('list'),
           },
         ]}
         action={
@@ -156,11 +205,11 @@ export default function PostListView() {
                 variant={((tab === 'all' || tab === filters.publish) && 'filled') || 'soft'}
                 color={(tab === 'published' && 'info') || 'default'}
               >
-                {tab === 'all' && posts.length}
+                {tab === 'all' && newPosts.length}
 
-                {tab === 'published' && posts.filter((post) => post.publish === 'published').length}
+                {tab === 'published' && newPosts.filter((post) => post.publish === 'published').length}
 
-                {tab === 'draft' && posts.filter((post) => post.publish === 'draft').length}
+                {tab === 'draft' && newPosts.filter((post) => post.publish === 'draft').length}
               </Label>
             }
             sx={{ textTransform: 'capitalize' }}

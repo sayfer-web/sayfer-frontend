@@ -1,12 +1,17 @@
 import { Helmet } from 'react-helmet-async';
+import { useLocales } from 'src/locales';
 // routes
 import { useParams } from 'src/routes/hooks';
+import { GamesEditView } from 'src/sections/games/view';
 // sections
 import { TourEditView } from 'src/sections/tour/view';
 
 // ----------------------------------------------------------------------
 
 export default function GamesEditPage() {
+
+  const { t } = useLocales()
+
   const params = useParams();
 
   const { id } = params;
@@ -14,10 +19,10 @@ export default function GamesEditPage() {
   return (
     <>
       <Helmet>
-        <title> Dashboard: Tour Edit</title>
+        <title> {t('dashboard')}: {t('tour_edit')}</title>
       </Helmet>
 
-      <TourEditView id={`${id}`} />
+      <GamesEditView id={`${id}`} />
     </>
   );
 }

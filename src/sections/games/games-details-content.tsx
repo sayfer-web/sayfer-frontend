@@ -11,34 +11,39 @@ import ListItemText from '@mui/material/ListItemText';
 // utils
 import { fDate } from 'src/utils/format-time';
 // _mock
-import { TOUR_SERVICE_OPTIONS } from 'src/_mock';
+import { GAMES_SERVICE_OPTIONS } from 'src/_mock';
 // types
-import { ITourItem } from 'src/types/tour';
+// import { ITourItem } from 'src/types/tour';
 // components
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import Markdown from 'src/components/markdown';
 import { varTranHover } from 'src/components/animate';
 import Lightbox, { useLightBox } from 'src/components/lightbox';
+import { useLocales } from 'src/locales';
+import { IGameItem } from 'src/types/games';
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  tour: ITourItem;
+  games: IGameItem;
 };
 
-export default function GamesDetailsContent({ tour }: Props) {
+export default function GamesDetailsContent({ games }: Props) {
+
+  const { t } = useLocales()
+
   const {
     name,
     images,
     content,
     services,
-    tourGuides,
+    gameGuides,
     available,
     durations,
     destination,
     ratingNumber,
-  } = tour;
+  } = games;
 
   const slides = images.map((slide) => ({
     src: slide,
@@ -137,21 +142,21 @@ export default function GamesDetailsContent({ tour }: Props) {
           <Box component="span" sx={{ typography: 'subtitle2' }}>
             {ratingNumber}
           </Box>
-          <Link sx={{ color: 'text.secondary' }}>(234 reviews)</Link>
+          <Link sx={{ color: 'text.secondary' }}>(234 {t('reviews')})</Link>
         </Stack>
-
+        {/* 
         <Stack direction="row" alignItems="center" spacing={0.5} sx={{ typography: 'body2' }}>
           <Iconify icon="mingcute:location-fill" sx={{ color: 'error.main' }} />
           {destination}
-        </Stack>
+        </Stack> */}
 
-        <Stack direction="row" alignItems="center" spacing={0.5} sx={{ typography: 'subtitle2' }}>
+        {/* <Stack direction="row" alignItems="center" spacing={0.5} sx={{ typography: 'subtitle2' }}>
           <Iconify icon="solar:flag-bold" sx={{ color: 'info.main' }} />
           <Box component="span" sx={{ typography: 'body2', color: 'text.secondary' }}>
             Guide by
           </Box>
           {tourGuides.map((tourGuide) => tourGuide.name).join(', ')}
-        </Stack>
+        </Stack> */}
       </Stack>
     </>
   );
@@ -167,23 +172,23 @@ export default function GamesDetailsContent({ tour }: Props) {
     >
       {[
         {
-          label: 'Available',
+          label: t('next_event'),
           value: `${fDate(available.startDate)} - ${fDate(available.endDate)}`,
           icon: <Iconify icon="solar:calendar-date-bold" />,
         },
         {
-          label: 'Contact name',
-          value: tourGuides.map((tourGuide) => tourGuide.phoneNumber).join(', '),
-          icon: <Iconify icon="solar:user-rounded-bold" />,
-        },
-        {
-          label: 'Durations',
+          label: t('time_event'),
           value: durations,
           icon: <Iconify icon="solar:clock-circle-bold" />,
         },
         {
-          label: 'Contact phone',
-          value: tourGuides.map((tourGuide) => tourGuide.name).join(', '),
+          label: t('players_event'),
+          value: gameGuides.map((gameGuide) => gameGuide.phoneNumber).join(', '),
+          icon: <Iconify icon="solar:user-rounded-bold" />,
+        },
+        {
+          label: t('salary_event'),
+          value: gameGuides.map((gameGuide) => gameGuide.name).join(', '),
           icon: <Iconify icon="solar:phone-bold" />,
         },
       ].map((item) => (
@@ -213,7 +218,7 @@ export default function GamesDetailsContent({ tour }: Props) {
       <Markdown children={content} />
 
       <Stack spacing={2}>
-        <Typography variant="h6"> Services</Typography>
+        <Typography variant="h6">{t('benefits')}</Typography>
 
         <Box
           rowGap={2}
@@ -223,7 +228,7 @@ export default function GamesDetailsContent({ tour }: Props) {
             md: 'repeat(2, 1fr)',
           }}
         >
-          {TOUR_SERVICE_OPTIONS.map((service) => (
+          {GAMES_SERVICE_OPTIONS().map((service) => (
             <Stack
               key={service.label}
               spacing={1}

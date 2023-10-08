@@ -10,6 +10,7 @@ import Card, { CardProps } from '@mui/material/Card';
 import { fNumber } from 'src/utils/format-number';
 // components
 import Chart, { useChart } from 'src/components/chart';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -29,6 +30,8 @@ interface Props extends CardProps {
 }
 
 export default function BookingAvailable({ title, subheader, chart, ...other }: Props) {
+
+  const { t } = useLocales()
   const theme = useTheme();
 
   const {
@@ -39,7 +42,7 @@ export default function BookingAvailable({ title, subheader, chart, ...other }: 
 
   const total = sumBy(series, 'value');
 
-  const chartSeries = (series.filter((i) => i.label === 'Sold out')[0].value / total) * 100;
+  const chartSeries = (series.filter((i) => i.label === t('sold_out'))[0].value / total) * 100;
 
   const chartOptions = useChart({
     legend: {
@@ -64,7 +67,7 @@ export default function BookingAvailable({ title, subheader, chart, ...other }: 
           name: { offsetY: -16 },
           value: { offsetY: 8 },
           total: {
-            label: 'Tours',
+            label: t('tours'),
             formatter: () => fNumber(total),
           },
         },
@@ -96,13 +99,13 @@ export default function BookingAvailable({ title, subheader, chart, ...other }: 
                 height: 16,
                 bgcolor: alpha(theme.palette.grey[500], 0.16),
                 borderRadius: 0.75,
-                ...(item.label === 'Sold out' && {
+                ...(item.label === t('sold_out') && {
                   bgcolor: colors[1],
                 }),
               }}
             />
             <Box sx={{ color: 'text.secondary', flexGrow: 1 }}>{item.label}</Box>
-            {item.value} Tours
+            {item.value} {t('tours')}
           </Stack>
         ))}
       </Stack>

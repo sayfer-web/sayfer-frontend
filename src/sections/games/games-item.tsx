@@ -13,23 +13,28 @@ import { RouterLink } from 'src/routes/components';
 import { fDateTime } from 'src/utils/format-time';
 import { fCurrency } from 'src/utils/format-number';
 // types
-import { ITourItem } from 'src/types/tour';
+// import { ITourItem } from 'src/types/tour';
 // components
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
 import { shortDateLabel } from 'src/components/custom-date-range-picker';
+import { useLocales } from 'src/locales';
+import { IGameItem } from 'src/types/games';
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  tour: ITourItem;
+  tour: IGameItem;
   onView: VoidFunction;
   onEdit: VoidFunction;
   onDelete: VoidFunction;
 };
 
 export default function GamesItem({ tour, onView, onEdit, onDelete }: Props) {
+  
+  const { t } = useLocales()
+  
   const popover = usePopover();
 
   const {
@@ -82,12 +87,13 @@ export default function GamesItem({ tour, onView, onEdit, onDelete }: Props) {
         typography: 'subtitle2',
       }}
     >
-      {!!priceSale && (
+      {/* {!!priceSale && (
         <Box component="span" sx={{ color: 'grey.500', mr: 0.25, textDecoration: 'line-through' }}>
           {fCurrency(priceSale)}
         </Box>
-      )}
-      {fCurrency(price)}
+      )} */}
+      {/* {fCurrency(price)} */}
+      {t('free_coins')}
     </Stack>
   );
 
@@ -116,7 +122,7 @@ export default function GamesItem({ tour, onView, onEdit, onDelete }: Props) {
       sx={{
         p: (theme) => theme.spacing(2.5, 2.5, 2, 2.5),
       }}
-      primary={`Posted date: ${fDateTime(createdAt)}`}
+      primary={`${t('posted_date')}: ${fDateTime(createdAt)}`}
       secondary={
         <Link component={RouterLink} href={paths.dashboard.tour.details(id)} color="inherit">
           {name}
@@ -199,7 +205,7 @@ export default function GamesItem({ tour, onView, onEdit, onDelete }: Props) {
           }}
         >
           <Iconify icon="solar:eye-bold" />
-          View
+          {t('view')}
         </MenuItem>
 
         <MenuItem
@@ -209,7 +215,7 @@ export default function GamesItem({ tour, onView, onEdit, onDelete }: Props) {
           }}
         >
           <Iconify icon="solar:pen-bold" />
-          Edit
+          {t('edit')}
         </MenuItem>
 
         <MenuItem
@@ -220,7 +226,7 @@ export default function GamesItem({ tour, onView, onEdit, onDelete }: Props) {
           sx={{ color: 'error.main' }}
         >
           <Iconify icon="solar:trash-bin-trash-bold" />
-          Delete
+          {t('delete')}
         </MenuItem>
       </CustomPopover>
     </>

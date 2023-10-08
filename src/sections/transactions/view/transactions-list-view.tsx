@@ -177,17 +177,17 @@ export default function TransactionsListView() {
     <>
       <Container maxWidth={settings.themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="List"
+          heading={t('list')}
           links={[
             {
-              name: 'Dashboard',
+              name: t('dashboard'),
               href: paths.dashboard.root,
             },
             {
-              name: 'Order',
+              name: t('order'),
               href: paths.dashboard.order.root,
             },
-            { name: 'List' },
+            { name: t('list') },
           ]}
           sx={{
             mb: { xs: 3, md: 5 },
@@ -230,7 +230,7 @@ export default function TransactionsListView() {
                     {tab.value === 'cancelled' &&
                       _orders.filter((order) => order.status === 'cancelled').length}
                     {tab.value === 'refunded' &&
-                      _orders.filter((order) => order.status === t('refunded')).length}
+                      _orders.filter((order) => order.status === 'refunded').length}
                   </Label>
                 }
               />
@@ -269,7 +269,7 @@ export default function TransactionsListView() {
                 )
               }
               action={
-                <Tooltip title="Delete">
+                <Tooltip title={t('delete')}>
                   <IconButton color="primary" onClick={confirm.onTrue}>
                     <Iconify icon="solar:trash-bin-trash-bold" />
                   </IconButton>
@@ -338,10 +338,10 @@ export default function TransactionsListView() {
       <ConfirmDialog
         open={confirm.value}
         onClose={confirm.onFalse}
-        title="Delete"
+        title={t('delete')}
         content={
           <>
-            Are you sure want to delete <strong> {table.selected.length} </strong> items?
+            {t('are_you_sure_want_to_delete')} <strong> {table.selected.length} </strong> {t('items')}?
           </>
         }
         action={

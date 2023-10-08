@@ -25,6 +25,7 @@ import Label from 'src/components/label';
 import Scrollbar from 'src/components/scrollbar';
 //
 import InvoiceToolbar from './invoice-toolbar';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -44,6 +45,9 @@ type Props = {
 };
 
 export default function InvoiceDetails({ invoice }: Props) {
+
+  const { t } = useLocales()
+
   const [currentStatus, setCurrentStatus] = useState(invoice.status);
 
   const handleChangeStatus = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,7 +60,7 @@ export default function InvoiceDetails({ invoice }: Props) {
         <TableCell colSpan={3} />
         <TableCell sx={{ color: 'text.secondary' }}>
           <Box sx={{ mt: 2 }} />
-          Subtotal
+          {t('subtotal')}
         </TableCell>
         <TableCell width={120} sx={{ typography: 'subtitle2' }}>
           <Box sx={{ mt: 2 }} />
@@ -66,7 +70,7 @@ export default function InvoiceDetails({ invoice }: Props) {
 
       <StyledTableRow>
         <TableCell colSpan={3} />
-        <TableCell sx={{ color: 'text.secondary' }}>Shipping</TableCell>
+        <TableCell sx={{ color: 'text.secondary' }}>{t('shipping')}</TableCell>
         <TableCell width={120} sx={{ color: 'error.main', typography: 'body2' }}>
           {fCurrency(-invoice.shipping)}
         </TableCell>
@@ -74,7 +78,7 @@ export default function InvoiceDetails({ invoice }: Props) {
 
       <StyledTableRow>
         <TableCell colSpan={3} />
-        <TableCell sx={{ color: 'text.secondary' }}>Discount</TableCell>
+        <TableCell sx={{ color: 'text.secondary' }}>{t('discount')}</TableCell>
         <TableCell width={120} sx={{ color: 'error.main', typography: 'body2' }}>
           {fCurrency(-invoice.discount)}
         </TableCell>
@@ -82,13 +86,13 @@ export default function InvoiceDetails({ invoice }: Props) {
 
       <StyledTableRow>
         <TableCell colSpan={3} />
-        <TableCell sx={{ color: 'text.secondary' }}>Taxes</TableCell>
+        <TableCell sx={{ color: 'text.secondary' }}>{t('taxes')}</TableCell>
         <TableCell width={120}>{fCurrency(invoice.taxes)}</TableCell>
       </StyledTableRow>
 
       <StyledTableRow>
         <TableCell colSpan={3} />
-        <TableCell sx={{ typography: 'subtitle1' }}>Total</TableCell>
+        <TableCell sx={{ typography: 'subtitle1' }}>{t('total')}</TableCell>
         <TableCell width={140} sx={{ typography: 'subtitle1' }}>
           {fCurrency(invoice.totalAmount)}
         </TableCell>

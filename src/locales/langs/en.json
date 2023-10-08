@@ -249,8 +249,6 @@
 
   "project_ui": "Project UI",
 
-  "create_new_tour": "Create a new tour",
-
   "new_tour": "New tour",
 
   "title_short_description_image": "Title, short description, image...",
@@ -387,8 +385,239 @@
 
   "reset": "Reset",
 
-  "optional": "Optional"
+  "optional": "Optional",
 
+  "new_user": "New User",
 
+  "create_new_post": "Create a New Post",
+
+  "post_title": "Post Title",
+
+  "information": "Information",
+
+  "attachments": "Attachments",
+
+  "type_a_message": "Type a message...",
+
+  "filters": "Filters",
+
+  "posted_date": "Posted date",
+
+  "create_a_new_invoice": "Create a new Invoice",
+  "create_a_new_job": "Create a new Task",
+  "create_a_new_product": "Create a new Product",
+  "create_a_new_user": "Create a new User",
+  "create_a_new_tour": "Create a new Tour",
+  "create_a_new_post": "Create a new Post",
+
+  "employment_type": "Employment Type",
+
+  "title": "Title",
+
+  "experience": "Experience",
+
+  "skills": "Skills",
+
+  "working_schedule": "Working schedule",
+
+  "schedule": "Schedule",
+
+  "locations": "Locations",
+
+  "expired": "Expired",
+
+  "salary": "Salary",
+
+  "salary_is_negotiable": "Salary is negotiable",
+
+  "benefits": "Benefits",
+
+  "create_job": "Create Job",
+
+  "tour_content": "Tour Content",
+
+  "dashboard": "Panel",
+
+  "permission_denied": "Permission denied",
+
+  "invoice_details": "Invoice details",
+
+  "invoice_edit": "Invoice edit",
+
+  "invoice_list": "Invoice list",
+
+  "job_edit": "Job edit",
+
+  "order_list": "Order list",
+
+  "post_details": "Post details",
+
+  "post_edit": "Post edit",
+
+  "post_list": "Post list",
+
+  "product_edit": "Product edit",
+
+  "product_list": "Product list",
+
+  "cover": "Cover",
+
+  "enable_comments": "Enable comments",
+
+  "preview": "Preview",
+
+  "create_post": "Create Post",
+
+  "tour_list": "Tour list",
+
+  "account_settings": "Account settings",
+
+  "user_cards": "User cards",
+  
+  "user_list": "User list",
+
+  "user_profile": "User profile",
+
+  "no_data": "No data",
+
+  "new_invoice": "New Invoice",
+
+  "total": "Total",
+
+  "paid": "Paid",
+
+  "overdue": "Overdue",
+
+  "delete": "Delete",
+
+  "are_you_sure_want_to_delete": "Are you sure want to delete",
+
+  "is_admin": "is Admin?",
+
+  "is_user": "is User?",
+
+  "new_product": "New Product",
+
+  "complete_order": "Complete Order",
+
+  "current_balance": "Current Balance",
+
+  "sent": "Sent",
+
+  "order_time": "Order time",
+
+  "Payment_time": "Payment time",
+
+  "canceled": "Canceled",
+
+  "sold_out": "Sold Out",
+
+  "check_in": "Check In",
+
+  "check_out": "Check Out",
+
+  "delivery_time_for_the_carrier": "Delivery time for the carrier",
+
+  "completion_time": "Completion time",
+
+  "order_summary": "Order summary",
+
+  "total_active_users": "Total active users",
+
+  "total_installed": "Total installed",
+
+  "total_downloads": "Total downloads",
+
+  "current_download": "Current download",
+
+  "area_installed": "Area installed",
+
+  "top_related_applications": "Top related applications",
+
+  "top_installed_countries": "Top installed countries",
+
+  "top_authors": "Top Authours",
+
+  "conversion": "Conversion",
+
+  "applications": "Applications",
+
+  "invoice_id": "Invoice ID",
+
+  "category": "category",
+
+  "asia": "Asia",
+
+  "america": "America",
+
+  "featured_app": "Featured App",
+
+  "total_amount": "Total amount",
+
+  "customer_info": "Customer info",
+
+  "add_to_black_list": "Add to black list",
+
+  "delivery": "delivery",
+
+  "ship_by": "Ship by",
+
+  "speedy": "Speedy",
+
+  "tracking_no": "Tracking No.",
+
+  "shipping": "Shipping",
+
+  "payment": "Payment",
+
+  "history": "History",
+
+  "subtotal": "Subtotal",
+
+  "discount": "Discount",
+
+  "taxes": "Taxes",
+
+  "payment_time": "Payment time",
+
+  "print": "Print",
+
+  "results_found": "results found",
+
+  "import": "Import",
+
+  "export": "Export",
+
+  "social_links": "Social Links",
+
+  "banned": "Banned",
+
+  "rejected": "Rejected",
+
+  "active": "Active",
+
+  "company": "Company",
+
+  "update_photo": "Update photo",
+
+  "upload_photo": "Download photo",
+
+  "avatar": "Avatar",
+
+  "disabling_this_will_automatically_send_the_user_a_verification_email": "Disabling this will automatically send the user a verification email",
+
+  "email_verified": "Email verified",
+
+  "mail_address": "Mail Address",
+
+  "sign_in_to_sayfer_inv": "Sign in to Sayfer Investment App",
+
+  "login": "Login",
+
+  "home": "Home",
+
+  "components": "Components",
+
+  "games": "Games"
 
 }

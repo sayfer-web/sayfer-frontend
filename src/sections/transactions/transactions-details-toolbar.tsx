@@ -12,6 +12,7 @@ import { fDateTime } from 'src/utils/format-time';
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -35,6 +36,9 @@ export default function TransactionsDetailsToolbar({
   statusOptions,
   onChangeStatus,
 }: Props) {
+
+  const { t } = useLocales()
+
   const popover = usePopover();
 
   return (
@@ -53,7 +57,7 @@ export default function TransactionsDetailsToolbar({
 
           <Stack spacing={0.5}>
             <Stack spacing={1} direction="row" alignItems="center">
-              <Typography variant="h4"> Order {orderNumber} </Typography>
+              <Typography variant="h4"> {t('order')} {orderNumber} </Typography>
               <Label
                 variant="soft"
                 color={
@@ -95,11 +99,11 @@ export default function TransactionsDetailsToolbar({
             variant="outlined"
             startIcon={<Iconify icon="solar:printer-minimalistic-bold" />}
           >
-            Print
+            {t('print')}
           </Button>
 
           <Button color="inherit" variant="contained" startIcon={<Iconify icon="solar:pen-bold" />}>
-            Edit
+            {t('edit')}
           </Button>
         </Stack>
       </Stack>

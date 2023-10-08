@@ -89,7 +89,7 @@ export default function ListView() {
       >
         <Container>
           <CustomBreadcrumbs
-            heading="List"
+            heading={t('list')}
             links={[
               {
                 name: 'Components',

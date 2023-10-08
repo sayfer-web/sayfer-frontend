@@ -24,7 +24,7 @@ type Props = {
 export default function TourDetailsView({ id }: Props) {
   const settings = useSettingsContext();
 
-  const currentTour = _tours.filter((tour) => tour.id === id)[0];
+  const currentTour = _tours().filter((tour: any) => tour.id === id)[0];
 
   const [publish, setPublish] = useState(currentTour?.publish);
 
@@ -46,7 +46,7 @@ export default function TourDetailsView({ id }: Props) {
         mb: { xs: 3, md: 5 },
       }}
     >
-      {TOUR_DETAILS_TABS.map((tab) => (
+      {TOUR_DETAILS_TABS().map((tab) => (
         <Tab
           key={tab.value}
           iconPosition="end"

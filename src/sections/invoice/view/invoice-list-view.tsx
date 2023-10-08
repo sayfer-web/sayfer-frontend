@@ -48,6 +48,7 @@ import InvoiceAnalytic from '../invoice-analytic';
 import InvoiceTableRow from '../invoice-table-row';
 import InvoiceTableToolbar from '../invoice-table-toolbar';
 import InvoiceTableFiltersResult from '../invoice-table-filters-result';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -72,6 +73,9 @@ const defaultFilters: IInvoiceTableFilters = {
 // ----------------------------------------------------------------------
 
 export default function InvoiceListView() {
+
+  const { t } = useLocales()
+
   const theme = useTheme();
 
   const settings = useSettingsContext();
@@ -214,18 +218,18 @@ export default function InvoiceListView() {
     <>
       <Container maxWidth={settings.themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="List"
+          heading={t('list')}
           links={[
             {
-              name: 'Dashboard',
+              name: t('dashboard'),
               href: paths.dashboard.root,
             },
             {
-              name: 'Invoice',
+              name: t('invoice'),
               href: paths.dashboard.invoice.root,
             },
             {
-              name: 'List',
+              name: t('list'),
             },
           ]}
           action={
@@ -235,7 +239,7 @@ export default function InvoiceListView() {
               variant="contained"
               startIcon={<Iconify icon="mingcute:add-line" />}
             >
-              New Invoice
+              {t('new_invoice')}
             </Button>
           }
           sx={{
@@ -255,7 +259,7 @@ export default function InvoiceListView() {
               sx={{ py: 2 }}
             >
               <InvoiceAnalytic
-                title="Total"
+                title={t('total')}
                 total={tableData.length}
                 percent={100}
                 price={sumBy(tableData, 'totalAmount')}
@@ -264,7 +268,7 @@ export default function InvoiceListView() {
               />
 
               <InvoiceAnalytic
-                title="Paid"
+                title={t('paid')}
                 total={getInvoiceLength('paid')}
                 percent={getPercentByStatus('paid')}
                 price={getTotalAmount('paid')}
@@ -273,7 +277,7 @@ export default function InvoiceListView() {
               />
 
               <InvoiceAnalytic
-                title="Pending"
+                title={t('pending')}
                 total={getInvoiceLength('pending')}
                 percent={getPercentByStatus('pending')}
                 price={getTotalAmount('pending')}
@@ -282,7 +286,7 @@ export default function InvoiceListView() {
               />
 
               <InvoiceAnalytic
-                title="Overdue"
+                title={t('overdue')}
                 total={getInvoiceLength('overdue')}
                 percent={getPercentByStatus('overdue')}
                 price={getTotalAmount('overdue')}
@@ -291,7 +295,7 @@ export default function InvoiceListView() {
               />
 
               <InvoiceAnalytic
-                title="Draft"
+                title={t('draft')}
                 total={getInvoiceLength('draft')}
                 percent={getPercentByStatus('draft')}
                 price={getTotalAmount('draft')}
@@ -364,25 +368,25 @@ export default function InvoiceListView() {
               }
               action={
                 <Stack direction="row">
-                  <Tooltip title="Sent">
+                  <Tooltip title={t('sent')}>
                     <IconButton color="primary">
                       <Iconify icon="iconamoon:send-fill" />
                     </IconButton>
                   </Tooltip>
 
-                  <Tooltip title="Download">
+                  <Tooltip title={t('download')}>
                     <IconButton color="primary">
                       <Iconify icon="eva:download-outline" />
                     </IconButton>
                   </Tooltip>
 
-                  <Tooltip title="Print">
+                  <Tooltip title={t('print')}>
                     <IconButton color="primary">
                       <Iconify icon="solar:printer-minimalistic-bold" />
                     </IconButton>
                   </Tooltip>
 
-                  <Tooltip title="Delete">
+                  <Tooltip title={t('delete')}>
                     <IconButton color="primary" onClick={confirm.onTrue}>
                       <Iconify icon="solar:trash-bin-trash-bold" />
                     </IconButton>
@@ -453,10 +457,10 @@ export default function InvoiceListView() {
       <ConfirmDialog
         open={confirm.value}
         onClose={confirm.onFalse}
-        title="Delete"
+        title={t('delete')}
         content={
           <>
-            Are you sure want to delete <strong> {table.selected.length} </strong> items?
+            {t('are_you_sure_want_to_delete')} <strong> {table.selected.length} </strong> {t('items')}?
           </>
         }
         action={
@@ -468,7 +472,7 @@ export default function InvoiceListView() {
               confirm.onFalse();
             }}
           >
-            Delete
+            {t('delete')}
           </Button>
         }
       />

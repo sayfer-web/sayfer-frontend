@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { useLocales } from 'src/locales';
 // sections
 import { InvoiceListView } from 'src/sections/invoice/view';
 import TransactionsListView from 'src/sections/transactions/view/transactions-list-view';
@@ -7,10 +8,13 @@ import TransactionsListView from 'src/sections/transactions/view/transactions-li
 // ----------------------------------------------------------------------
 
 export default function InvoiceListPage() {
+
+  const { t } = useLocales()
+
   return (
     <>
       <Helmet>
-        <title> Dashboard: Invoice List</title>
+        <title> {t('dashboard')}: {t('invoice_list')}</title>
       </Helmet>
 
       <TransactionsListView />

@@ -26,6 +26,7 @@ import KanbanDetailsPriority from './kanban-details-priority';
 import KanbanDetailsAttachments from './kanban-details-attachments';
 import KanbanDetailsCommentList from './kanban-details-comment-list';
 import KanbanDetailsCommentInput from './kanban-details-comment-input';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -56,6 +57,9 @@ export default function KanbanDetails({
   onUpdateTask,
   onDeleteTask,
 }: Props) {
+
+  const { t } = useLocales()
+
   const [priority, setPriority] = useState(task.priority);
 
   const [taskName, setTaskName] = useState(task.name);
@@ -233,7 +237,7 @@ export default function KanbanDetails({
 
   const renderAttachments = (
     <Stack direction="row">
-      <StyledLabel>Attachments</StyledLabel>
+      <StyledLabel>{t('attachments')}</StyledLabel>
       <KanbanDetailsAttachments attachments={task.attachments} />
     </Stack>
   );

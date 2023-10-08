@@ -36,7 +36,7 @@ export default function OrderDetailsInfo({ customer, delivery, payment, shipping
   const renderCustomer = (
     <>
       <CardHeader
-        title="Customer Info"
+        title={t('customer_info')}
         action={
           <IconButton>
             <Iconify icon="solar:pen-bold" />
@@ -56,7 +56,7 @@ export default function OrderDetailsInfo({ customer, delivery, payment, shipping
           <Box sx={{ color: 'text.secondary' }}>{customer.email}</Box>
 
           <Box>
-            IP Address:
+            IP {t('address')}:
             <Box component="span" sx={{ color: 'text.secondary', ml: 0.25 }}>
               {customer.ipAddress}
             </Box>
@@ -68,7 +68,7 @@ export default function OrderDetailsInfo({ customer, delivery, payment, shipping
             startIcon={<Iconify icon="mingcute:add-line" />}
             sx={{ mt: 1 }}
           >
-            Add to Blacklist
+            {t('add_to_black_list')}
           </Button>
         </Stack>
       </Stack>
@@ -78,7 +78,7 @@ export default function OrderDetailsInfo({ customer, delivery, payment, shipping
   const renderDelivery = (
     <>
       <CardHeader
-        title="Delivery"
+        title={t('delivery')}
         action={
           <IconButton>
             <Iconify icon="solar:pen-bold" />
@@ -88,19 +88,19 @@ export default function OrderDetailsInfo({ customer, delivery, payment, shipping
       <Stack spacing={1.5} sx={{ p: 3, typography: 'body2' }}>
         <Stack direction="row" alignItems="center">
           <Box component="span" sx={{ color: 'text.secondary', width: 120, flexShrink: 0 }}>
-            Ship by
+            {t('ship_by')}
           </Box>
           {delivery.shipBy}
         </Stack>
         <Stack direction="row" alignItems="center">
           <Box component="span" sx={{ color: 'text.secondary', width: 120, flexShrink: 0 }}>
-            Speedy
+            {t('speedy')}
           </Box>
           {delivery.speedy}
         </Stack>
         <Stack direction="row" alignItems="center">
           <Box component="span" sx={{ color: 'text.secondary', width: 120, flexShrink: 0 }}>
-            Tracking No.
+            {t('tracking_no')}
           </Box>
           <Link underline="always" color="inherit">
             {delivery.trackingNumber}
@@ -113,7 +113,7 @@ export default function OrderDetailsInfo({ customer, delivery, payment, shipping
   const renderShipping = (
     <>
       <CardHeader
-        title="Shipping"
+        title={t('shipping')}
         action={
           <IconButton>
             <Iconify icon="solar:pen-bold" />
@@ -129,7 +129,7 @@ export default function OrderDetailsInfo({ customer, delivery, payment, shipping
         </Stack>
         <Stack direction="row" alignItems="center">
           <Box component="span" sx={{ color: 'text.secondary', width: 120, flexShrink: 0 }}>
-            Phone number
+            {t('phone_number')}
           </Box>
           {shippingAddress.phoneNumber}
         </Stack>
@@ -140,7 +140,7 @@ export default function OrderDetailsInfo({ customer, delivery, payment, shipping
   const renderPayment = (
     <>
       <CardHeader
-        title="Payment"
+        title={t('payment')}
         action={
           <IconButton>
             <Iconify icon="solar:pen-bold" />
@@ -149,7 +149,7 @@ export default function OrderDetailsInfo({ customer, delivery, payment, shipping
       />
       <Stack direction="row" alignItems="center" sx={{ p: 3, typography: 'body2' }}>
         <Box component="span" sx={{ color: 'text.secondary', flexGrow: 1 }}>
-          Phone number
+          {t('phone_number')}
         </Box>
 
         {payment.cardNumber}

@@ -24,12 +24,16 @@ import { navConfig } from './config-navigation';
 import NavMobile from './nav/mobile';
 import NavDesktop from './nav/desktop';
 //
-import { SettingsButton, HeaderShadow, LoginButton } from '../_common';
+import { SettingsButton, HeaderShadow, LoginButton, LanguagePopover } from '../_common';
 import { useNavigate, useNavigation } from 'react-router';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function Header() {
+
+  const { t } = useLocales()
+
   const theme = useTheme();
 
   const navigate = useNavigate()
@@ -80,26 +84,27 @@ export default function Header() {
                 right: -16,
               },
             }}
-            badgeContent={
-              <Link
-                href={paths.changelog}
-                target="_blank"
-                rel="noopener"
-                underline="none"
-                sx={{ ml: 1 }}
-              >
-                <Label color="info" sx={{ textTransform: 'unset', height: 22, px: 0.5 }}>
-                  v0.0.1
-                </Label>
-              </Link>
-            }
+            // badgeContent={
+            //   <Link
+            //     href={paths.changelog}
+            //     target="_blank"
+            //     rel="noopener"
+            //     underline="none"
+            //     sx={{ ml: 1 }}
+            //   >
+            //     <Label color="info" sx={{ textTransform: 'unset', height: 22, px: 0.5 }}>
+            //       v0.0.1
+            //     </Label>
+            //   </Link>
+            // }
           >
             {/* <Logo /> */}
+
           </Badge>
 
           <Box sx={{ flexGrow: 1 }} />
 
-          {mdUp && <NavDesktop offsetTop={offsetTop} data={navConfig} />}
+          {mdUp && <NavDesktop offsetTop={offsetTop} data={navConfig()} />}
 
           <Stack alignItems="center" direction={{ xs: 'row', md: 'row-reverse' }}>
             <Button variant="contained" rel="noopener" 
@@ -108,10 +113,17 @@ export default function Header() {
             // href="/auth/jwt/login"
             onClick={() => { navigate('/auth/jwt/login') } }
             >
-              Login
+              {t('login')}
             </Button>
 
-            {mdUp && <LoginButton />}
+            <LanguagePopover 
+              sx={{
+                // ml: { xs: 1, md: 0 },
+                // mr: { md: 2 },
+              }} 
+            />
+
+            {/* {mdUp && <LoginButton />} */}
 
             <SettingsButton
               sx={{
@@ -120,7 +132,7 @@ export default function Header() {
               }}
             />
 
-            {!mdUp && <NavMobile offsetTop={offsetTop} data={navConfig} />}
+            {!mdUp && <NavMobile offsetTop={offsetTop} data={navConfig()} />}
           </Stack>
         </Container>
       </Toolbar>

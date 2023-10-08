@@ -34,16 +34,17 @@ import FormProvider, {
   RHFMultiCheckbox,
 } from 'src/components/hook-form';
 // types
-import { ITourGuide, ITourItem } from 'src/types/tour';
+// import { ITourGuide, ITourItem } from 'src/types/tour';
 import { useLocales } from 'src/locales';
+import { IGameGuide, IGameItem } from 'src/types/games';
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  currentTour?: ITourItem;
+  currentGame?: IGameItem;
 };
 
-export default function GamesNewEditForm({ currentTour }: Props) {
+export default function GamesNewEditForm({ currentGame }: Props) {
 
   const { t } = useLocales()
 
@@ -77,21 +78,21 @@ export default function GamesNewEditForm({ currentTour }: Props) {
 
   const defaultValues = useMemo(
     () => ({
-      name: currentTour?.name || '',
-      content: currentTour?.content || '',
-      images: currentTour?.images || [],
+      name: currentGame?.name || '',
+      content: currentGame?.content || '',
+      images: currentGame?.images || [],
       //
-      tourGuides: currentTour?.tourGuides || [],
-      tags: currentTour?.tags || [],
-      durations: currentTour?.durations || '',
-      destination: currentTour?.destination || '',
-      services: currentTour?.services || [],
+      tourGuides: currentGame?.gameGuides || [],
+      tags: currentGame?.tags || [],
+      durations: currentGame?.durations || '',
+      destination: currentGame?.destination || '',
+      services: currentGame?.services || [],
       available: {
-        startDate: currentTour?.available.startDate || null,
-        endDate: currentTour?.available.endDate || null,
+        startDate: currentGame?.available.startDate || null,
+        endDate: currentGame?.available.endDate || null,
       },
     }),
-    [currentTour]
+    [currentGame]
   );
 
   const methods = useForm({
@@ -111,16 +112,16 @@ export default function GamesNewEditForm({ currentTour }: Props) {
   const values = watch();
 
   useEffect(() => {
-    if (currentTour) {
+    if (currentGame) {
       reset(defaultValues);
     }
-  }, [currentTour, defaultValues, reset]);
+  }, [currentGame, defaultValues, reset]);
 
   const onSubmit = handleSubmit(async (data) => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
-      enqueueSnackbar(currentTour ? 'Update success!' : 'Create success!');
+      enqueueSnackbar(currentGame ? 'Update success!' : 'Create success!');
       router.push(paths.dashboard.tour.root);
       console.info('DATA', data);
     } catch (error) {
@@ -170,7 +171,7 @@ export default function GamesNewEditForm({ currentTour }: Props) {
 
       <Grid xs={12} md={8}>
         <Card>
-          {!mdUp && <CardHeader title="Details" />}
+          {!mdUp && <CardHeader title={t('details')} />}
 
           <Stack spacing={3} sx={{ p: 3 }}>
             <Stack spacing={1.5}>
@@ -231,7 +232,7 @@ export default function GamesNewEditForm({ currentTour }: Props) {
                 placeholder="+ Tour Guides"
                 disableCloseOnSelect
                 options={_tourGuides}
-                getOptionLabel={(option) => (option as ITourGuide).name}
+                getOptionLabel={(option) => (option as IGameGuide).name}
                 isOptionEqualToValue={(option, value) => option.id === value.id}
                 renderOption={(props, tourGuide) => (
                   <li {...props} key={tourGuide.id}>
@@ -399,7 +400,7 @@ export default function GamesNewEditForm({ currentTour }: Props) {
           loading={isSubmitting}
           sx={{ ml: 2 }}
         >
-          {!currentTour ? 'Create Tour' : 'Save Changes'}
+          {!currentGame ? 'Create Tour' : 'Save Changes'}
         </LoadingButton>
       </Grid>
     </>

@@ -43,21 +43,23 @@ import { IOrderItem, IOrderTableFilters, IOrderTableFilterValue } from 'src/type
 import OrderTableRow from '../order-table-row';
 import OrderTableToolbar from '../order-table-toolbar';
 import OrderTableFiltersResult from '../order-table-filters-result';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
-const restVar = ORDER_STATUS_OPTIONS()
 
-const STATUS_OPTIONS = [{ value: 'all', label: 'All' }, ...restVar];
 
 const TABLE_HEAD = () => { 
+  
+  const { t } = useLocales()
+
   return [
-  { id: 'orderNumber', label: 'Order', width: 116 },
-  { id: 'name', label: 'Customer' },
-  { id: 'createdAt', label: 'Date', width: 140 },
-  { id: 'totalQuantity', label: 'Items', width: 120, align: 'center' },
-  { id: 'totalAmount', label: 'Price', width: 140 },
-  { id: 'status', label: 'Status', width: 110 },
+  { id: 'orderNumber', label: t('order'), width: 116 },
+  { id: 'name', label: t('customer') },
+  { id: 'createdAt', label: t('date'), width: 140 },
+  { id: 'totalQuantity', label: t('items'), width: 120, align: 'center' },
+  { id: 'totalAmount', label: t('price'), width: 140 },
+  { id: 'status', label: t('status'), width: 110 },
   { id: '', width: 88 },
 ];
 }
@@ -72,6 +74,13 @@ const defaultFilters: IOrderTableFilters = {
 // ----------------------------------------------------------------------
 
 export default function OrderListView() {
+
+  const { t } = useLocales() 
+
+  const restVar = ORDER_STATUS_OPTIONS()
+
+  const STATUS_OPTIONS = [{ value: 'all', label: t('all') }, ...restVar];
+
   const table = useTable({ defaultOrderBy: 'orderNumber' });
 
   const settings = useSettingsContext();
@@ -162,17 +171,17 @@ export default function OrderListView() {
     <>
       <Container maxWidth={settings.themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="List"
+          heading={t('list')}
           links={[
             {
-              name: 'Dashboard',
+              name: t('dashboard'),
               href: paths.dashboard.root,
             },
             {
-              name: 'Order',
+              name: t('order'),
               href: paths.dashboard.order.root,
             },
-            { name: 'List' },
+            { name: t('list') },
           ]}
           sx={{
             mb: { xs: 3, md: 5 },
@@ -254,7 +263,7 @@ export default function OrderListView() {
                 )
               }
               action={
-                <Tooltip title="Delete">
+                <Tooltip title={t('delete')}>
                   <IconButton color="primary" onClick={confirm.onTrue}>
                     <Iconify icon="solar:trash-bin-trash-bold" />
                   </IconButton>
@@ -323,10 +332,10 @@ export default function OrderListView() {
       <ConfirmDialog
         open={confirm.value}
         onClose={confirm.onFalse}
-        title="Delete"
+        title={t('delete')}
         content={
           <>
-            Are you sure want to delete <strong> {table.selected.length} </strong> items?
+            {t('are_you_sure_want_to_delete')} <strong> {table.selected.length} </strong> {t('items')}
           </>
         }
         action={
@@ -338,7 +347,7 @@ export default function OrderListView() {
               confirm.onFalse();
             }}
           >
-            Delete
+            {t('delete')}
           </Button>
         }
       />

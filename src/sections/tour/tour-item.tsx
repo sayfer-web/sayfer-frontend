@@ -19,6 +19,7 @@ import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
 import { shortDateLabel } from 'src/components/custom-date-range-picker';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -30,6 +31,9 @@ type Props = {
 };
 
 export default function TourItem({ tour, onView, onEdit, onDelete }: Props) {
+  
+  const { t } = useLocales()
+
   const popover = usePopover();
 
   const {
@@ -116,7 +120,7 @@ export default function TourItem({ tour, onView, onEdit, onDelete }: Props) {
       sx={{
         p: (theme) => theme.spacing(2.5, 2.5, 2, 2.5),
       }}
-      primary={`Posted date: ${fDateTime(createdAt)}`}
+      primary={`${t('posted_date')}: ${fDateTime(createdAt)}`}
       secondary={
         <Link component={RouterLink} href={paths.dashboard.tour.details(id)} color="inherit">
           {name}

@@ -21,6 +21,7 @@ import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 import { TableHeadCustom } from 'src/components/table';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -54,6 +55,9 @@ export default function BookingDetails({
   tableData,
   ...other
 }: Props) {
+
+  const { t } = useLocales()
+
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} sx={{ mb: 3 }} />
@@ -80,7 +84,7 @@ export default function BookingDetails({
           color="inherit"
           endIcon={<Iconify icon="eva:arrow-ios-forward-fill" width={18} sx={{ ml: -0.5 }} />}
         >
-          View All
+          {t('view_all')}
         </Button>
       </Box>
     </Card>
@@ -94,6 +98,9 @@ type BookingDetailsRowProps = {
 };
 
 function BookingDetailsRow({ row }: BookingDetailsRowProps) {
+
+  const { t } = useLocales()
+
   const theme = useTheme();
 
   const isLight = theme.palette.mode === 'light';
@@ -200,24 +207,24 @@ function BookingDetailsRow({ row }: BookingDetailsRowProps) {
       >
         <MenuItem onClick={handleDownload}>
           <Iconify icon="eva:cloud-download-fill" />
-          Download
+          {t('download')}
         </MenuItem>
 
         <MenuItem onClick={handlePrint}>
           <Iconify icon="solar:printer-minimalistic-bold" />
-          Print
+          {t('print')}
         </MenuItem>
 
         <MenuItem onClick={handleShare}>
           <Iconify icon="solar:share-bold" />
-          Share
+          {t('share')}
         </MenuItem>
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
         <MenuItem onClick={handleDelete} sx={{ color: 'error.main' }}>
           <Iconify icon="solar:trash-bin-trash-bold" />
-          Delete
+          {t('delete')}
         </MenuItem>
       </CustomPopover>
     </>

@@ -1,5 +1,6 @@
 // components
 import Chart, { useChart } from 'src/components/chart';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -11,6 +12,9 @@ type Props = {
 };
 
 export default function ChartColumnSingle({ series }: Props) {
+
+  const { t } = useLocales()
+
   const chartOptions = useChart({
     plotOptions: {
       bar: {
@@ -21,11 +25,11 @@ export default function ChartColumnSingle({ series }: Props) {
       show: false,
     },
     xaxis: {
-      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+      categories: [t('feb'), t('mar'), t('apr'), t('may'), t('jun'), t('jul'), t('aug'), t('sep'), t('oct')],
     },
     tooltip: {
       y: {
-        formatter: (value: number) => `$ ${value} thousands`,
+        formatter: (value: number) => `$ ${value} ${t('thousands')}`,
       },
     },
   });

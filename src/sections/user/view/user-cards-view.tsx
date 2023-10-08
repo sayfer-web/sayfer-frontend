@@ -12,20 +12,24 @@ import { useSettingsContext } from 'src/components/settings';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 //
 import UserCardList from '../user-card-list';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function UserCardsView() {
+
+  const { t } = useLocales()
+
   const settings = useSettingsContext();
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
       <CustomBreadcrumbs
-        heading="User Cards"
+        heading={t('user_cards')}
         links={[
-          { name: 'Dashboard', href: paths.dashboard.root },
-          { name: 'User', href: paths.dashboard.user.root },
-          { name: 'Cards' },
+          { name: t('dashboard'), href: paths.dashboard.root },
+          { name: t('user'), href: paths.dashboard.user.root },
+          { name: t('cards') },
         ]}
         action={
           <Button
@@ -34,7 +38,7 @@ export default function UserCardsView() {
             variant="contained"
             startIcon={<Iconify icon="mingcute:add-line" />}
           >
-            New User
+            {t('new_user')}
           </Button>
         }
         sx={{ mb: { xs: 3, md: 5 } }}

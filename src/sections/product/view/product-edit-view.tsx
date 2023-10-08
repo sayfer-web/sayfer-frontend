@@ -9,6 +9,7 @@ import { useSettingsContext } from 'src/components/settings';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 //
 import ProductNewEditForm from '../product-new-edit-form';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -17,6 +18,9 @@ type Props = {
 };
 
 export default function ProductEditView({ id }: Props) {
+
+  const { t } = useLocales()
+
   const settings = useSettingsContext();
 
   const { product: currentProduct } = useGetProduct(id);
@@ -24,11 +28,11 @@ export default function ProductEditView({ id }: Props) {
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
       <CustomBreadcrumbs
-        heading="Edit"
+        heading={t('edit')}
         links={[
-          { name: 'Dashboard', href: paths.dashboard.root },
+          { name: t('dashboard'), href: paths.dashboard.root },
           {
-            name: 'Product',
+            name: t('product'),
             href: paths.dashboard.product.root,
           },
           { name: currentProduct?.name },

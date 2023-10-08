@@ -190,10 +190,10 @@ export default function UserNewEditForm({ currentUser }: Props) {
                 label={
                   <>
                     <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                      Banned
+                      {t('banned')}
                     </Typography>
                     <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                      Apply disable account
+                      {t('apply_disable_account')}
                     </Typography>
                   </>
                 }
@@ -207,10 +207,10 @@ export default function UserNewEditForm({ currentUser }: Props) {
               label={
                 <>
                   <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                    Email Verified
+                    {t('email_verified')}
                   </Typography>
                   <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    Disabling this will automatically send the user a verification email
+                    {t('disabling_this_will_automatically_send_the_user_a_verification_email')}
                   </Typography>
                 </>
               }
@@ -220,7 +220,7 @@ export default function UserNewEditForm({ currentUser }: Props) {
             {currentUser && (
               <Stack justifyContent="center" alignItems="center" sx={{ mt: 3 }}>
                 <Button variant="soft" color="error">
-                  Delete User
+                  {t('delete_user')}
                 </Button>
               </Stack>
             )}
@@ -238,9 +238,9 @@ export default function UserNewEditForm({ currentUser }: Props) {
                 sm: 'repeat(2, 1fr)',
               }}
             >
-              <RHFTextField name="name" label="Full Name" />
-              <RHFTextField name="email" label="Email Address" />
-              <RHFTextField name="phoneNumber" label="Phone Number" />
+              <RHFTextField name="name" label={t('full_name')} />
+              <RHFTextField name="email" label={t('mail_address')} />
+              <RHFTextField name="phoneNumber" label={t('phone_number')} />
 
               <RHFAutocomplete
                 name="country"
@@ -271,17 +271,17 @@ export default function UserNewEditForm({ currentUser }: Props) {
                 }}
               />
 
-              <RHFTextField name="state" label="State/Region" />
-              <RHFTextField name="city" label="City" />
-              <RHFTextField name="address" label="Address" />
-              <RHFTextField name="zipCode" label="Zip/Code" />
-              <RHFTextField name="company" label="Company" />
-              <RHFTextField name="role" label="Role" />
+              <RHFTextField name="state" label={t('state_region')} />
+              <RHFTextField name="city" label={t('city')} />
+              <RHFTextField name="address" label={t('address')} />
+              <RHFTextField name="zipCode" label={t('zip_code')} />
+              <RHFTextField name="company" label={t('company')} />
+              <RHFTextField name="role" label={t('role')} />
             </Box>
 
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                {!currentUser ? 'Create User' : 'Save Changes'}
+                {!currentUser ? t('create_user') : t('save_changes')}
               </LoadingButton>
             </Stack>
           </Card>

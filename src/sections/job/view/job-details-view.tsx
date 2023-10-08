@@ -24,7 +24,9 @@ type Props = {
 export default function JobDetailsView({ id }: Props) {
   const settings = useSettingsContext();
 
-  const currentJob = _jobs.filter((job) => job.id === id)[0];
+  const jobs: any = _jobs()
+
+  const currentJob = jobs.filter((job: any) => job.id === id)[0];
 
   const [publish, setPublish] = useState(currentJob?.publish);
 
@@ -46,7 +48,7 @@ export default function JobDetailsView({ id }: Props) {
         mb: { xs: 3, md: 5 },
       }}
     >
-      {JOB_DETAILS_TABS.map((tab) => (
+      {JOB_DETAILS_TABS().map((tab) => (
         <Tab
           key={tab.value}
           iconPosition="end"
@@ -72,7 +74,7 @@ export default function JobDetailsView({ id }: Props) {
         liveLink="#"
         publish={publish || ''}
         onChangePublish={handleChangePublish}
-        publishOptions={JOB_PUBLISH_OPTIONS}
+        publishOptions={JOB_PUBLISH_OPTIONS()}
       />
       {renderTabs}
 

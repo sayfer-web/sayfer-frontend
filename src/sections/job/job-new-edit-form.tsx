@@ -46,6 +46,7 @@ import FormProvider, {
 } from 'src/components/hook-form';
 // types
 import { IJobItem } from 'src/types/job';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -54,6 +55,17 @@ type Props = {
 };
 
 export default function JobNewEditForm({ currentJob }: Props) {
+
+  const { t } = useLocales()
+
+  // const jobEmploymentTypeOptions = JOB_EMPLOYMENT_TYPE_OPTIONS()
+  const jobSkillOptions = JOB_SKILL_OPTIONS()
+  const jobBenefitOptions = JOB_BENEFIT_OPTIONS()
+  const jobExperienceOptions = JOB_EXPERIENCE_OPTIONS()
+  const jobEmploymentTypeOptions = JOB_EMPLOYMENT_TYPE_OPTIONS()
+  const jobWorkingScheduleOptions = JOB_WORKING_SCHEDULE_OPTIONS()
+  // const 
+
   const router = useRouter();
 
   const mdUp = useResponsive('up', 'md');
@@ -134,26 +146,26 @@ export default function JobNewEditForm({ currentJob }: Props) {
       {mdUp && (
         <Grid md={4}>
           <Typography variant="h6" sx={{ mb: 0.5 }}>
-            Details
+            {t('details')}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Title, short description, image...
+            {t('title_short_description_image')}
           </Typography>
         </Grid>
       )}
 
       <Grid xs={12} md={8}>
         <Card>
-          {!mdUp && <CardHeader title="Details" />}
+          {!mdUp && <CardHeader title={t('details')} />}
 
           <Stack spacing={3} sx={{ p: 3 }}>
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Title</Typography>
-              <RHFTextField name="title" placeholder="Ex: Software Engineer..." />
+              <Typography variant="subtitle2">{t('title')}</Typography>
+              <RHFTextField name="title" placeholder={t('ex_software_engineer')} />
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Content</Typography>
+              <Typography variant="subtitle2">{t('content')}</Typography>
               <RHFEditor simple name="content" />
             </Stack>
           </Stack>
@@ -167,36 +179,36 @@ export default function JobNewEditForm({ currentJob }: Props) {
       {mdUp && (
         <Grid md={4}>
           <Typography variant="h6" sx={{ mb: 0.5 }}>
-            Properties
+            {t('properties')}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Additional functions and attributes...
+            {t('additional_functions_and_attributes')}
           </Typography>
         </Grid>
       )}
 
       <Grid xs={12} md={8}>
         <Card>
-          {!mdUp && <CardHeader title="Properties" />}
+          {!mdUp && <CardHeader title={t('properties')} />}
 
           <Stack spacing={3} sx={{ p: 3 }}>
             <Stack spacing={1}>
-              <Typography variant="subtitle2">Employment type</Typography>
+              <Typography variant="subtitle2">{t('employment_type')}</Typography>
               <RHFMultiCheckbox
                 row
                 spacing={4}
                 name="employmentTypes"
-                options={JOB_EMPLOYMENT_TYPE_OPTIONS}
+                options={jobEmploymentTypeOptions}
               />
             </Stack>
 
             <Stack spacing={1}>
-              <Typography variant="subtitle2">Experience</Typography>
-              <RHFRadioGroup row spacing={4} name="experience" options={JOB_EXPERIENCE_OPTIONS} />
+              <Typography variant="subtitle2">{t('experience')}</Typography>
+              <RHFRadioGroup row spacing={4} name="experience" options={JOB_EXPERIENCE_OPTIONS()} />
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Role</Typography>
+              <Typography variant="subtitle2">{t('role')}</Typography>
               <RHFAutocomplete
                 name="role"
                 autoHighlight
@@ -211,13 +223,13 @@ export default function JobNewEditForm({ currentJob }: Props) {
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Skills</Typography>
+              <Typography variant="subtitle2">{t('skills')}</Typography>
               <RHFAutocomplete
                 name="skills"
-                placeholder="+ Skills"
+                placeholder={`+ ${t('skills')}`}
                 multiple
                 disableCloseOnSelect
-                options={JOB_SKILL_OPTIONS.map((option) => option)}
+                options={JOB_SKILL_OPTIONS().map((option) => option)}
                 getOptionLabel={(option) => option}
                 renderOption={(props, option) => (
                   <li {...props} key={option}>
@@ -240,13 +252,13 @@ export default function JobNewEditForm({ currentJob }: Props) {
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Working schedule</Typography>
+              <Typography variant="subtitle2">{t('working_schedule')}</Typography>
               <RHFAutocomplete
                 name="workingSchedule"
-                placeholder="+ Schedule"
+                placeholder={`+ ${t('schedule')}`}
                 multiple
                 disableCloseOnSelect
-                options={JOB_WORKING_SCHEDULE_OPTIONS.map((option) => option)}
+                options={jobWorkingScheduleOptions.map((option) => option)}
                 getOptionLabel={(option) => option}
                 renderOption={(props, option) => (
                   <li {...props} key={option}>
@@ -269,10 +281,10 @@ export default function JobNewEditForm({ currentJob }: Props) {
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Locations</Typography>
+              <Typography variant="subtitle2">{t('locations')}</Typography>
               <RHFAutocomplete
                 name="locations"
-                placeholder="+ Locations"
+                placeholder={`+ ${t('locations')}`}
                 multiple
                 disableCloseOnSelect
                 options={countries.map((option) => option.label)}
@@ -314,7 +326,7 @@ export default function JobNewEditForm({ currentJob }: Props) {
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Expired</Typography>
+              <Typography variant="subtitle2">{t('expired')}</Typography>
               <Controller
                 name="expiredDate"
                 control={control}
@@ -335,7 +347,7 @@ export default function JobNewEditForm({ currentJob }: Props) {
             </Stack>
 
             <Stack spacing={2}>
-              <Typography variant="subtitle2">Salary</Typography>
+              <Typography variant="subtitle2">{t('salary')}</Typography>
 
               <Controller
                 name="salary.type"
@@ -388,14 +400,14 @@ export default function JobNewEditForm({ currentJob }: Props) {
                   ),
                 }}
               />
-              <RHFSwitch name="salary.negotiable" label="Salary is negotiable" />
+              <RHFSwitch name="salary.negotiable" label={t('salary_is_negotiable')} />
             </Stack>
 
             <Stack spacing={1}>
-              <Typography variant="subtitle2">Benefits</Typography>
+              <Typography variant="subtitle2">{t('benefits')}</Typography>
               <RHFMultiCheckbox
                 name="benefits"
-                options={JOB_BENEFIT_OPTIONS}
+                options={JOB_BENEFIT_OPTIONS()}
                 sx={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(2, 1fr)',
@@ -414,7 +426,7 @@ export default function JobNewEditForm({ currentJob }: Props) {
       <Grid xs={12} md={8} sx={{ display: 'flex', alignItems: 'center' }}>
         <FormControlLabel
           control={<Switch defaultChecked />}
-          label="Publish"
+          label={t('publish')}
           sx={{ flexGrow: 1, pl: 3 }}
         />
 
@@ -425,7 +437,7 @@ export default function JobNewEditForm({ currentJob }: Props) {
           loading={isSubmitting}
           sx={{ ml: 2 }}
         >
-          {!currentJob ? 'Create Job' : 'Save Changes'}
+          {!currentJob ? t('create_job') : t('save_changes')}
         </LoadingButton>
       </Grid>
     </>

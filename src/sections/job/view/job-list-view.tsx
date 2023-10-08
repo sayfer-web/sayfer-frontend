@@ -34,6 +34,7 @@ import JobSort from '../job-sort';
 import JobSearch from '../job-search';
 import JobFilters from '../job-filters';
 import JobFiltersResult from '../job-filters-result';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -48,6 +49,13 @@ const defaultFilters: IJobFilters = {
 // ----------------------------------------------------------------------
 
 export default function JobListView() {
+
+  const jobs = _jobs()
+
+  const { t } = useLocales()
+
+  const getJobEmploymentTypeOptions = JOB_EMPLOYMENT_TYPE_OPTIONS()
+
   const settings = useSettingsContext();
 
   const openFilters = useBoolean();
@@ -61,8 +69,77 @@ export default function JobListView() {
 
   const [filters, setFilters] = useState(defaultFilters);
 
+  const newJobs = [
+    {
+      id: '1',
+      role: 'PRO',
+      title: 'Подписаться',
+      content: 'string,',
+      publish: '10 минут',
+      createdAt: new Date(),
+      skills: ['string'],
+      expiredDate: new Date(),
+      totalViews: 0,
+      experience: 'Легко',
+      salary: {
+        type: 'string',
+        price: 0,
+        negotiable: true,
+      },
+      benefits: ['string...'],
+      locations: ['string'],
+      company: {
+        name: 'string;',
+        logo: 'string;',
+        phoneNumber: 'string;',
+        fullAddress: 'string;',
+      },
+      employmentTypes: ['10 минут'],
+      workingSchedule: ['10 минут'],
+      candidates: [{
+        id: 'string;',
+        name: 'string;',
+        role: 'string;',
+        avatarUrl: 'string;',
+      }],
+    },
+    {
+      id: '2',
+      role: 'string,',
+      title: 'Пополнить',
+      content: 'string,',
+      publish: 'string,',
+      createdAt: new Date(),
+      skills: ['string'],
+      expiredDate: new Date(),
+      totalViews: 0,
+      experience: 'Нужен PRO',
+      salary: {
+        type: 'string',
+        price: 0,
+        negotiable: true,
+      },
+      benefits: ['string'],
+      locations: ['string'],
+      company: {
+        name: 'string;',
+        logo: 'string;',
+        phoneNumber: 'string;',
+        fullAddress: 'string;',
+      },
+      employmentTypes: ['string'],
+      workingSchedule: ['string'],
+      candidates: [{
+        id: 'string;',
+        name: 'string;',
+        role: 'string;',
+        avatarUrl: 'string;',
+      }],
+    },
+  ]
+
   const dataFiltered = applyFilter({
-    inputData: _jobs,
+    inputData: newJobs,
     filters,
     sortBy,
   });
@@ -90,8 +167,8 @@ export default function JobListView() {
       }));
 
       if (inputValue) {
-        const results = _jobs.filter(
-          (job) => job.title.toLowerCase().indexOf(search.query.toLowerCase()) !== -1
+        const results = jobs.filter(
+          (job: any) => job.title.toLowerCase().indexOf(search.query.toLowerCase()) !== -1
         );
 
         setSearch((prevState) => ({
@@ -135,12 +212,12 @@ export default function JobListView() {
           //
           locationOptions={countries}
           roleOptions={_roles}
-          benefitOptions={JOB_BENEFIT_OPTIONS.map((option) => option.label)}
-          experienceOptions={['all', ...JOB_EXPERIENCE_OPTIONS.map((option) => option.label)]}
-          employmentTypeOptions={JOB_EMPLOYMENT_TYPE_OPTIONS.map((option) => option.label)}
+          benefitOptions={JOB_BENEFIT_OPTIONS().map((option) => option.label)}
+          experienceOptions={['all', ...JOB_EXPERIENCE_OPTIONS().map((option) => option.label)]}
+          employmentTypeOptions={getJobEmploymentTypeOptions.map((option) => option.label)}
         />
 
-        <JobSort sort={sortBy} onSort={handleSortBy} sortOptions={JOB_SORT_OPTIONS} />
+        <JobSort sort={sortBy} onSort={handleSortBy} sortOptions={JOB_SORT_OPTIONS()} />
       </Stack>
     </Stack>
   );
@@ -160,14 +237,14 @@ export default function JobListView() {
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
       <CustomBreadcrumbs
-        heading="List"
+        heading={t('list')}
         links={[
-          { name: 'Dashboard', href: paths.dashboard.root },
+          { name: t('dashboard'), href: paths.dashboard.root },
           {
-            name: 'Job',
+            name: t('job'),
             href: paths.dashboard.job.root,
           },
-          { name: 'List' },
+          { name: t('list') },
         ]}
         action={
           <Button
@@ -176,7 +253,7 @@ export default function JobListView() {
             variant="contained"
             startIcon={<Iconify icon="mingcute:add-line" />}
           >
-            New Job
+            {t('new_job')}
           </Button>
         }
         sx={{
@@ -195,7 +272,7 @@ export default function JobListView() {
         {canReset && renderResults}
       </Stack>
 
-      {notFound && <EmptyContent filled title="No Data" sx={{ py: 10 }} />}
+      {notFound && <EmptyContent filled title={t('no_data')} sx={{ py: 10 }} />}
 
       <JobList jobs={dataFiltered} />
     </Container>

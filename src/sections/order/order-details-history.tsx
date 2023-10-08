@@ -15,6 +15,7 @@ import Typography from '@mui/material/Typography';
 import { fDateTime } from 'src/utils/format-time';
 // types
 import { IOrderHistory } from 'src/types/order';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -23,6 +24,9 @@ type Props = {
 };
 
 export default function OrderDetailsHistory({ history }: Props) {
+
+  const { t } = useLocales()
+
   const renderSummary = (
     <Stack
       spacing={2}
@@ -38,19 +42,19 @@ export default function OrderDetailsHistory({ history }: Props) {
       }}
     >
       <Stack spacing={0.5}>
-        <Box sx={{ color: 'text.disabled' }}>Order time</Box>
+        <Box sx={{ color: 'text.disabled' }}>{t('order_time')}</Box>
         {fDateTime(history.orderTime)}
       </Stack>
       <Stack spacing={0.5}>
-        <Box sx={{ color: 'text.disabled' }}>Payment time</Box>
+        <Box sx={{ color: 'text.disabled' }}>{t('payment_time')}</Box>
         {fDateTime(history.orderTime)}
       </Stack>
       <Stack spacing={0.5}>
-        <Box sx={{ color: 'text.disabled' }}>Delivery time for the carrier</Box>
+        <Box sx={{ color: 'text.disabled' }}>{t('delivery_time_for_the_carrier')}</Box>
         {fDateTime(history.orderTime)}
       </Stack>
       <Stack spacing={0.5}>
-        <Box sx={{ color: 'text.disabled' }}>Completion time</Box>
+        <Box sx={{ color: 'text.disabled' }}>{t('completion_time')}</Box>
         {fDateTime(history.orderTime)}
       </Stack>
     </Stack>
@@ -94,7 +98,7 @@ export default function OrderDetailsHistory({ history }: Props) {
 
   return (
     <Card>
-      <CardHeader title="History" />
+      <CardHeader title={t('history')} />
       <Stack
         spacing={3}
         alignItems={{ md: 'flex-start' }}

@@ -198,7 +198,7 @@ export default function NotificationItem({ notification }: NotificationItemProps
         Design
       </Label>
       <Label variant="outlined" color="warning">
-        Dashboard
+        {t('dashboard')}
       </Label>
       <Label variant="outlined">Design system</Label>
     </Stack>

@@ -97,6 +97,9 @@ type BankingRecentTransitionsRowProps = {
 };
 
 function BankingRecentTransitionsRow({ row }: BankingRecentTransitionsRowProps) {
+  
+  const { t } = useLocales()
+  
   const theme = useTheme();
 
   const isLight = theme.palette.mode === 'light';
@@ -213,24 +216,24 @@ function BankingRecentTransitionsRow({ row }: BankingRecentTransitionsRowProps) 
       >
         <MenuItem onClick={handleDownload}>
           <Iconify icon="eva:cloud-download-fill" />
-          Download
+          {t('download')}
         </MenuItem>
 
         <MenuItem onClick={handlePrint}>
           <Iconify icon="solar:printer-minimalistic-bold" />
-          Print
+          {t('print')}
         </MenuItem>
 
         <MenuItem onClick={handleShare}>
           <Iconify icon="solar:share-bold" />
-          Share
+          {t('share')}
         </MenuItem>
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
         <MenuItem onClick={handleDelete} sx={{ color: 'error.main' }}>
           <Iconify icon="solar:trash-bin-trash-bold" />
-          Delete
+          {t('delete')}
         </MenuItem>
       </CustomPopover>
     </>

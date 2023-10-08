@@ -59,7 +59,7 @@ export default function OverviewAppView() {
 
         <Grid xs={12} md={4}>
           <AppWidgetSummary
-            title="Total Active Users"
+            title={t('total_active_users')}
             percent={2.6}
             total={18765}
             chart={{
@@ -70,7 +70,7 @@ export default function OverviewAppView() {
 
         <Grid xs={12} md={4}>
           <AppWidgetSummary
-            title="Total Installed"
+            title={t('total_installed')}
             percent={0.2}
             total={4876}
             chart={{
@@ -82,7 +82,7 @@ export default function OverviewAppView() {
 
         <Grid xs={12} md={4}>
           <AppWidgetSummary
-            title="Total Downloads"
+            title={t('total_downloads')}
             percent={-0.1}
             total={678}
             chart={{
@@ -94,7 +94,7 @@ export default function OverviewAppView() {
 
         <Grid xs={12} md={6} lg={4}>
           <AppCurrentDownload
-            title="Current Download"
+            title={t('current_download')}
             chart={{
               series: [
                 { label: 'Mac', value: 12244 },
@@ -108,8 +108,8 @@ export default function OverviewAppView() {
 
         <Grid xs={12} md={6} lg={8}>
           <AppAreaInstalled
-            title="Area Installed"
-            subheader="(+43%) than last year"
+            title={t('area_installed')}
+            subheader={`(+43%) ${t('than_last_year')}`}
             chart={{
               categories: [
                 t('jan'),
@@ -130,11 +130,11 @@ export default function OverviewAppView() {
                   year: '2019',
                   data: [
                     {
-                      name: 'Asia',
+                      name: t('asia'),
                       data: [10, 41, 35, 51, 49, 62, 69, 91, 148, 35, 51, 49],
                     },
                     {
-                      name: 'America',
+                      name: t('america'),
                       data: [10, 34, 13, 56, 77, 88, 99, 77, 45, 13, 56, 77],
                     },
                   ],
@@ -143,11 +143,11 @@ export default function OverviewAppView() {
                   year: '2020',
                   data: [
                     {
-                      name: 'Asia',
+                      name: t('asia'),
                       data: [51, 35, 41, 10, 91, 69, 62, 148, 91, 69, 62, 49],
                     },
                     {
-                      name: 'America',
+                      name: t('america'),
                       data: [56, 13, 34, 10, 77, 99, 88, 45, 77, 99, 88, 77],
                     },
                   ],
@@ -159,34 +159,34 @@ export default function OverviewAppView() {
 
         <Grid xs={12} lg={8}>
           <AppNewInvoice
-            title="New Invoice"
+            title={t('new_invoice')}
             tableData={_appInvoices}
             tableLabels={[
-              { id: 'id', label: 'Invoice ID' },
-              { id: 'category', label: 'Category' },
-              { id: 'price', label: 'Price' },
-              { id: 'status', label: 'Status' },
+              { id: 'id', label: t('invoice_id') },
+              { id: 'category', label: t('category') },
+              { id: 'price', label: t('price') },
+              { id: 'status', label: t('status') },
               { id: '' },
             ]}
           />
         </Grid>
 
         <Grid xs={12} md={6} lg={4}>
-          <AppTopRelated title="Top Related Applications" list={_appRelated} />
+          <AppTopRelated title={t('top_related_applications')} list={_appRelated} />
         </Grid>
 
         <Grid xs={12} md={6} lg={4}>
-          <AppTopInstalledCountries title="Top Installed Countries" list={_appInstalled} />
+          <AppTopInstalledCountries title={t('top_installed_countries')} list={_appInstalled} />
         </Grid>
 
         <Grid xs={12} md={6} lg={4}>
-          <AppTopAuthors title="Top Authors" list={_appAuthors} />
+          <AppTopAuthors title={t('top_authors')} list={_appAuthors} />
         </Grid>
 
         <Grid xs={12} md={6} lg={4}>
           <Stack spacing={3}>
             <AppWidget
-              title="Conversion"
+              title={t('conversion')}
               total={38566}
               icon="solar:user-rounded-bold"
               chart={{
@@ -195,7 +195,7 @@ export default function OverviewAppView() {
             />
 
             <AppWidget
-              title="Applications"
+              title={t('applications')}
               total={55566}
               icon="fluent:mail-24-filled"
               color="info"

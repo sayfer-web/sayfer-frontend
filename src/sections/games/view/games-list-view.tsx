@@ -12,7 +12,7 @@ import { useBoolean } from 'src/hooks/use-boolean';
 // utils
 import { fTimestamp } from 'src/utils/format-time';
 // _mock
-import { _tours, _tourGuides, TOUR_SERVICE_OPTIONS, TOUR_SORT_OPTIONS } from 'src/_mock';
+import { _games, _gamesGuides, GAMES_SERVICE_OPTIONS, GAMES_SORT_OPTIONS } from 'src/_mock';
 // assets
 import { countries } from 'src/assets/data';
 // components
@@ -21,34 +21,76 @@ import EmptyContent from 'src/components/empty-content';
 import { useSettingsContext } from 'src/components/settings';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 // types
-import { ITourItem, ITourFilters, ITourFilterValue } from 'src/types/tour';
+// import { ITourItem, ITourFilters, ITourFilterValue } from 'src/types/tour';
+import { IGameItem, IGameFilters, IGameFilterValue } from 'src/types/games';
 //
-import TourList from '../tour-list';
-import TourSort from '../tour-sort';
-import TourSearch from '../tour-search';
-import TourFilters from '../tour-filters';
-import TourFiltersResult from '../tour-filters-result';
+import GamesList from '../games-list';
+import GamesSort from '../games-sort';
+import GamesSearch from '../games-search';
+import GamesFilters from '../games-filters';
+import GamesFiltersResult from '../games-filters-result';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
-const defaultFilters: ITourFilters = {
+const defaultFilters: IGameFilters = {
   destination: [],
-  tourGuides: [],
+  gameGuides: [],
   services: [],
   startDate: null,
   endDate: null,
 };
 
+const newGames = [{
+  id: '1',
+  name: 'Poker',
+  price: 0,
+  totalViews: 0,
+  tags: ['string'],
+  content: 'string;',
+  publish: 'string;',
+  images: [
+    'https://sayfer.club/assets/images/travel/travel_1.jpg',
+    'https://sayfer.club/assets/images/travel/travel_2.jpg',
+    'https://sayfer.club/assets/images/travel/travel_3.jpg',
+  ],
+  durations: 'string;',
+  priceSale: 0,
+  services: ['string'],
+  destination: 'Subtitle',
+  ratingNumber: 0,
+  bookers: [{
+    id: 'string;',
+    name: 'string;',
+    avatarUrl: 'string;',
+    guests: 0,
+  }],
+  gameGuides: [{
+    id: 'string;',
+    name: 'string;',
+    avatarUrl: 'string;',
+    phoneNumber: 'string;',
+  }],
+  createdAt: new Date(),
+  available: {
+    startDate: new Date(),
+    endDate: new Date(),
+  },
+}]
+
 // ----------------------------------------------------------------------
 
 export default function GamesListView() {
+
+  const { t } = useLocales()
+
   const settings = useSettingsContext();
 
   const openFilters = useBoolean();
 
   const [sortBy, setSortBy] = useState('latest');
 
-  const [search, setSearch] = useState<{ query: string; results: ITourItem[] }>({
+  const [search, setSearch] = useState<{ query: string; results: IGameItem[] }>({
     query: '',
     results: [],
   });
@@ -60,8 +102,15 @@ export default function GamesListView() {
       ? filters.startDate.getTime() > filters.endDate.getTime()
       : false;
 
+  
+
+  const games = _games()
+
+  console.log(games)
+
   const dataFiltered = applyFilter({
-    inputData: _tours,
+    /* @ts-ignore */
+    inputData: newGames,
     filters,
     sortBy,
     dateError,
@@ -69,13 +118,13 @@ export default function GamesListView() {
 
   const canReset =
     !!filters.destination.length ||
-    !!filters.tourGuides.length ||
+    !!filters.gameGuides.length ||
     !!filters.services.length ||
     (!!filters.startDate && !!filters.endDate);
 
   const notFound = !dataFiltered.length && canReset;
 
-  const handleFilters = useCallback((name: string, value: ITourFilterValue) => {
+  const handleFilters = useCallback((name: string, value: IGameFilterValue) => {
     setFilters((prevState) => ({
       ...prevState,
       [name]: value,
@@ -94,14 +143,14 @@ export default function GamesListView() {
       }));
 
       if (inputValue) {
-        const results = _tours.filter(
-          (tour) => tour.name.toLowerCase().indexOf(search.query.toLowerCase()) !== -1
+        const results = _games().filter(
+          (game: any) => game.name.toLowerCase().indexOf(search.query.toLowerCase()) !== -1
         );
 
-        setSearch((prevState) => ({
-          ...prevState,
-          results,
-        }));
+        // setSearch((prevState) => ({
+        //   ...prevState,
+        //   results,
+        // }));
       }
     },
     [search.query]
@@ -118,7 +167,7 @@ export default function GamesListView() {
       alignItems={{ xs: 'flex-end', sm: 'center' }}
       direction={{ xs: 'column', sm: 'row' }}
     >
-      <TourSearch
+      <GamesSearch
         query={search.query}
         results={search.results}
         onSearch={handleSearch}
@@ -126,7 +175,7 @@ export default function GamesListView() {
       />
 
       <Stack direction="row" spacing={1} flexShrink={0}>
-        <TourFilters
+        <GamesFilters
           open={openFilters.value}
           onOpen={openFilters.onTrue}
           onClose={openFilters.onFalse}
@@ -137,20 +186,20 @@ export default function GamesListView() {
           canReset={canReset}
           onResetFilters={handleResetFilters}
           //
-          serviceOptions={TOUR_SERVICE_OPTIONS.map((option) => option.label)}
-          tourGuideOptions={_tourGuides}
+          serviceOptions={GAMES_SERVICE_OPTIONS().map((option) => option.label)}
+          gameGuideOptions={_gamesGuides()}
           destinationOptions={countries}
           //
           dateError={dateError}
         />
 
-        <TourSort sort={sortBy} onSort={handleSortBy} sortOptions={TOUR_SORT_OPTIONS} />
+        <GamesSort sort={sortBy} onSort={handleSortBy} sortOptions={GAMES_SORT_OPTIONS()} />
       </Stack>
     </Stack>
   );
 
   const renderResults = (
-    <TourFiltersResult
+    <GamesFiltersResult
       filters={filters}
       onResetFilters={handleResetFilters}
       //
@@ -164,14 +213,14 @@ export default function GamesListView() {
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
       <CustomBreadcrumbs
-        heading="List"
+        heading={t('list')}
         links={[
-          { name: 'Dashboard', href: paths.dashboard.root },
+          { name: t('dashboard'), href: paths.dashboard.root },
           {
-            name: 'Tour',
+            name: t('games'),
             href: paths.dashboard.tour.root,
           },
-          { name: 'List' },
+          { name: t('list') },
         ]}
         action={
           <Button
@@ -180,7 +229,7 @@ export default function GamesListView() {
             variant="contained"
             startIcon={<Iconify icon="mingcute:add-line" />}
           >
-            New Tour
+            {t('new_game')}
           </Button>
         }
         sx={{
@@ -199,9 +248,9 @@ export default function GamesListView() {
         {canReset && renderResults}
       </Stack>
 
-      {notFound && <EmptyContent title="No Data" filled sx={{ py: 10 }} />}
+      {notFound && <EmptyContent title={t('no_data')} filled sx={{ py: 10 }} />}
 
-      <TourList tours={dataFiltered} />
+      <GamesList tours={dataFiltered} />
     </Container>
   );
 }
@@ -214,14 +263,14 @@ const applyFilter = ({
   sortBy,
   dateError,
 }: {
-  inputData: ITourItem[];
-  filters: ITourFilters;
+  inputData: IGameItem[];
+  filters: IGameFilters;
   sortBy: string;
   dateError: boolean;
 }) => {
-  const { services, destination, startDate, endDate, tourGuides } = filters;
+  const { services, destination, startDate, endDate, gameGuides } = filters;
 
-  const tourGuideIds = tourGuides.map((tourGuide) => tourGuide.id);
+  const tourGuideIds = gameGuides.map((tourGuide: any) => tourGuide.id);
 
   // SORT BY
   if (sortBy === 'latest') {
@@ -252,8 +301,8 @@ const applyFilter = ({
   }
 
   if (tourGuideIds.length) {
-    inputData = inputData.filter((tour) =>
-      tour.tourGuides.some((filterItem) => tourGuideIds.includes(filterItem.id))
+    inputData = inputData.filter((games) =>
+      games.gameGuides.some((filterItem) => tourGuideIds.includes(filterItem.id))
     );
   }
 

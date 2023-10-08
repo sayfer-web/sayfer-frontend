@@ -9,6 +9,7 @@ import Card, { CardProps } from '@mui/material/Card';
 import Image from 'src/components/image';
 import { MotionContainer, varFade } from 'src/components/animate';
 import Carousel, { CarouselDots, CarouselArrows, useCarousel } from 'src/components/carousel';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -62,6 +63,9 @@ type CarouselItemProps = {
 };
 
 function CarouselItem({ item, active }: CarouselItemProps) {
+
+  const { t } = useLocales()
+
   const theme = useTheme();
 
   const { coverUrl, title, description } = item;
@@ -99,7 +103,7 @@ function CarouselItem({ item, active }: CarouselItemProps) {
       >
         <m.div variants={varFade().inRight}>
           <Typography variant="overline" sx={{ color: 'primary.light' }}>
-            Featured App
+            {t('featured_app')}
           </Typography>
         </m.div>
 

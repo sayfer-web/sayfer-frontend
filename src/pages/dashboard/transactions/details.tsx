@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { useLocales } from 'src/locales';
 // routes
 import { useParams } from 'src/routes/hooks';
 // sections
@@ -8,6 +9,9 @@ import TransactionsDetailsView from 'src/sections/transactions/view/transactions
 // ----------------------------------------------------------------------
 
 export default function InvoiceDetailsPage() {
+
+  const { t } = useLocales()
+
   const params = useParams();
 
   const { id } = params;
@@ -15,7 +19,7 @@ export default function InvoiceDetailsPage() {
   return (
     <>
       <Helmet>
-        <title> Dashboard: Invoice Details</title>
+        <title> {t('dashboard')}: {t('invoice_details')}</title>
       </Helmet>
 
       <TransactionsDetailsView id={`${id}`} />

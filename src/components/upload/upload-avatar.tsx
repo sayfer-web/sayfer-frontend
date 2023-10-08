@@ -10,6 +10,7 @@ import Image from '../image';
 //
 import { UploadProps } from './types';
 import RejectionFiles from './errors-rejection-files';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -21,6 +22,9 @@ export default function UploadAvatar({
   sx,
   ...other
 }: UploadProps) {
+
+  const { t } = useLocales()
+
   const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
     multiple: false,
     disabled,
@@ -38,7 +42,7 @@ export default function UploadAvatar({
 
   const renderPreview = hasFile && (
     <Image
-      alt="avatar"
+      alt={t('avatar')}
       src={imgUrl}
       sx={{
         width: 1,
@@ -85,7 +89,7 @@ export default function UploadAvatar({
     >
       <Iconify icon="solar:camera-add-bold" width={32} />
 
-      <Typography variant="caption">{file ? 'Update photo' : 'Upload photo'}</Typography>
+      <Typography variant="caption">{file ? t('update_photo') : t('upload_photo')}</Typography>
     </Stack>
   );
 

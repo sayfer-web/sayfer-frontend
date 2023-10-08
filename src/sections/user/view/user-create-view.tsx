@@ -7,26 +7,30 @@ import { useSettingsContext } from 'src/components/settings';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 //
 import UserNewEditForm from '../user-new-edit-form';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function UserCreateView() {
+
+  const { t } = useLocales()
+
   const settings = useSettingsContext();
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
       <CustomBreadcrumbs
-        heading="Create a new user"
+        heading={t('create_a_new_user')}
         links={[
           {
-            name: 'Dashboard',
+            name: t('dashboard'),
             href: paths.dashboard.root,
           },
           {
-            name: 'User',
+            name: t('user'),
             href: paths.dashboard.user.root,
           },
-          { name: 'New user' },
+          { name: t('new_user') },
         ]}
         sx={{
           mb: { xs: 3, md: 5 },

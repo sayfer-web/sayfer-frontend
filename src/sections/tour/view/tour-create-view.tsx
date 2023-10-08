@@ -20,14 +20,14 @@ export default function TourCreateView() {
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
       <CustomBreadcrumbs
-        heading={t('create_new_tour')}
+        heading={t('create_a_new_tour')}
         links={[
           {
-            name: 'Dashboard',
+            name: t('dashboard'),
             href: paths.dashboard.root,
           },
           {
-            name: 'Tour',
+            name: t('tour'),
             href: paths.dashboard.tour.root,
           },
           { name: t('new_tour') },

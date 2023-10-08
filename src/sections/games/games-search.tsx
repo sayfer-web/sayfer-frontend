@@ -10,17 +10,18 @@ import Autocomplete, { autocompleteClasses } from '@mui/material/Autocomplete';
 // routes
 import { useRouter } from 'src/routes/hooks';
 // types
-import { ITourItem } from 'src/types/tour';
+// import { ITourItem } from 'src/types/tour';
 // components
 import Iconify from 'src/components/iconify';
 import SearchNotFound from 'src/components/search-not-found';
 import { useLocales } from 'src/locales';
+import { IGameItem } from 'src/types/games';
 
 // ----------------------------------------------------------------------
 
 type Props = {
   query: string;
-  results: ITourItem[];
+  results: IGameItem[];
   onSearch: (inputValue: string) => void;
   hrefItem: (id: string) => string;
 };

@@ -47,7 +47,11 @@ export default function JobSort({ sort, onSort, sortOptions }: Props) {
             textTransform: 'capitalize',
           }}
         >
-          {sort}
+          {
+          sort === "latest" && t('latest') ||
+          sort === "popular" && t('popular') ||
+          sort === "oldest" && t('oldest')
+          }
         </Box>
       </Button>
 

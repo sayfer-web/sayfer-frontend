@@ -25,6 +25,7 @@ import { IKanbanColumn, IKanbanTask } from 'src/types/kanban';
 import KanbanTaskAdd from './kanban-task-add';
 import KanbanTaskItem from './kanban-task-item';
 import KanbanColumnToolBar from './kanban-column-tool-bar';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -35,6 +36,9 @@ type Props = {
 };
 
 export default function KanbanColumn({ column, tasks, index }: Props) {
+
+  const { t } = useLocales()
+
   const { enqueueSnackbar } = useSnackbar();
 
   const openAddTask = useBoolean();
@@ -45,7 +49,7 @@ export default function KanbanColumn({ column, tasks, index }: Props) {
         if (column.name !== columnName) {
           updateColumn(column.id, columnName);
 
-          enqueueSnackbar('Update success!', {
+          enqueueSnackbar(t('update_success'), {
             anchorOrigin: { vertical: 'top', horizontal: 'center' },
           });
         }
@@ -68,7 +72,7 @@ export default function KanbanColumn({ column, tasks, index }: Props) {
     try {
       deleteColumn(column.id);
 
-      enqueueSnackbar('Delete success!', {
+      enqueueSnackbar(t('delete_success'), {
         anchorOrigin: { vertical: 'top', horizontal: 'center' },
       });
     } catch (error) {
@@ -102,7 +106,7 @@ export default function KanbanColumn({ column, tasks, index }: Props) {
       try {
         deleteTask(column.id, taskId);
 
-        enqueueSnackbar('Delete success!', {
+        enqueueSnackbar(t('delete_success'), {
           anchorOrigin: { vertical: 'top', horizontal: 'center' },
         });
       } catch (error) {
@@ -141,7 +145,7 @@ export default function KanbanColumn({ column, tasks, index }: Props) {
         onClick={openAddTask.onToggle}
         sx={{ fontSize: 14 }}
       >
-        {openAddTask.value ? 'Close' : 'Add Task'}
+        {openAddTask.value ? t('close') : t('add_task') }
       </Button>
     </Stack>
   );

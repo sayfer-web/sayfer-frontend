@@ -177,7 +177,7 @@ export default function OverviewBankingView() {
               title={t('balance_statistics')}
               // subheader="(+43% Income | +12% Expense) than last year"
               chart={{
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                categories: [t('jan'), t('feb'), t('mar'), t('apr'), t('may'), t('jun'), t('jul'), t('aug'), t('sep')],
                 // categoriesLabels: [t('jan'), t('Feb'), t('mar'), t('apr'), t('may'), t('jun'), t('jul'), t('aug'), t('sep')],
                 series: [
                   {

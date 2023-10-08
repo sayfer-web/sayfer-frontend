@@ -57,6 +57,9 @@ const TABS = () => {
 // ----------------------------------------------------------------------
 
 export default function AccountView() {
+
+  const { t } = useLocales()
+
   const settings = useSettingsContext();
 
   const [currentTab, setCurrentTab] = useState('general');
@@ -68,11 +71,11 @@ export default function AccountView() {
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
       <CustomBreadcrumbs
-        heading="Account"
+        heading={t('account')}
         links={[
-          { name: 'Dashboard', href: paths.dashboard.root },
-          { name: 'User', href: paths.dashboard.user.root },
-          { name: 'Account' },
+          { name: t('dashboard'), href: paths.dashboard.root },
+          { name: t('user'), href: paths.dashboard.user.root },
+          { name: t('account') },
         ]}
         sx={{
           mb: { xs: 3, md: 5 },

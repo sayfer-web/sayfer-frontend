@@ -40,7 +40,7 @@ export default function OrderDetailsView({ id }: Props) {
         createdAt={currentOrder.createdAt}
         status={status}
         onChangeStatus={handleChangeStatus}
-        statusOptions={ORDER_STATUS_OPTIONS}
+        statusOptions={ORDER_STATUS_OPTIONS()}
       />
 
       <Grid container spacing={3}>

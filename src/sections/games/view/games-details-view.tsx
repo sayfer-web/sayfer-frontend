@@ -6,14 +6,14 @@ import Container from '@mui/material/Container';
 // routes
 import { paths } from 'src/routes/paths';
 // _mock
-import { _tours, TOUR_PUBLISH_OPTIONS, TOUR_DETAILS_TABS } from 'src/_mock';
+import { _games, GAMES_PUBLISH_OPTIONS, GAMES_DETAILS_TABS } from 'src/_mock';
 // components
 import Label from 'src/components/label';
 import { useSettingsContext } from 'src/components/settings';
 //
-import TourDetailsToolbar from '../tour-details-toolbar';
-import TourDetailsContent from '../tour-details-content';
-import TourDetailsBookers from '../tour-details-bookers';
+import GameDetailsToolbar from '../games-details-toolbar';
+import GameDetailsContent from '../games-details-content';
+import GameDetailsBookers from '../games-details-bookers';
 
 // ----------------------------------------------------------------------
 
@@ -24,9 +24,9 @@ type Props = {
 export default function GamesDetailsView({ id }: Props) {
   const settings = useSettingsContext();
 
-  const currentTour = _tours.filter((tour) => tour.id === id)[0];
+  const currentGame = _games().filter((game: any) => game.id === id)[0];
 
-  const [publish, setPublish] = useState(currentTour?.publish);
+  const [publish, setPublish] = useState(currentGame?.publish);
 
   const [currentTab, setCurrentTab] = useState('content');
 
@@ -46,7 +46,7 @@ export default function GamesDetailsView({ id }: Props) {
         mb: { xs: 3, md: 5 },
       }}
     >
-      {TOUR_DETAILS_TABS.map((tab) => (
+      {GAMES_DETAILS_TABS().map((tab) => (
         <Tab
           key={tab.value}
           iconPosition="end"
@@ -54,7 +54,7 @@ export default function GamesDetailsView({ id }: Props) {
           label={tab.label}
           icon={
             tab.value === 'bookers' ? (
-              <Label variant="filled">{currentTour?.bookers.length}</Label>
+              <Label variant="filled">{currentGame?.bookers.length}</Label>
             ) : (
               ''
             )
@@ -66,19 +66,22 @@ export default function GamesDetailsView({ id }: Props) {
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
-      <TourDetailsToolbar
-        backLink={paths.dashboard.tour.root}
-        editLink={paths.dashboard.tour.edit(`${currentTour?.id}`)}
+      <GameDetailsToolbar
+        backLink={paths.dashboard.games.root}
+        editLink={paths.dashboard.games.edit(`${currentGame?.id}`)}
         liveLink="#"
         publish={publish || ''}
         onChangePublish={handleChangePublish}
-        publishOptions={TOUR_PUBLISH_OPTIONS}
+        publishOptions={GAMES_PUBLISH_OPTIONS()}
       />
       {renderTabs}
 
-      {currentTab === 'content' && <TourDetailsContent tour={currentTour} />}
+      {/* @ts-ignore */}
+      {currentTab === 'content' && <GameDetailsContent games={currentGame} />}
 
-      {currentTab === 'bookers' && <TourDetailsBookers bookers={currentTour?.bookers} />}
+      {currentTab === 'bookers' && <GameDetailsBookers bookers={currentGame?.bookers} />}
     </Container>
   );
 }
+
+

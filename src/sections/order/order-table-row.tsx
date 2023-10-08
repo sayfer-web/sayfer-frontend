@@ -23,6 +23,7 @@ import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 import { ConfirmDialog } from 'src/components/custom-dialog';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -41,6 +42,9 @@ export default function OrderTableRow({
   onSelectRow,
   onDeleteRow,
 }: Props) {
+
+  const { t } = useLocales()
+
   const { items, status, orderNumber, createdAt, customer, totalQuantity, subTotal } = row;
 
   const confirm = useBoolean();
@@ -206,7 +210,7 @@ export default function OrderTableRow({
           sx={{ color: 'error.main' }}
         >
           <Iconify icon="solar:trash-bin-trash-bold" />
-          Delete
+          {t('delete')}
         </MenuItem>
 
         <MenuItem
@@ -216,18 +220,18 @@ export default function OrderTableRow({
           }}
         >
           <Iconify icon="solar:eye-bold" />
-          View
+          {t('view')}
         </MenuItem>
       </CustomPopover>
 
       <ConfirmDialog
         open={confirm.value}
         onClose={confirm.onFalse}
-        title="Delete"
-        content="Are you sure want to delete?"
+        title={t('delete')}
+        content={t('are_you_sure_want_to_delete')}
         action={
           <Button variant="contained" color="error" onClick={onDeleteRow}>
-            Delete
+            {t('delete')}
           </Button>
         }
       />

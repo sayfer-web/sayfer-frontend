@@ -20,10 +20,14 @@ import { IPostItem } from 'src/types/blog';
 import PostList from '../post-list';
 import PostSort from '../post-sort';
 import PostSearch from '../post-search';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function PostListHomeView() {
+
+  const { t } = useLocales()
+
   const settings = useSettingsContext();
 
   const [sortBy, setSortBy] = useState('latest');
@@ -34,10 +38,58 @@ export default function PostListHomeView() {
 
   const { posts, postsLoading } = useGetPosts();
 
+  const newPosts = [{
+      id: 'string;',
+      title: 'string;',
+      tags: ['string'],
+      publish: 'string;',
+      content: 'string;',
+      coverUrl: 'string;',
+      totalViews: 1,
+      totalShares: 1,
+      description: 'string;',
+      totalComments: 1,
+      totalFavorites: 1,
+      metaTitle: 'string;',
+      metaKeywords: ['string'],
+      metaDescription: 'string;',
+      comments: [
+        {
+          id: 'string',
+          name: 'string',
+          avatarUrl: 'string',
+          message: 'string',
+          postedAt: new Date(),
+          users: [{
+              id: 'string',
+              name: 'string',
+              avatarUrl: 'string',
+          }],
+          replyComment: [{
+              id: 'string',
+              userId: 'string',
+              message: 'string',
+              postedAt: new Date(),
+              tagUser: 'string',
+          }],
+      }
+      ],
+      createdAt: new Date(),
+      favoritePerson: [{
+        name: 'string;',
+        avatarUrl: 'string;',
+      }],
+      author: {
+        name: 'string;',
+        avatarUrl: 'string;',
+      },
+    },
+  ]
+
   const { searchResults, searchLoading } = useSearchPosts(debouncedQuery);
 
   const dataFiltered = applyFilter({
-    inputData: posts,
+    inputData: newPosts,
     sortBy,
   });
 
@@ -57,7 +109,7 @@ export default function PostListHomeView() {
           my: { xs: 3, md: 5 },
         }}
       >
-        Blog
+        {t('blog')}
       </Typography>
 
       <Stack

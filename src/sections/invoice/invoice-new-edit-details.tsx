@@ -19,10 +19,14 @@ import { IInvoiceItem } from 'src/types/invoice';
 // components
 import Iconify from 'src/components/iconify';
 import { RHFSelect, RHFTextField } from 'src/components/hook-form';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function InvoiceNewEditDetails() {
+
+  const { t } = useLocales()
+
   const { control, setValue, watch, resetField } = useFormContext();
 
   const { fields, append, remove } = useFieldArray({
@@ -152,7 +156,7 @@ export default function InvoiceNewEditDetails() {
   return (
     <Box sx={{ p: 3 }}>
       <Typography variant="h6" sx={{ color: 'text.disabled', mb: 3 }}>
-        Details:
+        {t('details')}:
       </Typography>
 
       <Stack divider={<Divider flexItem sx={{ borderStyle: 'dashed' }} />} spacing={3}>

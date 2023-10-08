@@ -1,6 +1,7 @@
-import { useCallback } from 'react';
 import { m } from 'framer-motion';
+import { useCallback } from 'react';
 // @mui
+import { Theme, SxProps } from '@mui/material/styles';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 // locales
@@ -9,10 +10,16 @@ import { useLocales } from 'src/locales';
 import Iconify from 'src/components/iconify';
 import { varHover } from 'src/components/animate';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
+import { Box } from '@mui/system';
+import Container from '@mui/material/Container';
 
 // ----------------------------------------------------------------------
 
-export default function LanguagePopover() {
+type Props = {
+  sx?: SxProps<Theme>;
+};
+
+export default function LanguagePopover({ sx }: Props) {
   const locales = useLocales();
 
   const popover = usePopover();
@@ -26,7 +33,9 @@ export default function LanguagePopover() {
   );
 
   return (
-    <>
+    <Container sx={{
+      ...sx
+    }} >
       <IconButton
         component={m.button}
         whileTap="tap"
@@ -57,6 +66,6 @@ export default function LanguagePopover() {
           </MenuItem>
         ))}
       </CustomPopover>
-    </>
+    </Container>
   );
 }

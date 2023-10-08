@@ -9,6 +9,7 @@ import { useSettingsContext } from 'src/components/settings';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 //
 import PostNewEditForm from '../post-new-edit-form';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -17,6 +18,9 @@ type Props = {
 };
 
 export default function PostEditView({ title }: Props) {
+
+  const { t } = useLocales()
+
   const settings = useSettingsContext();
 
   const { post: currentPost } = useGetPost(title);
@@ -24,14 +28,14 @@ export default function PostEditView({ title }: Props) {
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
       <CustomBreadcrumbs
-        heading="Edit"
+        heading={t('edit')}
         links={[
           {
-            name: 'Dashboard',
+            name: t('dashboard'),
             href: paths.dashboard.root,
           },
           {
-            name: 'Blog',
+            name: t('blog'),
             href: paths.dashboard.post.root,
           },
           {

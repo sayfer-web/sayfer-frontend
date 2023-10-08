@@ -9,6 +9,7 @@ import { useSettingsContext } from 'src/components/settings';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 //
 import JobNewEditForm from '../job-new-edit-form';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -17,21 +18,26 @@ type Props = {
 };
 
 export default function JobEditView({ id }: Props) {
+
+  const { t } = useLocales()
+
   const settings = useSettingsContext();
 
-  const currentJob = _jobs.find((job) => job.id === id);
+  const jobs: any = _jobs()
+
+  const currentJob = jobs.find((job: any) => job.id === id);
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
       <CustomBreadcrumbs
-        heading="Edit"
+        heading={t('edit')}
         links={[
           {
-            name: 'Dashboard',
+            name: t('dashboard'),
             href: paths.dashboard.root,
           },
           {
-            name: 'Job',
+            name: t('job'),
             href: paths.dashboard.job.root,
           },
           { name: currentJob?.title },

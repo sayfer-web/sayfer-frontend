@@ -19,6 +19,7 @@ import { IJobFilters, IJobFilterValue } from 'src/types/job';
 // components
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -62,6 +63,9 @@ export default function JobFilters({
   experienceOptions,
   employmentTypeOptions,
 }: Props) {
+
+  const { t } = useLocales()
+
   const handleFilterEmploymentTypes = useCallback(
     (newValue: string) => {
       const checked = filters.employmentTypes.includes(newValue)
@@ -111,7 +115,7 @@ export default function JobFilters({
       sx={{ py: 2, pr: 1, pl: 2.5 }}
     >
       <Typography variant="h6" sx={{ flexGrow: 1 }}>
-        Filters
+        {t('filters')}
       </Typography>
 
       <Tooltip title="Reset">
@@ -287,7 +291,7 @@ export default function JobFilters({
         }
         onClick={onOpen}
       >
-        Filters
+        {t('filters')}
       </Button>
 
       <Drawer

@@ -21,6 +21,7 @@ import { IProductFilters, IProductFilterValue } from 'src/types/product';
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 import { ColorPicker } from 'src/components/color-utils';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -60,6 +61,9 @@ export default function ProductFilters({
   ratingOptions,
   categoryOptions,
 }: Props) {
+
+  const { t } = useLocales()
+
   const marksLabel = [...Array(21)].map((_, index) => {
     const value = index * 10;
 
@@ -117,7 +121,7 @@ export default function ProductFilters({
       sx={{ py: 2, pr: 1, pl: 2.5 }}
     >
       <Typography variant="h6" sx={{ flexGrow: 1 }}>
-        Filters
+        {t('filters')}
       </Typography>
 
       <Tooltip title="Reset">
@@ -261,7 +265,7 @@ export default function ProductFilters({
         }
         onClick={onOpen}
       >
-        Filters
+        {t('filters')}
       </Button>
 
       <Drawer

@@ -13,6 +13,7 @@ import Iconify from 'src/components/iconify';
 import Chart, { useChart } from 'src/components/chart';
 // theme
 import { ColorSchema } from 'src/theme/palette';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -40,7 +41,9 @@ export default function BookingTotalIncomes({
   sx,
   ...other
 }: Props) {
-  const theme = useTheme();
+
+  const { t } = useLocales()
+   const theme = useTheme();
 
   const {
     colors = [theme.palette[color].main, theme.palette[color].dark],
@@ -129,7 +132,7 @@ export default function BookingTotalIncomes({
             </Box>
           </Stack>
 
-          <Box sx={{ mt: 0.5, opacity: 0.8, typography: 'body2' }}>than last month </Box>
+          <Box sx={{ mt: 0.5, opacity: 0.8, typography: 'body2' }}>{t('than_last_month')} </Box>
         </div>
       </Stack>
 

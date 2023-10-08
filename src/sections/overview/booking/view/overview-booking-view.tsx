@@ -85,63 +85,63 @@ export default function OverviewBookingView() {
               <BookingCheckInWidgets
                 chart={{
                   series: [
-                    { label: 'Sold', percent: 72, total: 38566 },
-                    { label: 'Pending for payment', percent: 64, total: 18472 },
+                    { label: t('sold'), percent: 72, total: 38566 },
+                    { label: t('pending_for_payment'), percent: 64, total: 18472 },
                   ],
                 }}
               />
             </Grid>
 
             <Grid xs={12}>
-              <BookingStatistics
+              {/* <BookingStatistics
                 title={t('statistics')}
-                subheader={`(+43% Sold | +12% Canceled) ${t('than_last_year')}`}
+                subheader={`(+43% ${t('sold')} | +12% ${t('canceled')}) ${t('than_last_year')}`}
                 chart={{
                   colors: [theme.palette.primary.main, theme.palette.error.light],
-                  categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                  categories: [t('jan'), t('feb'), t('mar'), t('apr'), t('may'), t('jun'), t('jul'), t('aug'), t('sep')],
                   series: [
                     {
-                      type: 'Week',
+                      type: t('week'),
                       data: [
                         {
-                          name: 'Sold',
+                          name: t('sold'),
                           data: [10, 41, 35, 151, 49, 62, 69, 91, 48],
                         },
                         {
-                          name: 'Canceled',
+                          name: t('canceled'),
                           data: [10, 34, 13, 56, 77, 88, 99, 77, 45],
                         },
                       ],
                     },
                     {
-                      type: 'Month',
+                      type: t('month'),
                       data: [
                         {
-                          name: 'Sold',
+                          name: t('sold'),
                           data: [148, 91, 69, 62, 49, 51, 35, 41, 10],
                         },
                         {
-                          name: 'Canceled',
+                          name: t('canceled'),
                           data: [45, 77, 99, 88, 77, 56, 13, 34, 10],
                         },
                       ],
                     },
                     {
-                      type: 'Year',
+                      type: t('year'),
                       data: [
                         {
-                          name: 'Sold',
+                          name: t('sold'),
                           data: [76, 42, 29, 41, 27, 138, 117, 86, 63],
                         },
                         {
-                          name: 'Canceled',
+                          name: t('canceled'),
                           data: [80, 55, 34, 114, 80, 130, 15, 28, 55],
                         },
                       ],
                     },
                   ],
                 }}
-              />
+              /> */}
             </Grid>
           </Grid>
 
@@ -150,35 +150,35 @@ export default function OverviewBookingView() {
               title={t('tours_available')}
               chart={{
                 series: [
-                  { label: 'Sold out', value: 120 },
-                  { label: 'Available', value: 66 },
+                  { label: t('sold_out'), value: 120 },
+                  { label: t('available'), value: 66 },
                 ],
               }}
             />
-
-            <BookingCustomerReviews
-              title={t('customer_reviews')}
-              subheader={`${_bookingReview.length} Reviews`}
-              list={_bookingReview}
-              sx={{ mt: SPACING }}
-            />
+  {/* 
+              <BookingCustomerReviews
+                title={t('customer_reviews')}
+                subheader={`${_bookingReview.length} ${t('reviews')}`}
+                list={_bookingReview}
+                sx={{ mt: SPACING }}
+              /> */}
           </Grid>
         </Grid>
 
-        <Grid xs={12}>
+        {/* <Grid xs={12}>
           <BookingNewest title={t('newest_booking')} subheader={t('twelve_booking')} list={_bookingNew} />
-        </Grid>
+        </Grid> */}
 
         <Grid xs={12}>
           <BookingDetails
             title={t('booking_details')}
             tableData={_bookings}
             tableLabels={[
-              { id: 'destination', label: 'Destination' },
-              { id: 'customer', label: 'Customer' },
-              { id: 'checkIn', label: 'Check In' },
-              { id: 'checkOut', label: 'Check Out' },
-              { id: 'status', label: 'Status' },
+              { id: 'destination', label: t('destination') },
+              { id: 'customer', label: t('customer') },
+              { id: 'checkIn', label: t('check_in') },
+              { id: 'checkOut', label: t('check_out') },
+              { id: 'status', label: t('status') },
               { id: '' },
             ]}
           />

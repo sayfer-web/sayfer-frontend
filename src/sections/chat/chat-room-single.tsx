@@ -11,6 +11,7 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import { IChatParticipant } from 'src/types/chat';
 // components
 import Iconify from 'src/components/iconify';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -19,6 +20,9 @@ type Props = {
 };
 
 export default function ChatRoomSingle({ participant }: Props) {
+
+  const { t } = useLocales()
+
   const collapse = useBoolean(true);
 
   const { name, avatarUrl, role, address, phoneNumber, email } = participant;
@@ -48,7 +52,7 @@ export default function ChatRoomSingle({ participant }: Props) {
       }}
     >
       <Box component="span" sx={{ flexGrow: 1 }}>
-        Information
+        {t('information')}
       </Box>
       <Iconify
         width={16}

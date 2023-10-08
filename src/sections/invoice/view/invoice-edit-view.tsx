@@ -9,6 +9,7 @@ import { useSettingsContext } from 'src/components/settings';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 //
 import InvoiceNewEditForm from '../invoice-new-edit-form';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -17,6 +18,9 @@ type Props = {
 };
 
 export default function InvoiceEditView({ id }: Props) {
+
+  const { t } = useLocales()
+
   const settings = useSettingsContext();
 
   const currentInvoice = _invoices.find((invoice) => invoice.id === id);
@@ -24,14 +28,14 @@ export default function InvoiceEditView({ id }: Props) {
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
       <CustomBreadcrumbs
-        heading="Edit"
+        heading={t('edit')}
         links={[
           {
-            name: 'Dashboard',
+            name: t('dashboard'),
             href: paths.dashboard.root,
           },
           {
-            name: 'Invoice',
+            name: t('invoice'),
             href: paths.dashboard.invoice.root,
           },
           { name: currentInvoice?.invoiceNumber },

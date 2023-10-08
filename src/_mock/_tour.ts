@@ -3,13 +3,19 @@ import { countries } from 'src/assets/data';
 //
 import { _mock } from './_mock';
 import { _tags } from './assets';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
-export const TOUR_DETAILS_TABS = [
-  { value: 'content', label: 'Tour Content' },
-  { value: 'bookers', label: 'Booker' },
-];
+export const TOUR_DETAILS_TABS = () => {
+
+  const { t } = useLocales()
+
+  return [
+  { value: 'content', label: t('tour_content') },
+  { value: 'bookers', label: t('booker') },
+]
+}
 
 export const TOUR_SORT_OPTIONS = [
   { value: 'latest', label: 'Latest' },
@@ -44,7 +50,11 @@ export const TOUR_SERVICE_OPTIONS = [
   },
 ];
 
-const CONTENT = `
+const CONTENT = () => { 
+  
+  const { t } = useLocales()
+
+  return (`
 <h6>Description</h6>
 <br/>
 <p>Occaecati est et illo quibusdam accusamus qui. Incidunt aut et molestiae ut facere aut. Est quidem iusto praesentium excepturi harum nihil tenetur facilis. Ut omnis voluptates nihil accusantium doloribus eaque debitis.</p>
@@ -83,7 +93,8 @@ const CONTENT = `
 <br/>
 <br/>
 <br/>
-`;
+`
+)}
 
 const BOOKER = [...Array(12)].map((_, index) => ({
   id: _mock.id(index),
@@ -99,9 +110,10 @@ export const _tourGuides = [...Array(12)].map((_, index) => ({
   phoneNumber: _mock.phoneNumber(index),
 }));
 
-export const TRAVEL_IMAGES = [...Array(16)].map((_, index) => _mock.image.travel(index));
+export const TRAVEL_IMAGES = [...Array(16)].map((_, index) => _mock.image.games(index));
 
-export const _tours = [...Array(12)].map((_, index) => {
+export const _tours = () => {
+  return [...Array(2)].map((_, index) => {
   const available = {
     startDate: _mock.time(index + 1),
     endDate: _mock.time(index),
@@ -138,7 +150,7 @@ export const _tours = [...Array(12)].map((_, index) => {
     tourGuides,
     destination,
     bookers: BOOKER,
-    content: CONTENT,
+    content: CONTENT(),
     tags: _tags.slice(0, 5),
     name: _mock.tourName(index),
     createdAt: _mock.time(index),
@@ -149,3 +161,4 @@ export const _tours = [...Array(12)].map((_, index) => {
     ratingNumber: _mock.number.rating(index),
   };
 });
+}

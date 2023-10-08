@@ -34,6 +34,7 @@ import FormProvider, {
 } from 'src/components/hook-form';
 //
 import PostDetailsPreview from './post-details-preview';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -42,6 +43,9 @@ type Props = {
 };
 
 export default function PostNewEditForm({ currentPost }: Props) {
+
+  const { t } = useLocales()
+
   const router = useRouter();
 
   const mdUp = useResponsive('up', 'md');
@@ -134,30 +138,30 @@ export default function PostNewEditForm({ currentPost }: Props) {
       {mdUp && (
         <Grid md={4}>
           <Typography variant="h6" sx={{ mb: 0.5 }}>
-            Details
+            {t('details')}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Title, short description, image...
+            {t('title_short_description_image')}
           </Typography>
         </Grid>
       )}
 
       <Grid xs={12} md={8}>
         <Card>
-          {!mdUp && <CardHeader title="Details" />}
+          {!mdUp && <CardHeader title={t('details')} />}
 
           <Stack spacing={3} sx={{ p: 3 }}>
-            <RHFTextField name="title" label="Post Title" />
+            <RHFTextField name="title" label={t('post_title')} />
 
-            <RHFTextField name="description" label="Description" multiline rows={3} />
+            <RHFTextField name="description" label={t('description')} multiline rows={3} />
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Content</Typography>
+              <Typography variant="subtitle2">{t('content')}</Typography>
               <RHFEditor simple name="content" />
             </Stack>
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Cover</Typography>
+              <Typography variant="subtitle2">{t('cover')}</Typography>
               <RHFUpload
                 name="coverUrl"
                 maxSize={3145728}
@@ -176,10 +180,10 @@ export default function PostNewEditForm({ currentPost }: Props) {
       {mdUp && (
         <Grid md={4}>
           <Typography variant="h6" sx={{ mb: 0.5 }}>
-            Properties
+            {t('properties')}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Additional functions and attributes...
+            {t('additional_functions_and_attributes')}
           </Typography>
         </Grid>
       )}
@@ -191,8 +195,8 @@ export default function PostNewEditForm({ currentPost }: Props) {
           <Stack spacing={3} sx={{ p: 3 }}>
             <RHFAutocomplete
               name="tags"
-              label="Tags"
-              placeholder="+ Tags"
+              label={t('tags')}
+              placeholder={`+ ${t('tags')}`}
               multiple
               freeSolo
               options={_tags.map((option) => option)}
@@ -254,7 +258,7 @@ export default function PostNewEditForm({ currentPost }: Props) {
               }
             />
 
-            <FormControlLabel control={<Switch defaultChecked />} label="Enable comments" />
+            <FormControlLabel control={<Switch defaultChecked />} label={t('enable_comments')} />
           </Stack>
         </Card>
       </Grid>
@@ -267,12 +271,12 @@ export default function PostNewEditForm({ currentPost }: Props) {
       <Grid xs={12} md={8} sx={{ display: 'flex', alignItems: 'center' }}>
         <FormControlLabel
           control={<Switch defaultChecked />}
-          label="Publish"
+          label={t('publish')}
           sx={{ flexGrow: 1, pl: 3 }}
         />
 
         <Button color="inherit" variant="outlined" size="large" onClick={preview.onTrue}>
-          Preview
+          {t('preview')}
         </Button>
 
         <LoadingButton
@@ -282,7 +286,7 @@ export default function PostNewEditForm({ currentPost }: Props) {
           loading={isSubmitting}
           sx={{ ml: 2 }}
         >
-          {!currentPost ? 'Create Post' : 'Save Changes'}
+          {!currentPost ? t('create_post') : t('save_changes')}
         </LoadingButton>
       </Grid>
     </>

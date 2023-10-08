@@ -6,16 +6,17 @@ import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import Stack, { StackProps } from '@mui/material/Stack';
 // types
-import { ITourFilters, ITourFilterValue, ITourGuide } from 'src/types/tour';
+// import { ITourFilters, ITourFilterValue, ITourGuide } from 'src/types/tour';
 // components
 import Iconify from 'src/components/iconify';
 import { shortDateLabel } from 'src/components/custom-date-range-picker';
+import { IGameFilterValue, IGameFilters, IGameGuide } from 'src/types/games';
 
 // ----------------------------------------------------------------------
 
 type Props = StackProps & {
-  filters: ITourFilters;
-  onFilters: (name: string, value: ITourFilterValue) => void;
+  filters: IGameFilters;
+  onFilters: (name: string, value: IGameFilterValue) => void;
   //
   canReset: boolean;
   onResetFilters: VoidFunction;
@@ -45,8 +46,8 @@ export default function GamesFiltersResult({
     onFilters('endDate', null);
   };
 
-  const handleRemoveTourGuide = (inputValue: ITourGuide) => {
-    const newValue = filters.tourGuides.filter((item) => item.name !== inputValue.name);
+  const handleRemoveTourGuide = (inputValue: IGameGuide) => {
+    const newValue = filters.gameGuides.filter((item: any) => item.name !== inputValue.name);
     onFilters('tourGuides', newValue);
   };
 
@@ -84,9 +85,9 @@ export default function GamesFiltersResult({
           </Block>
         )}
 
-        {!!filters.tourGuides.length && (
+        {!!filters.gameGuides.length && (
           <Block label="Tour guide:">
-            {filters.tourGuides.map((item) => (
+            {filters.gameGuides.map((item) => (
               <Chip
                 key={item.id}
                 size="small"

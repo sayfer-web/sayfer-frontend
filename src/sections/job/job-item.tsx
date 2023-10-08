@@ -20,6 +20,7 @@ import { paths } from 'src/routes/paths';
 import Iconify from 'src/components/iconify';
 import { RouterLink } from 'src/routes/components';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -31,6 +32,9 @@ type Props = {
 };
 
 export default function JobItem({ job, onView, onEdit, onDelete }: Props) {
+
+  const { t } = useLocales()
+
   const popover = usePopover();
 
   const { id, title, company, createdAt, candidates, experience, employmentTypes, salary, role } =
@@ -58,7 +62,7 @@ export default function JobItem({ job, onView, onEdit, onDelete }: Props) {
                 {title}
               </Link>
             }
-            secondary={`Posted date: ${fDate(createdAt)}`}
+            secondary={`${t('posted_date')}: ${fDate(createdAt)}`}
             primaryTypographyProps={{
               typography: 'subtitle1',
             }}
@@ -77,7 +81,7 @@ export default function JobItem({ job, onView, onEdit, onDelete }: Props) {
             sx={{ color: 'primary.main', typography: 'caption' }}
           >
             <Iconify width={16} icon="solar:users-group-rounded-bold" />
-            {candidates.length} Candidates
+            {candidates.length} {t('candidates')}
           </Stack>
         </Stack>
 

@@ -22,6 +22,7 @@ import { IInvoice } from 'src/types/invoice';
 import Iconify from 'src/components/iconify';
 //
 import InvoicePDF from './invoice-pdf';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -41,6 +42,9 @@ export default function InvoiceToolbar({
   statusOptions,
   onChangeStatus,
 }: Props) {
+
+  const { t } = useLocales()
+
   const router = useRouter();
 
   const view = useBoolean();
@@ -58,13 +62,13 @@ export default function InvoiceToolbar({
         sx={{ mb: { xs: 3, md: 5 } }}
       >
         <Stack direction="row" spacing={1} flexGrow={1} sx={{ width: 1 }}>
-          <Tooltip title="Edit">
+          <Tooltip title={t('edit')}>
             <IconButton onClick={handleEdit}>
               <Iconify icon="solar:pen-bold" />
             </IconButton>
           </Tooltip>
 
-          <Tooltip title="View">
+          <Tooltip title={t('view')}>
             <IconButton onClick={view.onTrue}>
               <Iconify icon="solar:eye-bold" />
             </IconButton>
@@ -76,7 +80,7 @@ export default function InvoiceToolbar({
             style={{ textDecoration: 'none' }}
           >
             {({ loading }) => (
-              <Tooltip title="Download">
+              <Tooltip title={t('download')}>
                 <IconButton>
                   {loading ? (
                     <CircularProgress size={24} color="inherit" />
@@ -88,19 +92,19 @@ export default function InvoiceToolbar({
             )}
           </PDFDownloadLink>
 
-          <Tooltip title="Print">
+          <Tooltip title={t('print')}>
             <IconButton>
               <Iconify icon="solar:printer-minimalistic-bold" />
             </IconButton>
           </Tooltip>
 
-          <Tooltip title="Send">
+          <Tooltip title={t('send')}>
             <IconButton>
               <Iconify icon="iconamoon:send-fill" />
             </IconButton>
           </Tooltip>
 
-          <Tooltip title="Share">
+          <Tooltip title={t('share')}>
             <IconButton>
               <Iconify icon="solar:share-bold" />
             </IconButton>
@@ -110,7 +114,7 @@ export default function InvoiceToolbar({
         <TextField
           fullWidth
           select
-          label="Status"
+          label={t('status')}
           value={currentStatus}
           onChange={onChangeStatus}
           sx={{
@@ -133,7 +137,7 @@ export default function InvoiceToolbar({
             }}
           >
             <Button color="inherit" variant="contained" onClick={view.onFalse}>
-              Close
+              {t('close')}
             </Button>
           </DialogActions>
 

@@ -201,5 +201,17 @@ export const paths = {
         edit: `${ROOTS.DASHBOARD}/transactions/${MOCK_ID}/edit`,
       },
     },
+    personal_transactions: {
+      root: `${ROOTS.DASHBOARD}/transactions/personal`,
+      new: `${ROOTS.DASHBOARD}/transactions/personal/new`,
+      // userTransactions: (id: string) => `${ROOTS.DASHBOARD}/transactions/personal/${id}`,
+      details: (id: string) => `${ROOTS.DASHBOARD}/transactions/personal/${id}`,
+      edit: (id: string) => `${ROOTS.DASHBOARD}/transactions/perosnal/${id}/edit`,
+      demo: {
+        userTransactions: `${ROOTS.DASHBOARD}/transactions/personal/${MOCK_ID}`,
+        details: `${ROOTS.DASHBOARD}/transactions/personal/${MOCK_ID}`,
+        edit: `${ROOTS.DASHBOARD}/transactions/personal/${MOCK_ID}/edit`,
+      },
+    },
   },
 };

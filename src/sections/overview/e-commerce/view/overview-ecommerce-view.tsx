@@ -45,7 +45,7 @@ export default function OverviewEcommerceView() {
       <Grid container spacing={3}>
         <Grid xs={12} md={8}>
           <EcommerceWelcome
-            title={`Congratulations! \n ${user?.displayName}`}
+            title={`${t('congratulations')}! \n ${user?.displayName}`}
             description="Best seller of the month You have done 57.6% more sales today."
             img={<MotivationIllustration />}
             action={
@@ -62,7 +62,7 @@ export default function OverviewEcommerceView() {
 
         <Grid xs={12} md={4}>
           <EcommerceWidgetSummary
-            title="Product Sold"
+            title={t('product_sold')}
             percent={2.6}
             total={765}
             chart={{
@@ -73,7 +73,7 @@ export default function OverviewEcommerceView() {
 
         <Grid xs={12} md={4}>
           <EcommerceWidgetSummary
-            title="Total Balance"
+            title={t('total_balance')}
             percent={-0.1}
             total={18765}
             chart={{
@@ -85,7 +85,7 @@ export default function OverviewEcommerceView() {
 
         <Grid xs={12} md={4}>
           <EcommerceWidgetSummary
-            title="Sales Profit"
+            title={t('sales_profit')}
             percent={0.6}
             total={4876}
             chart={{
@@ -97,12 +97,12 @@ export default function OverviewEcommerceView() {
 
         <Grid xs={12} md={6} lg={4}>
           <EcommerceSaleByGender
-            title="Sale By Gender"
+            title={t('sale_by_gender')}
             total={2324}
             chart={{
               series: [
-                { label: 'Mens', value: 44 },
-                { label: 'Womens', value: 75 },
+                { label: t('mens'), value: 44 },
+                { label: t('womens'), value: 75 },
               ],
             }}
           />
@@ -110,33 +110,33 @@ export default function OverviewEcommerceView() {
 
         <Grid xs={12} md={6} lg={8}>
           <EcommerceYearlySales
-            title="Yearly Sales"
-            subheader="(+43%) than last year"
+            title={t('yearly_sales')}
+            subheader={`(+43%) ${t('than_last_year')}`}
             chart={{
               categories: [
-                'Jan',
-                'Feb',
-                'Mar',
-                'Apr',
-                'May',
-                'Jun',
-                'Jul',
-                'Aug',
-                'Sep',
-                'Oct',
-                'Nov',
-                'Dec',
+                t('jan'),
+                t('feb'),
+                t('mar'),
+                t('apr'),
+                t('may'),
+                t('jun'),
+                t('jul'),
+                t('aug'),
+                t('sep'),
+                t('oct'),
+                t('nov'),
+                t('dec'),
               ],
               series: [
                 {
                   year: '2019',
                   data: [
                     {
-                      name: 'Total Income',
+                      name: t('total_income'),
                       data: [10, 41, 35, 51, 49, 62, 69, 91, 148, 35, 51, 49],
                     },
                     {
-                      name: 'Total Expenses',
+                      name: t('total_expenses'),
                       data: [10, 34, 13, 56, 77, 88, 99, 77, 45, 13, 56, 77],
                     },
                   ],
@@ -145,11 +145,11 @@ export default function OverviewEcommerceView() {
                   year: '2020',
                   data: [
                     {
-                      name: 'Total Income',
+                      name: t('total_income'),
                       data: [51, 35, 41, 10, 91, 69, 62, 148, 91, 69, 62, 49],
                     },
                     {
-                      name: 'Total Expenses',
+                      name: t('total_expenses'),
                       data: [56, 13, 34, 10, 77, 99, 88, 45, 77, 99, 88, 77],
                     },
                   ],
@@ -160,12 +160,12 @@ export default function OverviewEcommerceView() {
         </Grid>
 
         <Grid xs={12} md={6} lg={8}>
-          <EcommerceSalesOverview title="Sales Overview" data={_ecommerceSalesOverview} />
+          <EcommerceSalesOverview title={t('sales_overview')} data={_ecommerceSalesOverview} />
         </Grid>
 
         <Grid xs={12} md={6} lg={4}>
           <EcommerceCurrentBalance
-            title="Current Balance"
+            title={t('current_balance')}
             currentBalance={187650}
             sentAmount={25500}
           />
@@ -173,20 +173,20 @@ export default function OverviewEcommerceView() {
 
         <Grid xs={12} md={6} lg={8}>
           <EcommerceBestSalesman
-            title="Best Salesman"
+            title={t('best_salesman')}
             tableData={_ecommerceBestSalesman}
             tableLabels={[
-              { id: 'name', label: 'Seller' },
-              { id: 'category', label: 'Product' },
-              { id: 'country', label: 'Country', align: 'center' },
-              { id: 'totalAmount', label: 'Total', align: 'right' },
-              { id: 'rank', label: 'Rank', align: 'right' },
+              { id: 'name', label: t('seller') },
+              { id: 'category', label: t('product') },
+              { id: 'country', label: t('country'), align: 'center' },
+              { id: 'totalAmount', label: t('total'), align: 'right' },
+              { id: 'rank', label: t('rank'), align: 'right' },
             ]}
           />
         </Grid>
 
         <Grid xs={12} md={6} lg={4}>
-          <EcommerceLatestProducts title="Latest Products" list={_ecommerceLatestProducts} />
+          <EcommerceLatestProducts title={t('latest_products')} list={_ecommerceLatestProducts} />
         </Grid>
       </Grid>
     </Container>

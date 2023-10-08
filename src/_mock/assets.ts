@@ -175,7 +175,7 @@ export const _lastNames = [
 // ----------------------------------------------------------------------
 
 export const _prices = [
-  83.74, 97.14, 68.71, 85.21, 52.17, 25.18, 43.84, 60.98, 98.42, 53.37, 72.75, 56.61, 64.55, 77.32,
+  1, 97.14, 68.71, 85.21, 52.17, 25.18, 43.84, 60.98, 98.42, 53.37, 72.75, 56.61, 64.55, 77.32,
   60.62, 79.81, 93.68, 47.44, 76.24, 92.87, 72.91, 20.54, 94.25, 37.51,
 ];
 
@@ -326,8 +326,8 @@ export const _productNames = [
 // ----------------------------------------------------------------------
 
 export const _tourNames = [
-  'Adventure Seekers Expedition',
-  'Historic Heritage Tour',
+  'Poker',
+  'Bridge',
   'Culinary Delights Exploration',
   "Nature's Wonders Escapade",
   'Cultural Immersion Journey',

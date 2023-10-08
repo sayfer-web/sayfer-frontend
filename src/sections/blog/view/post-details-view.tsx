@@ -57,6 +57,8 @@ export default function PostDetailsView({ title }: Props) {
 
   const renderSkeleton = <PostDetailsSkeleton />;
 
+  const POST_PUBLISH_OPTIONS_ARR = POST_PUBLISH_OPTIONS()
+
   const renderError = (
     <EmptyContent
       filled
@@ -85,7 +87,7 @@ export default function PostDetailsView({ title }: Props) {
         liveLink={paths.post.details(`${post?.title}`)}
         publish={publish || ''}
         onChangePublish={handleChangePublish}
-        publishOptions={POST_PUBLISH_OPTIONS()}
+        publishOptions={POST_PUBLISH_OPTIONS_ARR}
       />
 
       <PostDetailsHero title={post.title} coverUrl={post.coverUrl} />

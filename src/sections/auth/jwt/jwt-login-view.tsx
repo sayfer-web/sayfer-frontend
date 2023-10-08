@@ -28,6 +28,7 @@ import { useLoginMutation } from 'src/app/features/auth/authApiSlice';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from 'src/app/features/auth/authSlice';
 import { TextField, makeStyles, withStyles } from '@mui/material';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -74,6 +75,8 @@ import { TextField, makeStyles, withStyles } from '@mui/material';
 // }));
 
 export default function JwtLoginView() {
+
+  const { t } = useLocales()
 
   /* @ts-ingore */
   // const classes = useStyles('dark');
@@ -181,7 +184,7 @@ export default function JwtLoginView() {
 
   const renderHead = (
     <Stack spacing={2} sx={{ mb: 5 }}>
-      <Typography variant="h4">Sign in to Sayfer Inv.</Typography>
+      <Typography variant="h4">{t('sign_in_to_sayfer_inv')}</Typography>
 
       <Stack direction="row" spacing={0.5}>
         <Typography variant="body2">New user?</Typography>

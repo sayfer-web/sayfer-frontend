@@ -138,21 +138,21 @@ export default function WalletRefillFounds({
 
         <Stack direction="row" justifyContent="space-between">
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Order Total
+            {t('current_balance')}
           </Typography>
           <Typography variant="body2">{fCurrency(currentBalance)}</Typography>
         </Stack>
 
         <Stack direction="row" justifyContent="space-between">
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Earning
+            {t('sent')}
           </Typography>
           <Typography variant="body2">- {fCurrency(sentAmount)}</Typography>
         </Stack>
 
         <Stack direction="row" justifyContent="space-between">
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Refunded
+            {t('total_amount')}
           </Typography>
           <Typography variant="subtitle1">{fCurrency(totalAmount)}</Typography>
         </Stack>

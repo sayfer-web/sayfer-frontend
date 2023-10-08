@@ -11,6 +11,7 @@ import { fCurrency } from 'src/utils/format-number';
 import { IOrderProductItem } from 'src/types/order';
 // components
 import Scrollbar from 'src/components/scrollbar';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -31,6 +32,9 @@ export default function TransactionsDetailsItems({
   subTotal,
   totalAmount,
 }: Props) {
+
+  const { t } = useLocales()
+
   const renderTotal = (
     <Stack
       spacing={2}
@@ -38,12 +42,12 @@ export default function TransactionsDetailsItems({
       sx={{ my: 3, textAlign: 'right', typography: 'body2' }}
     >
       <Stack direction="row">
-        <Box sx={{ color: 'text.secondary' }}>Subtotal</Box>
+        <Box sx={{ color: 'text.secondary' }}>{t('subtotal')}</Box>
         <Box sx={{ width: 160, typography: 'subtitle2' }}>{fCurrency(subTotal) || '-'}</Box>
       </Stack>
 
       <Stack direction="row">
-        <Box sx={{ color: 'text.secondary' }}>Shipping</Box>
+        <Box sx={{ color: 'text.secondary' }}>{t('shipping')}</Box>
         <Box
           sx={{
             width: 160,
@@ -55,7 +59,7 @@ export default function TransactionsDetailsItems({
       </Stack>
 
       <Stack direction="row">
-        <Box sx={{ color: 'text.secondary' }}>Discount</Box>
+        <Box sx={{ color: 'text.secondary' }}>{t('discount')}</Box>
         <Box
           sx={{
             width: 160,
@@ -67,12 +71,12 @@ export default function TransactionsDetailsItems({
       </Stack>
 
       <Stack direction="row">
-        <Box sx={{ color: 'text.secondary' }}>Taxes</Box>
+        <Box sx={{ color: 'text.secondary' }}>{t('taxes')}</Box>
         <Box sx={{ width: 160 }}>{taxes ? fCurrency(taxes) : '-'}</Box>
       </Stack>
 
       <Stack direction="row" sx={{ typography: 'subtitle1' }}>
-        <Box>Total</Box>
+        <Box>{t('total')}</Box>
         <Box sx={{ width: 160 }}>{fCurrency(totalAmount) || '-'}</Box>
       </Stack>
     </Stack>
@@ -80,7 +84,7 @@ export default function TransactionsDetailsItems({
 
   return (
     <Card>
-      <CardHeader title="Details" />
+      <CardHeader title={t('details')} />
 
       <Stack
         sx={{

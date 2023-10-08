@@ -7,26 +7,30 @@ import { useSettingsContext } from 'src/components/settings';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 //
 import JobNewEditForm from '../job-new-edit-form';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function JobCreateView() {
+
+  const { t } = useLocales()
+
   const settings = useSettingsContext();
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
       <CustomBreadcrumbs
-        heading="Create a new job"
+        heading={t('create_a_new_job')}
         links={[
           {
-            name: 'Dashboard',
+            name: t('dashboard'),
             href: paths.dashboard.root,
           },
           {
-            name: 'Job',
+            name: t('job'),
             href: paths.dashboard.job.root,
           },
-          { name: 'New job' },
+          { name: t('new_job') },
         ]}
         sx={{
           mb: { xs: 3, md: 5 },

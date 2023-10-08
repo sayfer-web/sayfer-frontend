@@ -4,17 +4,22 @@ import { paths } from 'src/routes/paths';
 import { PATH_AFTER_LOGIN } from 'src/config-global';
 // components
 import Iconify from 'src/components/iconify';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
-export const navConfig = [
+export const navConfig = () => {
+
+  const { t } = useLocales()
+
+  return [
   {
-    title: 'Home',
+    title: t('home'),
     icon: <Iconify icon="solar:home-2-bold-duotone" />,
     path: '/',
   },
   {
-    title: 'Components',
+    title: t('components'),
     icon: <Iconify icon="solar:atom-bold-duotone" />,
     path: paths.components,
   },
@@ -89,3 +94,4 @@ export const navConfig = [
   //   path: paths.docs,
   // },
 ];
+}

@@ -27,6 +27,7 @@ import ProductDetailsSummary from '../product-details-summary';
 import ProductDetailsToolbar from '../product-details-toolbar';
 import ProductDetailsCarousel from '../product-details-carousel';
 import ProductDetailsDescription from '../product-details-description';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -55,6 +56,9 @@ type Props = {
 };
 
 export default function ProductDetailsView({ id }: Props) {
+
+  const { t } = useLocales()
+
   const { product, productLoading, productError } = useGetProduct(id);
 
   const settings = useSettingsContext();
@@ -90,7 +94,7 @@ export default function ProductDetailsView({ id }: Props) {
           startIcon={<Iconify icon="eva:arrow-ios-back-fill" width={16} />}
           sx={{ mt: 3 }}
         >
-          Back to List
+          {t('back_to_list')}
         </Button>
       }
       sx={{ py: 10 }}
@@ -154,11 +158,11 @@ export default function ProductDetailsView({ id }: Props) {
           {[
             {
               value: 'description',
-              label: 'Description',
+              label: t('description'),
             },
             {
               value: 'reviews',
-              label: `Reviews (${product.reviews.length})`,
+              label: `${t('reviews')} (${product.reviews.length})`,
             },
           ].map((tab) => (
             <Tab key={tab.value} value={tab.value} label={tab.label} />

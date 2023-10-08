@@ -40,6 +40,45 @@ const defaultFilters: ITourFilters = {
   endDate: null,
 };
 
+
+const newTours = [{
+  id: '1',
+  name: 'Poker',
+  price: 0,
+  totalViews: 0,
+  tags: ['string'],
+  content: 'string;',
+  publish: 'string;',
+  images: [
+    'https://sayfer.club/assets/images/travel/travel_1.jpg',
+    'https://sayfer.club/assets/images/travel/travel_2.jpg',
+    'https://sayfer.club/assets/images/travel/travel_3.jpg',
+  ],
+  durations: 'string;',
+  priceSale: 0,
+  services: ['string'],
+  destination: 'Subtitle',
+  ratingNumber: 0,
+  bookers: [{
+    id: 'string;',
+    name: 'string;',
+    avatarUrl: 'string;',
+    guests: 0,
+  }],
+  tourGuides: [{
+    id: 'string;',
+    name: 'string;',
+    avatarUrl: 'string;',
+    phoneNumber: 'string;',
+  }],
+  createdAt: new Date(),
+  available: {
+    startDate: new Date(),
+    endDate: new Date(),
+  },
+}]
+
+
 // ----------------------------------------------------------------------
 
 export default function TourListView() {
@@ -64,8 +103,9 @@ export default function TourListView() {
       ? filters.startDate.getTime() > filters.endDate.getTime()
       : false;
 
+
   const dataFiltered = applyFilter({
-    inputData: _tours,
+    inputData: newTours,
     filters,
     sortBy,
     dateError,
@@ -98,14 +138,14 @@ export default function TourListView() {
       }));
 
       if (inputValue) {
-        const results = _tours.filter(
+        const results = _tours().filter(
           (tour) => tour.name.toLowerCase().indexOf(search.query.toLowerCase()) !== -1
         );
 
-        setSearch((prevState) => ({
-          ...prevState,
-          results,
-        }));
+        // setSearch((prevState) => ({
+        //   ...prevState,
+        //   results,
+        // }));
       }
     },
     [search.query]
@@ -168,14 +208,14 @@ export default function TourListView() {
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
       <CustomBreadcrumbs
-        heading="List"
+        heading={t('list')}
         links={[
-          { name: 'Dashboard', href: paths.dashboard.root },
+          { name: t('dashboard'), href: paths.dashboard.root },
           {
-            name: 'Tour',
+            name: t('tour'),
             href: paths.dashboard.tour.root,
           },
-          { name: 'List' },
+          { name: t('list') },
         ]}
         action={
           <Button

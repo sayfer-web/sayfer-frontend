@@ -47,21 +47,33 @@ import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
-const STATUS_OPTIONS = [{ value: 'all', label: 'all' }, 
-  { value: 'active', label: 'all' },
-  { value: 'pending', label: 'all' },
-  { value: 'banned', label: 'all' },
-  { value: 'rejected', label: 'all' },];
+const STATUS_OPTIONS = () => {
+
+  const { t } = useLocales()
+
+  return [
+  { value: 'all', label: t('all') }, 
+  { value: 'active', label: t('active') },
+  { value: 'pending', label: t('pending') },
+  { value: 'banned', label: t('banned') },
+  { value: 'rejected', label: t('rejected') },
+]
+}
 
 
-const TABLE_HEAD = [
-  { id: 'name', label: 'Name' },
-  { id: 'phoneNumber', label: 'Phone Number', width: 180 },
-  { id: 'company', label: 'Company', width: 220 },
-  { id: 'role', label: 'Role', width: 180 },
-  { id: 'status', label: 'Status', width: 100 },
+const TABLE_HEAD = () => {
+
+  const { t } = useLocales()
+
+  return [
+  { id: 'name', label: t('name') },
+  { id: 'phoneNumber', label: t('phone_number'), width: 180 },
+  { id: 'company', label: t('company'), width: 220 },
+  { id: 'role', label: t('role'), width: 180 },
+  { id: 'status', label: t('status'), width: 100 },
   { id: '', width: 88 },
 ];
+}
 
 const defaultFilters: IUserTableFilters = {
   name: '',
@@ -72,6 +84,9 @@ const defaultFilters: IUserTableFilters = {
 // ----------------------------------------------------------------------
 
 export default function UserListView() {
+
+  const { t } = useLocales()
+
   const table = useTable();
 
   const settings = useSettingsContext();
@@ -155,11 +170,11 @@ export default function UserListView() {
     <>
       <Container maxWidth={settings.themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="List"
+          heading={t('list')}
           links={[
-            { name: 'Dashboard', href: paths.dashboard.root },
-            { name: 'User', href: paths.dashboard.user.root },
-            { name: 'List' },
+            { name: t('dashboard'), href: paths.dashboard.root },
+            { name: t('user'), href: paths.dashboard.user.root },
+            { name: t('list') },
           ]}
           action={
             <Button
@@ -168,7 +183,7 @@ export default function UserListView() {
               variant="contained"
               startIcon={<Iconify icon="mingcute:add-line" />}
             >
-              New User
+              {t('new_user')}
             </Button>
           }
           sx={{
@@ -185,7 +200,7 @@ export default function UserListView() {
               boxShadow: (theme) => `inset 0 -2px 0 0 ${alpha(theme.palette.grey[500], 0.08)}`,
             }}
           >
-            {STATUS_OPTIONS.map((tab) => (
+            {STATUS_OPTIONS().map((tab) => (
               <Tab
                 key={tab.value}
                 iconPosition="end"
@@ -263,7 +278,7 @@ export default function UserListView() {
                 <TableHeadCustom
                   order={table.order}
                   orderBy={table.orderBy}
-                  headLabel={TABLE_HEAD}
+                  headLabel={TABLE_HEAD()}
                   rowCount={tableData.length}
                   numSelected={table.selected.length}
                   onSort={table.onSort}

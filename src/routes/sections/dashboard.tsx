@@ -186,6 +186,16 @@ export const dashboardRoutes = [
           { path: ':id/edit', element: <TransactionsEditPage /> },
         ],
       },
+      {
+        path: 'transactions/personal',
+        children: [
+          { element: <TransactionsListPage />, index: true },
+          { path: 'list', element: <TransactionsListPage /> },
+          { path: ':id', element: <TransactionsDetailsPage /> },
+          { path: 'new', element: <TransactionsCreatePage /> },
+          { path: ':id/edit', element: <TransactionsEditPage /> },
+        ],
+      },
       { path: 'file-manager', element: <FileManagerPage /> },
       { path: 'mail', element: <MailPage /> },
       { path: 'chat', element: <ChatPage /> },

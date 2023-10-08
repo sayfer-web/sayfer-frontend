@@ -22,6 +22,7 @@ import { countries } from 'src/assets/data';
 import Iconify from 'src/components/iconify';
 import { useSnackbar } from 'src/components/snackbar';
 import FormProvider, { RHFSelect, RHFTextField, RHFAutocomplete } from 'src/components/hook-form';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -32,6 +33,9 @@ type Props = {
 };
 
 export default function UserQuickEditForm({ currentUser, open, onClose }: Props) {
+  
+  const { t } = useLocales()
+  
   const { enqueueSnackbar } = useSnackbar();
 
   const NewUserSchema = Yup.object().shape({
@@ -113,7 +117,7 @@ export default function UserQuickEditForm({ currentUser, open, onClose }: Props)
               sm: 'repeat(2, 1fr)',
             }}
           >
-            <RHFSelect name="status" label="Status">
+            <RHFSelect name="status" label={t('status')}>
               {USER_STATUS_OPTIONS().map((status) => (
                 <MenuItem key={status.value} value={status.value}>
                   {status.label}
@@ -123,13 +127,13 @@ export default function UserQuickEditForm({ currentUser, open, onClose }: Props)
 
             <Box sx={{ display: { xs: 'none', sm: 'block' } }} />
 
-            <RHFTextField name="name" label="Full Name" />
-            <RHFTextField name="email" label="Email Address" />
-            <RHFTextField name="phoneNumber" label="Phone Number" />
+            <RHFTextField name="name" label={('full_name')} />
+            <RHFTextField name="email" label={('email_address')} />
+            <RHFTextField name="phoneNumber" label={t('phone_number')} />
 
             <RHFAutocomplete
               name="country"
-              label="Country"
+              label={t('country')}
               options={countries.map((country) => country.label)}
               getOptionLabel={(option) => option}
               renderOption={(props, option) => {
@@ -155,22 +159,22 @@ export default function UserQuickEditForm({ currentUser, open, onClose }: Props)
               }}
             />
 
-            <RHFTextField name="state" label="State/Region" />
-            <RHFTextField name="city" label="City" />
-            <RHFTextField name="address" label="Address" />
-            <RHFTextField name="zipCode" label="Zip/Code" />
-            <RHFTextField name="company" label="Company" />
-            <RHFTextField name="role" label="Role" />
+            <RHFTextField name="state" label={t('state_region')} />
+            <RHFTextField name="city" label={t('city')} />
+            <RHFTextField name="address" label={t('address')} />
+            <RHFTextField name="zipCode" label={t('zip_code')} />
+            <RHFTextField name="company" label={t('company')} />
+            <RHFTextField name="role" label={t('role')} />
           </Box>
         </DialogContent>
 
         <DialogActions>
           <Button variant="outlined" onClick={onClose}>
-            Cancel
+            {t('cancel')}
           </Button>
 
           <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-            Update
+            {t('update')}
           </LoadingButton>
         </DialogActions>
       </FormProvider>

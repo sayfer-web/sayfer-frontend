@@ -2,7 +2,7 @@ export * from './assets';
 export * from './_mock';
 
 // ----------------------------------------------------------------------
-
+export * from './_games';
 export * from './_job';
 export * from './_user';
 export * from './_tour';

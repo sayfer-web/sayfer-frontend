@@ -98,7 +98,7 @@ export default function GroupingFixedHeaderTable() {
                   colSpan={3}
                   sx={{ background: (theme) => theme.palette.background.paper }}
                 >
-                  Details
+                  {t('details')}
                 </TableCell>
               </TableRow>
 

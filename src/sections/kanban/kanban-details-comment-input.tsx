@@ -9,10 +9,14 @@ import IconButton from '@mui/material/IconButton';
 import { useMockedUser } from 'src/hooks/use-mocked-user';
 // components
 import Iconify from 'src/components/iconify';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function KanbanDetailsCommentInput() {
+
+  const { t } = useLocales()
+
   const { user } = useMockedUser();
 
   return (
@@ -27,7 +31,7 @@ export default function KanbanDetailsCommentInput() {
       <Avatar src={user?.photoURL} alt={user?.displayName} />
 
       <Paper variant="outlined" sx={{ p: 1, flexGrow: 1, bgcolor: 'transparent' }}>
-        <InputBase fullWidth multiline rows={2} placeholder="Type a message" sx={{ px: 1 }} />
+        <InputBase fullWidth multiline rows={2} placeholder={t('type_a_message')} sx={{ px: 1 }} />
 
         <Stack direction="row" alignItems="center">
           <Stack direction="row" flexGrow={1}>

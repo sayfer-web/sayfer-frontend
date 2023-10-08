@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { useLocales } from 'src/locales';
 // routes
 import { useParams } from 'src/routes/hooks';
 // sections
@@ -7,6 +8,9 @@ import { TourEditView } from 'src/sections/tour/view';
 // ----------------------------------------------------------------------
 
 export default function TourEditPage() {
+
+  const { t } = useLocales()
+
   const params = useParams();
 
   const { id } = params;
@@ -14,7 +18,7 @@ export default function TourEditPage() {
   return (
     <>
       <Helmet>
-        <title> Dashboard: Tour Edit</title>
+        <title> {t('dashboard')}: {t('tour_edit')}</title>
       </Helmet>
 
       <TourEditView id={`${id}`} />

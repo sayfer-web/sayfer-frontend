@@ -17,6 +17,7 @@ import { sendMessage, createConversation } from 'src/api/chat';
 import Iconify from 'src/components/iconify';
 // types
 import { IChatParticipant } from 'src/types/chat';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -35,6 +36,9 @@ export default function ChatMessageInput({
   disabled,
   selectedConversationId,
 }: Props) {
+
+  const { t } = useLocales()
+
   const router = useRouter();
 
   const { user } = useMockedUser();
@@ -121,7 +125,7 @@ export default function ChatMessageInput({
         value={message}
         onKeyUp={handleSendMessage}
         onChange={handleChangeMessage}
-        placeholder="Type a message"
+        placeholder={t('type_a_message')}
         disabled={disabled}
         startAdornment={
           <IconButton>

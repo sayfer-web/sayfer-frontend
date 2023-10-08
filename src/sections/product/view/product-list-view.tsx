@@ -74,6 +74,9 @@ const defaultFilters: IProductTableFilters = {
 // ----------------------------------------------------------------------
 
 export default function ProductListView() {
+
+  const { t } = useLocales()
+
   const router = useRouter();
 
   const table = useTable();
@@ -165,14 +168,14 @@ export default function ProductListView() {
     <>
       <Container maxWidth={settings.themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="List"
+          heading={t('list')}
           links={[
-            { name: 'Dashboard', href: paths.dashboard.root },
+            { name: t('dashboard'), href: paths.dashboard.root },
             {
-              name: 'Product',
+              name: t('product'),
               href: paths.dashboard.product.root,
             },
-            { name: 'List' },
+            { name: t('list') },
           ]}
           action={
             <Button
@@ -181,7 +184,7 @@ export default function ProductListView() {
               variant="contained"
               startIcon={<Iconify icon="mingcute:add-line" />}
             >
-              New Product
+              {t('new_product')}
             </Button>
           }
           sx={{ mb: { xs: 3, md: 5 } }}
@@ -220,7 +223,7 @@ export default function ProductListView() {
                 )
               }
               action={
-                <Tooltip title="Delete">
+                <Tooltip title={t('delete')}>
                   <IconButton color="primary" onClick={confirm.onTrue}>
                     <Iconify icon="solar:trash-bin-trash-bold" />
                   </IconButton>
@@ -298,7 +301,7 @@ export default function ProductListView() {
       <ConfirmDialog
         open={confirm.value}
         onClose={confirm.onFalse}
-        title="Delete"
+        title={t('delete')}
         content={
           <>
             Are you sure want to delete <strong> {table.selected.length} </strong> items?
@@ -313,7 +316,7 @@ export default function ProductListView() {
               confirm.onFalse();
             }}
           >
-            Delete
+            {t('delete')}
           </Button>
         }
       />

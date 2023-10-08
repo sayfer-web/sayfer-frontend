@@ -13,6 +13,7 @@ import { IChatAttachment } from 'src/types/chat';
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 import FileThumbnail from 'src/components/file-thumbnail';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -21,6 +22,9 @@ type Props = {
 };
 
 export default function ChatRoomAttachments({ attachments }: Props) {
+
+  const { t } = useLocales()
+
   const collapse = useBoolean(true);
 
   const totalAttachments = attachments.length;
@@ -41,7 +45,7 @@ export default function ChatRoomAttachments({ attachments }: Props) {
       }}
     >
       <Box component="span" sx={{ flexGrow: 1 }}>
-        Attachments ({totalAttachments})
+        {t('attachments')} ({totalAttachments})
       </Box>
       <Iconify
         width={16}
