@@ -63,12 +63,17 @@ export const _appInvoices = [...Array(5)].map((_, index) => {
   };
 });
 
-export const _appFeatured = [...Array(3)].map((_, index) => ({
+export const _appFeatured = () => {
+
+  const { t } = useLocales()
+
+  return [...Array(3)].map((_, index) => ({
   id: _mock.id(index),
-  title: _mock.postTitle(index),
+  title: `Poker ${index}`,
   description: _mock.sentence(index),
   coverUrl: _mock.image.cover(index),
 }));
+}
 
 // ANALYTIC
 // ----------------------------------------------------------------------

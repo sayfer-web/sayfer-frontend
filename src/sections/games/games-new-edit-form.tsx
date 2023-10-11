@@ -122,7 +122,7 @@ export default function GamesNewEditForm({ currentGame }: Props) {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
       enqueueSnackbar(currentGame ? 'Update success!' : 'Create success!');
-      router.push(paths.dashboard.tour.root);
+      router.push(paths.dashboard.games.root);
       console.info('DATA', data);
     } catch (error) {
       console.error(error);

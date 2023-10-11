@@ -25,7 +25,7 @@ export default function JobEditView({ id }: Props) {
 
   const jobs: any = _jobs()
 
-  const currentJob = jobs.find((job: any) => job.id === id);
+  const currentJob = jobs.find((job: any) => job.id === +id);
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>

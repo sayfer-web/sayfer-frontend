@@ -29,6 +29,7 @@ import { useDispatch } from 'react-redux';
 // import { useRegistrationMutation } from 'src/features/registration/registrationApiSlice';
 import { setCredentials } from 'src/app/features/auth/authSlice';
 import { TextField } from '@mui/material';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -37,6 +38,8 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/
 
 
 export default function JwtRegisterView() {
+
+  const { t } = useLocales()
 
   const userRef = useRef(null)
   const errRef = useRef(null)
@@ -107,6 +110,9 @@ export default function JwtRegisterView() {
   // }, [user, pwd, matchPwd])
 
   const handleSubmitReg = async (e: any) => {
+
+    const { t } = useLocales()
+
     e.preventDefault()
     const v1 = USER_REGEX.test(user)
     const v2 = PWD_REGEX.test(pwd)
@@ -205,13 +211,14 @@ export default function JwtRegisterView() {
 
   const renderHead = (
     <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
-      <Typography variant="h4">Get started absolutely free</Typography>
+      <Typography variant="h4">{t('get_started_absolutely_free')}</Typography>
 
       <Stack direction="row" spacing={0.5}>
-        <Typography variant="body2"> Already have an account? </Typography>
+        <Typography variant="body2"> {t('already_have_an_account')}? </Typography>
 
-        <Link href={paths.auth.jwt.login} component={RouterLink} variant="subtitle2">
-          Sign in
+        {/* <Link href={paths.auth.jwt.login} component={RouterLink} variant="subtitle2"> */}
+        <Link href='/auth/login' component={RouterLink} variant="subtitle2">
+          {t('sign_in')}
         </Link>
       </Stack>
     </Stack>
@@ -227,13 +234,13 @@ export default function JwtRegisterView() {
         textAlign: 'center',
       }}
     >
-      {'By signing up, I agree to '}
+      {t('by_signing_up_i_agree_to')}
       <Link underline="always" color="text.primary">
-        Terms of Service
+        {t('terms_of_service')}
       </Link>
-      {' and '}
+      {t('and')}
       <Link underline="always" color="text.primary">
-        Privacy Policy
+        {t('privacy_policy')}
       </Link>
       .
     </Typography>
@@ -271,7 +278,7 @@ export default function JwtRegisterView() {
               <TextField
         type="text"
         id="username"
-        label="Username"
+        label={t('username')}
         ref={userRef}
         value={user}
         autoComplete="on"
@@ -286,7 +293,7 @@ export default function JwtRegisterView() {
       <TextField
         type={showPwd ? 'text' : "password"}
         id="password"
-        label="Password"
+        label={t('password')}
         value={pwd}
         autoComplete="on"
         required
@@ -309,7 +316,7 @@ export default function JwtRegisterView() {
       <TextField
         type={showMatchPwd ? "text" : "password"}
         id="matchPassword"
-        label="Repeat password"
+        label={t('repeat_password')}
         value={matchPwd}
         autoComplete="on"
         required
@@ -338,7 +345,7 @@ export default function JwtRegisterView() {
           loading={isLoading}
           // loading={isSubmitting}
         >
-          Create account
+          {t('create_account')}
         </LoadingButton>
 
         {!!errorMsg && <Alert severity="success">{errorMsg}</Alert>}

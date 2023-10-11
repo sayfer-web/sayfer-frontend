@@ -199,7 +199,7 @@ return ([...Array(12)].map((_, index) => {
   const locations = countries.slice(1, index + 2).map((option) => option.label);
 
   return {
-    id: _mock.id(index),
+    id: index+1,
     salary,
     publish,
     company,

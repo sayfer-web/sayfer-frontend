@@ -187,10 +187,11 @@ export default function JwtLoginView() {
       <Typography variant="h4">{t('sign_in_to_sayfer_inv')}</Typography>
 
       <Stack direction="row" spacing={0.5}>
-        <Typography variant="body2">New user?</Typography>
+        <Typography variant="body2">{t('new_user')}?</Typography>
 
-        <Link component={RouterLink} href={paths.auth.jwt.register} variant="subtitle2">
-          Create an account
+        {/* <Link component={RouterLink} href={paths.auth.jwt.register} variant="subtitle2"> */}
+        <Link component={RouterLink} href='/auth/registration' variant="subtitle2">
+          {t('create_an_account')}
         </Link>
       </Stack>
     </Stack>
@@ -203,7 +204,7 @@ export default function JwtLoginView() {
       <TextField
         type="text"
         id="username"
-        label="Username"
+        label={t('username')}
         ref={userRef}
         value={user}
         autoComplete="on"
@@ -224,7 +225,7 @@ export default function JwtLoginView() {
       <TextField
         type="password"
         id="password"
-        label="Password"
+        label={t('password')}
         value={pwd}
         autoComplete="on"
         InputLabelProps={{}}
@@ -259,7 +260,7 @@ export default function JwtLoginView() {
       /> */}
 
       <Link variant="body2" color="inherit" underline="always" sx={{ alignSelf: 'flex-end' }}>
-        Forgot password?
+        {t('forgot_password')}?
       </Link>
 
       <LoadingButton
@@ -270,7 +271,7 @@ export default function JwtLoginView() {
         variant="contained"
         loading={isLoading}
       >
-        Login
+        {t('login')}
       </LoadingButton>
     </Stack>
   );
@@ -280,7 +281,7 @@ export default function JwtLoginView() {
       {renderHead}
 
       <Alert severity="info" sx={{ mb: 3 }}>
-        Use username: <strong>Tester12</strong> / password :<strong> Tester12</strong>
+        {t('use_username')}: <strong>Tester12</strong> / {t('password')} :<strong> Tester12</strong>
       </Alert>
 
       {renderForm}

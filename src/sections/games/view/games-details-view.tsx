@@ -24,7 +24,13 @@ type Props = {
 export default function GamesDetailsView({ id }: Props) {
   const settings = useSettingsContext();
 
-  const currentGame = _games().filter((game: any) => game.id === id)[0];
+  console.log(id)
+
+  // const currentGame = _games()[+id-1];
+  const gamesList = _games()
+  const currentGame = gamesList.filter((game: any) => game.id === +id)[0];
+
+  console.log(currentGame)
 
   const [publish, setPublish] = useState(currentGame?.publish);
 

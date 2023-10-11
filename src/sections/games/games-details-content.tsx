@@ -41,7 +41,7 @@ export default function GamesDetailsContent({ games }: Props) {
     gameGuides,
     available,
     durations,
-    destination,
+    // destination,
     ratingNumber,
   } = games;
 
@@ -170,7 +170,7 @@ export default function GamesDetailsContent({ games }: Props) {
         md: 'repeat(2, 1fr)',
       }}
     >
-      {[
+      {/* {[
         {
           label: t('next_event'),
           value: `${fDate(available.startDate)} - ${fDate(available.endDate)}`,
@@ -209,7 +209,7 @@ export default function GamesDetailsContent({ games }: Props) {
             }}
           />
         </Stack>
-      ))}
+      ))} */}
     </Box>
   );
 

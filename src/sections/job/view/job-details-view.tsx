@@ -26,7 +26,7 @@ export default function JobDetailsView({ id }: Props) {
 
   const jobs: any = _jobs()
 
-  const currentJob = jobs.filter((job: any) => job.id === id)[0];
+  const currentJob = jobs.filter((job: any) => job.id === +id)[0];
 
   const [publish, setPublish] = useState(currentJob?.publish);
 

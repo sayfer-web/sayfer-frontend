@@ -81,7 +81,7 @@ export default function NavVertical({ openNav, onCloseNav }: Props) {
             height: 1,
             position: 'fixed',
             width: NAV.W_VERTICAL,
-            borderRight: (theme) => `dashed 1px ${theme.palette.divider}`,
+            borderRight: (theme: any) => `dashed 1px ${theme.palette.divider}`,
           }}
         >
           {renderContent}

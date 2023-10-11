@@ -25,6 +25,7 @@ type StyledPolygonProps = {
   anchor?: 'top' | 'bottom';
 };
 
+/* @ts-ignore */
 const StyledPolygon = styled('div')<StyledPolygonProps>(({ anchor = 'top', theme }) => ({
   left: 0,
   zIndex: 9,
@@ -75,6 +76,8 @@ export default function HomeView() {
           <HomeForDesigner />
           {/* <StyledPolygon anchor="bottom" /> */}
         </Box>
+
+        
 
         {/* <HomeDarkMode /> */}
 

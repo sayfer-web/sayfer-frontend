@@ -77,7 +77,29 @@ export default function OverviewBankingView() {
           { x: 2023, y: 184 },
         ],
         percent: 10,
-        total: 100
+        total: 1
+      },
+      {
+        title: 'SFRX',
+        icon: '',
+        series: [
+          { x: 2010, y: 88 },
+          { x: 2011, y: 120 },
+          { x: 2012, y: 156 },
+          { x: 2013, y: 123 },
+          { x: 2014, y: 88 },
+          { x: 2015, y: 66 },
+          { x: 2016, y: 45 },
+          { x: 2017, y: 29 },
+          { x: 2018, y: 45 },
+          { x: 2019, y: 88 },
+          { x: 2020, y: 132 },
+          { x: 2021, y: 146 },
+          { x: 2022, y: 169 },
+          { x: 2023, y: 184 },
+        ],
+        percent: 10,
+        total: 1
       }
     ]
   )
@@ -97,24 +119,24 @@ export default function OverviewBankingView() {
       cardNumber: '**** **** **** 3640',
       cardValid: '',
     },
-    {
-      id: 1,
-      balance: 18000.23,
-      cardType: 'SFRX',
-      // cardHolder: _mock.fullName(3),
-      cardHolder: username,
-      cardNumber: '**** **** **** 8864',
-      cardValid: '',
-    },
-    {
-      id: 3,
-      balance: 2000.89,
-      cardType: 'mastercard',
-      // cardHolder: _mock.fullName(4),
-      cardHolder: username,
-      cardNumber: '**** **** **** 7755',
-      cardValid: '',
-    },
+    // {
+    //   id: 1,
+    //   balance: 18000.23,
+    //   cardType: 'SFRX',
+    //   // cardHolder: _mock.fullName(3),
+    //   cardHolder: username,
+    //   cardNumber: '**** **** **** 8864',
+    //   cardValid: '',
+    // },
+    // {
+    //   id: 3,
+    //   balance: 2000.89,
+    //   cardType: 'mastercard',
+    //   // cardHolder: _mock.fullName(4),
+    //   cardHolder: username,
+    //   cardNumber: '**** **** **** 7755',
+    //   cardValid: '',
+    // },
   ];
   
 
@@ -127,7 +149,14 @@ export default function OverviewBankingView() {
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Grid container spacing={3}>
-        <Grid xs={12} md={7}>
+
+      <Grid xs={12} md={3}>
+          {/* @ts-ignore */}
+          <BankingCurrentBalance list={_bankingCreditCard} />
+        </Grid>
+
+
+        <Grid xs={12} md={9}>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3}>
            
             {income.map(item => (
@@ -166,10 +195,6 @@ export default function OverviewBankingView() {
           </Stack>
         </Grid>
 
-        <Grid xs={12} md={5}>
-          {/* @ts-ignore */}
-          <BankingCurrentBalance list={_bankingCreditCard} />
-        </Grid>
 
         <Grid xs={12} md={8}>
           <Stack spacing={3}>
@@ -179,6 +204,7 @@ export default function OverviewBankingView() {
               chart={{
                 categories: [t('jan'), t('feb'), t('mar'), t('apr'), t('may'), t('jun'), t('jul'), t('aug'), t('sep')],
                 // categoriesLabels: [t('jan'), t('Feb'), t('mar'), t('apr'), t('may'), t('jun'), t('jul'), t('aug'), t('sep')],
+                colors: ['#0e0', '#080'],
                 series: [
                   {
                     type: 'Week',
@@ -238,26 +264,29 @@ export default function OverviewBankingView() {
               title={t('expenses_categories')}
               chart={{
                 series: [
-                  { label: 'Category 1', value: 14 },
-                  { label: 'Category 2', value: 23 },
-                  { label: 'Category 3', value: 21 },
-                  { label: 'Category 4', value: 17 },
-                  { label: 'Category 5', value: 15 },
-                  { label: 'Category 6', value: 10 },
-                  { label: 'Category 7', value: 12 },
-                  { label: 'Category 8', value: 17 },
-                  { label: 'Category 9', value: 21 },
+                  { label: 'SFR', value: 14 },
+                  { label: 'SFRX', value: 23 },
+                  { label: 'SFRM', value: 21 },
+                  // { label: 'Category 4', value: 17 },
+                  // { label: 'Category 5', value: 15 },
+                  // { label: 'Category 6', value: 10 },
+                  // { label: 'Category 7', value: 12 },
+                  // { label: 'Category 8', value: 17 },
+                  // { label: 'Category 9', value: 21 },
                 ],
                 colors: [
-                  theme.palette.primary.main,
-                  theme.palette.warning.dark,
-                  theme.palette.success.darker,
-                  theme.palette.error.main,
-                  theme.palette.info.dark,
-                  theme.palette.info.darker,
-                  theme.palette.success.main,
-                  theme.palette.warning.main,
-                  theme.palette.info.main,
+                  '#0f0',
+                  '#090',
+                  '#050',
+                  // theme.palette.primary.main,
+                  // theme.palette.warning.dark,
+                  // theme.palette.success.darker,
+                  // theme.palette.error.main,
+                  // theme.palette.info.dark,
+                  // theme.palette.info.darker,
+                  // theme.palette.success.main,
+                  // theme.palette.warning.main,
+                  // theme.palette.info.main,
                 ],
               }}
             />
@@ -295,14 +324,15 @@ export default function OverviewBankingView() {
                 list={_bankingContacts.slice(-5)}
               /> 
             */}
-
+            {/* <Stack sx={{ marginTop: 12 }}> */}
             <BankingInviteFriends
               price="$50"
               title={`${t('invite_friends')} \n ${t('and_earn')}`}
               description={t('present_egestas')}
-              img="/assets/illustrations/characters/character_11.png"
+              // img="/assets/illustrations/characters/character_11.png"
             />
-          </Stack>
+            </Stack>
+          {/* </Stack> */}
         </Grid>
       </Grid>
     </Container>

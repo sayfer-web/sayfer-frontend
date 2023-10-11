@@ -61,7 +61,7 @@ export default function GamesEditView({ id }: Props) {
 
   const settings = useSettingsContext();
 
-  const currentTour = newGames.find((tour) => tour.id === id);
+  const currentGame = newGames.find((tour) => tour.id === id);
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
@@ -73,17 +73,17 @@ export default function GamesEditView({ id }: Props) {
             href: paths.dashboard.root,
           },
           {
-            name: t('tour'),
-            href: paths.dashboard.tour.root,
+            name: t('games'),
+            href: paths.dashboard.games.root,
           },
-          { name: currentTour?.name },
+          { name: currentGame?.name },
         ]}
         sx={{
           mb: { xs: 3, md: 5 },
         }}
       />
 
-      <GamesNewEditForm currentGame={currentTour} />
+      <GamesNewEditForm currentGame={currentGame} />
     </Container>
   );
 }

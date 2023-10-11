@@ -218,14 +218,14 @@ export default function GamesListView() {
           { name: t('dashboard'), href: paths.dashboard.root },
           {
             name: t('games'),
-            href: paths.dashboard.tour.root,
+            href: paths.dashboard.games.root,
           },
           { name: t('list') },
         ]}
         action={
           <Button
             component={RouterLink}
-            href={paths.dashboard.tour.new}
+            href={paths.dashboard.games.new}
             variant="contained"
             startIcon={<Iconify icon="mingcute:add-line" />}
           >

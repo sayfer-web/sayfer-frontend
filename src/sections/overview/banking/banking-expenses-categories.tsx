@@ -60,6 +60,7 @@ export default function BankingExpensesCategories({ title, subheader, chart, ...
     },
     responsive: [
       {
+        /* @ts-ignore */
         breakpoint: theme.breakpoints.values.sm,
         options: {
           legend: {

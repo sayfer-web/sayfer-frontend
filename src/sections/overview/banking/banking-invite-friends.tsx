@@ -32,7 +32,7 @@ export default function BankingInviteFriends({
 
   return (
     <Box {...other}>
-      <Box
+      {/* <Box
         component="img"
         alt="invite"
         src={img}
@@ -44,11 +44,11 @@ export default function BankingInviteFriends({
           filter: 'drop-shadow(0 12px 24px rgba(0,0,0,0.24))',
           ...sx,
         }}
-      />
+      /> */}
 
       <Box
         sx={{
-          mt: -15,
+          mt: 0,
           color: 'common.white',
           borderRadius: 2,
           p: theme.spacing(16, 5, 5, 5),

@@ -55,26 +55,26 @@ export default function WalletRefillFounds({
 
     const coinsList = [
       {
-        network: 'Litecoin - LTC', 
-        coinTitle: 'ltc', 
+        network: 'PayPal', 
+        coinTitle: 'ttp', 
         icon: '',
         enabled: true
       },
       {
-        network: 'Bitcoin - BTC', 
-        coinTitle: 'btc', 
+        network: 'MasterCard', 
+        coinTitle: 'ttm', 
         icon: '',
         enabled: false
       },
       {
-        network: 'Ethereum - ETC', 
-        coinTitle: 'eth', 
+        network: 'Visa', 
+        coinTitle: 'ttv', 
         icon: '',
         enabled: false
       },
       {
-        network: 'Ethereum - USDT', 
-        coinTitle: 'usdt', 
+        network: 'Bank transfer', 
+        coinTitle: 'usd', 
         icon: '',
         enabled: false
       },
@@ -158,7 +158,7 @@ export default function WalletRefillFounds({
         </Stack>
 
         <Stack direction="row" spacing={1.5}>
-          <Button fullWidth onClick={() => toggleDialogVisible(true)} variant="contained" color="warning">
+          <Button fullWidth onClick={() => toggleDialogVisible(true)} variant="contained" color="success">
             {t('request')}
           </Button>
 

@@ -25,6 +25,7 @@ import { MotionContainer, varFade } from 'src/components/animate';
 
 // wave
 import wave from 'src/assets/images/other/wave.png'
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -130,6 +131,9 @@ const StyledEllipseBottom = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function HomeHero() {
+
+  const { t } = useLocales()
+
   const mdUp = useResponsive('up', 'md');
 
   const theme = useTheme();
@@ -199,8 +203,8 @@ export default function HomeHero() {
             textAlign: 'center',
           }}
         >
-          Blockchain based <br />
-          Investment Platform
+          {/* {t('blockchain_based')} <br /> */}
+          {t('investment_platform')}
         </Typography>
       </m.div>
 
@@ -220,7 +224,7 @@ export default function HomeHero() {
 
       <m.div variants={varFade().in}>
         <Typography variant="body2" sx={{ textAlign: 'center' }}>
-        Customer payouts are over $739,091
+        {t('customer_payouts_are_over')} $739,091
         </Typography>
       </m.div>
 
@@ -237,7 +241,7 @@ export default function HomeHero() {
             <Box component="strong" sx={{ mr: 0.5, color: 'text.primary' }}>
               4.96/5
             </Box>
-            (99+ reviews)
+            (99+ {t('reviews')})
           </Typography>
         </Stack>
       </m.div>
@@ -253,7 +257,7 @@ export default function HomeHero() {
               variant="contained"
               startIcon={<Iconify icon="eva:flash-fill" width={24} />}
             >
-              Join the Club Free
+              {t('join')}
             </Button>
 
             {/* <Link
@@ -283,7 +287,7 @@ export default function HomeHero() {
             href='/dashboard'
             sx={{ borderColor: 'text.primary' }}
           >
-            YouTube Preview
+            {t('preview')}
           </Button>
 
         </Stack>
@@ -294,7 +298,7 @@ export default function HomeHero() {
       <Stack spacing={3} sx={{ textAlign: 'center' }}>
         <m.div variants={varFade().in}>
           <Typography variant="overline" sx={{ opacity: 0.4 }}>
-            We work with
+            {t('we_work_with')}
           </Typography>
         </m.div>
 
@@ -425,11 +429,11 @@ export default function HomeHero() {
         <StyledWrapper>
           <Container component={MotionContainer} sx={{ height: 1 }}>
             <Grid container columnSpacing={{ md: 10 }} sx={{ height: 1 }}>
-              <Grid xs={12} md={6}>
+              {/* <Grid xs={12} md={6}> */}
                 {renderDescription}
-              </Grid>
+              {/* </Grid> */}
 
-              {mdUp && <Grid md={6}>{renderSlides}</Grid>}
+              {/* {mdUp && <Grid md={6}>{renderSlides}</Grid>} */}
             </Grid>
           </Container>
 

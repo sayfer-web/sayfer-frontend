@@ -23,14 +23,14 @@ export default function GamesList({ tours }: Props) {
 
   const handleView = useCallback(
     (id: string) => {
-      router.push(paths.dashboard.tour.details(id));
+      router.push(paths.dashboard.games.details(id));
     },
     [router]
   );
 
   const handleEdit = useCallback(
     (id: string) => {
-      router.push(paths.dashboard.tour.edit(id));
+      router.push(paths.dashboard.games.edit(id));
     },
     [router]
   );

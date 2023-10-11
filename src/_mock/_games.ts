@@ -149,7 +149,7 @@ export const _games = () => {
   const images = GAMES_IMAGES.slice(index, index + 5);
 
   return {
-    id: _mock.id(index),
+    id: index+1,
     images,
     publish,
     services,
@@ -159,7 +159,7 @@ export const _games = () => {
     bookers: BOOKER,
     content: CONTENT,
     tags: _tags.slice(0, 5),
-    name: _mock.tourName(index),
+    name: 'test',
     createdAt: _mock.time(index),
     durations: '4 days 3 nights',
     price: _mock.number.price(index),

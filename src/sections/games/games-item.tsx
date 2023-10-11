@@ -102,7 +102,7 @@ export default function GamesItem({ tour, onView, onEdit, onDelete }: Props) {
       spacing={0.5}
       direction="row"
       sx={{
-        p: (theme) => theme.spacing(1, 1, 0, 1),
+        p: (theme: any) => theme.spacing(1, 1, 0, 1),
       }}
     >
       <Stack flexGrow={1} sx={{ position: 'relative' }}>
@@ -120,24 +120,24 @@ export default function GamesItem({ tour, onView, onEdit, onDelete }: Props) {
   const renderTexts = (
     <ListItemText
       sx={{
-        p: (theme) => theme.spacing(2.5, 2.5, 2, 2.5),
+        p: (theme: any) => theme.spacing(2.5, 2.5, 2, 2.5),
       }}
       primary={`${t('posted_date')}: ${fDateTime(createdAt)}`}
       secondary={
-        <Link component={RouterLink} href={paths.dashboard.tour.details(id)} color="inherit">
+        <Link component={RouterLink} href={paths.dashboard.games.details(id)} color="inherit">
           {name}
         </Link>
       }
       primaryTypographyProps={{
-        typography: 'caption',
+        // typography: 'caption',
         color: 'text.disabled',
       }}
       secondaryTypographyProps={{
-        mt: 1,
+        // mt: 1,
         noWrap: true,
         component: 'span',
         color: 'text.primary',
-        typography: 'subtitle1',
+        // typography: 'subtitle1',
       }}
     />
   );
@@ -147,7 +147,7 @@ export default function GamesItem({ tour, onView, onEdit, onDelete }: Props) {
       spacing={1.5}
       sx={{
         position: 'relative',
-        p: (theme) => theme.spacing(0, 2.5, 2.5, 2.5),
+        p: (theme: any) => theme.spacing(0, 2.5, 2.5, 2.5),
       }}
     >
       <IconButton onClick={popover.onOpen} sx={{ position: 'absolute', bottom: 20, right: 8 }}>

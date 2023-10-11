@@ -17,6 +17,7 @@ interface Props extends CardProps {
   title: string;
   total: number;
   percent: number;
+  postfix?: string
   chart: {
     colors?: string[];
     series: number[];
@@ -24,7 +25,7 @@ interface Props extends CardProps {
   };
 }
 
-export default function AppWidgetSummary({ title, percent, total, chart, sx, ...other }: Props) {
+export default function AppWidgetSummary({ title, percent, total, chart, sx, postfix, ...other }: Props) {
   const theme = useTheme();
 
   const {
@@ -97,7 +98,7 @@ export default function AppWidgetSummary({ title, percent, total, chart, sx, ...
           </Typography>
         </Stack>
 
-        <Typography variant="h3">{fNumber(total)}</Typography>
+        <Typography variant="h3">{fNumber(total)}{postfix}</Typography>
       </Box>
 
       <Chart type="bar" series={[{ data: series }]} options={chartOptions} width={60} height={36} />

@@ -55,46 +55,46 @@ export default function BankingCurrentBalance({ list, sx }: Props) {
   });
 
   return (
-    <Box
-      sx={{
-        ...bgGradient({
-          color: alpha(theme.palette.grey[900], 0.8),
-          imgUrl: '/assets/background/overlay_2.jpg',
-        }),
-        height: 262,
-        borderRadius: 2,
-        position: 'relative',
-        color: 'common.white',
-        '.slick-slider, .slick-list, .slick-track, .slick-slide > div': {
-          height: 1,
-        },
-        '&:before, &:after': {
-          left: 0,
-          mx: 2.5,
-          right: 0,
-          zIndex: -2,
-          height: 200,
-          bottom: -16,
-          content: "''",
-          opacity: 0.16,
-          borderRadius: 2,
-          bgcolor: 'grey.500',
-          position: 'absolute',
-        },
-        '&:after': {
-          mx: 1,
-          bottom: -8,
-          opacity: 0.24,
-        },
-        ...sx,
-      }}
-    >
+    // <Box
+    //   sx={{
+    //     ...bgGradient({
+    //       color: alpha(theme.palette.grey[900], 0.8),
+    //       // imgUrl: '/assets/background/overlay_2.jpg',
+    //     }),
+    //     height: 262,
+    //     borderRadius: 2,
+    //     position: 'relative',
+    //     color: 'common.white',
+    //     '.slick-slider, .slick-list, .slick-track, .slick-slide > div': {
+    //       height: 1,
+    //     },
+    //     '&:before, &:after': {
+    //       left: 0,
+    //       mx: 2.5,
+    //       right: 0,
+    //       zIndex: -2,
+    //       height: 200,
+    //       bottom: -16,
+    //       content: "''",
+    //       opacity: 0.16,
+    //       borderRadius: 2,
+    //       bgcolor: 'grey.500',
+    //       position: 'absolute',
+    //     },
+    //     '&:after': {
+    //       mx: 1,
+    //       bottom: -8,
+    //       opacity: 0.24,
+    //     },
+    //     ...sx,
+    //   }}
+    // >
       <Carousel {...carousel.carouselSettings}>
         {list.map((card) => (
           <CardItem key={card.id} card={card} />
         ))}
       </Carousel>
-    </Box>
+    // </Box>
   );
 }
 

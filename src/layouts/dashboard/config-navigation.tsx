@@ -7,6 +7,7 @@ import { useLocales } from 'src/locales';
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 import SvgColor from 'src/components/svg-color';
+import { useAuth } from 'src/hooks/use-auth';
 
 // ----------------------------------------------------------------------
 
@@ -49,6 +50,8 @@ const ICONS = {
 
 export function useNavData() {
   const { t } = useLocales();
+
+  const { username, status } = useAuth()
 
   const data = useMemo(
     () => [
@@ -447,7 +450,6 @@ export function useNavData() {
           },
         ],
       },
-
       {
         subheader: t('menu_ap'),
         items: [
@@ -569,5 +571,5 @@ export function useNavData() {
     [t]
   );
 
-  return data;
+  return status === 'Admin' ? data : data.filter(item => item.subheader !== t('menu_ap'))
 }

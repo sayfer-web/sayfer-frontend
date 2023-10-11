@@ -43,10 +43,14 @@ import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import { MotionViewport, varFade } from 'src/components/animate';
 import { HomePresent } from './home-present';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function HomeHugePackElements() {
+
+  const { t } = useLocales()
+
   const mdUp = useResponsive('up', 'md');
 
   const [slider, setSlider] = useState<number>(24);
@@ -78,7 +82,7 @@ export default function HomeHugePackElements() {
         href={paths.components}
         endIcon={<Iconify icon="eva:arrow-ios-forward-fill" width={18} sx={{ ml: -0.5 }} />}
       >
-        View All Components
+        {t('details')}
       </Button>
     </m.div>
   );
@@ -88,19 +92,18 @@ export default function HomeHugePackElements() {
       sx={{
         textAlign: { xs: 'center', md: 'unset' },
         pl: { md: 5 },
-        pt: { md: 15 },
+        pt: { md: 5 },
       }}
     >
       <m.div variants={varFade().inUp}>
         <Typography component="div" variant="overline" sx={{ color: 'text.disabled' }}>
-          Interface Starter Kit
+          {t('invest_platform')}
         </Typography>
       </m.div>
 
       <m.div variants={varFade().inUp}>
-        <Typography variant="h2" sx={{ my: 3 }}>
-          Huge pack <br />
-          of elements
+        <Typography variant="h3" sx={{ my: 3 }}>
+          {t('invest_your_money')}
         </Typography>
       </m.div>
 
@@ -111,8 +114,7 @@ export default function HomeHugePackElements() {
             color: 'text.secondary',
           }}
         >
-          We collected most popular elements. Menu, sliders, buttons, inputs etc. are all here. Just
-          dive in!
+          {t('no_lie_anymore')}
         </Typography>
       </m.div>
 
@@ -144,7 +146,7 @@ export default function HomeHugePackElements() {
     <Container
       component={MotionViewport}
       sx={{
-        py: { xs: 10, md: 15 },
+        py: { xs: 5, md: 10 },
       }}
     >
       <Grid container direction={{ xs: 'column', md: 'row-reverse' }} spacing={5}>

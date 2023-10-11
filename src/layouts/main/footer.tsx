@@ -26,11 +26,13 @@ import IconTelegram from 'src/assets/icons/socials/IconTelegram'
 import IconVk from 'src/assets/icons/socials/IconVk'
 import IconLinkedin from 'src/assets/icons/socials/IconLinkedin'
 import IconLogo from 'src/assets/icons/menu/IconLogo'
+import { useLocales } from 'src/locales';
 
 
 // ----------------------------------------------------------------------
 
-const LINKS = [
+const LINKS = () => {
+  return [
   {
     headline: 'Minimal',
     children: [
@@ -45,16 +47,20 @@ const LINKS = [
       { name: 'Terms and Condition', href: '#' },
       { name: 'Privacy Policy', href: '#' },
     ],
-  },
+  }, 
   {
     headline: 'Contact',
     children: [{ name: 'support@minimals.cc', href: '#' }],
   },
 ];
+}
 
 // ----------------------------------------------------------------------
 
 export default function Footer() {
+
+  const { t } = useLocales()
+
   const pathname = usePathname();
 
   const isHome = pathname === '/';
@@ -144,7 +150,7 @@ export default function Footer() {
 
           <Grid xs={12} md={6}>
             <Stack spacing={5} direction={{ xs: 'column', md: 'row' }}>
-              {LINKS.map((list) => (
+              {LINKS().map((list) => (
                 <Stack
                   key={list.headline}
                   spacing={2}
@@ -188,6 +194,7 @@ export default function Footer() {
       style={{ display: 'flex', flexDirection: 'column', flex: 1, gap: 40, padding: 30, paddingLeft: 20, paddingRight: 20 }}
       >
 
+
         <div className='list-none flex flex-row md:flex-col max-[436px]:flex-col gap-4 text-[#fff] lg:flex-1'
         style={{ display: 'flex', flexDirection: 'column', gap: 10 }}
         >
@@ -201,7 +208,7 @@ export default function Footer() {
           <div className='max-w-full font-light max-[436px]:text-2xl text-lg max-[436px]:text-center'
           style={{ width: '100%', fontSize: 20, fontWeight: '200' }}
           >
-            Уникальная сетевая инвестиционная платформа, основанная на блокчейне. Кровеносной системой проекта является личная криптовалюта, выдаваемая инвесторам в качестве токенов. Токены являются удобным средством для проведения операций в приложениях внутри нашей сети.
+            {t('footer_title')}
           </div>
 
         </div>
@@ -222,12 +229,12 @@ export default function Footer() {
 
           <div style={{ listStyle: "none", display: 'flex', flexDirection: 'column', color: '#fff', gap: 0, width: 250 }} className='max-[436px]:w-full w-[168]'>
 
-            <span style={{ fontWeight: '500', color: '#02a30c', fontSize: 20 }} className='text-xl max-[436px]:text-2xl'>Пользователь</span>
-            <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column' }}>
-              <li style={{ listStyle: 'none'}}>» Мой профиль</li>
-              <li className='font-light max-[436px]:text-xl text-lg'>» Мой портфель</li>
-              <li className='font-light max-[436px]:text-xl text-lg'>» Настройки</li>
-              <li className='font-light max-[436px]:text-xl text-lg'>» Выход</li>
+            <span style={{ fontWeight: '500', color: '#02a30c', fontSize: 20 }} className='text-xl max-[436px]:text-2xl'>{t('user')}</span>
+            <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column', paddingLeft: 0 }}>
+              <li style={{ listStyle: 'none'}}>» {t('my_profile')}</li>
+              <li>» {t('my_portfolio')}</li>
+              <li>» {t('settings')}</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» {t('exit')}</li>
             </ul>
 
           </div>
@@ -235,33 +242,33 @@ export default function Footer() {
 
           <div style={{ listStyle: "none", display: 'flex', flexDirection: 'column', color: '#fff', gap: 0, width: 250 }} className='max-[436px]:w-full w-[168]'>
             <span style={{ fontWeight: '500', color: '#02a30c', fontSize: 20 }} className='text-xl max-[436px]:text-2xl'>Платформа</span>
-            <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column' }}>
-              <li className='font-light max-[436px]:text-xl text-lg'>» Кто мы</li>
-              <li className='font-light max-[436px]:text-xl text-lg'>» Наши цели</li>
-              <li className='font-light max-[436px]:text-xl text-lg'>» Преимущества</li>
-              <li className='font-light max-[436px]:text-xl text-lg'>» С чего начать</li>
+            <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column', paddingLeft: 0 }}>
+              <li className='font-light max-[436px]:text-xl text-lg'>» {t('who_we_are')}</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» {t('our_targets')}</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» {t('our_advantages')}</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» {t('starts_with')}</li>
             </ul>
 
           </div>
 
           <div style={{ listStyle: "none", display: 'flex', flexDirection: 'column', color: '#fff', gap: 0, width: 250 }} className='max-[436px]:w-full w-[168]'>
-            <span style={{ fontWeight: '500', color: '#02a30c', fontSize: 20 }} className='text-xl max-[436px]:text-2xl'>Справочник</span>
-            <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column' }}>
-              <li className='font-light max-[436px]:text-xl text-lg'>» Приватность</li>
-              <li className='font-light max-[436px]:text-xl text-lg'>» Безопасность</li>
-              <li className='font-light max-[436px]:text-xl text-lg'>» Правила сервиса</li>
-              <li className='font-light max-[436px]:text-xl text-lg'>» Сотрудничество</li>
+            <span style={{ fontWeight: '500', color: '#02a30c', fontSize: 20 }} className='text-xl max-[436px]:text-2xl'>{t('directory')}</span>
+            <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column', paddingLeft: 0 }}>
+              <li className='font-light max-[436px]:text-xl text-lg'>» {t('privacy')}</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» {t('security')}</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» {t('terms_of_service')}</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» {t('partnership')}</li>
             </ul>
 
           </div>
 
           <div style={{ listStyle: "none", display: 'flex', flexDirection: 'column', color: '#fff', gap: 0, width: 250 }} className='max-[436px]:w-full w-[168]'>
-            <span style={{ fontWeight: '500', color: '#02a30c', fontSize: 20 }} className='text-xl max-[436px]:text-2xl'>Legal Info</span>
-            <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column' }}>
-              <li className='font-light max-[436px]:text-xl text-lg'>» Privacy Notice</li>
-              <li className='font-light max-[436px]:text-xl text-lg'>» Security</li>
-              <li className='font-light max-[436px]:text-xl text-lg'>» Terms of Service</li>
-              <li className='font-light max-[436px]:text-xl text-lg'>» Become Affiliate</li>
+            <span style={{ fontWeight: '500', color: '#02a30c', fontSize: 20 }} className='text-xl max-[436px]:text-2xl'>{t('legal_info')}</span>
+            <ul style={{ listStyle: "none", display: 'flex', gap: 5, flexDirection: 'column', paddingLeft: 0 }}>
+              <li className='font-light max-[436px]:text-xl text-lg'>» {t('privacy_notice')}</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» {t('security')}</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» {t('terms_of_service')}</li>
+              <li className='font-light max-[436px]:text-xl text-lg'>» {t('become_affiliate')}</li>
             </ul>
           </div>
         </Stack>
@@ -302,7 +309,7 @@ export default function Footer() {
         style={{ display: 'flex', justifyContent: 'center', gap: 10, alignItems: 'center' }}
         >
           <span style={{  }}>© 2023 Sayfer. </span>
-          <span style={{ }}>Все права защищены.</span>
+          <span style={{ }}>{t('all_rights_reserved')}.</span>
         </div>
         <ul className='flex flex-row gap-5 text-white justify-center sm:justify-end w-full'
         style={{ display: 'flex', flexDirection: 'row', gap: 5, justifyContent: 'center', listStyle: 'none', alignItems: 'center', paddingLeft: 0 }}

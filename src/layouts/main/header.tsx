@@ -111,7 +111,7 @@ export default function Header() {
             // target="_blank"
             // href={paths.minimalUI}
             // href="/auth/jwt/login"
-            onClick={() => { navigate('/auth/jwt/login') } }
+            onClick={() => { navigate('/auth/login') } }
             >
               {t('login')}
             </Button>

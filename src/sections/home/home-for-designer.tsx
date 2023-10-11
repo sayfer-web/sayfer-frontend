@@ -17,10 +17,14 @@ import Iconify from 'src/components/iconify';
 import { MotionViewport, varFade } from 'src/components/animate';
 import { HomePresent } from './home-present';
 import { Style } from 'util';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function HomeForDesigner() {
+
+  const { t } = useLocales()
+
   const theme = useTheme();
 
   const mdUp = useResponsive('up', 'md');
@@ -29,11 +33,11 @@ export default function HomeForDesigner() {
     <Box sx={{ textAlign: { xs: 'center', md: 'unset' }, mt: { xs: 10, md: 20 } }}>
       <m.div variants={varFade().inUp}>
         <Typography component="div" variant="overline" sx={{ color: 'text.disabled' }}>
-          Seriously?
+          {t('general_token')}
         </Typography>
       </m.div>
 
-      <m.div variants={varFade().inUp}>
+      {/* <m.div variants={varFade().inUp}>
         <Typography
           variant="h2"
           sx={{
@@ -44,7 +48,24 @@ export default function HomeForDesigner() {
             ),
           }}
         >
-          SAYFER TOKEN
+          {t('sfr_token')}
+        </Typography>
+      </m.div> */}
+
+      <m.div variants={varFade().inUp}>
+        <Typography variant="h3" sx={{ my: 3 }}>
+          {t('unique_tokens')}
+        </Typography>
+      </m.div>
+
+      <m.div variants={varFade().inUp}>
+        <Typography
+          sx={{
+            mb: 5,
+            color: 'text.secondary',
+          }}
+        >
+          {t('another_tokens')}
         </Typography>
       </m.div>
 
@@ -58,7 +79,7 @@ export default function HomeForDesigner() {
           rel="noopener"
           href={paths.figma}
         >
-          Take it free!
+          {t('details')}
         </Button>
       </m.div>
     </Box>
