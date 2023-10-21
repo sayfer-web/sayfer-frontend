@@ -171,6 +171,7 @@ export default function JobListView() {
           (job: any) => job.title.toLowerCase().indexOf(search.query.toLowerCase()) !== -1
         );
 
+        /* @ts-ignore */
         setSearch((prevState) => ({
           ...prevState,
           results,

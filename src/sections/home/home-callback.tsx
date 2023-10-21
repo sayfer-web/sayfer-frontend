@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography"
 import Box from '@mui/joy/Box';
 // import Textarea from '@mui/joy/Textarea';
 import { Textarea } from '@mui/joy';
+import { varFade } from "src/components/animate"
 
 
 const USER_REGEX = /^[a-zA-Zа-яА-Я ]+$/
@@ -86,9 +87,20 @@ export const HomeCallback = () => {
   return (
     <section
       style={{ boxShadow: 'inset 0 5px 10px rgba(0, 255, 0, 0.2), 0 -5px 10px rgba(0, 255, 0, 0.2)', background: '#002102', flex: 1, display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', gap: 20, paddingTop: 48, paddingBottom: 48, padding: 12 }} className="py-12 px-4 gap-8">
-        <m.div>
+        
+        <m.div variants={varFade().inDown}>
+            <Typography variant="h4">{t('still_have_questions')}?</Typography>
+          </m.div>
+
+          <m.div variants={varFade().inDown}>
+            <Typography sx={{ mt: 2, mb: 5, color: 'text.secondary' }}>
+              {t('please_describe_your_case_to_receive_the_most_accurate_advice')}
+            </Typography>
+          </m.div>
+        
+        {/* <m.div>
           <Typography variant="h4" sx={{ paddingTop: 2, paddingBottom: 2 }}>{t('callback_title')}</Typography>
-        </m.div>
+        </m.div> */}
       {/* <h1 style={{ fontSize: 28, fontWeight: '500', color: '#fff', textAlign: 'center', fontStyle: 'initial' }}
         className="text-3xl pb-2 px-5"></h1> */}
       {/* <h2 style={{ fontSize: 24, fontWeight: '300', color: '#fff'}}></h2> */}

@@ -130,17 +130,17 @@ export const _userInvoices = [...Array(10)].map((_, index) => ({
 export const _userPlans = [
   {
     subscription: 'basic',
-    price: 0,
+    price: 10,
     primary: false,
   },
   {
     subscription: 'starter',
-    price: 4.99,
+    price: 100,
     primary: true,
   },
   {
     subscription: 'premium',
-    price: 9.99,
+    price: 300,
     primary: false,
   },
 ];

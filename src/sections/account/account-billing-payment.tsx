@@ -12,6 +12,7 @@ import Iconify from 'src/components/iconify';
 //
 import PaymentCardItem from '../payment/payment-card-item';
 import PaymentNewCardDialog from '../payment/payment-new-card-dialog';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -20,13 +21,16 @@ type Props = {
 };
 
 export default function AccountBillingPayment({ cards }: Props) {
+
+  const { t } = useLocales()
+
   const newCard = useBoolean();
 
   return (
     <>
       <Card sx={{ my: 3 }}>
         <CardHeader
-          title="Payment Method"
+          title={t('payment_method')}
           action={
             <Button
               size="small"
@@ -34,7 +38,7 @@ export default function AccountBillingPayment({ cards }: Props) {
               startIcon={<Iconify icon="mingcute:add-line" />}
               onClick={newCard.onTrue}
             >
-              New Card
+              {t('new_method')}
             </Button>
           }
         />

@@ -31,7 +31,7 @@ export default function AccountBilling({ cards, plans, invoices, addressBook }: 
 
         <AccountBillingPayment cards={cards} />
 
-        <AccountBillingAddress addressBook={addressBook} />
+        {/* <AccountBillingAddress addressBook={addressBook} /> */}
       </Grid>
 
       <Grid xs={12} md={4}>

@@ -10,39 +10,44 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 // components
 import FormProvider from 'src/components/hook-form';
 import { useSnackbar } from 'src/components/snackbar';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
-
-const NOTIFICATIONS = [
-  {
-    subheader: 'Activity',
-    caption: 'Donec mi odio, faucibus at, scelerisque quis',
-    items: [
-      {
-        id: 'activity_comments',
-        label: 'Email me when someone comments onmy article',
-      },
-      {
-        id: 'activity_answers',
-        label: 'Email me when someone answers on my form',
-      },
-      { id: 'activityFollows', label: 'Email me hen someone follows me' },
-    ],
-  },
-  {
-    subheader: 'Application',
-    caption: 'Donec mi odio, faucibus at, scelerisque quis',
-    items: [
-      { id: 'application_news', label: 'News and announcements' },
-      { id: 'application_product', label: 'Weekly product updates' },
-      { id: 'application_blog', label: 'Weekly blog digest' },
-    ],
-  },
-];
 
 // ----------------------------------------------------------------------
 
 export default function AccountNotifications() {
+
+  const { t } = useLocales()
+      
+  const NOTIFICATIONS = [
+    {
+      subheader: t('activity'),
+      caption: t('notifications_activity_info'),
+      items: [
+        {
+          id: 'activity_comments',
+          label: t('email_me_when_someone_comments_on_my_article'),
+        },
+        {
+          id: 'activity_answers',
+          label: t('email_me_when_someone_answers_on_my_form'),
+        },
+        { id: 'activityFollows', label: t('email_me_when_someone_follows_me') },
+      ],
+    },
+    {
+      subheader: t('application'),
+      caption: t('notifications_application_info'),
+      items: [
+        { id: 'application_news', label: t('news_and_announcements') },
+        { id: 'application_product', label: t('weekly_product_updates') },
+        { id: 'application_blog', label: t('weekly_blog_digest') },
+      ],
+    },
+  ];
+
+
   const { enqueueSnackbar } = useSnackbar();
 
   const methods = useForm({
@@ -123,7 +128,7 @@ export default function AccountNotifications() {
         ))}
 
         <LoadingButton type="submit" variant="contained" loading={isSubmitting} sx={{ ml: 'auto' }}>
-          Save Changes
+          {t('save_changes')}
         </LoadingButton>
       </Stack>
     </FormProvider>

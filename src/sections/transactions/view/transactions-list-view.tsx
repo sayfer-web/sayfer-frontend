@@ -44,6 +44,7 @@ import OrderTableRow from '../transactions-table-row';
 import OrderTableToolbar from '../transactions-table-toolbar';
 import OrderTableFiltersResult from '../transactions-table-filters-result';
 import { useLocales } from 'src/locales';
+import { useNavigate, useNavigation } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
 
@@ -95,7 +96,7 @@ export default function TransactionsListView() {
 
   const confirm = useBoolean();
 
-  const [tableData, setTableData] = useState(_orders);
+  const [tableData, setTableData] = useState(_orders());
 
   const [filters, setFilters] = useState(defaultFilters);
 
@@ -105,6 +106,7 @@ export default function TransactionsListView() {
       : false;
 
   const dataFiltered = applyFilter({
+    /* @ts-ignore */
     inputData: tableData,
     comparator: getComparator(table.order, table.orderBy),
     filters,
@@ -159,12 +161,19 @@ export default function TransactionsListView() {
     setFilters(defaultFilters);
   }, []);
 
-  const handleViewRow = useCallback(
-    (id: string) => {
-      router.push(paths.dashboard.order.details(id));
-    },
-    [router]
-  );
+  // const handleViewRow = useCallback(
+  //   (id: string) => {
+  //     router.push(paths.dashboard.order.details(id));
+  //   },
+  //   [router]
+  // );
+
+  // const navigate = useNavigation()
+  const navigate = useNavigate()
+
+  const handleViewRow = (id: string) => {
+    navigate(`/dashboard/transactions/${id}`)
+  }
 
   const handleFilterStatus = useCallback(
     (event: React.SyntheticEvent, newValue: string) => {
@@ -223,14 +232,14 @@ export default function TransactionsListView() {
                   >
                     {tab.value === 'all' && _orders.length}
                     {tab.value === 'completed' &&
-                      _orders.filter((order) => order.status === 'completed').length}
+                      _orders().filter((order) => order.status === 'completed').length}
 
                     {tab.value === 'pending' &&
-                      _orders.filter((order) => order.status === 'pending').length}
+                      _orders().filter((order) => order.status === 'pending').length}
                     {tab.value === 'cancelled' &&
-                      _orders.filter((order) => order.status === 'cancelled').length}
+                      _orders().filter((order) => order.status === 'cancelled').length}
                     {tab.value === 'refunded' &&
-                      _orders.filter((order) => order.status === 'refunded').length}
+                      _orders().filter((order) => order.status === 'refunded').length}
                   </Label>
                 }
               />
@@ -353,7 +362,7 @@ export default function TransactionsListView() {
               confirm.onFalse();
             }}
           >
-            Delete
+            {t('delete')}
           </Button>
         }
       />

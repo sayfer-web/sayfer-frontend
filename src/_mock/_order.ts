@@ -24,7 +24,11 @@ const ITEMS = [...Array(3)].map((_, index) => ({
   price: _mock.number.price(index),
 }));
 
-export const _orders = [...Array(20)].map((_, index) => {
+export const _orders = () => { 
+  
+  const { t } = useLocales()
+
+  return [...Array(20)].map((_, index) => {
   const shipping = 10;
 
   const discount = 10;
@@ -40,7 +44,7 @@ export const _orders = [...Array(20)].map((_, index) => {
   const totalAmount = subTotal - shipping - discount + taxes;
 
   const customer = {
-    id: _mock.id(index),
+    id: index+1,
     name: _mock.fullName(index),
     email: _mock.email(index),
     avatarUrl: _mock.image.avatar(index),
@@ -71,8 +75,8 @@ export const _orders = [...Array(20)].map((_, index) => {
   };
 
   return {
-    id: _mock.id(index),
-    orderNumber: `#601${index}`,
+    id: `${index+1}`,
+    orderNumber: `${index+1}`,
     createdAt: _mock.time(index),
     taxes,
     items,
@@ -99,3 +103,4 @@ export const _orders = [...Array(20)].map((_, index) => {
       'refunded',
   };
 });
+}

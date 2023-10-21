@@ -114,8 +114,8 @@ export default function JwtLoginView() {
       dispatch(setCredentials({ ...userData, user }))
       // setUser(userData.token)
       // setPwd('')
-      router.push(returnTo || PATH_AFTER_LOGIN);
-      // navigate('/dashboard')
+      // router.push(returnTo || PATH_AFTER_LOGIN);
+      navigate('/dashboard')
     } catch (err: any) {
       if (!err.originalStatus) {
         setErrMsg('No Server Response')

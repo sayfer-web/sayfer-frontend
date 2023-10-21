@@ -16,6 +16,7 @@ import { fDateTime } from 'src/utils/format-time';
 // types
 import { IOrderHistory } from 'src/types/order';
 import { useLocales } from 'src/locales';
+import { useState } from 'react';
 
 // ----------------------------------------------------------------------
 
@@ -26,6 +27,13 @@ type Props = {
 export default function TransactionsDetailsHistory({ history }: Props) {
 
   const { t } = useLocales()
+
+  const [newHistory, setHistory] = useState({
+    createdAt: new Date(),
+    receivedAt: new Date(),
+    timeline: [{ title: 'received', time: new Date() }, { title: 'created', time: new Date() }]
+    
+  })
 
   const renderSummary = (
     <Stack
@@ -41,21 +49,21 @@ export default function TransactionsDetailsHistory({ history }: Props) {
         borderStyle: 'dashed',
       }}
     >
-      <Stack spacing={0.5}>
+      {/* <Stack spacing={0.5}>
         <Box sx={{ color: 'text.disabled' }}>{t('order_time')}</Box>
         {fDateTime(history.orderTime)}
       </Stack>
       <Stack spacing={0.5}>
         <Box sx={{ color: 'text.disabled' }}>{t('payment_time')}</Box>
         {fDateTime(history.orderTime)}
+      </Stack> */}
+      <Stack spacing={0.5}>
+        <Box sx={{ color: 'text.disabled' }}>{t('transaction_receivedAt')}</Box>
+        {fDateTime(newHistory.receivedAt)}
       </Stack>
       <Stack spacing={0.5}>
-        <Box sx={{ color: 'text.disabled' }}>{t('delivery_time_for_the_carrier')}</Box>
-        {fDateTime(history.orderTime)}
-      </Stack>
-      <Stack spacing={0.5}>
-        <Box sx={{ color: 'text.disabled' }}>{t('completion_time')}</Box>
-        {fDateTime(history.orderTime)}
+        <Box sx={{ color: 'text.disabled' }}>{t('transaction_createdAt')}</Box>
+        {fDateTime(newHistory.createdAt)}
       </Stack>
     </Stack>
   );
@@ -71,7 +79,7 @@ export default function TransactionsDetailsHistory({ history }: Props) {
         },
       }}
     >
-      {history.timeline.map((item, index) => {
+      {newHistory.timeline.map((item, index) => {
         const firstTimeline = index === 0;
 
         const lastTimeline = index === history.timeline.length - 1;
@@ -84,7 +92,12 @@ export default function TransactionsDetailsHistory({ history }: Props) {
             </TimelineSeparator>
 
             <TimelineContent>
-              <Typography variant="subtitle2">{item.title}</Typography>
+              <Typography variant="subtitle2">
+                {
+                item.title === 'created' && t('transaction_createdAt') ||
+                item.title === 'received' && t('transaction_receivedAt')
+                }
+              </Typography>
 
               <Box sx={{ color: 'text.disabled', typography: 'caption', mt: 0.5 }}>
                 {fDateTime(item.time)}

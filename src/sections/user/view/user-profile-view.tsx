@@ -46,11 +46,11 @@ const TABS = () => {
     label: t('friends'),
     icon: <Iconify icon="solar:users-group-rounded-bold" width={24} />,
   },
-  {
-    value: 'gallery',
-    label: t('gallery'),
-    icon: <Iconify icon="solar:gallery-wide-bold" width={24} />,
-  },
+  // {
+  //   value: 'gallery',
+  //   label: t('gallery'),
+  //   icon: <Iconify icon="solar:gallery-wide-bold" width={24} />,
+  // },
 ];
 }
 

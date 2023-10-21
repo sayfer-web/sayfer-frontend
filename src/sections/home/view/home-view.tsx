@@ -77,7 +77,7 @@ export default function HomeView() {
           {/* <StyledPolygon anchor="bottom" /> */}
         </Box>
 
-        
+        <HomePricing />
 
         {/* <HomeDarkMode /> */}
 

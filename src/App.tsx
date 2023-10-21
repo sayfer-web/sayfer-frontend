@@ -63,6 +63,7 @@ import { Suspense, lazy } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrentRole, selectCurrentToken } from './app/features/auth/authSlice';
 import { useAuth } from './hooks/use-auth';
+import Page403 from './pages/403';
 
 // ----------------------------------------------------------------------
 
@@ -135,7 +136,7 @@ const BlankPage = lazy(() => import('src/pages/dashboard/blank'));
 
 export default function App() {
 
-  const { username, status } = useAuth()
+  const { username, status, isAdmin } = useAuth()
 
   console.log(username, status)
 
@@ -188,12 +189,12 @@ export default function App() {
                         // <dashBoardRo
                         <DashboardLayout>
                           <Suspense fallback={<LoadingScreen />}>
-                            <Outlet />
+                            { status === 'User' ? <Outlet /> : <Page403 /> }
                           </Suspense>
                         </DashboardLayout>
                       }>
                         <Route index element={<IndexPage />} />
-                        {/* <Route path='analytics' element={<OverviewAnalyticsPage />} /> */}
+                        {/* <Route pth='analytics' element={<OverviewAnalyticsPage />} /> */}
                         <Route path='wallet' element={<OverviewBankingPage />} />
 
                         <Route path='post'>
@@ -219,8 +220,13 @@ export default function App() {
 
                         <Route path='chat' element={<ChatPage />} />
 
-                        <Route path='transactions' element={<TransactionsListPage />} />
-                        
+                        <Route path='transactions'>
+                          <Route index element={<TransactionsListPage />} />
+                          <Route path=':id' element={<TransactionsDetailsPage />} />
+                          <Route path=':id/edit' element={<TransactionsEditPage />} />
+                          <Route path='new' element={<TransactionsCreatePage />} />
+                        </Route>
+
                         <Route path='user'>
                           <Route index element={<UserProfilePage />} />
                           <Route path='account' element={<UserAccountPage />} />

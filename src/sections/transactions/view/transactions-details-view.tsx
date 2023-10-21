@@ -24,7 +24,7 @@ type Props = {
 export default function TransactionsDetailsView({ id }: Props) {
   const settings = useSettingsContext();
 
-  const currentOrder = _orders.filter((order) => order.id === id)[0];
+  const currentOrder = _orders().filter((order) => order.id === id)[0];
 
   const [status, setStatus] = useState(currentOrder.status);
 
@@ -61,6 +61,7 @@ export default function TransactionsDetailsView({ id }: Props) {
 
         <Grid xs={12} md={4}>
           <OrderDetailsInfo
+            /* @ts-ignore */
             customer={currentOrder.customer}
             delivery={currentOrder.delivery}
             payment={currentOrder.payment}

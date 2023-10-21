@@ -21,6 +21,7 @@ export default function MotionContainer({ animate, action = false, children, ...
         initial={false}
         animate={animate ? 'animate' : 'exit'}
         variants={varContainer()}
+        sx={{ display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}
         {...other}
       >
         {children}
@@ -35,6 +36,7 @@ export default function MotionContainer({ animate, action = false, children, ...
       animate="animate"
       exit="exit"
       variants={varContainer()}
+      sx={{ display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}
       {...other}
     >
       {children}

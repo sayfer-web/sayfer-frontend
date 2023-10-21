@@ -89,7 +89,7 @@ export default function OrderListView() {
 
   const confirm = useBoolean();
 
-  const [tableData, setTableData] = useState(_orders);
+  const [tableData, setTableData] = useState(_orders());
 
   const [filters, setFilters] = useState(defaultFilters);
 
@@ -99,6 +99,7 @@ export default function OrderListView() {
       : false;
 
   const dataFiltered = applyFilter({
+    /* @ts-ignore */
     inputData: tableData,
     comparator: getComparator(table.order, table.orderBy),
     filters,
@@ -215,16 +216,16 @@ export default function OrderListView() {
                       'default'
                     }
                   >
-                    {tab.value === 'all' && _orders.length}
+                    {tab.value === 'all' && _orders().length}
                     {tab.value === 'completed' &&
-                      _orders.filter((order) => order.status === 'completed').length}
+                      _orders().filter((order) => order.status === 'completed').length}
 
                     {tab.value === 'pending' &&
-                      _orders.filter((order) => order.status === 'pending').length}
+                      _orders().filter((order) => order.status === 'pending').length}
                     {tab.value === 'cancelled' &&
-                      _orders.filter((order) => order.status === 'cancelled').length}
+                      _orders().filter((order) => order.status === 'cancelled').length}
                     {tab.value === 'refunded' &&
-                      _orders.filter((order) => order.status === 'refunded').length}
+                      _orders().filter((order) => order.status === 'refunded').length}
                   </Label>
                 }
               />

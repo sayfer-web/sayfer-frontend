@@ -13,10 +13,14 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import Iconify from 'src/components/iconify';
 import { useSnackbar } from 'src/components/snackbar';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function AccountChangePassword() {
+
+  const { t } = useLocales()
+
   const { enqueueSnackbar } = useSnackbar();
 
   const password = useBoolean();
@@ -68,7 +72,7 @@ export default function AccountChangePassword() {
         <RHFTextField
           name="oldPassword"
           type={password.value ? 'text' : 'password'}
-          label="Old Password"
+          label={t('old_password')}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -82,7 +86,7 @@ export default function AccountChangePassword() {
 
         <RHFTextField
           name="newPassword"
-          label="New Password"
+          label={t('new_password')}
           type={password.value ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
@@ -95,8 +99,8 @@ export default function AccountChangePassword() {
           }}
           helperText={
             <Stack component="span" direction="row" alignItems="center">
-              <Iconify icon="eva:info-fill" width={16} sx={{ mr: 0.5 }} /> Password must be minimum
-              6+
+              <Iconify icon="eva:info-fill" width={16} sx={{ mr: 0.5 }} /> {t('password_must_be_minimum')}
+              6+ {t('symbols')}
             </Stack>
           }
         />
@@ -104,7 +108,7 @@ export default function AccountChangePassword() {
         <RHFTextField
           name="confirmNewPassword"
           type={password.value ? 'text' : 'password'}
-          label="Confirm New Password"
+          label={t('confirm_new_password')}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -117,7 +121,7 @@ export default function AccountChangePassword() {
         />
 
         <LoadingButton type="submit" variant="contained" loading={isSubmitting} sx={{ ml: 'auto' }}>
-          Save Changes
+          {t('save_changes')}
         </LoadingButton>
       </Stack>
     </FormProvider>

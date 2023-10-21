@@ -16,6 +16,7 @@ import { fCurrency } from 'src/utils/format-number';
 import { useBoolean } from 'src/hooks/use-boolean';
 // components
 import Iconify from 'src/components/iconify';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -24,11 +25,14 @@ type Props = {
 };
 
 export default function AccountBillingHistory({ invoices }: Props) {
+
+  const { t } = useLocales()
+
   const showMore = useBoolean();
 
   return (
     <Card>
-      <CardHeader title="Invoice History" />
+      <CardHeader title={t('invoice_history')} />
 
       <Stack spacing={1.5} sx={{ px: 3, pt: 3 }}>
         {(showMore.value ? invoices : invoices.slice(0, 8)).map((invoice) => (
@@ -71,7 +75,7 @@ export default function AccountBillingHistory({ invoices }: Props) {
           }
           onClick={showMore.onToggle}
         >
-          {showMore.value ? `Show Less` : `Show More`}
+          {showMore.value ? t('show_less') : t('show_more')}
         </Button>
       </Stack>
     </Card>

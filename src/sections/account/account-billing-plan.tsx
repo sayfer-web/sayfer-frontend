@@ -96,7 +96,7 @@ export default function AccountBillingPlan({ cardList, addressBook, plans }: Pro
             startIcon={<Iconify icon="eva:star-fill" />}
             sx={{ position: 'absolute', top: 8, right: 8 }}
           >
-            Current
+            {t('current')}
           </Label>
         )}
 
@@ -114,15 +114,19 @@ export default function AccountBillingPlan({ cardList, addressBook, plans }: Pro
             textTransform: 'capitalize',
           }}
         >
-          {plan.subscription}
+          {
+          plan.subscription === 'basic' && t('minimum') ||
+          plan.subscription === 'starter' && t('medium') ||
+          plan.subscription === 'premium' && t('premium')
+          }
         </Box>
 
         <Stack direction="row" alignItems="center" sx={{ typography: 'h4' }}>
-          {plan.price || 'Free'}
+          {plan.price || 'Free'}$
 
           {!!plan.price && (
             <Box component="span" sx={{ typography: 'body2', color: 'text.disabled', ml: 0.5 }}>
-              /mo
+              /{t('short_month')}
             </Box>
           )}
         </Stack>
@@ -133,7 +137,7 @@ export default function AccountBillingPlan({ cardList, addressBook, plans }: Pro
   return (
     <>
       <Card>
-        <CardHeader title="Plan" />
+        <CardHeader title={t('subscription_plan')} />
 
         <Grid container spacing={2} sx={{ p: 3 }}>
           {renderPlans}
@@ -142,16 +146,20 @@ export default function AccountBillingPlan({ cardList, addressBook, plans }: Pro
         <Stack spacing={2} sx={{ p: 3, pt: 0, typography: 'body2' }}>
           <Grid container spacing={{ xs: 0.5, md: 2 }}>
             <Grid xs={12} md={4} sx={{ color: 'text.secondary' }}>
-              {t('plan')}
+              {t('selected_plan')}
             </Grid>
             <Grid xs={12} md={8} sx={{ typography: 'subtitle2', textTransform: 'capitalize' }}>
-              {selectedPlan || '-'}
+              {
+                selectedPlan === 'premium' && t('premium') ||
+                selectedPlan === 'starter' && t('medium') ||
+                selectedPlan === 'basic' && t('minimum') || '-'
+              }
             </Grid>
           </Grid>
 
           <Grid container spacing={{ xs: 0.5, md: 2 }}>
             <Grid xs={12} md={4} sx={{ color: 'text.secondary' }}>
-              Billing name
+              {t('receiver')}
             </Grid>
             <Grid xs={12} md={8}>
               <Button
@@ -164,15 +172,15 @@ export default function AccountBillingPlan({ cardList, addressBook, plans }: Pro
             </Grid>
           </Grid>
 
-          <Grid container spacing={{ xs: 0.5, md: 2 }}>
+          {/* <Grid container spacing={{ xs: 0.5, md: 2 }}>
             <Grid xs={12} md={4} sx={{ color: 'text.secondary' }}>
               Billing address
             </Grid>
             <Grid xs={12} md={8} sx={{ color: 'text.secondary' }}>
               {selectedAddress?.fullAddress}
             </Grid>
-          </Grid>
-
+          </Grid> */}
+{/* 
           <Grid container spacing={{ xs: 0.5, md: 2 }}>
             <Grid xs={12} md={4} sx={{ color: 'text.secondary' }}>
               Billing phone number
@@ -180,11 +188,11 @@ export default function AccountBillingPlan({ cardList, addressBook, plans }: Pro
             <Grid xs={12} md={8} sx={{ color: 'text.secondary' }}>
               {selectedAddress?.phoneNumber}
             </Grid>
-          </Grid>
+          </Grid> */}
 
           <Grid container spacing={{ xs: 0.5, md: 2 }}>
             <Grid xs={12} md={4} sx={{ color: 'text.secondary' }}>
-              Payment method
+              {t('payment_method')}
             </Grid>
             <Grid xs={12} md={8}>
               <Button
@@ -201,14 +209,14 @@ export default function AccountBillingPlan({ cardList, addressBook, plans }: Pro
         <Divider sx={{ borderStyle: 'dashed' }} />
 
         <Stack spacing={1.5} direction="row" justifyContent="flex-end" sx={{ p: 3 }}>
-          <Button variant="outlined">Cancel Plan</Button>
-          <Button variant="contained">Upgrade Plan</Button>
+          <Button variant="outlined">{t('cancel_plan')}</Button>
+          <Button variant="contained">{t('upgrade_plan')}</Button>
         </Stack>
       </Card>
 
       <PaymentCardListDialog
         list={cardList}
-        open={openCards.value}
+        open={openCards.value }
         onClose={openCards.onFalse}
         selected={(selectedId: string) => selectedCard?.id === selectedId}
         onSelect={handleSelectCard}

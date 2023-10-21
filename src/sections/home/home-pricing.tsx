@@ -19,10 +19,14 @@ import { _homePlans } from 'src/_mock';
 // components
 import Iconify from 'src/components/iconify';
 import { varFade, MotionViewport } from 'src/components/animate';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function HomePricing() {
+
+  const { t } = useLocales()
+
   const mdUp = useResponsive('up', 'md');
 
   const [currentTab, setCurrentTab] = useState('Standard');
@@ -35,19 +39,19 @@ export default function HomePricing() {
     <Stack spacing={3} sx={{ mb: 10, textAlign: 'center' }}>
       <m.div variants={varFade().inUp}>
         <Typography component="div" variant="overline" sx={{ mb: 2, color: 'text.disabled' }}>
-          pricing plans
+          {t('subscription_plans')}
         </Typography>
       </m.div>
 
       <m.div variants={varFade().inDown}>
         <Typography variant="h2">
-          The right plan for <br /> your business
+          {t('the_right_plan_for')} <br /> {t('your_business')}
         </Typography>
       </m.div>
 
       <m.div variants={varFade().inDown}>
         <Typography sx={{ color: 'text.secondary' }}>
-          Choose the perfect plan for your needs. Always flexible to grow
+          {t('choose_the_perfect_plan_for_your_needs')}
         </Typography>
       </m.div>
     </Stack>
@@ -102,7 +106,7 @@ export default function HomePricing() {
         </>
       )}
 
-      <m.div variants={varFade().in}>
+      {/* <m.div variants={varFade().in}>
         <Box
           sx={{
             textAlign: 'center',
@@ -133,7 +137,7 @@ export default function HomePricing() {
             </Button>
           </m.div>
         </Box>
-      </m.div>
+      </m.div> */}
     </>
   );
 
@@ -144,11 +148,11 @@ export default function HomePricing() {
         bgcolor: (theme) => alpha(theme.palette.grey[500], 0.04),
       }}
     >
-      {/* <Container component={MotionViewport}>
+      <Container component={MotionViewport}>
         {renderDescription}
 
         {renderContent}
-      </Container> */}
+      </Container>
     </Box>
   );
 }
@@ -165,11 +169,14 @@ interface PlanCardProps extends StackProps {
 }
 
 function PlanCard({ plan, sx, ...other }: PlanCardProps) {
+
+  const { t } = useLocales()
+
   const { license, commons, options, icons } = plan;
 
-  const standard = license === 'Standard';
+  const standard = license === 'Newbie';
 
-  const plus = license === 'Standard Plus';
+  const plus = license === 'Standart';
 
   return (
     <Stack
@@ -187,7 +194,7 @@ function PlanCard({ plan, sx, ...other }: PlanCardProps) {
     >
       <Stack spacing={2}>
         <Typography variant="overline" component="div" sx={{ color: 'text.disabled' }}>
-          License
+          {t('subscription_plan')}
         </Typography>
 
         <Box sx={{ position: 'relative' }}>
@@ -256,12 +263,12 @@ function PlanCard({ plan, sx, ...other }: PlanCardProps) {
         <Button
           color="inherit"
           size="small"
-          target="_blank"
-          rel="noopener"
-          href={paths.minimalUI}
+          // target="_blank"
+          // rel="noopener"
+          // href={paths.minimalUI}
           endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}
         >
-          Learn more
+          {t('details')}
         </Button>
       </Stack>
     </Stack>

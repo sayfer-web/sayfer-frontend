@@ -7,32 +7,36 @@ import { ForbiddenIllustration } from 'src/assets/illustrations';
 // components
 import { RouterLink } from 'src/routes/components';
 import { MotionContainer, varBounce } from 'src/components/animate';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
 export default function View403() {
+
+  const { t } = useLocales()
+
   return (
     <MotionContainer>
       <m.div variants={varBounce().in}>
         <Typography variant="h3" sx={{ mb: 2 }}>
-          No permission
+          {t('no_permission_title')}
         </Typography>
       </m.div>
 
       <m.div variants={varBounce().in}>
         <Typography sx={{ color: 'text.secondary' }}>
-          The page you&apos;re trying access has restricted access.
+          {t('no_permission_details_first')}
           <br />
-          Please refer to your system administrator
+          {t('no_permission_details_second')}
         </Typography>
       </m.div>
 
-      <m.div variants={varBounce().in}>
+      {/* <m.div variants={varBounce().in}>
         <ForbiddenIllustration sx={{ height: 260, my: { xs: 5, sm: 10 } }} />
-      </m.div>
+      </m.div> */}
 
       <Button component={RouterLink} href="/" size="large" variant="contained">
-        Go to Home
+        {t('go_to_home')}
       </Button>
     </MotionContainer>
   );

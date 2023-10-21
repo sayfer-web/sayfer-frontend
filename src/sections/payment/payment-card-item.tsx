@@ -10,6 +10,7 @@ import { IPaymentCard } from 'src/types/payment';
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -18,6 +19,9 @@ type PaymentItemProps = StackProps & {
 };
 
 export default function PaymentCardItem({ card, sx, ...other }: PaymentItemProps) {
+
+  const { t } = useLocales()
+
   const popover = usePopover();
 
   return (
@@ -40,7 +44,7 @@ export default function PaymentCardItem({ card, sx, ...other }: PaymentItemProps
             width={36}
           />
 
-          {card.primary && <Label color="info">Default</Label>}
+          {card.primary && <Label color="info">{t('default')}</Label>}
         </Stack>
 
         <Typography variant="subtitle2">{card.cardNumber}</Typography>

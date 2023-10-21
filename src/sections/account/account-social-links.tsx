@@ -10,6 +10,7 @@ import { IUserSocialLink } from 'src/types/user';
 import Iconify from 'src/components/iconify';
 import { useSnackbar } from 'src/components/snackbar';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -18,6 +19,9 @@ type Props = {
 };
 
 export default function AccountSocialLinks({ socialLinks }: Props) {
+
+  const { t } = useLocales()
+
   const { enqueueSnackbar } = useSnackbar();
 
   const defaultValues = {
@@ -80,7 +84,7 @@ export default function AccountSocialLinks({ socialLinks }: Props) {
         ))}
 
         <LoadingButton type="submit" variant="contained" loading={isSubmitting} sx={{ ml: 'auto' }}>
-          Save Changes
+          {t('save_changes')}
         </LoadingButton>
       </Stack>
     </FormProvider>

@@ -12,6 +12,7 @@ import { IOrderProductItem } from 'src/types/order';
 // components
 import Scrollbar from 'src/components/scrollbar';
 import { useLocales } from 'src/locales';
+import { useState } from 'react';
 
 // ----------------------------------------------------------------------
 
@@ -35,6 +36,20 @@ export default function TransactionsDetailsItems({
 
   const { t } = useLocales()
 
+  const [transaction, setTransaction] = useState({
+    id: 1,
+    tokensQuantity: 1242,
+    tokensType: 'SFRX',
+    tokensCourse: 1,
+    type: 'send_user',
+    comissionPercent: 10,
+    status: 'success',
+    senderId: 12,
+    receiverId: 32,
+    createdAt: new Date().toISOString(),
+    coupon: 10
+  })
+
   const renderTotal = (
     <Stack
       spacing={2}
@@ -43,9 +58,9 @@ export default function TransactionsDetailsItems({
     >
       <Stack direction="row">
         <Box sx={{ color: 'text.secondary' }}>{t('subtotal')}</Box>
-        <Box sx={{ width: 160, typography: 'subtitle2' }}>{fCurrency(subTotal) || '-'}</Box>
+        <Box sx={{ width: 160, typography: 'subtitle2' }}>{fCurrency(transaction.tokensQuantity) || '-'}</Box>
       </Stack>
-
+{/* 
       <Stack direction="row">
         <Box sx={{ color: 'text.secondary' }}>{t('shipping')}</Box>
         <Box
@@ -56,10 +71,10 @@ export default function TransactionsDetailsItems({
         >
           {shipping ? `- ${fCurrency(shipping)}` : '-'}
         </Box>
-      </Stack>
+      </Stack> */}
 
-      <Stack direction="row">
-        <Box sx={{ color: 'text.secondary' }}>{t('discount')}</Box>
+      {/* <Stack direction="row">
+        <Box sx={{ color: 'text.secondary' }}>{t('coupon')}</Box>
         <Box
           sx={{
             width: 160,
@@ -68,23 +83,23 @@ export default function TransactionsDetailsItems({
         >
           {discount ? `- ${fCurrency(discount)}` : '-'}
         </Box>
-      </Stack>
+      </Stack> */}
 
       <Stack direction="row">
-        <Box sx={{ color: 'text.secondary' }}>{t('taxes')}</Box>
-        <Box sx={{ width: 160 }}>{taxes ? fCurrency(taxes) : '-'}</Box>
+        <Box sx={{ color: 'text.secondary' }}>{t('transaction_comission')}</Box>
+        <Box sx={{ width: 160 }}>{transaction?.comissionPercent ? `${transaction.comissionPercent}%` : '-'}</Box>
       </Stack>
 
       <Stack direction="row" sx={{ typography: 'subtitle1' }}>
         <Box>{t('total')}</Box>
-        <Box sx={{ width: 160 }}>{fCurrency(totalAmount) || '-'}</Box>
+        <Box sx={{ width: 160 }}>{fCurrency(transaction.tokensQuantity / 100 * (100 + transaction.comissionPercent)) || '-'}</Box>
       </Stack>
     </Stack>
   );
 
   return (
     <Card>
-      <CardHeader title={t('details')} />
+      <CardHeader title={t('transaction_details')} />
 
       <Stack
         sx={{
@@ -92,22 +107,22 @@ export default function TransactionsDetailsItems({
         }}
       >
         <Scrollbar>
-          {items.map((item) => (
+          {/* {items.map((item) => ( */}
             <Stack
-              key={item.id}
+              // key={items[0].id}
               direction="row"
               alignItems="center"
               sx={{
                 py: 3,
-                minWidth: 640,
+                minWidth: 340,
                 borderBottom: (theme) => `dashed 2px ${theme.palette.background.neutral}`,
               }}
             >
-              <Avatar src={item.coverUrl} variant="rounded" sx={{ width: 48, height: 48, mr: 2 }} />
+              {/* <Avatar src={item.coverUrl} variant="rounded" sx={{ width: 48, height: 48, mr: 2 }} /> */}
 
               <ListItemText
-                primary={item.name}
-                secondary={item.sku}
+                primary={transaction.type === 'send_user' && t('transaction_send_user')}
+                secondary={t('transaction_type')}
                 primaryTypographyProps={{
                   typography: 'body2',
                 }}
@@ -118,13 +133,15 @@ export default function TransactionsDetailsItems({
                 }}
               />
 
-              <Box sx={{ typography: 'body2' }}>x{item.quantity}</Box>
+              <Box sx={{ typography: 'body2' }}>{transaction.tokensType} x{transaction.tokensQuantity}</Box>
 
               <Box sx={{ width: 110, textAlign: 'right', typography: 'subtitle2' }}>
-                {fCurrency(item.price)}
+                {fCurrency(transaction.tokensQuantity * transaction.tokensCourse)}
               </Box>
+
+
             </Stack>
-          ))}
+          {/* ))} */}
         </Scrollbar>
 
         {renderTotal}

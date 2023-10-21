@@ -57,7 +57,7 @@ export default function TransactionsDetailsToolbar({
 
           <Stack spacing={0.5}>
             <Stack spacing={1} direction="row" alignItems="center">
-              <Typography variant="h4"> {t('order')} {orderNumber} </Typography>
+              <Typography variant="h4"> {t('transaction')} #{orderNumber} </Typography>
               <Label
                 variant="soft"
                 color={
@@ -67,7 +67,12 @@ export default function TransactionsDetailsToolbar({
                   'default'
                 }
               >
-                {status}
+                {
+                  status === 'refunded' && t('refunded') ||
+                  status === 'completed' && t('completed') ||
+                  status === 'pending' && t('pending') ||
+                  status === 'cancelled' && t('cancelled')
+                }
               </Label>
             </Stack>
 
@@ -91,7 +96,12 @@ export default function TransactionsDetailsToolbar({
             onClick={popover.onOpen}
             sx={{ textTransform: 'capitalize' }}
           >
-            {status}
+            {
+            status === 'refunded' && t('refunded') ||
+            status === 'completed' && t('completed') ||
+            status === 'pending' && t('pending') ||
+            status === 'cancelled' && t('cancelled')
+            }
           </Button>
 
           <Button
