@@ -103,17 +103,17 @@ export default function PostItemHorizontal({ post }: Props) {
             >
               <Stack direction="row" alignItems="center">
                 <Iconify icon="eva:message-circle-fill" width={16} sx={{ mr: 0.5 }} />
-                {fShortenNumber(totalComments)}
+                {/* {fShortenNumber(totalComments)} */}
               </Stack>
 
               <Stack direction="row" alignItems="center">
                 <Iconify icon="solar:eye-bold" width={16} sx={{ mr: 0.5 }} />
-                {fShortenNumber(totalViews)}
+                {/* {fShortenNumber(totalViews)} */}
               </Stack>
 
               <Stack direction="row" alignItems="center">
                 <Iconify icon="solar:share-bold" width={16} sx={{ mr: 0.5 }} />
-                {fShortenNumber(totalShares)}
+                {/* {fShortenNumber(totalShares)} */}
               </Stack>
             </Stack>
           </Stack>
@@ -130,8 +130,8 @@ export default function PostItemHorizontal({ post }: Props) {
             }}
           >
             <Avatar
-              alt={author.name}
-              src={author.avatarUrl}
+              // alt={author.name}
+              // src={author.avatarUrl}
               sx={{ position: 'absolute', top: 16, right: 16, zIndex: 9 }}
             />
             <Image alt={title} src={coverUrl} sx={{ height: 1, borderRadius: 1.5 }} />

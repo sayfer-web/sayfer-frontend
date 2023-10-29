@@ -49,7 +49,7 @@ import SvgTree from 'src/assets/animations/tree/crypto2.svg'
 
 // ----------------------------------------------------------------------
 
-export default function HomeHugePackElements() {
+export default function HomeBuildings() {
 
   const { t } = useLocales()
 
@@ -99,13 +99,13 @@ export default function HomeHugePackElements() {
     >
       <m.div variants={varFade().inUp}>
         <Typography component="div" variant="overline" sx={{ color: 'text.disabled' }}>
-          {t('invest_platform')}
+          {t('centralized_platform')}
         </Typography>
       </m.div>
 
       <m.div variants={varFade().inUp}>
         <Typography variant="h3" sx={{ my: 3 }}>
-          {t('invest_your_money')}
+          {t('trust_service')}
         </Typography>
       </m.div>
 
@@ -116,7 +116,7 @@ export default function HomeHugePackElements() {
             color: 'text.secondary',
           }}
         >
-          {t('no_lie_anymore')}
+          {t('why_centralized')}
         </Typography>
       </m.div>
 
@@ -146,7 +146,7 @@ export default function HomeHugePackElements() {
         // width={100}
         height={200}
         // style={{ top: 100, left: 0 }}
-        src={`/assets/animations/tree/crypto2.svg`}
+        src={`/assets/animations/building/crypto3.svg`}
       />
     </Stack>
   );
@@ -155,10 +155,10 @@ export default function HomeHugePackElements() {
     <Container
       component={MotionViewport}
       sx={{
-        py: { xs: 5, md: 10 },
+        py: { xs: 5, md: 10 }
       }}
     >
-      <Grid container direction={{ xs: 'column', md: 'row-reverse' }} spacing={5}>
+      <Grid container direction={{ xs: 'column', md: 'row' }} spacing={5}>
         <Grid xs={12} md={5}>
           {renderDescription}
         </Grid>

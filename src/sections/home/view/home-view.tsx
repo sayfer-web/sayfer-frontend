@@ -18,6 +18,8 @@ import HomeHugePackElements from '../home-hugepack-elements';
 import { HomeAdvantages } from '../home-advantages';
 import { HomePresent } from '../home-present';
 import { HomeCallback } from '../home-callback';
+import HomeBuildings from '../home-building';
+import { HomeNews } from '../home-news';
 
 // ----------------------------------------------------------------------
 
@@ -77,7 +79,11 @@ export default function HomeView() {
           {/* <StyledPolygon anchor="bottom" /> */}
         </Box>
 
+        <HomeBuildings />
+
         <HomePricing />
+
+        <HomeNews />
 
         {/* <HomeDarkMode /> */}
 
@@ -87,7 +93,9 @@ export default function HomeView() {
 
         {/* <HomePricing /> */}
 
-        <HomeCallback />
+        <Box sx={{ }}>
+          <HomeCallback />
+        </Box>
 
         {/* <HomeLookingFor /> */}
 

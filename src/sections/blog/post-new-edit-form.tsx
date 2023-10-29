@@ -35,6 +35,7 @@ import FormProvider, {
 //
 import PostDetailsPreview from './post-details-preview';
 import { useLocales } from 'src/locales';
+import TextField from '@mui/material/TextField';
 
 // ----------------------------------------------------------------------
 
@@ -46,92 +47,94 @@ export default function PostNewEditForm({ currentPost }: Props) {
 
   const { t } = useLocales()
 
-  const router = useRouter();
+
+
+  // const router = useRouter();
 
   const mdUp = useResponsive('up', 'md');
 
-  const { enqueueSnackbar } = useSnackbar();
+  // const { enqueueSnackbar } = useSnackbar();
 
-  const preview = useBoolean();
+  // const preview = useBoolean();
 
-  const NewBlogSchema = Yup.object().shape({
-    title: Yup.string().required('Title is required'),
-    description: Yup.string().required('Description is required'),
-    content: Yup.string().required('Content is required'),
-    coverUrl: Yup.mixed<any>().nullable().required('Cover is required'),
-    tags: Yup.array().min(2, 'Must have at least 2 tags'),
-    metaKeywords: Yup.array().min(1, 'Meta keywords is required'),
-    // not required
-    metaTitle: Yup.string(),
-    metaDescription: Yup.string(),
-  });
+  // const NewBlogSchema = Yup.object().shape({
+  //   title: Yup.string().required('Title is required'),
+  //   description: Yup.string().required('Description is required'),
+  //   content: Yup.string().required('Content is required'),
+  //   coverUrl: Yup.mixed<any>().nullable().required('Cover is required'),
+  //   tags: Yup.array().min(2, 'Must have at least 2 tags'),
+  //   metaKeywords: Yup.array().min(1, 'Meta keywords is required'),
+  //   // not required
+  //   metaTitle: Yup.string(),
+  //   metaDescription: Yup.string(),
+  // });
 
-  const defaultValues = useMemo(
-    () => ({
-      title: currentPost?.title || '',
-      description: currentPost?.description || '',
-      content: currentPost?.content || '',
-      coverUrl: currentPost?.coverUrl || null,
-      tags: currentPost?.tags || [],
-      metaKeywords: currentPost?.metaKeywords || [],
-      metaTitle: currentPost?.metaTitle || '',
-      metaDescription: currentPost?.metaDescription || '',
-    }),
-    [currentPost]
-  );
+  // const defaultValues = useMemo(
+  //   () => ({
+  //     title: currentPost?.title || '',
+  //     description: currentPost?.description || '',
+  //     content: currentPost?.content || '',
+  //     coverUrl: currentPost?.coverUrl || null,
+  //     tags: currentPost?.tags || [],
+  //     metaKeywords: currentPost?.metaKeywords || [],
+  //     metaTitle: currentPost?.metaTitle || '',
+  //     metaDescription: currentPost?.metaDescription || '',
+  //   }),
+  //   [currentPost]
+  // );
 
-  const methods = useForm({
-    resolver: yupResolver(NewBlogSchema),
-    defaultValues,
-  });
+  // const methods = useForm({
+  //   resolver: yupResolver(NewBlogSchema),
+  //   defaultValues,
+  // });
 
-  const {
-    reset,
-    watch,
-    setValue,
-    handleSubmit,
-    formState: { isSubmitting, isValid },
-  } = methods;
+  // const {
+  //   reset,
+  //   watch,
+  //   setValue,
+  //   handleSubmit,
+  //   formState: { isSubmitting, isValid },
+  // } = methods;
 
-  const values = watch();
+  // const values = watch();
 
-  useEffect(() => {
-    if (currentPost) {
-      reset(defaultValues);
-    }
-  }, [currentPost, defaultValues, reset]);
+  // useEffect(() => {
+  //   if (currentPost) {
+  //     reset(defaultValues);
+  //   }
+  // }, [currentPost, defaultValues, reset]);
 
-  const onSubmit = handleSubmit(async (data) => {
+  const onSubmit = async (data: any) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      reset();
-      preview.onFalse();
-      enqueueSnackbar(currentPost ? 'Update success!' : 'Create success!');
-      router.push(paths.dashboard.post.root);
+      // await new Promise((resolve) => setTimeout(resolve, 500));
+      // reset();
+      // preview.onFalse();
+      // enqueueSnackbar(currentPost ? 'Update success!' : 'Create success!');
+      // router.push(paths.dashboard.post.root);
       console.info('DATA', data);
     } catch (error) {
       console.error(error);
     }
-  });
+  };
 
-  const handleDrop = useCallback(
-    (acceptedFiles: File[]) => {
-      const file = acceptedFiles[0];
+  // const handleDrop = useCallback(
+  //   (acceptedFiles: File[]) => {
+  //     const file = acceptedFiles[0];
 
-      const newFile = Object.assign(file, {
-        preview: URL.createObjectURL(file),
-      });
+  //     const newFile = Object.assign(file, {
+  //       preview: URL.createObjectURL(file),
+  //     });
 
-      if (file) {
-        setValue('coverUrl', newFile, { shouldValidate: true });
-      }
-    },
-    [setValue]
-  );
+  //     if (file) {
+  //       setValue('coverUrl', newFile, { shouldValidate: true });
+  //     }
+  //   },
+  //   [setValue]
+  // );
 
-  const handleRemoveFile = useCallback(() => {
-    setValue('coverUrl', null);
-  }, [setValue]);
+  // const handleRemoveFile = useCallback(() => {
+  //   setValue('coverUrl', null);
+  // }, [setValue]);
 
   const renderDetails = (
     <>
@@ -151,16 +154,57 @@ export default function PostNewEditForm({ currentPost }: Props) {
           {!mdUp && <CardHeader title={t('details')} />}
 
           <Stack spacing={3} sx={{ p: 3 }}>
-            <RHFTextField name="title" label={t('post_title')} />
+          <TextField
+            type="password"
+            id="password"
+            label={t('title')}
+            // value={pwd}
+            autoComplete="on"
+            InputLabelProps={{}}
+            sx={{ 
+              "& input:-webkit-autofill": {
+                '-webkit-box-shadow': '0 0 0 100px #000 inset',
+                '-webkit-text-fill-color': '#fff',
+              }
+            }}
+            required
+            // onChange={(value) => setPwd(value.target.value)}
+            // onFocus={() => toggleFocusPwd(true)}
+            // onBlur={() => toggleFocusPwd(false)}
+          />
 
-            <RHFTextField name="description" label={t('description')} multiline rows={3} />
+          <TextField
+            type="password"
+            id="password"
+            label={t('content')}
+            multiline
+            rows={3}
+            // value={pwd}
+            autoComplete="on"
+            InputLabelProps={{}}
+            sx={{ 
+              "& input:-webkit-autofill": {
+                '-webkit-box-shadow': '0 0 0 100px #000 inset',
+                '-webkit-text-fill-color': '#fff',
+              },
+            }}
+            required
+            // onChange={(value) => setPwd(value.target.value)}
+            // onFocus={() => toggleFocusPwd(true)}
+            // onBlur={() => toggleFocusPwd(false)}
+          />
 
-            <Stack spacing={1.5}>
+
+            {/* <RHFTextField name="title" label={t('post_title')} /> */}
+
+            {/* <RHFTextField name="description" label={t('description')} multiline rows={3} /> */}
+
+            {/* <Stack spacing={1.5}>
               <Typography variant="subtitle2">{t('content')}</Typography>
               <RHFEditor simple name="content" />
-            </Stack>
+            </Stack> */}
 
-            <Stack spacing={1.5}>
+            {/* <Stack spacing={1.5}>
               <Typography variant="subtitle2">{t('cover')}</Typography>
               <RHFUpload
                 name="coverUrl"
@@ -168,122 +212,122 @@ export default function PostNewEditForm({ currentPost }: Props) {
                 onDrop={handleDrop}
                 onDelete={handleRemoveFile}
               />
-            </Stack>
+            </Stack> */}
           </Stack>
         </Card>
       </Grid>
     </>
   );
 
-  const renderProperties = (
-    <>
-      {mdUp && (
-        <Grid md={4}>
-          <Typography variant="h6" sx={{ mb: 0.5 }}>
-            {t('properties')}
-          </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            {t('additional_functions_and_attributes')}
-          </Typography>
-        </Grid>
-      )}
+  // const renderProperties = (
+  //   <>
+  //     {mdUp && (
+  //       <Grid md={4}>
+  //         <Typography variant="h6" sx={{ mb: 0.5 }}>
+  //           {t('properties')}
+  //         </Typography>
+  //         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+  //           {t('additional_functions_and_attributes')}
+  //         </Typography>
+  //       </Grid>
+  //     )}
 
-      <Grid xs={12} md={8}>
-        <Card>
-          {!mdUp && <CardHeader title="Properties" />}
+  //     <Grid xs={12} md={8}>
+  //       <Card>
+  //         {!mdUp && <CardHeader title="Properties" />}
 
-          <Stack spacing={3} sx={{ p: 3 }}>
-            <RHFAutocomplete
-              name="tags"
-              label={t('tags')}
-              placeholder={`+ ${t('tags')}`}
-              multiple
-              freeSolo
-              options={_tags.map((option) => option)}
-              getOptionLabel={(option) => option}
-              renderOption={(props, option) => (
-                <li {...props} key={option}>
-                  {option}
-                </li>
-              )}
-              renderTags={(selected, getTagProps) =>
-                selected.map((option, index) => (
-                  <Chip
-                    {...getTagProps({ index })}
-                    key={option}
-                    label={option}
-                    size="small"
-                    color="info"
-                    variant="soft"
-                  />
-                ))
-              }
-            />
+  //         <Stack spacing={3} sx={{ p: 3 }}>
+  //           <RHFAutocomplete
+  //             name="tags"
+  //             label={t('tags')}
+  //             placeholder={`+ ${t('tags')}`}
+  //             multiple
+  //             freeSolo
+  //             options={_tags.map((option) => option)}
+  //             getOptionLabel={(option) => option}
+  //             renderOption={(props, option) => (
+  //               <li {...props} key={option}>
+  //                 {option}
+  //               </li>
+  //             )}
+  //             renderTags={(selected, getTagProps) =>
+  //               selected.map((option, index) => (
+  //                 <Chip
+  //                   {...getTagProps({ index })}
+  //                   key={option}
+  //                   label={option}
+  //                   size="small"
+  //                   color="info"
+  //                   variant="soft"
+  //                 />
+  //               ))
+  //             }
+  //           />
 
-            <RHFTextField name="metaTitle" label="Meta title" />
+  //           <RHFTextField name="metaTitle" label="Meta title" />
 
-            <RHFTextField
-              name="metaDescription"
-              label="Meta description"
-              fullWidth
-              multiline
-              rows={3}
-            />
+  //           <RHFTextField
+  //             name="metaDescription"
+  //             label="Meta description"
+  //             fullWidth
+  //             multiline
+  //             rows={3}
+  //           />
 
-            <RHFAutocomplete
-              name="metaKeywords"
-              label="Meta keywords"
-              placeholder="+ Keywords"
-              multiple
-              freeSolo
-              disableCloseOnSelect
-              options={_tags.map((option) => option)}
-              getOptionLabel={(option) => option}
-              renderOption={(props, option) => (
-                <li {...props} key={option}>
-                  {option}
-                </li>
-              )}
-              renderTags={(selected, getTagProps) =>
-                selected.map((option, index) => (
-                  <Chip
-                    {...getTagProps({ index })}
-                    key={option}
-                    label={option}
-                    size="small"
-                    color="info"
-                    variant="soft"
-                  />
-                ))
-              }
-            />
+  //           <RHFAutocomplete
+  //             name="metaKeywords"
+  //             label="Meta keywords"
+  //             placeholder="+ Keywords"
+  //             multiple
+  //             freeSolo
+  //             disableCloseOnSelect
+  //             options={_tags.map((option) => option)}
+  //             getOptionLabel={(option) => option}
+  //             renderOption={(props, option) => (
+  //               <li {...props} key={option}>
+  //                 {option}
+  //               </li>
+  //             )}
+  //             renderTags={(selected, getTagProps) =>
+  //               selected.map((option, index) => (
+  //                 <Chip
+  //                   {...getTagProps({ index })}
+  //                   key={option}
+  //                   label={option}
+  //                   size="small"
+  //                   color="info"
+  //                   variant="soft"
+  //                 />
+  //               ))
+  //             }
+  //           />
 
-            <FormControlLabel control={<Switch defaultChecked />} label={t('enable_comments')} />
-          </Stack>
-        </Card>
-      </Grid>
-    </>
-  );
+  //           <FormControlLabel control={<Switch defaultChecked />} label={t('enable_comments')} />
+  //         </Stack>
+  //       </Card>
+  //     </Grid>
+  //   </>
+  // );
 
   const renderActions = (
     <>
       {mdUp && <Grid md={4} />}
       <Grid xs={12} md={8} sx={{ display: 'flex', alignItems: 'center' }}>
-        <FormControlLabel
+        {/* <FormControlLabel
           control={<Switch defaultChecked />}
           label={t('publish')}
           sx={{ flexGrow: 1, pl: 3 }}
-        />
+        /> */}
 
-        <Button color="inherit" variant="outlined" size="large" onClick={preview.onTrue}>
+        {/* <Button color="inherit" variant="outlined" size="large" onClick={preview.onTrue}>
           {t('preview')}
-        </Button>
+        </Button> */}
 
         <LoadingButton
           type="submit"
           variant="contained"
           size="large"
-          loading={isSubmitting}
+          loading={false}
           sx={{ ml: 2 }}
         >
           {!currentPost ? t('create_post') : t('save_changes')}
@@ -293,16 +337,16 @@ export default function PostNewEditForm({ currentPost }: Props) {
   );
 
   return (
-    <FormProvider methods={methods} onSubmit={onSubmit}>
+    <form onSubmit={onSubmit}>
       <Grid container spacing={3}>
         {renderDetails}
 
-        {renderProperties}
+        {/* {renderProperties} */}
 
         {renderActions}
       </Grid>
 
-      <PostDetailsPreview
+      {/* <PostDetailsPreview
         title={values.title}
         content={values.content}
         description={values.description}
@@ -317,7 +361,7 @@ export default function PostNewEditForm({ currentPost }: Props) {
         isSubmitting={isSubmitting}
         onClose={preview.onFalse}
         onSubmit={onSubmit}
-      />
-    </FormProvider>
+      /> */}
+    </form>
   );
 }

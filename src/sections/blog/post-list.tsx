@@ -9,6 +9,7 @@ import { IPostItem } from 'src/types/blog';
 //
 import PostItem from './post-item';
 import { PostItemSkeleton } from './post-skeleton';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -18,7 +19,12 @@ type Props = {
   disabledIndex?: boolean;
 };
 
+
+
 export default function PostList({ posts, loading, disabledIndex }: Props) {
+
+  const { t } = useLocales()
+  
   const renderSkeleton = (
     <>
       {[...Array(16)].map((_, index) => (
@@ -58,7 +64,7 @@ export default function PostList({ posts, loading, disabledIndex }: Props) {
             variant="outlined"
             startIcon={<Iconify icon="svg-spinners:12-dots-scale-rotate" width={24} />}
           >
-            Load More
+            {t('load_more')}
           </Button>
         </Stack>
       )}

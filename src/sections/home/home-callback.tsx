@@ -86,7 +86,7 @@ export const HomeCallback = () => {
 
   return (
     <section
-      style={{ boxShadow: 'inset 0 5px 10px rgba(0, 255, 0, 0.2), 0 -5px 10px rgba(0, 255, 0, 0.2)', background: '#002102', flex: 1, display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', gap: 20, paddingTop: 48, paddingBottom: 48, padding: 12 }} className="py-12 px-4 gap-8">
+      style={{ background: '#002102', flex: 1, display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', gap: 20, marginTop: 48, paddingBottom: 48, padding: 12 }} className="py-12 px-4 gap-8">
         
         <m.div variants={varFade().inDown}>
             <Typography variant="h4">{t('still_have_questions')}?</Typography>

@@ -23,7 +23,7 @@ import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
-export default function HomePricing() {
+export default function   HomePricing() {
 
   const { t } = useLocales()
 
@@ -68,7 +68,7 @@ export default function HomePricing() {
             border: (theme) => `dashed 1px ${theme.palette.divider}`,
           }}
         >
-          {_homePlans.map((plan) => (
+          {_homePlans().map((plan) => (
             <m.div key={plan.license} variants={varFade().in}>
               <PlanCard key={plan.license} plan={plan} />
             </m.div>
@@ -78,7 +78,7 @@ export default function HomePricing() {
         <>
           <Stack alignItems="center" sx={{ mb: 5 }}>
             <Tabs value={currentTab} onChange={handleChangeTab}>
-              {_homePlans.map((tab) => (
+              {_homePlans().map((tab) => (
                 <Tab key={tab.license} value={tab.license} label={tab.license} />
               ))}
             </Tabs>
@@ -90,7 +90,7 @@ export default function HomePricing() {
               border: (theme) => `dashed 1px ${theme.palette.divider}`,
             }}
           >
-            {_homePlans.map(
+            {_homePlans().map(
               (tab) =>
                 tab.license === currentTab && (
                   <PlanCard
@@ -161,6 +161,7 @@ export default function HomePricing() {
 
 interface PlanCardProps extends StackProps {
   plan: {
+    price: number[];
     license: string;
     commons: string[];
     options: string[];
@@ -172,11 +173,11 @@ function PlanCard({ plan, sx, ...other }: PlanCardProps) {
 
   const { t } = useLocales()
 
-  const { license, commons, options, icons } = plan;
+  const { price, license, commons, options, icons } = plan;
 
-  const standard = license === 'Newbie';
+  const standard = license === t('newbie');
 
-  const plus = license === 'Standart';
+  const plus = license === t('standart');
 
   return (
     <Stack
@@ -199,6 +200,13 @@ function PlanCard({ plan, sx, ...other }: PlanCardProps) {
 
         <Box sx={{ position: 'relative' }}>
           <Typography variant="h4">{license}</Typography>
+          <Typography>
+            {
+              license === t('newbie') && 10 ||
+              license === t('standart') && 100 ||
+              license === t('premium') && 300
+            }$
+          </Typography>
           <Box
             sx={{
               left: 0,

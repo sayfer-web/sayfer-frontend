@@ -21,12 +21,23 @@ import PostList from '../post-list';
 import PostSort from '../post-sort';
 import PostSearch from '../post-search';
 import { useLocales } from 'src/locales';
+import { useGetUsersQuery } from 'src/app/features/users/usersApiSlice';
 
 // ----------------------------------------------------------------------
 
 export default function PostListHomeView() {
 
   const { t } = useLocales()
+
+  
+  const {
+    data: news,
+    isLoading,
+    isSuccess,
+    isError,
+    error
+    /* @ts-ignore */
+} = useGetUsersQuery()
 
   const settings = useSettingsContext();
 
@@ -41,55 +52,55 @@ export default function PostListHomeView() {
   const newPosts = [{
       id: 'string;',
       title: 'string;',
-      tags: ['string'],
-      publish: 'string;',
+      // tags: ['string'],
+      // publish: 'string;',
       content: 'string;',
       coverUrl: 'string;',
-      totalViews: 1,
-      totalShares: 1,
+      // totalViews: 1,
+      // totalShares: 1,
       description: 'string;',
-      totalComments: 1,
-      totalFavorites: 1,
-      metaTitle: 'string;',
-      metaKeywords: ['string'],
-      metaDescription: 'string;',
-      comments: [
-        {
-          id: 'string',
-          name: 'string',
-          avatarUrl: 'string',
-          message: 'string',
-          postedAt: new Date(),
-          users: [{
-              id: 'string',
-              name: 'string',
-              avatarUrl: 'string',
-          }],
-          replyComment: [{
-              id: 'string',
-              userId: 'string',
-              message: 'string',
-              postedAt: new Date(),
-              tagUser: 'string',
-          }],
-      }
-      ],
+      // totalComments: 1,
+      // totalFavorites: 1,
+      // metaTitle: 'string;',
+      // metaKeywords: ['string'],
+      // metaDescription: 'string;',
+      // comments: [
+      //   {
+      //     id: 'string',
+      //     name: 'string',
+      //     avatarUrl: 'string',
+      //     message: 'string',
+      //     postedAt: new Date(),
+      //     users: [{
+      //         id: 'string',
+      //         name: 'string',
+      //         avatarUrl: 'string',
+      //     }],
+      //     replyComment: [{
+      //         id: 'string',
+      //         userId: 'string',
+      //         message: 'string',
+      //         postedAt: new Date(),
+      //         tagUser: 'string',
+      //     }],
+      // }
+      // ],
       createdAt: new Date(),
-      favoritePerson: [{
-        name: 'string;',
-        avatarUrl: 'string;',
-      }],
-      author: {
-        name: 'string;',
-        avatarUrl: 'string;',
-      },
+      // favoritePerson: [{
+      //   name: 'string;',
+      //   avatarUrl: 'string;',
+      // }],
+      // author: {
+      //   name: 'string;',
+      //   avatarUrl: 'string;',
+      // },
     },
   ]
 
   const { searchResults, searchLoading } = useSearchPosts(debouncedQuery);
 
   const dataFiltered = applyFilter({
-    inputData: newPosts,
+    inputData: news,
     sortBy,
   });
 

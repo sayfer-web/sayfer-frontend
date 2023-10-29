@@ -41,25 +41,25 @@ export type IPostComment = {
 export type IPostItem = {
   id: string;
   title: string;
-  tags: string[];
-  publish: string;
+  tags?: string[];
+  publish?: string;
   content: string;
   coverUrl: string;
-  metaTitle: string;
-  totalViews: number;
-  totalShares: number;
-  description: string;
-  totalComments: number;
-  totalFavorites: number;
-  metaKeywords: string[];
-  metaDescription: string;
-  comments: IPostComment[];
-  createdAt: Date;
-  favoritePerson: {
+  metaTitle?: string;
+  totalViews?: number;
+  totalShares?: number;
+  description?: string;
+  totalComments?: number;
+  totalFavorites?: number;
+  metaKeywords?: string[];
+  metaDescription?: string;
+  comments?: IPostComment[];
+  createdAt?: Date;
+  favoritePerson?: {
     name: string;
     avatarUrl: string;
   }[];
-  author: {
+  author?: {
     name: string;
     avatarUrl: string;
   };

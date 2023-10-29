@@ -27,6 +27,7 @@ import PostSort from '../post-sort';
 import PostSearch from '../post-search';
 import PostListHorizontal from '../post-list-horizontal';
 import { useLocales } from 'src/locales';
+import { useGetUsersQuery } from 'src/app/features/users/usersApiSlice';
 
 // ----------------------------------------------------------------------
 
@@ -38,7 +39,16 @@ const defaultFilters: IPostFilters = {
 
 export default function PostListView() {
 
-  const { t } = useLocales()
+  const { t } = useLocales()   
+  
+  const {
+    data: news,
+    isLoading,
+    isSuccess,
+    isError,
+    error
+    /* @ts-ignore */
+  } = useGetUsersQuery()
 
   const settings = useSettingsContext();
 
@@ -56,55 +66,55 @@ export default function PostListView() {
 
   
   const newPosts = [{
-    id: 'string;',
+    id: '1',
     title: 'First News',
-    tags: ['string'],
-    publish: 'published',
+    // tags: ['string'],
+    // publish: 'published',
     content: 'string, string, string, string, string, string, string, string, string, string, string, string, string, string, ',
     coverUrl: 'https://w.forfun.com/fetch/b4/b4d430320229744245679e19e50b6f03.jpeg',
-    totalViews: 1,
-    totalShares: 1,
+    // totalViews: 1,
+    // totalShares: 1,
     description: 'string, string, string, string, string, string, string, string, string, string, string, string, string',
-    totalComments: 1,
-    totalFavorites: 1,
-    metaTitle: 'string;',
-    metaKeywords: ['string'],
-    metaDescription: 'string;',
-    comments: [
-      {
-        id: 'string',
-        name: 'string',
-        avatarUrl: 'string',
-        message: 'string',
-        postedAt: new Date(),
-        users: [{
-            id: 'string',
-            name: 'string',
-            avatarUrl: 'string',
-        }],
-        replyComment: [{
-            id: 'string',
-            userId: 'string',
-            message: 'string',
-            postedAt: new Date(),
-            tagUser: 'string',
-        }],
-    }
-    ],
-    createdAt: new Date(),
-    favoritePerson: [{
-      name: 'string;',
-      avatarUrl: 'string;',
-    }],
-    author: {
-      name: 'string;',
-      avatarUrl: 'string;',
-    },
+    // totalComments: 1,
+    // totalFavorites: 1,
+    // metaTitle: 'string;',
+    // metaKeywords: ['string'],
+    // metaDescription: 'string;',
+    // comments: [
+    //   {
+    //     id: 'string',
+    //     name: 'string',
+    //     avatarUrl: 'string',
+    //     message: 'string',
+    //     postedAt: new Date(),
+    //     users: [{
+    //         id: 'string',
+    //         name: 'string',
+    //         avatarUrl: 'string',
+    //     }],
+    //     replyComment: [{
+    //         id: 'string',
+    //         userId: 'string',
+    //         message: 'string',
+    //         postedAt: new Date(),
+    //         tagUser: 'string',
+    //     }],
+    // }
+    // ],
+    // createdAt: new Date(),
+    // favoritePerson: [{
+    //   name: 'string;',
+    //   avatarUrl: 'string;',
+    // }],
+    // author: {
+    //   name: 'string;',
+    //   avatarUrl: 'string;',
+    // },
   },
 ]
 
   const dataFiltered = applyFilter({
-    inputData: newPosts,
+    inputData: news,
     filters,
     sortBy,
   });
@@ -207,9 +217,9 @@ export default function PostListView() {
               >
                 {tab === 'all' && newPosts.length}
 
-                {tab === 'published' && newPosts.filter((post) => post.publish === 'published').length}
+                {/* {tab === 'published' && newPosts.filter((post) => post.publish === 'published').length} */}
 
-                {tab === 'draft' && newPosts.filter((post) => post.publish === 'draft').length}
+                {/* {tab === 'draft' && newPosts.filter((post) => post.publish === 'draft').length} */}
               </Label>
             }
             sx={{ textTransform: 'capitalize' }}

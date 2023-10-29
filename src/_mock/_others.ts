@@ -155,14 +155,19 @@ export const _socials = [
 
 // ----------------------------------------------------------------------
 
-export const _homePlans = [...Array(3)].map((_, index) => ({
-  license: ['Newbie', 'Standard', 'Premium'][index],
-  commons: ['One end products', '12 months updates', '6 months of support'],
+export const _homePlans = () => { 
+
+  const { t } = useLocales()
+
+  return [...Array(3)].map((_, index) => ({
+  price: [10, 100, 300],
+  license: [t('newbie'), t('standart'), t('premium')][index],
+  commons: [t('panel_access'), t('wallet_access'), t('invest_access')],
   options: [
-    'JavaScript version',
-    'TypeScript version',
-    'Design Resources',
-    'Commercial applications',
+    t('referral_access'),
+    t('low_comission'),
+    t('features_access'),
+    t('personal_access'),
   ],
   icons: [
     '/assets/icons/platforms/ic_figma.svg',
@@ -170,6 +175,7 @@ export const _homePlans = [...Array(3)].map((_, index) => ({
     '/assets/icons/platforms/ic_ts.svg',
   ],
 }));
+}
 
 // ----------------------------------------------------------------------
 
