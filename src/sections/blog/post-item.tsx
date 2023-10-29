@@ -43,7 +43,7 @@ export default function PostItem({ post, index }: Props) {
   if (mdUp && latestPost) {
     return (
       <Card>
-        <Avatar
+        {/* <Avatar
           alt={author.name}
           src={author.avatarUrl}
           sx={{
@@ -52,15 +52,22 @@ export default function PostItem({ post, index }: Props) {
             zIndex: 9,
             position: 'absolute',
           }}
-        />
+        /> */}
 
         <PostContent
           title={title}
-          createdAt={createdAt}
-          totalViews={totalViews}
-          totalShares={totalShares}
-          totalComments={totalComments}
+          createdAt={new Date()}
+          totalViews={1}
+          totalShares={1}
+          totalComments={1}
           index={index}
+
+          // title={title}
+          // createdAt={createdAt}
+          // totalViews={totalViews}
+          // totalShares={totalShares}
+          // totalComments={totalComments}
+          // index={index}
         />
 
         <Image
@@ -90,7 +97,7 @@ export default function PostItem({ post, index }: Props) {
           }}
         />
 
-        <Avatar
+        {/* <Avatar
           alt={author.name}
           src={author.avatarUrl}
           sx={{
@@ -99,17 +106,22 @@ export default function PostItem({ post, index }: Props) {
             bottom: -24,
             position: 'absolute',
           }}
-        />
+        /> */}
 
         <Image alt={title} src={coverUrl} ratio="4/3" />
       </Box>
 
       <PostContent
         title={title}
-        totalViews={totalViews}
-        totalComments={totalComments}
-        totalShares={totalShares}
-        createdAt={createdAt}
+        totalViews={1}
+        totalComments={1}
+        totalShares={1}
+        createdAt={new Date()}
+
+        // totalViews={totalViews}
+        // totalComments={totalComments}
+        // totalShares={totalShares}
+        // createdAt={createdAt}
       />
     </Card>
   );

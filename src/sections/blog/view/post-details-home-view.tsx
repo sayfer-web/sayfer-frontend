@@ -116,11 +116,11 @@ export default function PostDetailsHomeView({ title }: Props) {
               borderBottom: (theme) => `dashed 1px ${theme.palette.divider}`,
             }}
           >
-            <Stack direction="row" flexWrap="wrap" spacing={1}>
+            {/* <Stack direction="row" flexWrap="wrap" spacing={1}>
               {post.tags.map((tag) => (
                 <Chip key={tag} label={tag} variant="soft" />
               ))}
-            </Stack>
+            </Stack> */}
 
             <Stack direction="row" alignItems="center">
               <FormControlLabel
@@ -133,15 +133,16 @@ export default function PostDetailsHomeView({ title }: Props) {
                     checkedIcon={<Iconify icon="solar:heart-bold" />}
                   />
                 }
-                label={fShortenNumber(post.totalFavorites)}
+                // label={fShortenNumber(post.totalFavorites)}
+                label={fShortenNumber(2)}
                 sx={{ mr: 1 }}
               />
 
-              <AvatarGroup>
+              {/* <AvatarGroup>
                 {post.favoritePerson.map((person) => (
                   <Avatar key={person.name} alt={person.name} src={person.avatarUrl} />
                 ))}
-              </AvatarGroup>
+              </AvatarGroup> */}
             </Stack>
           </Stack>
 
@@ -149,7 +150,8 @@ export default function PostDetailsHomeView({ title }: Props) {
             <Typography variant="h4">{t('comments')}</Typography>
 
             <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
-              ({post.comments.length})
+              {/* ({post.comments.length}) */}
+              ({1})
             </Typography>
           </Stack>
 
@@ -157,7 +159,7 @@ export default function PostDetailsHomeView({ title }: Props) {
 
           <Divider sx={{ mt: 5, mb: 2 }} />
 
-          <PostCommentList comments={post.comments} />
+          {/* <PostCommentList comments={post.comments} /> */}
         </Stack>
       </Container>
     </>
