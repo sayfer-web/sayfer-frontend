@@ -4,10 +4,10 @@ import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 // _mock
-import { 
-  _bankingContacts, 
-  _bankingCreditCard, 
-  _bankingRecentTransitions 
+import {
+  _bankingContacts,
+  _bankingCreditCard,
+  _bankingRecentTransitions
 } from 'src/_mock';
 // components
 import { useSettingsContext } from 'src/components/settings';
@@ -24,7 +24,7 @@ import { useState } from 'react';
 import EcommerceCurrentBalance from '../../e-commerce/ecommerce-current-balance';
 import WalletRefillFounds from '../wallet-refill-founds';
 import { useSelector } from 'react-redux';
-import { selectCurrentUsername } from 'src/app/features/auth/authSlice';
+import { selectCurrentTokenBalanceSFR, selectCurrentUsername } from 'src/app/features/auth/authSlice';
 import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
@@ -32,6 +32,8 @@ import { useLocales } from 'src/locales';
 export default function OverviewBankingView() {
 
   const { t } = useLocales()
+
+  const tokenBalanceSFR = useSelector(selectCurrentTokenBalanceSFR)
 
   const [income, setIncome] = useState(
     [
@@ -78,28 +80,6 @@ export default function OverviewBankingView() {
         ],
         percent: 10,
         total: 1
-      },
-      {
-        title: 'SFRX',
-        icon: '',
-        series: [
-          { x: 2010, y: 88 },
-          { x: 2011, y: 120 },
-          { x: 2012, y: 156 },
-          { x: 2013, y: 123 },
-          { x: 2014, y: 88 },
-          { x: 2015, y: 66 },
-          { x: 2016, y: 45 },
-          { x: 2017, y: 29 },
-          { x: 2018, y: 45 },
-          { x: 2019, y: 88 },
-          { x: 2020, y: 132 },
-          { x: 2021, y: 146 },
-          { x: 2022, y: 169 },
-          { x: 2023, y: 184 },
-        ],
-        percent: 10,
-        total: 1
       }
     ]
   )
@@ -112,7 +92,7 @@ export default function OverviewBankingView() {
   const _bankingCreditCard = [
     {
       id: 1,
-      balance: 0,
+      balance: tokenBalanceSFR,
       cardType: 'SFR',
       // cardHolder: _mock.fullName(2),
       cardHolder: username,
@@ -138,7 +118,7 @@ export default function OverviewBankingView() {
     //   cardValid: '',
     // },
   ];
-  
+
 
   // const expenses = useState()
 
@@ -150,7 +130,7 @@ export default function OverviewBankingView() {
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Grid container spacing={3}>
 
-      <Grid xs={12} md={3}>
+        <Grid xs={12} md={3}>
           {/* @ts-ignore */}
           <BankingCurrentBalance list={_bankingCreditCard} />
         </Grid>
@@ -158,20 +138,20 @@ export default function OverviewBankingView() {
 
         <Grid xs={12} md={9}>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3}>
-           
+
             {income.map(item => (
               <BankingWidgetSummary
-              key={item.title}
-              title={item.title}
-              icon={item.icon}
-              percent={item.percent}
-              total={item.total}
-              chart={{
-                series: item.series
-              }}
+                key={item.title}
+                title={item.title}
+                icon={item.icon}
+                percent={item.percent}
+                total={item.total}
+                chart={{
+                  series: item.series
+                }}
               />
-              )) }
-            
+            ))}
+
             {/* <BankingWidgetSummary
               title={income[0][1].title}
               icon={income[0][1].icon}
@@ -258,7 +238,7 @@ export default function OverviewBankingView() {
               }}
             />
 
-            
+
 
             <BankingExpensesCategories
               title={t('expenses_categories')}
@@ -308,15 +288,15 @@ export default function OverviewBankingView() {
 
         <Grid xs={12} md={4}>
           <Stack spacing={3}>
-            
-          <WalletRefillFounds
-            title={t('total_money_received')}
-            currentBalance={187650}
-            sentAmount={25500}
-          />
+
+            <WalletRefillFounds
+              title={t('total_money_received')}
+              currentBalance={187650}
+              sentAmount={25500}
+            />
 
             <BankingQuickTransfer title={t('quick_transfer')} list={_bankingContacts} />
-            
+
             {/* 
               <BankingContacts
                 title="Contacts"
@@ -329,9 +309,9 @@ export default function OverviewBankingView() {
               price="$50"
               title={`${t('invite_friends')} \n ${t('and_earn')}`}
               description={t('present_egestas')}
-              // img="/assets/illustrations/characters/character_11.png"
+            // img="/assets/illustrations/characters/character_11.png"
             />
-            </Stack>
+          </Stack>
           {/* </Stack> */}
         </Grid>
       </Grid>

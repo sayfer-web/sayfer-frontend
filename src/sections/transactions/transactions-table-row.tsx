@@ -17,7 +17,7 @@ import { useBoolean } from 'src/hooks/use-boolean';
 // utils
 import { fCurrency } from 'src/utils/format-number';
 // types
-import { IOrderItem } from 'src/types/order';
+import { ITransactionItem } from 'src/types/transaction';
 // components
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
@@ -26,22 +26,20 @@ import CustomPopover, { usePopover } from 'src/components/custom-popover';
 
 // ----------------------------------------------------------------------
 
-type Props = {
-  row: IOrderItem;
-  selected: boolean;
-  onViewRow: VoidFunction;
-  onSelectRow: VoidFunction;
-  onDeleteRow: VoidFunction;
-};
+// type Props = {
+//   row: ITransactionItem;
+//   selected: boolean;
+//   onViewRow: VoidFunction;
+//   onSelectRow: VoidFunction;
+//   onDeleteRow: VoidFunction;
+// };
 
-export default function TransactionsTableRow({
-  row,
-  selected,
-  onViewRow,
-  onSelectRow,
-  onDeleteRow,
-}: Props) {
-  const { items, status, orderNumber, createdAt, customer, totalQuantity, subTotal } = row;
+/* @ts-ignore */
+export default function TransactionsTableRow({ row, selected, onViewRow, onSelectRow, onDeleteRow, }
+// : Props
+) {
+  // const { items, status, orderNumber, createdAt, customer, totalQuantity, subTotal } = row;
+  const { id, txid, address, category, receiver, tokenType, amount, exchangeRate, status, createdAt, successedAt } = row;
 
   const confirm = useBoolean();
 
@@ -65,22 +63,24 @@ export default function TransactionsTableRow({
             },
           }}
         >
-          {orderNumber}
+          {id}
         </Box>
       </TableCell>
 
       <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
-        <Avatar alt={customer.name} src={customer.avatarUrl} sx={{ mr: 2 }} />
+        {/* <Avatar alt={customer.name} src={customer.avatarUrl} sx={{ mr: 2 }} /> */}
 
         <ListItemText
-          primary={customer.name}
-          secondary={customer.email}
+          primary={txid}
+          secondary={address}
           primaryTypographyProps={{ typography: 'body2' }}
           secondaryTypographyProps={{
             component: 'span',
             color: 'text.disabled',
           }}
         />
+
+
       </TableCell>
 
       <TableCell>
@@ -96,9 +96,9 @@ export default function TransactionsTableRow({
         />
       </TableCell>
 
-      <TableCell align="center"> {totalQuantity} </TableCell>
+      <TableCell align="center"> {category} </TableCell>
 
-      <TableCell> {fCurrency(subTotal)} </TableCell>
+      <TableCell> {fCurrency(amount*exchangeRate)} </TableCell>
 
       <TableCell>
         <Label
@@ -143,7 +143,7 @@ export default function TransactionsTableRow({
           unmountOnExit
           sx={{ bgcolor: 'background.neutral' }}
         >
-          <Stack component={Paper} sx={{ m: 1.5 }}>
+          {/* <Stack component={Paper} sx={{ m: 1.5 }}>
             {items.map((item) => (
               <Stack
                 key={item.id}
@@ -180,7 +180,7 @@ export default function TransactionsTableRow({
                 <Box sx={{ width: 110, textAlign: 'right' }}>{fCurrency(item.price)}</Box>
               </Stack>
             ))}
-          </Stack>
+          </Stack> */}
         </Collapse>
       </TableCell>
     </TableRow>

@@ -51,7 +51,10 @@ const ICONS = {
 export function useNavData() {
   const { t } = useLocales();
 
-  const { username, status } = useAuth()
+  // const { username, status } = useAuth()
+
+  let username = 'Sayfer'
+  let status = 'User'
 
   const data = useMemo(
     () => [

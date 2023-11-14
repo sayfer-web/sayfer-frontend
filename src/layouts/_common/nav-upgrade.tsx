@@ -23,7 +23,10 @@ export default function NavUpgrade() {
 
   // const { user } = useMockedUser();
 
-  const { username, status } = useAuth()
+  // const { username, status } = useAuth()
+
+  let username = 'Sayfer'
+  let status = 'User'
 
   const user = {
     id: '8864c717-587d-472a-929a-8e5f298024da-0',

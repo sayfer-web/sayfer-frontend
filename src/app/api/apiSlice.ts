@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { setCredentials, logOut } from "../features/auth/authSlice"
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://sayfer.club/',
+  baseUrl: 'https://api.sayfer.club/',
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     /* @ts-ignore */

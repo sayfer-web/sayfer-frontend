@@ -30,7 +30,10 @@ import { useAuth } from 'src/hooks/use-auth';
 
 export default function OverviewAppView() {
 
-  const { username, status } = useAuth()
+  // const { username, status } = useAuth()
+
+  let username = 'Sayfer'
+  let status = 'User'
 
   const { t } = useLocales()
 

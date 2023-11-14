@@ -110,10 +110,8 @@ export default function JwtRegisterView() {
   // }, [user, pwd, matchPwd])
 
   const handleSubmitReg = async (e: any) => {
-
-    const { t } = useLocales()
-
     e.preventDefault()
+    
     const v1 = USER_REGEX.test(user)
     const v2 = PWD_REGEX.test(pwd)
     if (!v1 || !v2) {
@@ -124,31 +122,45 @@ export default function JwtRegisterView() {
     setErrMsg('RESULT')
 
     let regResult = ''
-    try {
 
-      //   const body = new FormData(e.target)
+    
+    console.log(1)
+    regResult = await registration({ username: user, password: pwd }).unwrap()
+    console.log(2)
+    // const userData = await login({ username: user, password: pwd }).unwrap()
+    // dispatch(setCredentials({ ...userData, user }))
+    console.log(regResult)
+    setUser('')
+    setPwd('')
+    setMatchPwd('')
+    setErrorMsg('Successfully registered!')
+    // try {
 
-      //   const result = await fetch('sayfer.club/users/register', { method: 'POST', body })
-      //     .then(data => data.json())
-      //     .then(res => {
-      //       return res
-      //       // const resString = JSON.stringify(res)
+    //   //   const body = new FormData(e.target)
 
-      //       // setErrMsg(resString)
-      //     })
-      regResult = await registration({ username: user, password: pwd }).unwrap()
-      // const userData = await login({ username: user, password: pwd }).unwrap()
-      // dispatch(setCredentials({ ...userData, user }))
-      setUser('')
-      setPwd('')
-      setMatchPwd('')
-      setErrorMsg('Successfully registered!')
-      // redirect
-      // navigate('/dashboard')
-    } catch (err: any) {
-      /* @ts-ignore */
-      if (regResult.message === "User Exist") setErrorMsg('User exist. Take another username')
-    }
+    //   //   const result = await fetch('sayfer.club/users/register', { method: 'POST', body })
+    //   //     .then(data => data.json())
+    //   //     .then(res => {
+    //   //       return res
+    //   //       // const resString = JSON.stringify(res)
+
+    //   //       // setErrMsg(resString)
+    //   //     })
+
+    //   console.log('test')
+    //   regResult = await registration({ username: user, password: pwd }).unwrap()
+    //   // const userData = await login({ username: user, password: pwd }).unwrap()
+    //   // dispatch(setCredentials({ ...userData, user }))
+    //   setUser('')
+    //   setPwd('')
+    //   setMatchPwd('')
+    //   setErrorMsg('Successfully registered!')
+    //   // redirect
+    //   // navigate('/dashboard')
+    // } catch (err: any) {
+    //   /* @ts-ignore */
+    //   if (regResult.message === "User Exist") setErrorMsg('User exist. Take another username')
+    // }
   }
 
   // const [login, { isLoading }] = useLoginMutation()

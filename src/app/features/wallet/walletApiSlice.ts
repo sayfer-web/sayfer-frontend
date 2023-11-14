@@ -8,9 +8,9 @@ export const walletApiSlice = apiSlice.injectEndpoints({
             query: data => (`/wallet/info/${data}`),
             keepUnusedDataFor: 60,
         }),
-        getWalletAddresses: builder.mutation({
+        getWalletLtcAddress: builder.query({
             query: username => ({
-                url: `/wallet/getLtcAddress`,
+                url: `/wallet/getLtcAddress/${username}`,
                 method: 'GET',
             }),
             // keepUnusedDataFor: 60,
@@ -21,5 +21,5 @@ export const walletApiSlice = apiSlice.injectEndpoints({
 
 export const {
     useGetWalletInfoQuery,
-    useGetWalletAddressesMutation,
+    useGetWalletLtcAddressQuery,
 } = walletApiSlice

@@ -136,8 +136,10 @@ const BlankPage = lazy(() => import('src/pages/dashboard/blank'));
 
 export default function App() {
 
-  const { username, status, isAdmin } = useAuth()
+  // const { username, status, isAdmin } = useAuth()
 
+  let username = 'Sayfer'
+  let status = 'User'
   console.log(username, status)
 
 

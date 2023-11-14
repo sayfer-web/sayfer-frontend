@@ -27,7 +27,7 @@ import { StarBorder } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
 import { selectCurrentUsername } from 'src/app/features/auth/authSlice';
 import React from 'react';
-import { useGetWalletAddressesMutation } from 'src/app/features/wallet/walletApiSlice';
+import { useGetWalletLtcAddressQuery } from 'src/app/features/wallet/walletApiSlice';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useLocales } from 'src/locales';
 
@@ -51,7 +51,9 @@ export default function WalletRefillFounds({
 
   const username = useSelector(selectCurrentUsername)
 
-  const [getWalletAddresses, { isLoading, data }] = useGetWalletAddressesMutation()
+  const { data, isLoading } = useGetWalletLtcAddressQuery(username)
+  // const tokenBalanceSFR = useSelector(selectCurrentTokenBalanceSFR)
+
 
     const coinsList = [
       {
@@ -198,10 +200,7 @@ export default function WalletRefillFounds({
                       <List component="div" disablePadding>
                         <ListItemButton sx={{ pl: 4 }}>
                           <ListItemIcon>
-                          { !data
-                          ? <LoadingButton variant='soft' color='warning' loading={isLoading} onClick={getWalletAddresses}>Получить адрес для пополнения</LoadingButton>
-                          : <ListItemText primary={ !data ? null : data?.ltcAddressExist } />
-                          }
+                          {/* { data } */}
                           </ListItemIcon>
                         </ListItemButton>
                       </List>
