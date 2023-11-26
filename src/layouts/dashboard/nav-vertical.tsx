@@ -15,6 +15,8 @@ import { NavSectionVertical } from 'src/components/nav-section';
 import { NAV } from '../config-layout';
 import { useNavData } from './config-navigation';
 import { NavToggleButton, NavUpgrade } from '../_common';
+import { useSelector } from 'react-redux';
+import { selectCurrentRole } from 'src/app/features/auth/authSlice';
 
 // ----------------------------------------------------------------------
 
@@ -24,6 +26,9 @@ type Props = {
 };
 
 export default function NavVertical({ openNav, onCloseNav }: Props) {
+
+  const role = useSelector(selectCurrentRole)
+  
   const { user } = useMockedUser();
 
   const pathname = usePathname();
@@ -55,7 +60,7 @@ export default function NavVertical({ openNav, onCloseNav }: Props) {
       <NavSectionVertical
         data={navData}
         config={{
-          currentRole: user?.role || 'admin',
+          currentRole: role || 'User',
         }}
       />
 

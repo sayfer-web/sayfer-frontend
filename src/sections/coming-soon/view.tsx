@@ -16,23 +16,37 @@ import { _socials } from 'src/_mock';
 import { ComingSoonIllustration } from 'src/assets/illustrations';
 // components
 import Iconify from 'src/components/iconify';
+import { useLocales } from 'src/locales';
+import { useCallback, useEffect } from 'react';
 
 // ----------------------------------------------------------------------
 
-export default function ComingSoonView() {
-  const { days, hours, minutes, seconds } = useCountdownDate(new Date('07/07/2024 21:30'));
+type Props = {
+  date: string
+}
+
+// /* @ts-ignore */
+export default function ComingSoonView({ date }: Props) {
+
+  useEffect(() => {
+
+  }, [date])
+
+  const { t } = useLocales()
+
+  const { days, hours, minutes, seconds } = useCountdownDate(new Date(date));
 
   return (
     <>
       <Typography variant="h3" sx={{ mb: 2 }}>
-        Coming Soon!
+        {t('coming_soon')}
       </Typography>
 
       <Typography sx={{ color: 'text.secondary' }}>
-        We are currently working hard on this page!
+        {t('in_developing')}
       </Typography>
 
-      <ComingSoonIllustration sx={{ my: 10, height: 240 }} />
+      {/* <ComingSoonIllustration sx={{ my: 10, height: 240 }} /> */}
 
       <Stack
         direction="row"
@@ -49,7 +63,7 @@ export default function ComingSoonView() {
         <TimeBlock label="Seconds" value={seconds} />
       </Stack>
 
-      <TextField
+      {/* <TextField
         fullWidth
         placeholder="Enter your email"
         InputProps={{
@@ -75,9 +89,9 @@ export default function ComingSoonView() {
           },
         }}
         sx={{ my: 5 }}
-      />
+      /> */}
 
-      <Stack spacing={1} alignItems="center" justifyContent="center" direction="row">
+      {/* <Stack spacing={1} alignItems="center" justifyContent="center" direction="row">
         {_socials.map((social) => (
           <IconButton
             key={social.name}
@@ -91,7 +105,7 @@ export default function ComingSoonView() {
             <Iconify icon={social.icon} />
           </IconButton>
         ))}
-      </Stack>
+      </Stack> */}
     </>
   );
 }

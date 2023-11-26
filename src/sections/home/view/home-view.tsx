@@ -67,7 +67,7 @@ export default function HomeView() {
           bgcolor: '#002102',
         }}
       >
-        <HomeAdvantages />
+        {/* <HomeAdvantages /> */}
 
         {/* <HomePresent /> */}
 
@@ -81,7 +81,7 @@ export default function HomeView() {
 
         <HomeBuildings />
 
-        <HomePricing />
+        {/* <HomePricing /> */}
 
         <HomeNews />
 

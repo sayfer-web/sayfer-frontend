@@ -144,7 +144,7 @@ export default function HomeHugePackElements() {
         disabledEffect
         alt="sidebar"
         // width={100}
-        height={200}
+        height={mdUp ? 600 : 400}
         // style={{ top: 100, left: 0 }}
         src={`/assets/animations/tree/crypto2.svg`}
       />

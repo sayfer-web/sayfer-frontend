@@ -1,5 +1,5 @@
 import isEqual from 'lodash/isEqual';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 // @mui
 import { alpha } from '@mui/material/styles';
 import Tab from '@mui/material/Tab';
@@ -17,7 +17,7 @@ import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
 // _mock
-import { _userList, _roles, USER_STATUS_OPTIONS } from 'src/_mock';
+// import { _roles, USER_STATUS_OPTIONS } from 'src/_mock';
 // hooks
 import { useBoolean } from 'src/hooks/use-boolean';
 // components
@@ -44,6 +44,7 @@ import UserTableRow from '../user-table-row';
 import UserTableToolbar from '../user-table-toolbar';
 import UserTableFiltersResult from '../user-table-filters-result';
 import { useLocales } from 'src/locales';
+import { useGetUsersQuery } from 'src/app/features/users/usersApiSlice';
 
 // ----------------------------------------------------------------------
 
@@ -52,12 +53,12 @@ const STATUS_OPTIONS = () => {
   const { t } = useLocales()
 
   return [
-  { value: 'all', label: t('all') }, 
-  { value: 'active', label: t('active') },
-  { value: 'pending', label: t('pending') },
-  { value: 'banned', label: t('banned') },
-  { value: 'rejected', label: t('rejected') },
-]
+    { value: 'all', label: t('all') },
+    // { value: 'active', label: t('active') },
+    // { value: 'pending', label: t('pending') },
+    // { value: 'banned', label: t('banned') },
+    // { value: 'rejected', label: t('rejected') },
+  ]
 }
 
 
@@ -66,13 +67,13 @@ const TABLE_HEAD = () => {
   const { t } = useLocales()
 
   return [
-  { id: 'name', label: t('name') },
-  { id: 'phoneNumber', label: t('phone_number'), width: 180 },
-  { id: 'company', label: t('company'), width: 220 },
-  { id: 'role', label: t('role'), width: 180 },
-  { id: 'status', label: t('status'), width: 100 },
-  { id: '', width: 88 },
-];
+    { id: 'name', label: t('username') },
+    // { id: 'phoneNumber', label: t('phone_number'), width: 180 },
+    { id: 'company', label: t('mentor'), width: 220 },
+    // { id: 'role', label: t('contract_status'), width: 180 },
+    { id: 'status', label: t('contract_status'), width: 100 },
+    { id: '', width: 88 },
+  ];
 }
 
 const defaultFilters: IUserTableFilters = {
@@ -85,6 +86,26 @@ const defaultFilters: IUserTableFilters = {
 
 export default function UserListView() {
 
+  const { data: users, error, isLoading, isSuccess } = useGetUsersQuery('')
+
+  const _userList = [...Array(20)].map((_, index) => ({
+    id: `${index}`,
+    zipCode: '85807',
+    state: 'Virginia',
+    city: 'Rancho Cordova',
+    role: '1',
+    email: '1',
+    address: '908 Jack Locks',
+    name: '1',
+    isVerified: true,
+    company: 'mentor',
+    country: 'country',
+    avatarUrl: 'url',
+    phoneNumber: '1111111111',
+    status:
+      (index % 2 && 'pending') || (index % 3 && 'banned') || (index % 4 && 'rejected') || 'active',
+  }));
+
   const { t } = useLocales()
 
   const table = useTable();
@@ -94,6 +115,36 @@ export default function UserListView() {
   const router = useRouter();
 
   const confirm = useBoolean();
+
+  useEffect(() => {
+    if (isSuccess) {
+      console.log('USERS: ', users)
+      const newUsers = users.map((user: any, index: number) => {
+        return {
+          id: `${user.id}`,
+          zipCode: '0',
+          state: '0',
+          city: '0',
+          role: '1',
+          email: user.email,
+          address: '0',
+          name: user.username,
+          isVerified: true,
+          company: 'Mentor',
+          country: '0',
+          avatarUrl: 'url',
+          phoneNumber: user.phoneNumber,
+          status:
+            (index % 2 && 'pending') || (index % 3 && 'banned') || (index % 4 && 'rejected') || 'active',
+        }
+      })
+
+      console.log('NEW: ', newUsers)
+
+      setTableData(newUsers)
+
+    }
+  }, [users])
 
   const [tableData, setTableData] = useState(_userList);
 
@@ -166,6 +217,12 @@ export default function UserListView() {
     setFilters(defaultFilters);
   }, []);
 
+  const _statuses = [
+    '1 уровень',
+    '2 уровень',
+    '3 уровень',
+  ];
+
   return (
     <>
       <Container maxWidth={settings.themeStretch ? false : 'lg'}>
@@ -176,16 +233,16 @@ export default function UserListView() {
             { name: t('user'), href: paths.dashboard.user.root },
             { name: t('list') },
           ]}
-          action={
-            <Button
-              component={RouterLink}
-              href={paths.dashboard.user.new}
-              variant="contained"
-              startIcon={<Iconify icon="mingcute:add-line" />}
-            >
-              {t('new_user')}
-            </Button>
-          }
+          // action={
+          //   <Button
+          //     component={RouterLink}
+          //     href={paths.dashboard.user.new}
+          //     variant="contained"
+          //     startIcon={<Iconify icon="mingcute:add-line" />}
+          //   >
+          //     {t('new_user')}
+          //   </Button>
+          // }
           sx={{
             mb: { xs: 3, md: 5 },
           }}
@@ -238,7 +295,7 @@ export default function UserListView() {
             filters={filters}
             onFilters={handleFilters}
             //
-            roleOptions={_roles}
+            roleOptions={_statuses}
           />
 
           {canReset && (

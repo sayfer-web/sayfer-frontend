@@ -217,7 +217,7 @@ export default function GamesListView() {
         links={[
           { name: t('dashboard'), href: paths.dashboard.root },
           {
-            name: t('games'),
+            name: t('projects'),
             href: paths.dashboard.games.root,
           },
           { name: t('list') },

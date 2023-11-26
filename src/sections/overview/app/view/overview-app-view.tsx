@@ -25,6 +25,8 @@ import AppCurrentDownload from '../app-current-download';
 import AppTopInstalledCountries from '../app-top-installed-countries';
 import { useLocales } from 'src/locales';
 import { useAuth } from 'src/hooks/use-auth';
+import { useSelector } from 'react-redux';
+import { selectCurrentUsername } from 'src/app/features/auth/authSlice';
 
 // ----------------------------------------------------------------------
 
@@ -32,7 +34,9 @@ export default function OverviewAppView() {
 
   // const { username, status } = useAuth()
 
-  let username = 'Sayfer'
+  const username = useSelector(selectCurrentUsername) || 'Guest'
+
+  // let username = 'Sayfer'
   let status = 'User'
 
   const { t } = useLocales()
@@ -89,34 +93,53 @@ export default function OverviewAppView() {
     ],
   }
 
+
+  // -------------------
+
+  const recs = [
+    {
+      id: '1',
+      title: 'SFR',
+      description: 'Купить токен',
+      coverUrl: 'url',
+    },
+    {
+      id: '2',
+      title: 'Хочешь сыграть в покер?',
+      description: 'Подробнее',
+      coverUrl: 'url',
+    },
+  ]
+
+
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Grid container spacing={3}>
         <Grid xs={12} md={8}>
           <AppWelcome
             title={`${t('welcome')}, ${username || 'Guest'}`}
-            description={`${t('current_quests')} ${t('current_first_quest')} ${t('current_second_quest')} \n ${t('current_second_quest')}`}
-            // img={<SeoIllustration />}
-            action={
-              <Button variant="contained" color="primary">
-                {t('go_now')}
-              </Button>
-            }
+            description={`${t('dashboard_welcome')}`}
+          // img={<SeoIllustration />}
+          // action={
+          //   <Button variant="contained" color="primary">
+          //     {t('go_now')}
+          //   </Button>
+          // }
           />
         </Grid>
 
         <Grid xs={12} md={4}>
-          <AppFeatured list={_appFeatured()} />
+          <AppFeatured list={recs} />
         </Grid>
 
         <Grid xs={12} md={4}>
           <AppWidgetSummary
             title={t('sfr_current_price')}
-            percent={2.6}
-            total={1062}
+            percent={0}
+            total={1}
             postfix={'$'}
             chart={{
-              series: [5, 18, 12, 51, 68, 11, 39, 37, 27, 20],
+              series: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
             }}
           />
         </Grid>
@@ -124,12 +147,12 @@ export default function OverviewAppView() {
         <Grid xs={12} md={4}>
           <AppWidgetSummary
             title={t('all_bought_tokens')}
-            percent={0.2}
-            total={4876}
+            percent={0}
+            total={1}
             postfix={'$'}
             chart={{
               // colors: [theme.palette.info.light, theme.palette.info.main],
-              series: [20, 41, 63, 33, 28, 35, 50, 46, 11, 26],
+              series: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
             }}
           />
         </Grid>
@@ -137,16 +160,16 @@ export default function OverviewAppView() {
         <Grid xs={12} md={4}>
           <AppWidgetSummary
             title={t('tokens_counter')}
-            percent={-0.1}
-            total={678}
+            percent={0}
+            total={0}
             chart={{
               // colors: [theme.palette.warning.light, theme.palette.warning.main],
-              series: [8, 9, 31, 8, 16, 37, 8, 33, 46, 31],
+              series: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             }}
           />
         </Grid>
 
-        <Grid xs={12} md={6} lg={4}>
+        {/* <Grid xs={12} md={6} lg={4}>
           <AppCurrentDownload
             title={t('tokens_relations')}
             subheader={t('tokens_relations_info')}
@@ -158,9 +181,9 @@ export default function OverviewAppView() {
               ],
             }}
           />
-        </Grid>
+        </Grid> */}
 
-        <Grid xs={12} md={6} lg={8}>
+        <Grid xs={12} md={12} lg={12}>
           <AppAreaInstalled
             title={t('transactions_counter')}
             subheader={`(+43%) ${t('than_last_year')}`}
@@ -168,7 +191,7 @@ export default function OverviewAppView() {
           />
         </Grid>
 
-        <Grid xs={12} lg={8}>
+        {/* <Grid xs={12} lg={8}>
           <AppNewInvoice
             title={t('last_transactions')}
             tableData={_appInvoices}
@@ -180,7 +203,7 @@ export default function OverviewAppView() {
               { id: '' },
             ]}
           />
-        </Grid>
+        </Grid> */}
 
         {/* <Grid xs={12} md={6} lg={4}>
           <AppTopRelated title={t('top_related_applications')} list={_appRelated} />
@@ -194,7 +217,7 @@ export default function OverviewAppView() {
           <AppTopAuthors title={t('top_authors')} list={_appAuthors} />
         </Grid> */}
 
-        <Grid xs={12} md={6} lg={4}>
+        {/* <Grid xs={12} md={6} lg={4}>
           <Stack spacing={3}>
             <AppWidget
               title={t('conversion')}
@@ -226,7 +249,7 @@ export default function OverviewAppView() {
               }}
             />
           </Stack>
-        </Grid>
+        </Grid> */}
       </Grid>
     </Container>
   );

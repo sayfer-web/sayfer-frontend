@@ -17,29 +17,34 @@ import { useBoolean } from 'src/hooks/use-boolean';
 // utils
 import { fCurrency } from 'src/utils/format-number';
 // types
-import { ITransactionItem } from 'src/types/transaction';
+// import { IOrderItem } from 'src/types/order';
 // components
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 import { ConfirmDialog } from 'src/components/custom-dialog';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
+import { ITransactionItem } from 'src/types/transaction';
 
 // ----------------------------------------------------------------------
 
-// type Props = {
-//   row: ITransactionItem;
-//   selected: boolean;
-//   onViewRow: VoidFunction;
-//   onSelectRow: VoidFunction;
-//   onDeleteRow: VoidFunction;
-// };
+type Props = {
+  row: ITransactionItem;
+  selected: boolean;
+  onViewRow: VoidFunction;
+  onSelectRow: VoidFunction;
+  onDeleteRow: VoidFunction;
+};
 
-/* @ts-ignore */
-export default function TransactionsTableRow({ row, selected, onViewRow, onSelectRow, onDeleteRow, }
-// : Props
-) {
-  // const { items, status, orderNumber, createdAt, customer, totalQuantity, subTotal } = row;
-  const { id, txid, address, category, receiver, tokenType, amount, exchangeRate, status, createdAt, successedAt } = row;
+export default function TransactionsTableRow({
+  row,
+  selected,
+  onViewRow,
+  onSelectRow,
+  onDeleteRow,
+}: Props) {
+  const { items, status, orderNumber, createdAt, customer, totalQuantity, subTotal, txid, receiver } = row;
+
+  console.log('CREATED AT: ', createdAt)
 
   const confirm = useBoolean();
 
@@ -63,24 +68,22 @@ export default function TransactionsTableRow({ row, selected, onViewRow, onSelec
             },
           }}
         >
-          {id}
+          {orderNumber}
         </Box>
       </TableCell>
 
       <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
-        {/* <Avatar alt={customer.name} src={customer.avatarUrl} sx={{ mr: 2 }} /> */}
+        <Avatar alt={customer.name} src={customer.avatarUrl} sx={{ mr: 2 }} />
 
         <ListItemText
-          primary={txid}
-          secondary={address}
+          primary={customer.name}
+          secondary={customer.email}
           primaryTypographyProps={{ typography: 'body2' }}
           secondaryTypographyProps={{
             component: 'span',
             color: 'text.disabled',
           }}
         />
-
-
       </TableCell>
 
       <TableCell>
@@ -96,15 +99,15 @@ export default function TransactionsTableRow({ row, selected, onViewRow, onSelec
         />
       </TableCell>
 
-      <TableCell align="center"> {category} </TableCell>
+      <TableCell align="center"> {fCurrency(totalQuantity)} </TableCell>
 
-      <TableCell> {fCurrency(amount*exchangeRate)} </TableCell>
+      <TableCell> {fCurrency(subTotal)} </TableCell>
 
       <TableCell>
         <Label
           variant="soft"
           color={
-            (status === 'completed' && 'success') ||
+            (status === 'success' && 'success') ||
             (status === 'pending' && 'warning') ||
             (status === 'cancelled' && 'error') ||
             'default'
@@ -115,7 +118,7 @@ export default function TransactionsTableRow({ row, selected, onViewRow, onSelec
       </TableCell>
 
       <TableCell align="right" sx={{ px: 1, whiteSpace: 'nowrap' }}>
-        <IconButton
+        {/* <IconButton
           color={collapse.value ? 'inherit' : 'default'}
           onClick={collapse.onToggle}
           sx={{
@@ -125,7 +128,7 @@ export default function TransactionsTableRow({ row, selected, onViewRow, onSelec
           }}
         >
           <Iconify icon="eva:arrow-ios-downward-fill" />
-        </IconButton>
+        </IconButton> */}
 
         <IconButton color={popover.open ? 'inherit' : 'default'} onClick={popover.onOpen}>
           <Iconify icon="eva:more-vertical-fill" />
@@ -134,63 +137,63 @@ export default function TransactionsTableRow({ row, selected, onViewRow, onSelec
     </TableRow>
   );
 
-  const renderSecondary = (
-    <TableRow>
-      <TableCell sx={{ p: 0, border: 'none' }} colSpan={8}>
-        <Collapse
-          in={collapse.value}
-          timeout="auto"
-          unmountOnExit
-          sx={{ bgcolor: 'background.neutral' }}
-        >
-          {/* <Stack component={Paper} sx={{ m: 1.5 }}>
-            {items.map((item) => (
-              <Stack
-                key={item.id}
-                direction="row"
-                alignItems="center"
-                sx={{
-                  p: (theme) => theme.spacing(1.5, 2, 1.5, 1.5),
-                  '&:not(:last-of-type)': {
-                    borderBottom: (theme) => `solid 2px ${theme.palette.background.neutral}`,
-                  },
-                }}
-              >
-                <Avatar
-                  src={item.coverUrl}
-                  variant="rounded"
-                  sx={{ width: 48, height: 48, mr: 2 }}
-                />
+  // const renderSecondary = (
+  //   <TableRow>
+  //     <TableCell sx={{ p: 0, border: 'none' }} colSpan={8}>
+  //       <Collapse
+  //         in={collapse.value}
+  //         timeout="auto"
+  //         unmountOnExit
+  //         sx={{ bgcolor: 'background.neutral' }}
+  //       >
+  //         <Stack component={Paper} sx={{ m: 1.5 }}>
+  //           {items.map((item) => (
+  //             <Stack
+  //               key={item.id}
+  //               direction="row"
+  //               alignItems="center"
+  //               sx={{
+  //                 p: (theme) => theme.spacing(1.5, 2, 1.5, 1.5),
+  //                 '&:not(:last-of-type)': {
+  //                   borderBottom: (theme) => `solid 2px ${theme.palette.background.neutral}`,
+  //                 },
+  //               }}
+  //             >
+  //               <Avatar
+  //                 src={item.coverUrl}
+  //                 variant="rounded"
+  //                 sx={{ width: 48, height: 48, mr: 2 }}
+  //               />
 
-                <ListItemText
-                  primary={item.name}
-                  secondary={item.sku}
-                  primaryTypographyProps={{
-                    typography: 'body2',
-                  }}
-                  secondaryTypographyProps={{
-                    component: 'span',
-                    color: 'text.disabled',
-                    mt: 0.5,
-                  }}
-                />
+  //               <ListItemText
+  //                 primary={item.name}
+  //                 secondary={item.sku}
+  //                 primaryTypographyProps={{
+  //                   typography: 'body2',
+  //                 }}
+  //                 secondaryTypographyProps={{
+  //                   component: 'span',
+  //                   color: 'text.disabled',
+  //                   mt: 0.5,
+  //                 }}
+  //               />
 
-                <Box>x{item.quantity}</Box>
+  //               <Box>x{item.quantity}</Box>
 
-                <Box sx={{ width: 110, textAlign: 'right' }}>{fCurrency(item.price)}</Box>
-              </Stack>
-            ))}
-          </Stack> */}
-        </Collapse>
-      </TableCell>
-    </TableRow>
-  );
+  //               <Box sx={{ width: 110, textAlign: 'right' }}>{fCurrency(item.price)}</Box>
+  //             </Stack>
+  //           ))}
+  //         </Stack>
+  //       </Collapse>
+  //     </TableCell>
+  //   </TableRow>
+  // );
 
   return (
     <>
       {renderPrimary}
 
-      {renderSecondary}
+      {/* {renderSecondary} */}
 
       <CustomPopover
         open={popover.open}

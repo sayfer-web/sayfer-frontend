@@ -69,6 +69,11 @@ export default function AppWidgetSummary({ title, percent, total, chart, sx, pos
     ...options,
   };
 
+  /* @ts-ignore */
+  const showIcon: string = percent < 0 && 'solar:double-alt-arrow-down-bold-duotone' ||
+    percent > 0 && 'solar:double-alt-arrow-up-bold-duotone' ||
+    percent === 0 && ''
+
   return (
     <Card sx={{ display: 'flex', alignItems: 'center', p: 3, ...sx }} {...other}>
       <Box sx={{ flexGrow: 1 }}>
@@ -77,11 +82,7 @@ export default function AppWidgetSummary({ title, percent, total, chart, sx, pos
         <Stack direction="row" alignItems="center" sx={{ mt: 2, mb: 1 }}>
           <Iconify
             width={24}
-            icon={
-              percent < 0
-                ? 'solar:double-alt-arrow-down-bold-duotone'
-                : 'solar:double-alt-arrow-up-bold-duotone'
-            }
+            icon={showIcon}
             sx={{
               mr: 1,
               color: 'success.main',

@@ -280,9 +280,9 @@ export default function JwtLoginView() {
     <form onSubmit={handleSubmit2}>
       {renderHead}
 
-      <Alert severity="info" sx={{ mb: 3 }}>
+      {/* <Alert severity="info" sx={{ mb: 3 }}>
         {t('use_username')}: <strong>Tester12</strong> / {t('password')} :<strong> Tester12</strong>
-      </Alert>
+      </Alert> */}
 
       {renderForm}
     </form>

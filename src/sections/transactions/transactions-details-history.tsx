@@ -29,8 +29,8 @@ export default function TransactionsDetailsHistory({ history }: Props) {
   const { t } = useLocales()
 
   const [newHistory, setHistory] = useState({
-    createdAt: new Date(),
-    receivedAt: new Date(),
+    createdAt: new Date(history.orderTime),
+    receivedAt: new Date(history.completionTime),
     timeline: [{ title: 'received', time: new Date() }, { title: 'created', time: new Date() }]
     
   })

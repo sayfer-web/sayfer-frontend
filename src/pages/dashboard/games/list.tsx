@@ -13,7 +13,7 @@ export default function GamesListPage() {
   return (
     <>
       <Helmet>
-        <title> {t('dashboard')}: {t('games_room')}</title>
+        <title> {t('dashboard')}: {t('projects')}</title>
       </Helmet>
 
       <GamesListView />

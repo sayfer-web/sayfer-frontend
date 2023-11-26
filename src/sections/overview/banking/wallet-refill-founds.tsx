@@ -11,7 +11,7 @@ import DialogActions from '@mui/material/DialogActions';
 import Avatar from '@mui/material/Avatar';
 import ListItemText from '@mui/material/ListItemText';
 import TextField from '@mui/material/TextField';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useBoolean } from 'src/hooks/use-boolean';
 import Box from '@mui/material/Box';
 import DialogContent from '@mui/material/DialogContent';
@@ -51,94 +51,191 @@ export default function WalletRefillFounds({
 
   const username = useSelector(selectCurrentUsername)
 
+  const [ltcAddress, setLtcAddress] = useState('no address')
+
   const { data, isLoading } = useGetWalletLtcAddressQuery(username)
   // const tokenBalanceSFR = useSelector(selectCurrentTokenBalanceSFR)
 
+  useEffect(() => {
+    !isLoading && setLtcAddress(data?.result)
+  }, [data])
 
-    const coinsList = [
-      {
-        network: 'PayPal', 
-        coinTitle: 'ttp', 
-        icon: '',
-        enabled: true
-      },
-      {
-        network: 'MasterCard', 
-        coinTitle: 'ttm', 
-        icon: '',
-        enabled: false
-      },
-      {
-        network: 'Visa', 
-        coinTitle: 'ttv', 
-        icon: '',
-        enabled: false
-      },
-      {
-        network: 'Bank transfer', 
-        coinTitle: 'usd', 
-        icon: '',
-        enabled: false
-      },
-    ]
+  console.log(data)
 
-    const [dialogVisible, toggleDialogVisible] = useState(false)
-    const confirm = useBoolean();
+  const coinsList = [
+    {
+      network: 'Litecoin',
+      coinTitle: 'LTC',
+      address: ltcAddress,
+      icon: '',
+      enabled: true
+    },
+    {
+      network: 'Bitcoin',
+      coinTitle: 'BTC',
+      address: t('in_developing'),
+      icon: '',
+      enabled: false
+    },
+    {
+      network: 'Ethereum',
+      coinTitle: 'USDT',
+      address: t('in_developing'),
+      icon: '',
+      enabled: false
+    },
+  ]
 
-    const coins = ['ltc', 'btc', 'eth', 'usdt']
+  const [dialogInputVisible, toggleDialogInputVisible] = useState(false)
+  const [dialogOutputVisible, toggleDialogOutputVisible] = useState(false)
+  const [dialogSendVisible, toggleDialogSendVisible] = useState(false)
+  const confirm = useBoolean();
 
-    const [open, toggleOpen] = useState(
-      {
-        ltc: false,
-        btc: false,
-        eth: false,
-        usdt: false
-      }
-    );
+  const coins = ['ltc', 'btc', 'eth', 'usdt']
+
+  const [open, toggleOpen] = useState(
+    {
+      ltc: false,
+      btc: false,
+      eth: false,
+      usdt: false
+    }
+  );
 
 
-    const [openBtc, toggleOpenBtc] = useState(true);
-    const [openLtc, toggleOpenLtc] = useState(true);
-    const [openEth, toggleOpenEth] = useState(true);
-    const [openUsdt, toggleOpenUsdt] = useState(true);
+  const [openBtc, toggleOpenBtc] = useState(true);
+  const [openLtc, toggleOpenLtc] = useState(true);
+  const [openEth, toggleOpenEth] = useState(true);
+  const [openUsdt, toggleOpenUsdt] = useState(true);
 
-    const handleClick = (coinTitle: string) => {
-      switch (coinTitle) {
-        case 'ltc':
-          toggleOpen(state => ({ ...state, ltc: !state.ltc}))
-          break;
+  const handleClick = (coinTitle: string) => {
+    switch (coinTitle) {
+      case 'LTC':
+        toggleOpen(state => ({ ...state, ltc: !state.ltc }))
+        break;
 
-        case 'btc':
-          toggleOpen(state => ({ ...state, btc: !state.btc}))
-          break;
+      case 'BTC':
+        toggleOpen(state => ({ ...state, btc: !state.btc }))
+        break;
 
-        case 'eth':
-          toggleOpen(state => ({ ...state, eth: !state.eth}))
-          break;
+      case 'USDT':
+        toggleOpen(state => ({ ...state, eth: !state.eth }))
+        break;
 
-        case 'usdt':
-          toggleOpen(state => ({ ...state, usdt: !state.usdt}))
-          break;
-      
-        default:
-          break;
-      }
-    };
+      default:
+        break;
+    }
+  };
 
   const totalAmount = currentBalance - sentAmount;
+
+
+
+  const renderInputDialog = (<Dialog
+    open={dialogInputVisible}
+    onClose={() => toggleDialogInputVisible(false)}
+    aria-labelledby="alert-dialog-title"
+    aria-describedby="alert-dialog-description"
+  >
+    <DialogTitle id="alert-dialog-title">
+      {t('wallet_input')}
+    </DialogTitle>
+    <DialogContent>
+      <DialogContentText id="alert-dialog-description">
+
+        <Stack sx={{ minWidth: 450 }} >
+          {coinsList.map((item, idx) => {
+
+            return (
+              <Fragment key={item.coinTitle}>
+                <ListItemButton onClick={() => handleClick(item.coinTitle)}>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={(item.network)} />
+                  {/* @ts-ignore */}
+                  {open[item.coinTitle] ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
+                {/* @ts-ignore */}
+                <span>{item.address}</span>
+              </Fragment>
+            )
+          }
+
+          )}
+        </Stack>
+      </DialogContentText>
+    </DialogContent>
+    <DialogActions>
+      <Button variant='soft' color='error' onClick={() => toggleDialogInputVisible(false)}>{t('close')}</Button>
+    </DialogActions>
+  </Dialog>
+  )
+
+  const renderOutputDialog = (<Dialog
+    open={dialogOutputVisible}
+    onClose={() => toggleDialogOutputVisible(false)}
+    aria-labelledby="alert-dialog-title"
+    aria-describedby="alert-dialog-description"
+  >
+    <DialogTitle id="alert-dialog-title">
+      {t('wallet_output')}
+    </DialogTitle>
+    <DialogContent>
+      <DialogContentText id="alert-dialog-description">
+
+        <Stack sx={{ minWidth: 450 }} >
+          {t('in_developing')}
+        </Stack>
+      </DialogContentText>
+    </DialogContent>
+    <DialogActions>
+      <Button variant='soft' color='error' onClick={() => toggleDialogOutputVisible(false)}>{t('close')}</Button>
+    </DialogActions>
+  </Dialog>
+  )
+
+  const renderSendDialog = (<Dialog
+    open={dialogSendVisible}
+    onClose={() => toggleDialogSendVisible(false)}
+    aria-labelledby="alert-dialog-title"
+    aria-describedby="alert-dialog-description"
+  >
+    <DialogTitle id="alert-dialog-title">
+      {t('wallet_send')}
+    </DialogTitle>
+    <DialogContent>
+      <DialogContentText id="alert-dialog-description">
+
+        <Stack sx={{ minWidth: 450 }} >
+          {t('in_developing')}
+        </Stack>
+      </DialogContentText>
+    </DialogContent>
+    <DialogActions>
+      <Button variant='soft' color='error' onClick={() => toggleDialogSendVisible(false)}>{t('close')}</Button>
+
+    </DialogActions>
+  </Dialog>
+  )
+
 
   return (
     <>
 
-    <Card sx={{ p: 3, ...sx }} {...other}>
-      <Typography variant="subtitle2" gutterBottom>
-        {title}
-      </Typography>
+      {renderInputDialog}
+      {renderOutputDialog}
+      {renderSendDialog}
 
-      <Stack spacing={2}>
-        <Typography variant="h3">{fCurrency(totalAmount)}</Typography>
+      <Card sx={{ p: 3, height: '100%', ...sx }} {...other}>
+        <Typography variant="subtitle2" gutterBottom>
+          {title}
+        </Typography>
 
-        <Stack direction="row" justifyContent="space-between">
+        <Stack spacing={2}>
+          <Typography variant="h3">{fCurrency(totalAmount)}</Typography>
+
+          {/* <Stack direction="row" justifyContent="space-between">
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
             {t('current_balance')}
           </Typography>
@@ -150,84 +247,33 @@ export default function WalletRefillFounds({
             {t('sent')}
           </Typography>
           <Typography variant="body2">- {fCurrency(sentAmount)}</Typography>
-        </Stack>
+        </Stack> */}
 
-        <Stack direction="row" justifyContent="space-between">
+          {/* <Stack direction="row" justifyContent="space-between">
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
             {t('total_amount')}
           </Typography>
           <Typography variant="subtitle1">{fCurrency(totalAmount)}</Typography>
+        </Stack> */}
+
+          <Stack direction="row" spacing={1.5}>
+            <Button fullWidth onClick={() => toggleDialogInputVisible(true)} variant="contained" color="success">
+              {t('input')}
+            </Button>
+
+            <Button onClick={() => toggleDialogOutputVisible(true)} fullWidth variant="contained" color="primary">
+              {t('output')}
+            </Button>
+
+          </Stack>
+
+          <Button onClick={() => toggleDialogSendVisible(true)} fullWidth variant="contained" color="primary">
+            {t('send')}
+          </Button>
+
         </Stack>
 
-        <Stack direction="row" spacing={1.5}>
-          <Button fullWidth onClick={() => toggleDialogVisible(true)} variant="contained" color="success">
-            {t('request')}
-          </Button>
-
-          <Button onClick={() => toggleDialogVisible(true)} fullWidth variant="contained" color="primary">
-            {t('transfer')}
-          </Button>
-
-          
-      <Dialog
-        open={dialogVisible}
-        onClose={() => toggleDialogVisible(false)}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Пополнение кошелька"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            
-            <Stack sx={{ minWidth: 450 }} >
-                {coinsList.map((item, idx) => {
-                  
-                  return (
-                  <Fragment key={item.coinTitle}>
-                    <ListItemButton onClick={() => handleClick(item.coinTitle)}>
-                      <ListItemIcon>
-                        <InboxIcon />
-                      </ListItemIcon>
-                      <ListItemText primary={(item.network)} />
-                      {/* @ts-ignore */}
-                      {open[item.coinTitle] ? <ExpandLess /> : <ExpandMore />}
-                    </ListItemButton>
-                    {/* @ts-ignore */}
-                    <Collapse in={open[item.coinTitle]} timeout="auto" unmountOnExit>
-                      { item.enabled ?
-                      <List component="div" disablePadding>
-                        <ListItemButton sx={{ pl: 4 }}>
-                          <ListItemIcon>
-                          {/* { data } */}
-                          </ListItemIcon>
-                        </ListItemButton>
-                      </List>
-                      : 'This network is disabled for now' }
-                    </Collapse>
-                  </Fragment>
-                )}
-                
-                )}
-            </Stack>
-            <br />
-            Пополните
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button variant='soft' color='error' onClick={() => {}}>Отменить</Button>
-          <Button variant='contained' color='success' onClick={() => {}} autoFocus>
-            Я оплатил
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-
-
-        </Stack>
-      </Stack>
-    </Card>
+      </Card>
 
     </>
   );
@@ -250,11 +296,11 @@ interface ConfirmTransferDialogProps extends TConfirmTransferDialogProps {
 
 function ConfirmTransferDialog({
   open,
-//   amount,
-//   autoWidth,
-//   contactInfo,
+  //   amount,
+  //   autoWidth,
+  //   contactInfo,
   onClose,
-//   onBlur,
+  //   onBlur,
   onChange,
 }: ConfirmTransferDialogProps) {
   return (

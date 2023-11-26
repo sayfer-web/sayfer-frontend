@@ -1,5 +1,5 @@
 import orderBy from 'lodash/orderBy';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 // @mui
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
@@ -27,7 +27,7 @@ import PostSort from '../post-sort';
 import PostSearch from '../post-search';
 import PostListHorizontal from '../post-list-horizontal';
 import { useLocales } from 'src/locales';
-import { useGetUsersQuery } from 'src/app/features/users/usersApiSlice';
+import { useGetAllNewsQuery } from 'src/app/features/news/newsApiSlice';
 
 // ----------------------------------------------------------------------
 
@@ -39,8 +39,8 @@ const defaultFilters: IPostFilters = {
 
 export default function PostListView() {
 
-  const { t } = useLocales()   
-  
+  const { t } = useLocales()
+
   const {
     data: news,
     isLoading,
@@ -48,7 +48,7 @@ export default function PostListView() {
     isError,
     error
     /* @ts-ignore */
-  } = useGetUsersQuery()
+  } = useGetAllNewsQuery()
 
   const settings = useSettingsContext();
 
@@ -60,18 +60,41 @@ export default function PostListView() {
 
   const debouncedQuery = useDebounce(searchQuery);
 
-  const { posts, postsLoading } = useGetPosts();
+  // const { posts, postsLoading } = useGetPosts();
 
   const { searchResults, searchLoading } = useSearchPosts(debouncedQuery);
 
-  
-  const newPosts = [{
+  useEffect(() => {
+    if (isSuccess) {
+
+      const newNews = news.map((item: any) => {
+        console.log(item)
+        return {
+          id: item.id,
+          title: item.title,
+          // tags: ['string'],
+          // publish: 'published',
+          content: item.content,
+          coverUrl: 'https://telegra.ph/file/8fbdfb8c7a4a258a79aaf.jpg',
+          // totalViews: 1,
+          // totalShares: 1,
+          description: item.content,
+        }
+
+      })
+
+      setNewPosts(newNews)
+    }
+  }, [news])
+
+
+  const [newPosts, setNewPosts] = useState([{
     id: '1',
     title: 'First News',
     // tags: ['string'],
     // publish: 'published',
     content: 'string, string, string, string, string, string, string, string, string, string, string, string, string, string, ',
-    coverUrl: 'https://w.forfun.com/fetch/b4/b4d430320229744245679e19e50b6f03.jpeg',
+    coverUrl: 'https://telegra.ph/file/8fbdfb8c7a4a258a79aaf.jpg',
     // totalViews: 1,
     // totalShares: 1,
     description: 'string, string, string, string, string, string, string, string, string, string, string, string, string',
@@ -111,7 +134,7 @@ export default function PostListView() {
     //   avatarUrl: 'string;',
     // },
   },
-]
+  ])
 
   const dataFiltered = applyFilter({
     inputData: news,
@@ -158,16 +181,16 @@ export default function PostListView() {
             name: t('list'),
           },
         ]}
-        action={
-          <Button
-            component={RouterLink}
-            href={paths.dashboard.post.new}
-            variant="contained"
-            startIcon={<Iconify icon="mingcute:add-line" />}
-          >
-            {t('new_post')}
-          </Button>
-        }
+        // action={
+        //   <Button
+        //     component={RouterLink}
+        //     href={paths.dashboard.post.new}
+        //     variant="contained"
+        //     startIcon={<Iconify icon="mingcute:add-line" />}
+        //   >
+        //     {t('new_post')}
+        //   </Button>
+        // }
         sx={{
           mb: { xs: 3, md: 5 },
         }}
@@ -200,7 +223,11 @@ export default function PostListView() {
           mb: { xs: 3, md: 5 },
         }}
       >
-        {['all', 'published', 'draft'].map((tab) => (
+        {[
+          'all', 
+          // 'published', 
+          // 'draft'
+        ].map((tab) => (
           <Tab
             key={tab}
             iconPosition="end"
@@ -227,7 +254,7 @@ export default function PostListView() {
         ))}
       </Tabs>
 
-      <PostListHorizontal posts={dataFiltered} loading={postsLoading} />
+      <PostListHorizontal posts={newPosts} loading={isLoading} />
     </Container>
   );
 }

@@ -83,7 +83,7 @@ export default function AccountNotifications() {
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <Stack component={Card} spacing={3} sx={{ p: 3 }}>
-        {NOTIFICATIONS.map((notification) => (
+        {/* {NOTIFICATIONS.map((notification) => (
           <Grid key={notification.subheader} container spacing={3}>
             <Grid xs={12} md={4}>
               <ListItemText
@@ -129,7 +129,9 @@ export default function AccountNotifications() {
 
         <LoadingButton type="submit" variant="contained" loading={isSubmitting} sx={{ ml: 'auto' }}>
           {t('save_changes')}
-        </LoadingButton>
+        </LoadingButton> */}
+
+        {t('in_developing')}
       </Stack>
     </FormProvider>
   );

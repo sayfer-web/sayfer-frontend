@@ -2,9 +2,13 @@ import { apiSlice } from "../../api/apiSlice";
 
 export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        getTransactions: builder.query({
+        getAllTransactions: builder.query({
             query: () => '/transactions/findAllTransactions',
-            keepUnusedDataFor: 10,
+            keepUnusedDataFor: 60,
+        }),
+        getTransactionById: builder.query({
+            query: (id: string) => `/transactions/findTransactionById/${id}`,
+            keepUnusedDataFor: 60,
         }),
         // createNews: builder.mutation({
         //     query: body => ({
@@ -17,6 +21,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
 })
 
 export const {
-    useGetTransactionsQuery,
+    useGetAllTransactionsQuery,
+    useGetTransactionByIdQuery
     // useCreateNewsMutation
 } = usersApiSlice

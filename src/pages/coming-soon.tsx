@@ -4,14 +4,18 @@ import ComingSoonView from 'src/sections/coming-soon/view';
 
 // ----------------------------------------------------------------------
 
-export default function ComingSoonPage() {
+type Props = {
+  date: string
+}
+
+export default function ComingSoonPage({ date }: Props) {
   return (
     <>
       <Helmet>
         <title> Coming Soon</title>
       </Helmet>
 
-      <ComingSoonView />
+      <ComingSoonView date={date} />
     </>
   );
 }

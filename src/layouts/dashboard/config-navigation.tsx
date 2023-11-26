@@ -64,9 +64,15 @@ export function useNavData() {
         subheader: t('overview'),
         items: [
           {
-            title: t('app'),
+            title: t('explorer'),
             path: paths.dashboard.root,
             icon: ICONS.dashboard,
+          },
+
+          {
+            title: t('projects'),
+            path: paths.dashboard.general.games,
+            icon: ICONS.file,
           },
           // {
           //   title: t('ecommerce'),
@@ -85,7 +91,11 @@ export function useNavData() {
             icon: ICONS.blog,
           },
 
-        
+          {
+            title: t('roadmap'),
+            path: paths.dashboard.kanban,
+            icon: ICONS.kanban,
+          },
           // {
           //   title: t('Address book'),
           //   path: paths.dashboard.general.addressbook,
@@ -102,26 +112,26 @@ export function useNavData() {
         subheader: t('management'),
         items: [
           // USER
-          
+
 
           {
             title: t('wallet'),
             path: paths.dashboard.general.wallet,
             icon: ICONS.banking,
           },
-          
+
           // TOUR
           {
             title: t('transactions'),
             path: paths.dashboard.transactions.root,
             icon: ICONS.tour,
-            children: [
-              { title: t('all_transactions'), path: paths.dashboard.transactions.root },
-              { title: t('my_transactions'), path: paths.dashboard.transactions.demo.userTransactions },
+            // children: [
+              // { title: t('all_transactions'), path: paths.dashboard.transactions.root },
+              // { title: t('my_transactions'), path: paths.dashboard.transactions.demo.userTransactions },
               // { title: t('details'), path: paths.dashboard.transactions.demo.details },
               // { title: t('create'), path: paths.dashboard.transactions.new },
               // { title: t('edit'), path: paths.dashboard.transactions.demo.edit },
-            ],
+            // ],
           },
 
           {
@@ -129,7 +139,7 @@ export function useNavData() {
             path: paths.dashboard.user.root,
             icon: ICONS.user,
             children: [
-              
+
               { title: t('profile'), path: paths.dashboard.user.root },
               // { title: t('cards'), path: paths.dashboard.user.cards },
               // { title: t('create'), path: paths.dashboard.user.new },
@@ -278,13 +288,9 @@ export function useNavData() {
         subheader: t('activity'),
         items: [
 
-          
-          {
-            title: t('game_room'),
-            path: paths.dashboard.general.games,
-            icon: ICONS.file,
-          },
-                    
+
+
+
           {
             title: t('quests'),
             path: paths.dashboard.job.root,
@@ -305,7 +311,7 @@ export function useNavData() {
           //     // { title: t('my transactions'), path: paths.dashboard.user.demo.transactions },
           //   ],
           // },
-          
+
           // TOUR
           // {
           //   title: t('transactions'),
@@ -446,11 +452,7 @@ export function useNavData() {
           // },
 
           // KANBAN
-          {
-            title: t('roadmap'),
-            path: paths.dashboard.kanban,
-            icon: ICONS.kanban,
-          },
+
         ],
       },
       {

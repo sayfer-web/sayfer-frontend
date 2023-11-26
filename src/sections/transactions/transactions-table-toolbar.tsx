@@ -13,6 +13,7 @@ import { IOrderTableFilters, IOrderTableFilterValue } from 'src/types/order';
 import Iconify from 'src/components/iconify';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
 import { useLocales } from 'src/locales';
+import { Checkbox } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -22,6 +23,7 @@ type Props = {
   //
   canReset: boolean;
   onResetFilters: VoidFunction;
+  onChangeCheckbox: any;
 };
 
 export default function TransactionsTableToolbar({
@@ -30,6 +32,7 @@ export default function TransactionsTableToolbar({
   //
   canReset,
   onResetFilters,
+  onChangeCheckbox,
 }: Props) {
 
   const { t } = useLocales()
@@ -71,6 +74,12 @@ export default function TransactionsTableToolbar({
           pr: { xs: 2.5, md: 1 },
         }}
       >
+
+        <Stack sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
+          <Checkbox defaultChecked={false} onChange={onChangeCheckbox} color="success" />
+          {t('show_only_mine')}
+        </Stack>
+
         <DatePicker
           label={t('start_date')}
           value={filters.startDate}
@@ -125,6 +134,9 @@ export default function TransactionsTableToolbar({
             Clear
           </Button>
         )}
+
+
+
       </Stack>
 
       <CustomPopover

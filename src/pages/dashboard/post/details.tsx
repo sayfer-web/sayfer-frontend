@@ -13,7 +13,11 @@ export default function PostDetailsPage() {
 
   const params = useParams();
 
-  const { title } = params;
+  console.log('PARAMS: ', params)
+
+  const { id } = params;
+
+  // console.log(title)
 
   return (
     <>
@@ -21,7 +25,7 @@ export default function PostDetailsPage() {
         <title> {t('dashboard')}: {t('post_details')}</title>
       </Helmet>
 
-      <PostDetailsView title={`${title}`} />
+      <PostDetailsView id={`${id}`} />
     </>
   );
 }

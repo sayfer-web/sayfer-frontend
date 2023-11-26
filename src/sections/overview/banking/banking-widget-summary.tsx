@@ -124,7 +124,7 @@ export default function BankingWidgetSummary({
 
         <Typography variant="h3">{fCurrency(total)}</Typography>
 
-        <Stack
+        { percent !== 0 && <Stack
           spacing={0.5}
           direction="row"
           flexWrap="wrap"
@@ -139,7 +139,7 @@ export default function BankingWidgetSummary({
           </Box>
 
           <Box sx={{ opacity: 0.8 }}>{t('than_last_month')}</Box>
-        </Stack>
+        </Stack>}
       </Stack>
 
       <Chart type="area" series={[{ data: series }]} options={chartOptions} height={120} />

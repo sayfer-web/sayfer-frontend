@@ -129,12 +129,12 @@ export default function HomeBuildings() {
       component={Paper}
       variant="outlined"
       alignItems="center"
-      spacing={{ xs: 3, md: 5 }}
+      // spacing={{ xs: 3, md: 5 }}
       sx={{
         borderRadius: 2,
         bgcolor: 'unset',
         borderStyle: 'dashed',
-        p: { xs: 3, md: 5 },
+        // p: { xs: 3, md: 5 },
         position: 'relative'
       }}
     >
@@ -144,7 +144,7 @@ export default function HomeBuildings() {
         disabledEffect
         alt="sidebar"
         // width={100}
-        height={200}
+        height={mdUp ? 600 : 450}
         // style={{ top: 100, left: 0 }}
         src={`/assets/animations/building/crypto3.svg`}
       />

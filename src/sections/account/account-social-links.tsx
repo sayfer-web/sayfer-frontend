@@ -53,7 +53,7 @@ export default function AccountSocialLinks({ socialLinks }: Props) {
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <Stack component={Card} spacing={3} sx={{ p: 3 }}>
-        {Object.keys(socialLinks).map((link) => (
+        {/* {Object.keys(socialLinks).map((link) => (
           <RHFTextField
             key={link}
             name={link}
@@ -85,7 +85,9 @@ export default function AccountSocialLinks({ socialLinks }: Props) {
 
         <LoadingButton type="submit" variant="contained" loading={isSubmitting} sx={{ ml: 'auto' }}>
           {t('save_changes')}
-        </LoadingButton>
+        </LoadingButton> */}
+
+        {t('in_developing')}
       </Stack>
     </FormProvider>
   );

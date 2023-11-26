@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
@@ -26,123 +26,134 @@ import FormProvider, {
   RHFAutocomplete,
 } from 'src/components/hook-form';
 import { useLocales } from 'src/locales';
+import TextField from '@mui/material/TextField';
+import React from 'react';
+import { IMaskInput } from "react-imask"
+import InputLabel from '@mui/material/InputLabel';
+import Input from '@mui/material/Input';
+import { useGetUserByUsernameQuery, useUpdateProfileMutation } from 'src/app/features/users/usersApiSlice';
+import { useSelector } from 'react-redux';
+import { selectCurrentUsername } from 'src/app/features/auth/authSlice';
+import Alert from '@mui/material/Alert';
 
 // ----------------------------------------------------------------------
+
+const PHN_REGEX2 = /^\+\d{1}\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/
+
+interface CustomProps {
+  onChange: (event: { target: { name: string; value: string } }) => void;
+  name: string;
+}
+
+const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
+  function TextMaskCustom(props, ref) {
+    const { onChange, ...other } = props;
+    return (
+      <IMaskInput
+        {...other}
+        mask="+7(#00) 000-0000"
+        definitions={{
+          '#': /[1-9]/,
+        }}
+        inputRef={ref}
+        onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
+        overwrite
+      />
+    );
+  },
+);
+
+
+const FormattedInputs = () => {
+  const [values, setValues] = React.useState({
+    textmask: '(100) 000-0000',
+  });
+}
+
 
 export default function AccountGeneral() {
 
   const { t } = useLocales()
 
+  const username = useSelector(selectCurrentUsername)
+  const [updateProfile, { isLoading }] = useUpdateProfileMutation()
+
+  const { data: user, error, isLoading: isLoadingUser, isSuccess } = useGetUserByUsernameQuery(username)
+  
+  const [errorPhoneMsg, setErrorPhoneMsg] = useState('')
+  const [validPhoneNumber, setValidPhoneNumber] = useState(false)
+
+  
+  const [phoneNumber, setPhoneNumber] = useState('+7(999) 999-99-99')
+  const [email, setEmail] = useState('mail@sayfer.club')
+
+  useEffect(() => {
+    console.log(phoneNumber)
+    const result = PHN_REGEX2.test(phoneNumber)
+    result
+      ? setErrorPhoneMsg('')
+      : setErrorPhoneMsg('Номер телефона должен состоять из 10 цифр')
+
+    setValidPhoneNumber(result)
+  }, [phoneNumber])
+
+
+
+  const [errorMsg, setErrorMsg] = useState('')
+
   const { enqueueSnackbar } = useSnackbar();
 
-  const { user } = useMockedUser();
+  // const { user } = useMockedUser();
 
-  const UpdateUserSchema = Yup.object().shape({
-    displayName: Yup.string().required('Name is required'),
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
-    photoURL: Yup.mixed<any>().nullable().required('Avatar is required'),
-    phoneNumber: Yup.string().required('Phone number is required'),
-    country: Yup.string().required('Country is required'),
-    address: Yup.string().required('Address is required'),
-    state: Yup.string().required('State is required'),
-    city: Yup.string().required('City is required'),
-    zipCode: Yup.string().required('Zip code is required'),
-    about: Yup.string().required('About is required'),
-    // not required
-    isPublic: Yup.boolean(),
-  });
 
-  const defaultValues = {
-    displayName: user?.displayName || '',
-    email: user?.email || '',
-    photoURL: user?.photoURL || null,
-    phoneNumber: user?.phoneNumber || '',
-    country: user?.country || '',
-    address: user?.address || '',
-    state: user?.state || '',
-    city: user?.city || '',
-    zipCode: user?.zipCode || '',
-    about: user?.about || '',
-    isPublic: user?.isPublic || false,
-  };
-
-  const methods = useForm({
-    resolver: yupResolver(UpdateUserSchema),
-    defaultValues,
-  });
-
-  const {
-    setValue,
-    handleSubmit,
-    formState: { isSubmitting },
-  } = methods;
-
-  const onSubmit = handleSubmit(async (data) => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      enqueueSnackbar('Update success!');
-      console.info('DATA', data);
-    } catch (error) {
-      console.error(error);
+  useEffect(() => {
+    if (isSuccess) {
+      setPhoneNumber(user.phoneNumber)
+      setEmail(user.email)
     }
-  });
+  }, [user])
 
-  const handleDrop = useCallback(
-    (acceptedFiles: File[]) => {
-      const file = acceptedFiles[0];
+  // const defaultValues = {
+  //   displayName: user?.displayName || '',
+  //   email: user?.email || '',
+  //   photoURL: user?.photoURL || null,
+  //   phoneNumber: user?.phoneNumber || '',
+  //   country: user?.country || '',
+  //   address: user?.address || '',
+  //   state: user?.state || '',
+  //   city: user?.city || '',
+  //   zipCode: user?.zipCode || '',
+  //   about: user?.about || '',
+  //   isPublic: user?.isPublic || false,
+  // };
 
-      const newFile = Object.assign(file, {
-        preview: URL.createObjectURL(file),
-      });
 
-      if (file) {
-        setValue('photoURL', newFile, { shouldValidate: true });
-      }
-    },
-    [setValue]
-  );
+
+  const handleSubmit2 = async (e: any) => {
+    e.preventDefault()
+
+    console.log(1)
+    const regResult = await updateProfile({ phoneNumber, email }).unwrap()
+    console.log(2)
+
+    console.log(regResult)
+
+    setErrorMsg('Successfully updated!')
+
+  }
+
+
 
   return (
-    <FormProvider methods={methods} onSubmit={onSubmit}>
+    <form onSubmit={handleSubmit2}>
       <Grid container spacing={3}>
-        <Grid xs={12} md={4}>
-          <Card sx={{ pt: 10, pb: 5, px: 3, textAlign: 'center' }}>
-            <RHFUploadAvatar
-              name="photoURL"
-              maxSize={3145728}
-              onDrop={handleDrop}
-              helperText={
-                <Typography
-                  variant="caption"
-                  sx={{
-                    mt: 3,
-                    mx: 'auto',
-                    display: 'block',
-                    textAlign: 'center',
-                    color: 'text.disabled',
-                  }}
-                >
-                  {t('allowed')} *.jpeg, *.jpg, *.png, *.gif
-                  <br /> {t('max_size_of')} {fData(3145728)}
-                </Typography>
-              }
-            />
 
-            <RHFSwitch
-              name="isPublic"
-              labelPlacement="start"
-              label={t('public_profile')}
-              sx={{ mt: 5 }}
-            />
-
-            <Button variant="soft" color="error" sx={{ mt: 3 }}>
-              {t('delete_user')}
-            </Button>
-          </Card>
-        </Grid>
-
-        <Grid xs={12} md={8}>
+        <Grid xs={12} md={12}>
           <Card sx={{ p: 3 }}>
+
+          {!!errorMsg && <Alert severity="success">{errorMsg}</Alert>}
+          <br />
+
             <Box
               rowGap={3}
               columnGap={2}
@@ -152,12 +163,68 @@ export default function AccountGeneral() {
                 sm: 'repeat(2, 1fr)',
               }}
             >
-              <RHFTextField name="displayName" label={t('name')} />
+
+             
+
+
+              <InputLabel htmlFor="formatted-text-mask-input">{t('phone_number')}</InputLabel>
+              <Input
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                name="textmask"
+                id="formatted-text-mask-input"
+                inputComponent={TextMaskCustom as any}
+              />
+
+
+              <InputLabel htmlFor="formatted-text-mask-input">{t('email')}</InputLabel>
+              <TextField
+                type="email"
+                id="email"
+                label={t('email')}
+                value={email}
+                autoComplete="on"
+                InputLabelProps={{}}
+                sx={{
+                  "& input:-webkit-autofill": {
+                    '-webkit-box-shadow': '0 0 0 100px #000 inset',
+                    '-webkit-text-fill-color': '#fff',
+                  }
+                }}
+                required
+
+                onChange={(value) => setEmail(value.target.value)}
+              // onFocus={() => toggleFocusPwd(true)}
+              // onBlur={() => toggleFocusPwd(false)}
+              />
+
+              {/* <TextField
+                type="email"
+                id="email"
+                label={t('email')}
+                value={email}
+                autoComplete="on"
+                InputLabelProps={{}}
+                sx={{
+                  "& input:-webkit-autofill": {
+                    '-webkit-box-shadow': '0 0 0 100px #000 inset',
+                    '-webkit-text-fill-color': '#fff',
+                  }
+                }}
+                required
+                onChange={(value) => setEmail(value.target.value)}
+              // onFocus={() => toggleFocusPwd(true)}
+              // onBlur={() => toggleFocusPwd(false)}
+              /> */}
+
+
+
+              {/* <RHFTextField name="displayName" label={t('name')} />
               <RHFTextField name="email" label={t('email_address')} />
               <RHFTextField name="phoneNumber" label={t('phone_number')} />
-              <RHFTextField name="address" label={t('address')} />
+              <RHFTextField name="address" label={t('address')} /> */}
 
-              <RHFAutocomplete
+              {/* <RHFAutocomplete
                 name="country"
                 label={t('country')}
                 options={countries.map((country) => country.label)}
@@ -183,23 +250,28 @@ export default function AccountGeneral() {
                     </li>
                   );
                 }}
-              />
+              /> */}
 
-              <RHFTextField name="state" label={t('state_region')} />
+              {/* <RHFTextField name="state" label={t('state_region')} />
               <RHFTextField name="city" label={t('city')} />
-              <RHFTextField name="zipCode" label={t('zip_code')} />
+              <RHFTextField name="zipCode" label={t('zip_code')} /> */}
             </Box>
 
-            <Stack spacing={3} alignItems="flex-end" sx={{ mt: 3 }}>
-              <RHFTextField name="about" multiline rows={4} label={t('about')} />
+            
 
-              <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+            <Stack spacing={3} alignItems="flex-end" sx={{ mt: 3 }}>
+              {/* <RHFTextField name="about" multiline rows={4} label={t('about')} /> */}
+
+              <LoadingButton type="submit" variant="contained"
+              // loading={isSubmitting}
+              >
                 {t('save_changes')}
               </LoadingButton>
             </Stack>
+            <br />
           </Card>
         </Grid>
       </Grid>
-    </FormProvider>
+    </form>
   );
 }

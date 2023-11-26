@@ -26,16 +26,16 @@ type Props = {
 export default function AccountBilling({ cards, plans, invoices, addressBook }: Props) {
   return (
     <Grid container spacing={5} disableEqualOverflow>
-      <Grid xs={12} md={8}>
+      <Grid xs={12} md={12}>
         <AccountBillingPlan plans={plans} cardList={cards} addressBook={addressBook} />
 
-        <AccountBillingPayment cards={cards} />
+        {/* <AccountBillingPayment cards={cards} /> */}
 
         {/* <AccountBillingAddress addressBook={addressBook} /> */}
       </Grid>
 
       <Grid xs={12} md={4}>
-        <AccountBillingHistory invoices={invoices} />
+        {/* <AccountBillingHistory invoices={invoices} /> */}
       </Grid>
     </Grid>
   );

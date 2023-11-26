@@ -1,6 +1,6 @@
 // @mui
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
@@ -24,6 +24,7 @@ import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
 import { useLocales } from 'src/locales';
+import { Link } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
 
@@ -42,6 +43,7 @@ export default function PostItemHorizontal({ post }: Props) {
   const mdUp = useResponsive('up', 'md');
 
   const {
+    id,
     title,
     author,
     publish,
@@ -49,7 +51,7 @@ export default function PostItemHorizontal({ post }: Props) {
     createdAt,
     totalViews,
     totalShares,
-    totalComments,
+    totalComments = 0,
     description,
   } = post;
 
@@ -64,8 +66,8 @@ export default function PostItemHorizontal({ post }: Props) {
           <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 2 }}>
             <Label variant="soft" color={(publish === 'published' && 'info') || 'default'}>
               {
-              publish === 'draft' && t('draft') ||
-              publish === 'published' && t('published')
+                publish === 'draft' && t('draft') ||
+                publish === 'published' && t('published')
               }
             </Label>
 
@@ -75,13 +77,15 @@ export default function PostItemHorizontal({ post }: Props) {
           </Stack>
 
           <Stack spacing={1} flexGrow={1}>
-            <Link color="inherit" component={RouterLink} href={paths.dashboard.post.details(title)}>
+            {/* <Link color="inherit" component={RouterLink} href={paths.dashboard.post.details(title)}> */}
+            <Link style={{ fontStyle: 'normal', color: 'white'}} to={`/dashboard/post/${id}`} >
               <TextMaxLine variant="subtitle2" line={2}>
                 {title}
               </TextMaxLine>
             </Link>
+            {/* </Link> */}
 
-            <TextMaxLine variant="body2" sx={{ color: 'text.secondary' }}>
+            <TextMaxLine variant="body2" sx={{ color: 'text.secondary', width: 200 }}>
               {description}
             </TextMaxLine>
           </Stack>
@@ -103,7 +107,7 @@ export default function PostItemHorizontal({ post }: Props) {
             >
               <Stack direction="row" alignItems="center">
                 <Iconify icon="eva:message-circle-fill" width={16} sx={{ mr: 0.5 }} />
-                {/* {fShortenNumber(totalComments)} */}
+                {fShortenNumber(totalComments)}
               </Stack>
 
               <Stack direction="row" alignItems="center">
@@ -137,7 +141,7 @@ export default function PostItemHorizontal({ post }: Props) {
             <Image alt={title} src={coverUrl} sx={{ height: 1, borderRadius: 1.5 }} />
           </Box>
         )}
-      </Stack>
+      </Stack >
 
       <CustomPopover
         open={popover.open}

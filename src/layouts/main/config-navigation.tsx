@@ -18,11 +18,11 @@ export const navConfig = () => {
     icon: <Iconify icon="solar:home-2-bold-duotone" />,
     path: '/',
   },
-  {
-    title: t('components'),
-    icon: <Iconify icon="solar:atom-bold-duotone" />,
-    path: paths.components,
-  },
+  // {
+  //   title: t('components'),
+  //   icon: <Iconify icon="solar:atom-bold-duotone" />,
+  //   path: paths.components,
+  // },
   // {
   //   title: 'Pages',
   //   path: '/pages',

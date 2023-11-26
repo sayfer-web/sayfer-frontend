@@ -30,20 +30,84 @@ import PostCommentForm from '../post-comment-form';
 import { PostDetailsSkeleton } from '../post-skeleton';
 import PostDetailsToolbar from '../post-details-toolbar';
 import { useLocales } from 'src/locales';
+import { useGetNewsByIdQuery } from 'src/app/features/news/newsApiSlice';
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  title: string;
+  id: string;
 };
 
-export default function PostDetailsView({ title }: Props) {
+export default function PostDetailsView({ id }: Props) {
+
+  console.log(id)
 
   const { t } = useLocales()
 
   const [publish, setPublish] = useState('');
 
-  const { post, postLoading, postError } = useGetPost(title);
+  // const { post, postLoading, postError } = useGetPost(title);
+
+
+  const oldPost = {
+    id: '1',
+    title: 'Title',
+    // tags?: [''];
+    // publish?: '';
+    content: 'Content',
+    coverUrl: 'https://telegra.ph/file/8fbdfb8c7a4a258a79aaf.jpg',
+    // metaTitle?: string;
+    // totalViews?: number;
+    // totalShares?: number;
+    description: 'Description',
+    // totalComments?: number;
+    // totalFavorites?: number;
+    // metaKeywords?: string[];
+    // metaDescription?: string;
+    // comments?: IPostComment[];
+    // createdAt?: Date;
+    // favoritePerson?: {
+    // name: string;
+    // avatarUrl: string;
+    // }[];
+  }
+
+  const [post, setPost] = useState(oldPost)
+
+  const { data: currentPost, isLoading, isSuccess, isError, error } = useGetNewsByIdQuery(id)
+
+  console.log(currentPost)
+
+  useEffect(() => {
+    if (isSuccess && !error) {
+
+      const newPost = {
+        id: currentPost.id,
+        title: currentPost.title,
+        // tags?: [''];
+        // publish?: '';
+        content: currentPost.content,
+        coverUrl: currentPost.coverUrl,
+        // metaTitle?: string;
+        // totalViews?: number;
+        // totalShares?: number;
+        description: 'Desc',
+        // totalComments?: number;
+        // totalFavorites?: number;
+        // metaKeywords?: string[];
+        // metaDescription?: string;
+        // comments?: IPostComment[];
+        // createdAt?: Date;
+        // favoritePerson?: {
+        // name: string;
+        // avatarUrl: string;
+        // }[];
+      }
+
+      console.log(newPost)
+      setPost(newPost)
+    }
+  }, [currentPost])
 
   const handleChangePublish = useCallback((newValue: string) => {
     setPublish(newValue);
@@ -62,7 +126,7 @@ export default function PostDetailsView({ title }: Props) {
   const renderError = (
     <EmptyContent
       filled
-      title={`${postError?.message}`}
+      title={`${error}`}
       action={
         <Button
           component={RouterLink}
@@ -70,7 +134,7 @@ export default function PostDetailsView({ title }: Props) {
           startIcon={<Iconify icon="eva:arrow-ios-back-fill" width={16} />}
           sx={{ mt: 3 }}
         >
-          Back to List
+          {t('back')}
         </Button>
       }
       sx={{
@@ -105,7 +169,7 @@ export default function PostDetailsView({ title }: Props) {
 
         <Markdown children={post.content} />
 
-        <Stack
+        {/* <Stack
           spacing={3}
           sx={{
             py: 3,
@@ -113,11 +177,11 @@ export default function PostDetailsView({ title }: Props) {
             borderBottom: (theme) => `dashed 1px ${theme.palette.divider}`,
           }}
         >
-          {/* <Stack direction="row" flexWrap="wrap" spacing={1}>
+          <Stack direction="row" flexWrap="wrap" spacing={1}>
             {post.tags.map((tag) => (
               <Chip key={tag} label={tag} variant="soft" />
             ))}
-          </Stack> */}
+          </Stack>
 
           <Stack direction="row" alignItems="center">
             <FormControlLabel
@@ -135,7 +199,7 @@ export default function PostDetailsView({ title }: Props) {
               sx={{ mr: 1 }}
             />
 
-            {/* <AvatarGroup
+            <AvatarGroup
               sx={{
                 [`& .${avatarGroupClasses.avatar}`]: {
                   width: 32,
@@ -146,22 +210,22 @@ export default function PostDetailsView({ title }: Props) {
               {post.favoritePerson.map((person) => (
                 <Avatar key={person.name} alt={person.name} src={person.avatarUrl} />
               ))}
-            </AvatarGroup> */}
+            </AvatarGroup>
           </Stack>
-        </Stack>
-
+        </Stack> */}
+        {/* 
         <Stack direction="row" sx={{ mb: 3, mt: 5 }}>
           <Typography variant="h4">{t('comments')}</Typography>
 
           <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
-            {/* ({post.comments.length}) */}
-            ({1})
+            ({post.comments.length})
+            
           </Typography>
         </Stack>
 
         <PostCommentForm />
 
-        <Divider sx={{ mt: 5, mb: 2 }} />
+        <Divider sx={{ mt: 5, mb: 2 }} /> */}
 
         {/* <PostCommentList comments={post.comments} /> */}
       </Stack>
@@ -170,9 +234,9 @@ export default function PostDetailsView({ title }: Props) {
 
   return (
     <Container maxWidth={false}>
-      {postLoading && renderSkeleton}
+      {isLoading && renderSkeleton}
 
-      {postError && renderError}
+      {/* {isError && renderError} */}
 
       {post && renderPost}
     </Container>

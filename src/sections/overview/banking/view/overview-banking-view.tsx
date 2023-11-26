@@ -41,44 +41,20 @@ export default function OverviewBankingView() {
         title: 'SFR',
         icon: '',
         series: [
-          { x: 2010, y: 88 },
-          { x: 2011, y: 120 },
-          { x: 2012, y: 156 },
-          { x: 2013, y: 123 },
-          { x: 2014, y: 88 },
-          { x: 2015, y: 66 },
-          { x: 2016, y: 45 },
-          { x: 2017, y: 29 },
-          { x: 2018, y: 45 },
-          { x: 2019, y: 88 },
-          { x: 2020, y: 132 },
-          { x: 2021, y: 146 },
-          { x: 2022, y: 169 },
-          { x: 2023, y: 184 },
+          { x: 2022, y: 1 },
+          { x: 2023, y: 1 },
         ],
-        percent: 1,
-        total: 1000
+        percent: 0,
+        total: 1
       },
       {
         title: 'SFRX',
         icon: '',
         series: [
-          { x: 2010, y: 88 },
-          { x: 2011, y: 120 },
-          { x: 2012, y: 156 },
-          { x: 2013, y: 123 },
-          { x: 2014, y: 88 },
-          { x: 2015, y: 66 },
-          { x: 2016, y: 45 },
-          { x: 2017, y: 29 },
-          { x: 2018, y: 45 },
-          { x: 2019, y: 88 },
-          { x: 2020, y: 132 },
-          { x: 2021, y: 146 },
-          { x: 2022, y: 169 },
-          { x: 2023, y: 184 },
+          { x: 2022, y: 1 },
+          { x: 2023, y: 1 },
         ],
-        percent: 10,
+        percent: 0,
         total: 1
       }
     ]
@@ -130,13 +106,22 @@ export default function OverviewBankingView() {
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Grid container spacing={3}>
 
-        <Grid xs={12} md={3}>
+        <Grid xs={12} md={4}>
           {/* @ts-ignore */}
-          <BankingCurrentBalance list={_bankingCreditCard} />
+          {/* <BankingCurrentBalance list={_bankingCreditCard} />
+          
+          */}
+
+          <WalletRefillFounds
+            title={t('current_balance')}
+            currentBalance={tokenBalanceSFR}
+            sentAmount={0}
+          />
+
         </Grid>
 
 
-        <Grid xs={12} md={9}>
+        <Grid xs={12} md={8}>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3}>
 
             {income.map(item => (
@@ -178,7 +163,7 @@ export default function OverviewBankingView() {
 
         <Grid xs={12} md={8}>
           <Stack spacing={3}>
-            <BankingBalanceStatistics
+            {/* <BankingBalanceStatistics
               title={t('balance_statistics')}
               // subheader="(+43% Income | +12% Expense) than last year"
               chart={{
@@ -236,17 +221,17 @@ export default function OverviewBankingView() {
                   },
                 ],
               }}
-            />
+            /> */}
 
 
 
             <BankingExpensesCategories
-              title={t('expenses_categories')}
+              title={t('balance_state')}
               chart={{
                 series: [
-                  { label: 'SFR', value: 14 },
-                  { label: 'SFRX', value: 23 },
-                  { label: 'SFRM', value: 21 },
+                  { label: 'SFR', value: 3 },
+                  { label: 'SFRX', value: 1 },
+                  // { label: 'SFRM', value: 4 },
                   // { label: 'Category 4', value: 17 },
                   // { label: 'Category 5', value: 15 },
                   // { label: 'Category 6', value: 10 },
@@ -289,11 +274,6 @@ export default function OverviewBankingView() {
         <Grid xs={12} md={4}>
           <Stack spacing={3}>
 
-            <WalletRefillFounds
-              title={t('total_money_received')}
-              currentBalance={187650}
-              sentAmount={25500}
-            />
 
             <BankingQuickTransfer title={t('quick_transfer')} list={_bankingContacts} />
 
@@ -306,7 +286,7 @@ export default function OverviewBankingView() {
             */}
             {/* <Stack sx={{ marginTop: 12 }}> */}
             <BankingInviteFriends
-              price="$50"
+              price="$5"
               title={`${t('invite_friends')} \n ${t('and_earn')}`}
               description={t('present_egestas')}
             // img="/assets/illustrations/characters/character_11.png"

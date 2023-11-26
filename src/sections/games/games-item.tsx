@@ -108,7 +108,7 @@ export default function GamesItem({ tour, onView, onEdit, onDelete }: Props) {
       <Stack flexGrow={1} sx={{ position: 'relative' }}>
         {renderPrice}
         {renderRating}
-        <Image alt={images[0]} src={images[0]} sx={{ borderRadius: 1, height: 164, width: 1 }} />
+        <Image alt={images[0]} src={images[0]} sx={{ borderRadius: 1, height: 164, maxWidth: 262 }} />
       </Stack>
       <Stack spacing={0.5}>
         <Image alt={images[1]} src={images[1]} ratio="1/1" sx={{ borderRadius: 1, width: 80 }} />

@@ -20,30 +20,33 @@ import {
 import Iconify from 'src/components/iconify';
 import { useLocales } from 'src/locales';
 import { useState } from 'react';
+import { ITransactionCustomer, ITransactionDelivery, ITransactionPayment, ITransactionShippingAddress } from 'src/types/transaction';
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  customer: IOrderCustomer;
-  delivery: IOrderDelivery;
-  payment: IOrderPayment;
-  shippingAddress: IOrderShippingAddress;
+  customer: ITransactionCustomer;
+  delivery: ITransactionDelivery;
+  payment: ITransactionPayment;
+  shippingAddress: ITransactionShippingAddress;
 };
 
 export default function TransactionsDetailsInfo({ customer, delivery, payment, shippingAddress }: Props) {
 
   const [transaction, setTransaction] = useState({
     senderId: 12,
-    senderUsername: 'User123',
-    receiverId: 32,
-    receiverUsername: "User312",
+    senderUsername: null,
+    // receiverId: 32,
+    receiverUsername: customer.name,
     tokenType: 'SFRX',
     tokenQuantity: 1242,
     status: 'success',
     type: 'send_user',
     createdAt: new Date().toISOString(),
-    error: 'error_123',
+    error: null,
   })
+
+  console.log(customer)
 
   const { t } = useLocales()
 
@@ -51,11 +54,11 @@ export default function TransactionsDetailsInfo({ customer, delivery, payment, s
     <>
       <CardHeader
         title={t('sender_info')}
-        // action={
-        //   <IconButton>
-        //     <Iconify icon="solar:pen-bold" />
-        //   </IconButton>
-        // }
+      // action={
+      //   <IconButton>
+      //     <Iconify icon="solar:pen-bold" />
+      //   </IconButton>
+      // }
       />
       <Stack direction="row" sx={{ p: 3 }}>
         <Avatar
@@ -86,11 +89,11 @@ export default function TransactionsDetailsInfo({ customer, delivery, payment, s
     <>
       <CardHeader
         title={t('receiver_info')}
-        // action={
-        //   <IconButton>
-        //     <Iconify icon="solar:pen-bold" />
-        //   </IconButton>
-        // }
+      // action={
+      //   <IconButton>
+      //     <Iconify icon="solar:pen-bold" />
+      //   </IconButton>
+      // }
       />
       <Stack direction="row" sx={{ p: 3 }}>
         <Avatar
@@ -100,9 +103,9 @@ export default function TransactionsDetailsInfo({ customer, delivery, payment, s
         />
 
         <Stack spacing={0.5} alignItems="flex-start" sx={{ typography: 'body2' }}>
-          <Typography variant="subtitle2">{transaction.receiverUsername}</Typography>
+          <Typography variant="subtitle2">{customer.name}</Typography>
 
-          <Box sx={{ color: 'text.secondary' }}>{t('receiver_id')}: {transaction.receiverId}</Box>
+          {/* <Box sx={{ color: 'text.secondary' }}>{t('receiver_id')}: {transaction.receiverId}</Box> */}
 
           <Button
             size="small"
@@ -117,33 +120,33 @@ export default function TransactionsDetailsInfo({ customer, delivery, payment, s
     </>
   );
 
-  const renderDelivery = (
-    <>
-      <CardHeader
-        title={t('tokens')}
-        // action={
-        //   <IconButton>
-        //     <Iconify icon="solar:pen-bold" />
-        //   </IconButton>
-        // }
-      />
-      <Stack spacing={1.5} sx={{ p: 3, typography: 'body2' }}>
-        <Stack direction="row" alignItems="center">
-          <Box component="span" sx={{ color: 'text.secondary', width: 120, flexShrink: 0 }}>
-            {t('tokens_type')}
-          </Box>
-          {transaction.tokenType}
-        </Stack>
-        <Stack direction="row" alignItems="center">
-          <Box component="span" sx={{ color: 'text.secondary', width: 120, flexShrink: 0 }}>
-            {t('tokens_quantity')}
-          </Box>
-          {transaction.tokenQuantity} {t('coins')}
-        </Stack>
-        
-      </Stack>
-    </>
-  );
+  // const renderDelivery = (
+  //   <>
+  //     <CardHeader
+  //       title={t('tokens')}
+  //     // action={
+  //     //   <IconButton>
+  //     //     <Iconify icon="solar:pen-bold" />
+  //     //   </IconButton>
+  //     // }
+  //     />
+  //     <Stack spacing={1.5} sx={{ p: 3, typography: 'body2' }}>
+  //       <Stack direction="row" alignItems="center">
+  //         <Box component="span" sx={{ color: 'text.secondary', width: 120, flexShrink: 0 }}>
+  //           {t('tokens_type')}
+  //         </Box>
+  //         {transaction.tokenType}
+  //       </Stack>
+  //       <Stack direction="row" alignItems="center">
+  //         <Box component="span" sx={{ color: 'text.secondary', width: 120, flexShrink: 0 }}>
+  //           {t('tokens_quantity')}
+  //         </Box>
+  //         {transaction.tokenQuantity} {t('coins')}
+  //       </Stack>
+
+  //     </Stack>
+  //   </>
+  // );
 
   const renderStatus = (
     <>
@@ -156,24 +159,24 @@ export default function TransactionsDetailsInfo({ customer, delivery, payment, s
         }
       />
       <Stack spacing={1.5} sx={{ p: 3, typography: 'body2' }}>
-      <Stack direction="row" alignItems="center">
+        <Stack direction="row" alignItems="center">
           <Box component="span" sx={{ color: 'text.secondary', width: 120, flexShrink: 0 }}>
             {t('transaction_status')}
           </Box>
           <Link underline="always" color="inherit">
-            {transaction.status === 'success' && t('transaction_success')}
+            {transaction.status === 'success' && t('transaction_success') || t('transaction_pending')}
           </Link>
         </Stack>
 
         {
-        transaction.error && <Stack direction="row" alignItems="center">
-          <Box component="span" sx={{ color: 'text.secondary', width: 120, flexShrink: 0 }}>
-            {t('transaction_error')}
-          </Box>
-          { transaction.error === 'error_123' && t('transaction_error_123') }
-        </Stack>
+          transaction.error && <Stack direction="row" alignItems="center">
+            <Box component="span" sx={{ color: 'text.secondary', width: 120, flexShrink: 0 }}>
+              {t('transaction_error')}
+            </Box>
+            {transaction.error === 'error_123' && t('transaction_error_123')}
+          </Stack>
         }
-        
+
         {/* <Stack direction="row" alignItems="center">
           <Box component="span" sx={{ color: 'text.secondary', width: 120, flexShrink: 0 }}>
             {t('transaction_createdAt')}
@@ -189,11 +192,11 @@ export default function TransactionsDetailsInfo({ customer, delivery, payment, s
     <>
       <CardHeader
         title={t('payment')}
-        // action={
-        //   <IconButton>
-        //     <Iconify icon="solar:pen-bold" />
-        //   </IconButton>
-        // }
+      // action={
+      //   <IconButton>
+      //     <Iconify icon="solar:pen-bold" />
+      //   </IconButton>
+      // }
       />
       <Stack direction="row" alignItems="center" sx={{ p: 3, typography: 'body2' }}>
         <Box component="span" sx={{ color: 'text.secondary', flexGrow: 1 }}>
@@ -208,15 +211,16 @@ export default function TransactionsDetailsInfo({ customer, delivery, payment, s
 
   return (
     <Card>
-      {renderSender}
+
+      {transaction?.senderUsername ? renderSender: null}
 
       <Divider sx={{ borderStyle: 'dashed' }} />
 
       {renderReceiver}
 
-      <Divider sx={{ borderStyle: 'dashed' }} />
+      {/* <Divider sx={{ borderStyle: 'dashed' }} />
 
-      {renderDelivery}
+      {renderDelivery} */}
 
       <Divider sx={{ borderStyle: 'dashed' }} />
 

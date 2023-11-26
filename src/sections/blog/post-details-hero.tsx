@@ -28,17 +28,26 @@ export default function PostDetailsHero({ title, author, coverUrl, createdAt }: 
 
   const smUp = useResponsive('up', 'sm');
 
+  const style = coverUrl ? {
+    height: 480,
+    overflow: 'hidden',
+    ...bgGradient({
+      imgUrl: coverUrl,
+      startColor: `${alpha(theme.palette.grey[900], 0.64)} 0%`,
+      endColor: `${alpha(theme.palette.grey[900], 0.64)} 100%`,
+    }),
+  } : {
+    height: 150,
+    overflow: 'hidden',
+    ...bgGradient({
+      startColor: `${alpha(theme.palette.grey[900], 0.64)} 0%`,
+      endColor: `${alpha(theme.palette.grey[900], 0.64)} 100%`,
+    }),
+  }
+
   return (
     <Box
-      sx={{
-        height: 480,
-        overflow: 'hidden',
-        ...bgGradient({
-          imgUrl: coverUrl,
-          startColor: `${alpha(theme.palette.grey[900], 0.64)} 0%`,
-          endColor: `${alpha(theme.palette.grey[900], 0.64)} 100%`,
-        }),
-      }}
+      sx={style}
     >
       <Container sx={{ height: 1, position: 'relative' }}>
         <Typography

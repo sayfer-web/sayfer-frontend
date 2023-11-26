@@ -213,7 +213,7 @@ export default function Footer() {
 
         </div>
 
-        <Stack
+        {/* <Stack
           sx={{ display: 'flex', flexDirection: { mobile: 'column', sm: 'row' }, flexWrap: 'wrap', flex: 1, 
           justifyContent: {
             sm: 'space-evenly',
@@ -271,7 +271,7 @@ export default function Footer() {
               <li className='font-light max-[436px]:text-xl text-lg'>» {t('become_affiliate')}</li>
             </ul>
           </div>
-        </Stack>
+        </Stack> */}
       </div>
 
     </div>

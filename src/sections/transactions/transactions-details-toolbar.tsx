@@ -28,7 +28,7 @@ type Props = {
   }[];
 };
 
-export default function TransactionsDetailsToolbar({
+export default function   TransactionsDetailsToolbar({
   status,
   backLink,
   createdAt,
@@ -61,7 +61,7 @@ export default function TransactionsDetailsToolbar({
               <Label
                 variant="soft"
                 color={
-                  (status === 'completed' && 'success') ||
+                  (status === 'success' && 'success') ||
                   (status === 'pending' && 'warning') ||
                   (status === 'cancelled' && 'error') ||
                   'default'
@@ -69,7 +69,7 @@ export default function TransactionsDetailsToolbar({
               >
                 {
                   status === 'refunded' && t('refunded') ||
-                  status === 'completed' && t('completed') ||
+                  status === 'success' && t('success') ||
                   status === 'pending' && t('pending') ||
                   status === 'cancelled' && t('cancelled')
                 }
@@ -89,7 +89,7 @@ export default function TransactionsDetailsToolbar({
           alignItems="center"
           justifyContent="flex-end"
         >
-          <Button
+          {/* <Button
             color="inherit"
             variant="outlined"
             endIcon={<Iconify icon="eva:arrow-ios-downward-fill" />}
@@ -102,7 +102,7 @@ export default function TransactionsDetailsToolbar({
             status === 'pending' && t('pending') ||
             status === 'cancelled' && t('cancelled')
             }
-          </Button>
+          </Button> */}
 
           <Button
             color="inherit"
@@ -112,9 +112,9 @@ export default function TransactionsDetailsToolbar({
             {t('print')}
           </Button>
 
-          <Button color="inherit" variant="contained" startIcon={<Iconify icon="solar:pen-bold" />}>
+          {/* <Button color="inherit" variant="contained" startIcon={<Iconify icon="solar:pen-bold" />}>
             {t('edit')}
-          </Button>
+          </Button> */}
         </Stack>
       </Stack>
 

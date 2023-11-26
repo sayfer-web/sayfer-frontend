@@ -14,61 +14,187 @@ import Iconify from 'src/components/iconify';
 import { useSnackbar } from 'src/components/snackbar';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import { useLocales } from 'src/locales';
+import { setCredentials } from 'src/app/features/auth/authSlice';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { useEffect, useState } from 'react';
+import TextField from '@mui/material/TextField';
+import Alert from '@mui/material/Alert';
+import { useUpdatePasswordMutation } from 'src/app/features/auth/authApiSlice';
 
 // ----------------------------------------------------------------------
+
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/
 
 export default function AccountChangePassword() {
 
   const { t } = useLocales()
 
+  const [oldPwd, setOldPwd] = useState('')
+  const [showOldPwd, toggleShowOldPwd] = useState(false)
+
+  const [newPwd, setNewPwd] = useState('')
+  const [showNewPwd, toggleShowNewPwd] = useState(false)
+
+  const [validPwd, setValidPwd] = useState(false)
+  const [pwdFocus, setPwdFocus] = useState(false)
+
+  const [matchPwd, setMatchPwd] = useState('')
+  const [showMatchPwd, toggleShowMatchPwd] = useState(false)
+  const [validMatch, setValidMatch] = useState(false)
+  const [matchFocus, setMatchFocus] = useState(false)
+
+  const [success, setSuccess] = useState(false)
+
+  const [focusPwd, toggleFocusPwd] = useState(false)
+  const [errMsg, setErrMsg] = useState('')
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  /* @ts-ingore */
+  const [updatePassword, { isLoading }] = useUpdatePasswordMutation()
+  // const [login] = useLoginMutation()
+  // const errRef = useRef(null)
+
+  // const [errMsg, setErrMsg] = useState('')
+
+
+  // const dispatch = useDispatch()
+  // const navigate = useNavigate()
+
   const { enqueueSnackbar } = useSnackbar();
 
   const password = useBoolean();
 
-  const ChangePassWordSchema = Yup.object().shape({
-    oldPassword: Yup.string().required('Old Password is required'),
-    newPassword: Yup.string()
-      .required('New Password is required')
-      .min(6, 'Password must be at least 6 characters')
-      .test(
-        'no-match',
-        'New password must be different than old password',
-        (value, { parent }) => value !== parent.oldPassword
-      ),
-    confirmNewPassword: Yup.string().oneOf([Yup.ref('newPassword')], 'Passwords must match'),
-  });
+  useEffect(() => {
+    const result = PWD_REGEX.test(newPwd)
+    result
+      ? setErrorPwdMsg('')
+      : setErrorPwdMsg('Пароль должен содержать, как минимум, одну строчную, заглавную латинские буквы и цифру')
+    setValidPwd(result)
+    const match = newPwd === matchPwd
+    console.log(match)
+    match
+      ? setErrorMatchPwdMsg('')
+      : setErrorMatchPwdMsg('Повторите пароль, введённый ранее')
+    setValidMatch(match)
+  }, [newPwd, matchPwd])
 
-  const defaultValues = {
-    oldPassword: '',
-    newPassword: '',
-    confirmNewPassword: '',
-  };
+  // useEffect(() => {
+  //   setErrorMsg('')
+  // }, [user, oldPwd, matchPwd])
 
-  const methods = useForm({
-    resolver: yupResolver(ChangePassWordSchema),
-    defaultValues,
-  });
+  const handleSubmit2 = async (e: any) => {
+    e.preventDefault()
 
-  const {
-    reset,
-    handleSubmit,
-    formState: { isSubmitting },
-  } = methods;
-
-  const onSubmit = handleSubmit(async (data) => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      reset();
-      enqueueSnackbar('Update success!');
-      console.info('DATA', data);
-    } catch (error) {
-      console.error(error);
+    const v2 = PWD_REGEX.test(oldPwd)
+    if (!v2) {
+      setErrMsg('Введены невереные данные')
+      return
     }
-  });
+    setSuccess(true)
+    setErrMsg('RESULT')
+
+    let regResult = ''
+
+
+    console.log(1)
+    regResult = await updatePassword({ oldPwd, newPwd }).unwrap()
+    console.log(2)
+
+    console.log(regResult)
+    setOldPwd('')
+    setNewPwd('')
+    setMatchPwd('')
+    setErrorMsg('Successfully updated!')
+
+  }
+
+
+
+  const [errorMsg, setErrorMsg] = useState('');
+  const [errorUserMsg, setErrorUserMsg] = useState('');
+  const [errorPwdMsg, setErrorPwdMsg] = useState('');
+  const [errorMatchPwdMsg, setErrorMatchPwdMsg] = useState('');
+
+
+  const allInputsIsValid = validPwd && validMatch
+  // && !isLoading
+
 
   return (
-    <FormProvider methods={methods} onSubmit={onSubmit}>
+    <form onSubmit={handleSubmit2}>
       <Stack component={Card} spacing={3} sx={{ p: 3 }}>
+
+        {!!errorMsg && <Alert severity="success">{errorMsg}</Alert>}
+
+
+        <TextField
+          type="password"
+          id="oldPassword"
+          label={t('password')}
+          value={oldPwd}
+          autoComplete="on"
+          InputLabelProps={{}}
+          sx={{
+            "& input:-webkit-autofill": {
+              '-webkit-box-shadow': '0 0 0 100px #000 inset',
+              '-webkit-text-fill-color': '#fff',
+            }
+          }}
+          required
+          onChange={(value) => setOldPwd(value.target.value)}
+          onFocus={() => toggleFocusPwd(true)}
+          onBlur={() => toggleFocusPwd(false)}
+        />
+
+
+        <TextField
+          type="password"
+          id="password"
+          label={t('password')}
+          value={newPwd}
+          autoComplete="on"
+          InputLabelProps={{}}
+          sx={{
+            "& input:-webkit-autofill": {
+              '-webkit-box-shadow': '0 0 0 100px #000 inset',
+              '-webkit-text-fill-color': '#fff',
+            }
+          }}
+          required
+          onChange={(value) => setNewPwd(value.target.value)}
+          onFocus={() => toggleFocusPwd(true)}
+          onBlur={() => toggleFocusPwd(false)}
+        />
+
+        {!!errorPwdMsg && newPwd !== '' && <Alert severity="error">{errorPwdMsg}</Alert>}
+
+
+        <TextField
+          type="password"
+          id="matchPassword"
+          label={t('repeat_password')}
+          value={matchPwd}
+          autoComplete="on"
+          InputLabelProps={{}}
+          sx={{
+            "& input:-webkit-autofill": {
+              '-webkit-box-shadow': '0 0 0 100px #000 inset',
+              '-webkit-text-fill-color': '#fff',
+            }
+          }}
+          required
+          onChange={(value) => setMatchPwd(value.target.value)}
+          onFocus={() => toggleFocusPwd(true)}
+          onBlur={() => toggleFocusPwd(false)}
+        />
+
+        {!!errorMatchPwdMsg && <Alert severity="error">{errorMatchPwdMsg}</Alert>}
+
+
+        {/* 
         <RHFTextField
           name="oldPassword"
           type={password.value ? 'text' : 'password'}
@@ -118,12 +244,18 @@ export default function AccountChangePassword() {
               </InputAdornment>
             ),
           }}
-        />
+        /> */}
 
-        <LoadingButton type="submit" variant="contained" loading={isSubmitting} sx={{ ml: 'auto' }}>
+
+
+        <LoadingButton type="submit" variant="contained"
+          // loading={isSubmitting} 
+          sx={{ ml: 'auto' }}>
           {t('save_changes')}
         </LoadingButton>
+
+
       </Stack>
-    </FormProvider>
+    </form>
   );
 }

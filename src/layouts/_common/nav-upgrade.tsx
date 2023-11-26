@@ -14,6 +14,8 @@ import { useLocales } from 'src/locales';
 import Label from 'src/components/label';
 import { useAuth } from 'src/hooks/use-auth';
 import { _mock } from 'src/_mock';
+import { selectCurrentRole, selectCurrentUsername } from 'src/app/features/auth/authSlice';
+import { useSelector } from 'react-redux';
 
 // ----------------------------------------------------------------------
 
@@ -24,8 +26,10 @@ export default function NavUpgrade() {
   // const { user } = useMockedUser();
 
   // const { username, status } = useAuth()
+  const username = useSelector(selectCurrentUsername)
+  const role = useSelector(selectCurrentRole)
 
-  let username = 'Sayfer'
+  // let username = 'Sayfer'
   let status = 'User'
 
   const user = {
@@ -76,11 +80,11 @@ export default function NavUpgrade() {
 
         <Stack spacing={0.5} sx={{ mt: 1.5, mb: 2 }}>
           <Typography variant="subtitle2" noWrap>
-            {user?.displayName}
+            {username}
           </Typography>
 
           <Typography variant="body2" noWrap sx={{ color: 'text.disabled' }}>
-            {user?.role}
+            {role}
           </Typography>
         </Stack>
 

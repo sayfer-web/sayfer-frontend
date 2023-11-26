@@ -1,7 +1,7 @@
 import { m } from 'framer-motion';
 // @mui
 import { alpha, useTheme } from '@mui/material/styles';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Card, { CardProps } from '@mui/material/Card';
@@ -10,6 +10,8 @@ import Image from 'src/components/image';
 import { MotionContainer, varFade } from 'src/components/animate';
 import Carousel, { CarouselDots, CarouselArrows, useCarousel } from 'src/components/carousel';
 import { useLocales } from 'src/locales';
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
 
@@ -25,6 +27,10 @@ interface Props extends CardProps {
 }
 
 export default function AppFeatured({ list, ...other }: Props) {
+
+  const { t } = useLocales()
+  const navigate = useNavigate()
+
   const carousel = useCarousel({
     speed: 800,
     autoplay: true,
@@ -88,6 +94,7 @@ function CarouselItem({ item, active }: CarouselItemProps) {
   );
 
   return (
+    <Link to='/dashboard'>
     <MotionContainer action animate={active} sx={{ position: 'relative' }}>
       <Stack
         spacing={1}
@@ -103,16 +110,16 @@ function CarouselItem({ item, active }: CarouselItemProps) {
       >
         <m.div variants={varFade().inRight}>
           <Typography variant="overline" sx={{ color: 'primary.light' }}>
-            {t('featured_app')}
+            {t('recommendations')}
           </Typography>
         </m.div>
 
         <m.div variants={varFade().inRight}>
-          <Link color="inherit" underline="none">
+          {/* <Link href='https://google.com' color="inherit" underline="none"> */}
             <Typography variant="h5" noWrap>
               {title}
             </Typography>
-          </Link>
+          {/* </Link> */}
         </m.div>
 
         <m.div variants={varFade().inRight}>
@@ -124,5 +131,6 @@ function CarouselItem({ item, active }: CarouselItemProps) {
 
       {renderImg}
     </MotionContainer>
+    </Link>
   );
 }

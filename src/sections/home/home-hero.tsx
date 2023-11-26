@@ -228,6 +228,8 @@ export default function HomeHero() {
         </Typography>
       </m.div>
 
+      <br />
+{/* 
       <m.div variants={varFade().in}>
         <Stack
           spacing={0.75}
@@ -244,20 +246,20 @@ export default function HomeHero() {
             (99+ {t('reviews')})
           </Typography>
         </Stack>
-      </m.div>
+      </m.div> */}
 
       <m.div variants={varFade().in}>
         <Stack spacing={1.5} direction={{ xs: 'column-reverse', sm: 'row' }} sx={{ mb: 5 }}>
           <Stack alignItems="center" spacing={2}>
             <Button
               component={RouterLink}
-              href={paths.dashboard.root}
+              href={paths.login}
               color="inherit"
               size="large"
               variant="contained"
               startIcon={<Iconify icon="eva:flash-fill" width={24} />}
             >
-              {t('join')}
+              {t('registration')}
             </Button>
 
             {/* <Link
@@ -276,7 +278,7 @@ export default function HomeHero() {
               Get Free Version
             </Link> */}
           </Stack>
-
+{/* 
           <Button
             color="inherit"
             size="large"
@@ -288,7 +290,7 @@ export default function HomeHero() {
             sx={{ borderColor: 'text.primary' }}
           >
             {t('preview')}
-          </Button>
+          </Button> */}
 
         </Stack>
 
@@ -303,7 +305,7 @@ export default function HomeHero() {
         </m.div>
 
         <Stack spacing={2} direction="row" justifyContent="center">
-          {['ethereum-eth-logo', 'bitcoin-btc-logo', 'tether-usdt-logo', 'bnb-bnb-logo', 'litecoin-ltc-logo'].map((platform) => (
+          {['bitcoin-btc-logo', 'ethereum-eth-logo', 'tether-usdt-logo', 'litecoin-ltc-logo'].map((platform) => (
             <m.div key={platform} variants={varFade().in}>
               <Box
                 component="img"

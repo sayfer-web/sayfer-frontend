@@ -28,13 +28,43 @@ import { useLoginMutation, useRegistrationMutation } from 'src/app/features/auth
 import { useDispatch } from 'react-redux';
 // import { useRegistrationMutation } from 'src/features/registration/registrationApiSlice';
 import { setCredentials } from 'src/app/features/auth/authSlice';
-import { TextField } from '@mui/material';
+import { Input, InputLabel, TextField } from '@mui/material';
 import { useLocales } from 'src/locales';
+import React from 'react';
+import { IMaskInput } from 'react-imask';
 
 // ----------------------------------------------------------------------
 
+
+interface CustomProps {
+  onChange: (event: { target: { name: string; value: string } }) => void;
+  name: string;
+}
+
+const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
+  function TextMaskCustom(props, ref) {
+    const { onChange, ...other } = props;
+    return (
+      <IMaskInput
+        {...other}
+        mask="+7(#00) 000-00-00"
+        definitions={{
+          '#': /[1-9]/,
+        }}
+        inputRef={ref}
+        onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
+        overwrite
+      />
+    );
+  },
+);
+
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/
+const PHN_REGEX = /^\(\d{3}\)\s\d{3}-\d{4}$/
+const PHN_REGEX2 = /^\+\d{1}\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/
+
+
 
 
 export default function JwtRegisterView() {
@@ -50,15 +80,20 @@ export default function JwtRegisterView() {
   const [pwd, setPwd] = useState('')
   const [showPwd, toggleShowPwd] = useState(false)
 
+
   const [focusPwd, toggleFocusPwd] = useState(false)
   const [errMsg, setErrMsg] = useState('')
+
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [validPhoneNumber, setValidPhoneNumber] = useState(false)
+
   const navigate = useNavigate()
 
-  
+
 
   const dispatch = useDispatch()
 
-/* @ts-ingore */
+  /* @ts-ingore */
   const [registration, { isLoading }] = useRegistrationMutation()
   // const [login] = useLoginMutation()
   // const errRef = useRef(null)
@@ -77,14 +112,14 @@ export default function JwtRegisterView() {
 
 
   // useEffect(() => {
-    /* @ts-ignore */
+  /* @ts-ignore */
   //   userRef.current.focus()
   // }, [])
 
   useEffect(() => {
     console.log('use effect')
     const result = USER_REGEX.test(user)
-    result 
+    result
       ? setErrorUserMsg('')
       : setErrorUserMsg('Username должен содержать от 4 до 22 латинских символов')
 
@@ -94,16 +129,28 @@ export default function JwtRegisterView() {
   useEffect(() => {
     const result = PWD_REGEX.test(pwd)
     result
-    ? setErrorPwdMsg('')
-    : setErrorPwdMsg('Пароль должен содержать, как минимум, одну строчную, заглавную латинские буквы и цифру')
+      ? setErrorPwdMsg('')
+      : setErrorPwdMsg('Пароль должен содержать, как минимум, одну строчную, заглавную латинские буквы и цифру')
     setValidPwd(result)
     const match = pwd === matchPwd
     console.log(match)
     match
-    ? setErrorMatchPwdMsg('')
-    : setErrorMatchPwdMsg('Повторите пароль, введённый ранее')
+      ? setErrorMatchPwdMsg('')
+      : setErrorMatchPwdMsg('Повторите пароль, введённый ранее')
     setValidMatch(match)
   }, [pwd, matchPwd])
+
+
+  useEffect(() => {
+    console.log(phoneNumber)
+    const result = PHN_REGEX2.test(phoneNumber)
+    result
+      ? setErrorPhoneMsg('')
+      : setErrorPhoneMsg('Номер телефона должен состоять из 10 цифр')
+
+    setValidPhoneNumber(result)
+  }, [phoneNumber])
+
 
   // useEffect(() => {
   //   setErrorMsg('')
@@ -111,7 +158,7 @@ export default function JwtRegisterView() {
 
   const handleSubmitReg = async (e: any) => {
     e.preventDefault()
-    
+
     const v1 = USER_REGEX.test(user)
     const v2 = PWD_REGEX.test(pwd)
     if (!v1 || !v2) {
@@ -123,9 +170,9 @@ export default function JwtRegisterView() {
 
     let regResult = ''
 
-    
+
     console.log(1)
-    regResult = await registration({ username: user, password: pwd }).unwrap()
+    regResult = await registration({ username: user, password: pwd, phoneNumber }).unwrap()
     console.log(2)
     // const userData = await login({ username: user, password: pwd }).unwrap()
     // dispatch(setCredentials({ ...userData, user }))
@@ -164,7 +211,7 @@ export default function JwtRegisterView() {
   }
 
   // const [login, { isLoading }] = useLoginMutation()
-  
+
 
   // const { register } = useAuthContext();
 
@@ -174,6 +221,7 @@ export default function JwtRegisterView() {
   const [errorUserMsg, setErrorUserMsg] = useState('');
   const [errorPwdMsg, setErrorPwdMsg] = useState('');
   const [errorMatchPwdMsg, setErrorMatchPwdMsg] = useState('');
+  const [errorPhoneMsg, setErrorPhoneMsg] = useState('');
 
   // const searchParams = useSearchParams();
 
@@ -218,8 +266,8 @@ export default function JwtRegisterView() {
   //   }
   // });
 
-  
-  const allInputsIsValid = validUser && validPwd && validMatch && !isLoading
+
+  const allInputsIsValid = validUser && validPwd && validMatch && !!phoneNumber && !isLoading
 
   const renderHead = (
     <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
@@ -260,10 +308,10 @@ export default function JwtRegisterView() {
 
   const renderForm = (
     <form onSubmit={handleSubmitReg}>
-      
-        <Stack direction={{ xs: 'column', sm: 'column' }} spacing={2}>
 
-{/*           
+      <Stack direction={{ xs: 'column', sm: 'column' }} spacing={2}>
+
+        {/*           
           <RHFTextField name="firstName" label="First name" />
           <RHFTextField name="lastName" label="Last name" />
         </Stack>
@@ -285,66 +333,79 @@ export default function JwtRegisterView() {
           }}
         />  */}
 
-{!!errorUserMsg && user !== '' && <Alert severity="error">{errorUserMsg}</Alert>}
+        {!!errorUserMsg && user !== '' && <Alert severity="error">{errorUserMsg}</Alert>}
 
-              <TextField
-        type="text"
-        id="username"
-        label={t('username')}
-        ref={userRef}
-        value={user}
-        autoComplete="on"
-        required
-        onChange={(value) => setUser(value.target.value)}
-        onFocus={() => toggleFocusUser(true)}
-        onBlur={() => toggleFocusUser(false)}
-      />
+        <TextField
+          type="text"
+          id="username"
+          label={t('username')}
+          ref={userRef}
+          value={user}
+          autoComplete="on"
+          required
+          onChange={(value) => setUser(value.target.value)}
+          onFocus={() => toggleFocusUser(true)}
+          onBlur={() => toggleFocusUser(false)}
+        />
 
-{!!errorPwdMsg && pwd !== '' && <Alert severity="error">{errorPwdMsg}</Alert>}
 
-      <TextField
-        type={showPwd ? 'text' : "password"}
-        id="password"
-        label={t('password')}
-        value={pwd}
-        autoComplete="on"
-        required
-        onChange={(value) => setPwd(value.target.value)}
-        onFocus={() => toggleFocusPwd(true)}
-        onBlur={() => toggleFocusPwd(false)}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={() => toggleShowPwd(state => !state)} edge="end">
-                <Iconify icon={showPwd ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      />
+        {!!errorPwdMsg && pwd !== '' && <Alert severity="error">{errorPwdMsg}</Alert>}
 
-{!!errorMatchPwdMsg && <Alert severity="error">{errorMatchPwdMsg}</Alert>}
+        <TextField
+          type={showPwd ? 'text' : "password"}
+          id="password"
+          label={t('password')}
+          value={pwd}
+          autoComplete="on"
+          required
+          onChange={(value) => setPwd(value.target.value)}
+          onFocus={() => toggleFocusPwd(true)}
+          onBlur={() => toggleFocusPwd(false)}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={() => toggleShowPwd(state => !state)} edge="end">
+                  <Iconify icon={showPwd ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
 
-      <TextField
-        type={showMatchPwd ? "text" : "password"}
-        id="matchPassword"
-        label={t('repeat_password')}
-        value={matchPwd}
-        autoComplete="on"
-        required
-        onChange={(value) => setMatchPwd(value.target.value)}
-        onFocus={() => toggleFocusPwd(true)}
-        onBlur={() => toggleFocusPwd(false)}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={() => toggleShowMatchPwd(state => !state)} edge="end">
-                <Iconify icon={showMatchPwd ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      />
+        {!!errorMatchPwdMsg && <Alert severity="error">{errorMatchPwdMsg}</Alert>}
+
+        <TextField
+          type={showMatchPwd ? "text" : "password"}
+          id="matchPassword"
+          label={t('repeat_password')}
+          value={matchPwd}
+          autoComplete="on"
+          required
+          onChange={(value) => setMatchPwd(value.target.value)}
+          onFocus={() => toggleFocusPwd(true)}
+          onBlur={() => toggleFocusPwd(false)}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={() => toggleShowMatchPwd(state => !state)} edge="end">
+                  <Iconify icon={showMatchPwd ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+
+        {!!errorPhoneMsg && phoneNumber !== '' && <Alert severity="error">{errorPhoneMsg}</Alert>}
+
+        <InputLabel htmlFor="formatted-text-mask-input">{t('phone_number')}</InputLabel>
+        <Input
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+          name="textmask"
+          id="formatted-text-mask-input"
+          inputComponent={TextMaskCustom as any}
+        />
+
 
         <LoadingButton
           fullWidth
@@ -355,7 +416,7 @@ export default function JwtRegisterView() {
           // loading={isLoadingRegister}
           disabled={!allInputsIsValid}
           loading={isLoading}
-          // loading={isSubmitting}
+        // loading={isSubmitting}
         >
           {t('create_account')}
         </LoadingButton>

@@ -157,7 +157,7 @@ export default function AccountBillingPlan({ cardList, addressBook, plans }: Pro
             </Grid>
           </Grid>
 
-          <Grid container spacing={{ xs: 0.5, md: 2 }}>
+          {/* <Grid container spacing={{ xs: 0.5, md: 2 }}>
             <Grid xs={12} md={4} sx={{ color: 'text.secondary' }}>
               {t('receiver')}
             </Grid>
@@ -170,7 +170,7 @@ export default function AccountBillingPlan({ cardList, addressBook, plans }: Pro
                 {selectedAddress?.name}
               </Button>
             </Grid>
-          </Grid>
+          </Grid> */}
 
           {/* <Grid container spacing={{ xs: 0.5, md: 2 }}>
             <Grid xs={12} md={4} sx={{ color: 'text.secondary' }}>
@@ -190,7 +190,7 @@ export default function AccountBillingPlan({ cardList, addressBook, plans }: Pro
             </Grid>
           </Grid> */}
 
-          <Grid container spacing={{ xs: 0.5, md: 2 }}>
+          {/* <Grid container spacing={{ xs: 0.5, md: 2 }}>
             <Grid xs={12} md={4} sx={{ color: 'text.secondary' }}>
               {t('payment_method')}
             </Grid>
@@ -203,7 +203,7 @@ export default function AccountBillingPlan({ cardList, addressBook, plans }: Pro
                 {selectedCard?.cardNumber}
               </Button>
             </Grid>
-          </Grid>
+          </Grid> */}
         </Stack>
 
         <Divider sx={{ borderStyle: 'dashed' }} />

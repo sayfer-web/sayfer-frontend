@@ -64,6 +64,7 @@ import { useSelector } from 'react-redux';
 import { selectCurrentRole, selectCurrentToken } from './app/features/auth/authSlice';
 import { useAuth } from './hooks/use-auth';
 import Page403 from './pages/403';
+import ComingSoonPage from './pages/coming-soon';
 
 // ----------------------------------------------------------------------
 
@@ -159,103 +160,108 @@ export default function App() {
 
   return (
     // <AuthProvider>
-      <LocalizationProvider>
-        <SettingsProvider
-          defaultSettings={{
-            themeMode: 'dark', // 'light' | 'dark'
-            themeDirection: 'ltr', //  'rtl' | 'ltr'
-            themeContrast: 'default', // 'default' | 'bold'
-            themeLayout: 'vertical', // 'vertical' | 'horizontal' | 'mini'
-            themeColorPresets: 'default', // 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red'
-            themeStretch: false,
-          }}
-        >
-          <ThemeProvider>
-            <MotionLazy>
-              <SnackbarProvider>
-                <CheckoutProvider>
-                  <SettingsDrawer />
-                  <ProgressBar />
-                  {/* <AuthConsumer> */}
-                    {/* <Router /> */}
-                    {/* <BrowserRouter> */}
-                    <Routes>
-                      <Route path='/' element={<MainLayout><Suspense fallback={<LoadingScreen />}><Outlet /></Suspense></MainLayout>}>
-                        <Route index element={<HomePage />} />
-                      </Route>
-                      <Route path='/auth' element={<AuthClassicLayout><Suspense fallback={<LoadingScreen />}><Outlet /></Suspense></AuthClassicLayout>}>
-                        <Route path='login' element={<LoginPage />} />
-                        <Route path='registration' element={<RegisterPage />} />
-                      </Route>
-                      <Route path='/dashboard' element={
-                        // <dashBoardRo
-                        <DashboardLayout>
-                          <Suspense fallback={<LoadingScreen />}>
-                            { status === 'User' ? <Outlet /> : <Page403 /> }
-                          </Suspense>
-                        </DashboardLayout>
-                      }>
-                        <Route index element={<IndexPage />} />
-                        {/* <Route pth='analytics' element={<OverviewAnalyticsPage />} /> */}
-                        <Route path='wallet' element={<OverviewBankingPage />} />
+    <LocalizationProvider>
+      <SettingsProvider
+        defaultSettings={{
+          themeMode: 'dark', // 'light' | 'dark'
+          themeDirection: 'ltr', //  'rtl' | 'ltr'
+          themeContrast: 'default', // 'default' | 'bold'
+          themeLayout: 'vertical', // 'vertical' | 'horizontal' | 'mini'
+          themeColorPresets: 'default', // 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red'
+          themeStretch: false,
+        }}
+      >
+        <ThemeProvider>
+          <MotionLazy>
+            <SnackbarProvider>
+              <CheckoutProvider>
+                <SettingsDrawer />
+                <ProgressBar />
+                {/* <AuthConsumer> */}
+                {/* <Router /> */}
+                {/* <BrowserRouter> */}
+                <Routes>
+                  <Route path='/' element={<MainLayout><Suspense fallback={<LoadingScreen />}><Outlet /></Suspense></MainLayout>}>
+                    <Route index element={<HomePage />} />
+                  </Route>
+                  <Route path='/auth' element={<AuthClassicLayout><Suspense fallback={<LoadingScreen />}><Outlet /></Suspense></AuthClassicLayout>}>
+                    <Route path='login' element={<LoginPage />} />
+                    <Route path='registration' element={<RegisterPage />} />
+                  </Route>
+                  <Route path='/dashboard' element={
+                    // <dashBoardRo
+                    <DashboardLayout>
+                      <Suspense fallback={<LoadingScreen />}>
+                        {status === 'User' ? <Outlet /> : <Page403 />}
+                      </Suspense>
+                    </DashboardLayout>
+                  }>
+                    <Route index element={<IndexPage />} />
+                    {/* <Route pth='analytics' element={<OverviewAnalyticsPage />} /> */}
+                    <Route path='wallet' element={<OverviewBankingPage />} />
 
-                        <Route path='post'>
-                          <Route index element={<BlogPostsPage />} />
-                          <Route path=':id' element={<BlogPostPage />} />
-                          <Route path=':id/edit' element={<BlogEditPostPage />} />
-                          <Route path='new' element={<BlogNewPostPage />} />
-                        </Route>
-                        
-                        <Route path='job'>
-                          <Route index element={<JobListPage />} />
-                          <Route path=':id' element={<JobDetailsPage />} />
-                          <Route path=':id/edit' element={<JobEditPage />} />
-                          <Route path='new' element={<JobCreatePage />} />
-                        </Route>
+                    <Route path='post'>
+                      <Route index element={<BlogPostsPage />} />
+                      <Route path=':id' element={<BlogPostPage />} />
+                      <Route path=':id/edit' element={<BlogEditPostPage />} />
+                      <Route path='new' element={<BlogNewPostPage />} />
+                    </Route>
 
-                        <Route path='games'>
-                          <Route index element={<GamesListPage />} />
-                          <Route path=':id' element={<GamesDetailsPage />} />
-                          <Route path=':id/edit' element={<GamesEditPage />} />
-                          <Route path='new' element={<GamesCreatePage />} />
-                        </Route>
+                    <Route path='job'>
+                      <Route index element={<JobListPage />} />
+                      <Route path=':id' element={<JobDetailsPage />} />
+                      <Route path=':id/edit' element={<JobEditPage />} />
+                      <Route path='new' element={<JobCreatePage />} />
+                    </Route>
 
-                        <Route path='chat' element={<ChatPage />} />
+                    <Route path='games'>
+                      <Route index element={<GamesListPage />} />
+                      <Route path=':id' element={<GamesDetailsPage />} />
+                      <Route path=':id/edit' element={<GamesEditPage />} />
+                      <Route path='new' element={<GamesCreatePage />} />
+                    </Route>
 
-                        <Route path='transactions'>
-                          <Route index element={<TransactionsListPage />} />
-                          <Route path=':id' element={<TransactionsDetailsPage />} />
-                          <Route path=':id/edit' element={<TransactionsEditPage />} />
-                          <Route path='new' element={<TransactionsCreatePage />} />
-                        </Route>
+                    {/* <Route path='chat' element={<ChatPage />} /> */}
+                    <Route path='chat' element={<ComingSoonPage date='01/01/2024 00:00' />} />
 
-                        <Route path='user'>
-                          <Route index element={<UserProfilePage />} />
-                          <Route path='account' element={<UserAccountPage />} />
-                          <Route path='list' element={<UserListPage />} />
-                        </Route>
+                    <Route path='transactions'>
+                      <Route index element={<TransactionsListPage />} />
+                      <Route path=':id' element={<TransactionsDetailsPage />} />
+                      <Route path=':id/edit' element={<TransactionsEditPage />} />
+                      <Route path='new' element={<TransactionsCreatePage />} />
+                    </Route>
 
-                        <Route path='mail' element={<MailPage />} />
-                        <Route path='kanban' element={<KanbanPage />} />
+                    <Route path='user'>
+                      {/* <Route index element={<UserProfilePage />} /> */}
+                      <Route index element={<ComingSoonPage date='03/01/2024 00:00' />} />
+                      <Route path='account' element={<UserAccountPage />} />
+                      <Route path='list' element={<UserListPage />} />
+                    </Route>
 
-                        {status === 'Admin' && (
-                        <Route path='analytics' element={<OverviewAnalyticsPage />} />
-                        )}
-                        {status === 'Admin' && (
-                        <Route path='booking' element={<OverviewBookingPage />} />
-                        )}
-                     
-                        {/* <Route path='booking' element={<OverviewBookingPage />} /> */}
-                      </Route>
-                    </Routes>
-                    {/* </BrowserRouter> */}
-                  {/* </AuthConsumer> */}
-                </CheckoutProvider>
-              </SnackbarProvider>
-            </MotionLazy>
-          </ThemeProvider>
-        </SettingsProvider>
-      </LocalizationProvider>
+                    {/* <Route path='mail' element={<MailPage />} /> */}
+                    <Route path='mail' element={<ComingSoonPage date='02/01/2024 00:00' />} />
+
+                    {/* <Route path='kanban' element={<KanbanPage />} /> */}
+                    <Route path='kanban' element={<ComingSoonPage date='01/01/2024 00:00' />} />
+
+                    {status === 'Admin' && (
+                      <Route path='analytics' element={<OverviewAnalyticsPage />} />
+                    )}
+                    {status === 'Admin' && (
+                      <Route path='booking' element={<OverviewBookingPage />} />
+                    )}
+
+                    {/* <Route path='booking' element={<OverviewBookingPage />} /> */}
+                  </Route>
+                </Routes>
+                {/* </BrowserRouter> */}
+                {/* </AuthConsumer> */}
+              </CheckoutProvider>
+            </SnackbarProvider>
+          </MotionLazy>
+        </ThemeProvider>
+      </SettingsProvider>
+    </LocalizationProvider>
     // </AuthProvider>
   );
 }

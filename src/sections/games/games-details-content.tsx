@@ -136,7 +136,7 @@ export default function GamesDetailsContent({ games }: Props) {
         />
       </Stack>
 
-      <Stack spacing={3} direction="row" flexWrap="wrap" alignItems="center">
+      {/* <Stack spacing={3} direction="row" flexWrap="wrap" alignItems="center">
         <Stack direction="row" alignItems="center" spacing={0.5} sx={{ typography: 'body2' }}>
           <Iconify icon="eva:star-fill" sx={{ color: 'warning.main' }} />
           <Box component="span" sx={{ typography: 'subtitle2' }}>
@@ -144,20 +144,20 @@ export default function GamesDetailsContent({ games }: Props) {
           </Box>
           <Link sx={{ color: 'text.secondary' }}>(234 {t('reviews')})</Link>
         </Stack>
-        {/* 
+        
         <Stack direction="row" alignItems="center" spacing={0.5} sx={{ typography: 'body2' }}>
           <Iconify icon="mingcute:location-fill" sx={{ color: 'error.main' }} />
           {destination}
-        </Stack> */}
+        </Stack>
 
-        {/* <Stack direction="row" alignItems="center" spacing={0.5} sx={{ typography: 'subtitle2' }}>
+        <Stack direction="row" alignItems="center" spacing={0.5} sx={{ typography: 'subtitle2' }}>
           <Iconify icon="solar:flag-bold" sx={{ color: 'info.main' }} />
           <Box component="span" sx={{ typography: 'body2', color: 'text.secondary' }}>
             Guide by
           </Box>
           {tourGuides.map((tourGuide) => tourGuide.name).join(', ')}
-        </Stack> */}
-      </Stack>
+        </Stack>
+      </Stack> */}
     </>
   );
 
@@ -259,12 +259,12 @@ export default function GamesDetailsContent({ games }: Props) {
 
   return (
     <>
-      {renderGallery}
+      {/* {renderGallery} */}
 
       <Stack sx={{ maxWidth: 720, mx: 'auto' }}>
         {renderHead}
 
-        <Divider sx={{ borderStyle: 'dashed', my: 5 }} />
+        {/* <Divider sx={{ borderStyle: 'dashed', my: 5 }} /> */}
 
         {renderOverview}
 

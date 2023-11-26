@@ -109,16 +109,16 @@ export default function BankingExpensesCategories({ title, subheader, chart, ...
       >
         <Stack sx={{ py: 2, borderRight: `dashed 1px ${theme.palette.divider}` }}>
           <Box component="span" sx={{ mb: 1, typography: 'body2', color: 'text.secondary' }}>
-            {t('categories')}
+            {t('tokens_amount')}
           </Box>
-          9
+          0
         </Stack>
 
         <Stack sx={{ py: 2 }}>
           <Box component="span" sx={{ mb: 1, typography: 'body2', color: 'text.secondary' }}>
-            {t('categories')}
+            {t('tokens_price_summary')}
           </Box>
-          $18,765
+          $1
         </Stack>
       </Box>
     </Card>

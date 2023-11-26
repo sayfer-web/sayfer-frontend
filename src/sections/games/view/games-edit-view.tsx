@@ -73,7 +73,7 @@ export default function GamesEditView({ id }: Props) {
             href: paths.dashboard.root,
           },
           {
-            name: t('games'),
+            name: t('projects'),
             href: paths.dashboard.games.root,
           },
           { name: currentGame?.name },

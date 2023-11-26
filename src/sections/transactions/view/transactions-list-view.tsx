@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useLayoutEffect } from 'react';
 // @mui
 import { alpha } from '@mui/material/styles';
 import Tab from '@mui/material/Tab';
@@ -38,15 +38,17 @@ import {
   TablePaginationCustom,
 } from 'src/components/table';
 // types
-import { IOrderItem, IOrderTableFilters, IOrderTableFilterValue } from 'src/types/order';
+// import { IOrderItem, IOrderTableFilters, IOrderTableFilterValue } from 'src/types/order';
 //
 import OrderTableRow from '../transactions-table-row';
 import OrderTableToolbar from '../transactions-table-toolbar';
 import OrderTableFiltersResult from '../transactions-table-filters-result';
 import { useLocales } from 'src/locales';
 import { useNavigate, useNavigation } from 'react-router-dom';
-import { useGetTransactionsQuery } from 'src/app/features/transactions/transactionsApiSlice';
-import { ITransactionItem } from 'src/types/transaction';
+import { ITransactionItem, ITransactionTableFilters, ITransactionTableFilterValue } from 'src/types/transaction';
+import { useGetAllTransactionsQuery } from 'src/app/features/transactions/transactionsApiSlice';
+import { useSelector } from 'react-redux';
+import { selectCurrentUsername } from 'src/app/features/auth/authSlice';
 
 // ----------------------------------------------------------------------
 
@@ -55,9 +57,9 @@ const STATUS_OPTIONS = () => {
   const { t } = useLocales()
 
   return [{ value: 'all', label: t('all') },
-  { value: 'pending', label: t('pending') },
+  // { value: 'pending', label: t('pending') },
   { value: 'completed', label: t('completed') },
-  { value: 'cancelled', label: t('cancelled') },
+  // { value: 'cancelled', label: t('cancelled') },
   { value: 'refunded', label: t('refunded') },
   ];
 }
@@ -70,102 +72,123 @@ const TABLE_HEAD = () => {
     { id: 'orderNumber', label: t('order'), width: 116 },
     { id: 'name', label: t('customer') },
     { id: 'createdAt', label: t('date'), width: 140 },
-    { id: 'totalQuantity', label: t('items'), width: 120, align: 'center' },
+    { id: 'exchangeRate', label: t('exchangeRate'), width: 120, align: 'center' },
     { id: 'totalAmount', label: t('price'), width: 140 },
     { id: 'status', label: t('status'), width: 110 },
     { id: '', width: 88 },
   ];
 }
 
-const defaultFilters: IOrderTableFilters = {
+const defaultFilters: ITransactionTableFilters = {
   name: '',
   status: 'all',
   startDate: null,
   endDate: null,
 };
 
-
-// const transactionsArr = [
-//   {
-//     id: '1',
-//     orderNumber: '1',
-//     createdAt: new Date().toISOString(),
-//     taxes: 0,
-//     items: [{
-//       id: '',
-//       sku: '',
-//       quantity: 0,
-//       name: '',
-//       coverUrl: '',
-//       price: '',
-//     }],
-//     history: 0,
-//     subTotal: 0,
-//     shipping: 0,
-//     discount: 0,
-//     customer: 'User',
-//     delivery: 0,
-//     totalAmount: 0,
-//     totalQuantity: 0,
-//     shippingAddress: {
-//       fullAddress: '19034 Verna Unions Apt. 164 - Honolulu, RI / 87535',
-//       phoneNumber: '365-374-4961',
-//     },
-//     payment: {
-//       cardType: 'mastercard',
-//       cardNumber: '**** **** **** 5678',
-//     },
-//     status: 'refunded',
-//   },
-//   {
-//     id: '2',
-//     orderNumber: '2',
-//     createdAt: new Date().toISOString(),
-//     taxes: 0,
-//     items: [{
-//       id: '',
-//       sku: '',
-//       quantity: 0,
-//       name: '',
-//       coverUrl: '',
-//       price: '',
-//     }],
-//     history: 0,
-//     subTotal: 0,
-//     shipping: 0,
-//     discount: 0,
-//     customer: 'User2',
-//     delivery: 0,
-//     totalAmount: 0,
-//     totalQuantity: 0,
-//     shippingAddress: {
-//       fullAddress: '19034 Verna Unions Apt. 164 - Honolulu, RI / 87535',
-//       phoneNumber: '365-374-4961',
-//     },
-//     payment: {
-//       cardType: 'mastercard',
-//       cardNumber: '**** **** **** 5678',
-//     },
-//     status: 'refunded',
-//   },
-// ]
+// ----------------------------------------------------------------------
 
 // ----------------------------------------------------------------------
 
 export default function TransactionsListView() {
 
-  const {
-      data: transactions,
-      isLoading,
-      isSuccess,
-      isError,
-      error
-      /* @ts-ignore */
-  } = useGetTransactionsQuery()
+  const { data: transactions, error, isLoading, isSuccess } = useGetAllTransactionsQuery('')
+
+  // let oldTransactions = newTransactions
+  const username = useSelector(selectCurrentUsername)
+
+  const [tableData, setTableData] = useState([]);
+
+  const [showOnlyMine, toggleShowOnlyMine] = useState(false)
+
+  const handleToggleShowOnly = () => toggleShowOnlyMine(state => !state)
+
+  console.log(showOnlyMine)
+  // if(isLoading) oldTransactions = 'Loading...'
+  useEffect(() => {
+
+    if (isSuccess) {
+
+      let result = transactions.map((item: any, idx: number) => {
+
+        const { id, txid, address, category, sender, confirmations, receiver: user, tokenType, amount, exchangeRate, status, errMsg, createdAt, successedAt } = item
+
+        console.log(createdAt)
+
+        return {
+          id,
+          orderNumber: item.id,
+          createdAt: new Date(successedAt).toISOString(),
+          taxes: 10,
+          items: [{
+            id: '1',
+            sku: 'sky',
+            quantity: 12,
+            name: 'product name',
+            coverUrl: 'url',
+            price: 120,
+          }],
+          history: {
+            orderTime: createdAt,
+            paymentTime: createdAt,
+            deliveryTime: createdAt,
+            completionTime: createdAt,
+            successedAt,
+            createdAt,
+            timeline: [
+              { title: 'Delivery successful', time: createdAt },
+              { title: 'Transporting to [2]', time: createdAt },
+              { title: 'Transporting to [1]', time: createdAt },
+              {
+                title: 'The shipping unit has picked up the goods',
+                time: createdAt,
+              },
+              { title: 'Order has been created', time: createdAt },
+            ],
+          },
+          subTotal: amount*exchangeRate,
+          shipping: 10,
+          discount: 10,
+          customer: {
+            id: '1',
+            name: user || 'Username',
+            email: t('deposit'),
+            avatarUrl: 'avatar',
+            ipAddress: '192.158.1.38',
+          },
+          delivery: {
+            shipBy: 'DHL',
+            speedy: 'Standard',
+            trackingNumber: 'SPX037739199373',
+          },
+          totalAmount: amount ,
+          totalQuantity: exchangeRate,
+          shippingAddress: {
+            fullAddress: '19034 Verna Unions Apt. 164 - Honolulu, RI / 87535',
+            phoneNumber: '365-374-4961',
+          },
+          payment: {
+            cardType: 'mastercard',
+            cardNumber: '**** **** **** 5678',
+          },
+          status
+          // ...data
+        }
+      })
+
+      if(showOnlyMine) {
+        result = result.filter((item: any) => item.customer.name === username)
+      }
+
+      setTableData(result)
+
+      console.log("TABLE DATA: ", tableData)
+    }
+  }, [transactions, showOnlyMine])
 
   const { t } = useLocales()
 
-  const table = useTable({ defaultOrderBy: 'id' });
+  const table = useTable({ defaultOrderBy: 'orderNumber' });
 
   const settings = useSettingsContext();
 
@@ -173,7 +196,10 @@ export default function TransactionsListView() {
 
   const confirm = useBoolean();
 
-  const [tableData, setTableData] = useState(transactions);
+
+  // useEffect(() => {
+  //   setTableData(newTransactions())
+  // }, [oldTransactions])
 
   const [filters, setFilters] = useState(defaultFilters);
 
@@ -184,7 +210,6 @@ export default function TransactionsListView() {
 
   const dataFiltered = applyFilter({
     /* @ts-ignore */
-    // inputData: tableData,
     inputData: tableData,
     comparator: getComparator(table.order, table.orderBy),
     filters,
@@ -204,7 +229,7 @@ export default function TransactionsListView() {
   const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
 
   const handleFilters = useCallback(
-    (name: string, value: IOrderTableFilterValue) => {
+    (name: string, value: ITransactionTableFilterValue) => {
       table.onResetPage();
       setFilters((prevState) => ({
         ...prevState,
@@ -260,7 +285,8 @@ export default function TransactionsListView() {
     [handleFilters]
   );
 
-  return isLoading ? <div>Loading...</div> : (
+
+  return (
     <>
       <Container maxWidth={settings.themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
@@ -330,6 +356,7 @@ export default function TransactionsListView() {
             //
             canReset={canReset}
             onResetFilters={handleResetFilters}
+            onChangeCheckbox={handleToggleShowOnly}
           />
 
           {canReset && (
@@ -383,6 +410,7 @@ export default function TransactionsListView() {
 
                 <TableBody>
                   {dataFiltered
+                    .reverse()
                     .slice(
                       table.page * table.rowsPerPage,
                       table.page * table.rowsPerPage + table.rowsPerPage
@@ -458,7 +486,7 @@ function applyFilter({
 }: {
   inputData: ITransactionItem[];
   comparator: (a: any, b: any) => number;
-  filters: IOrderTableFilters;
+  filters: ITransactionTableFilters;
   dateError: boolean;
 }) {
   const { status, name, startDate, endDate } = filters;
@@ -473,14 +501,14 @@ function applyFilter({
 
   inputData = stabilizedThis.map((el) => el[0]);
 
-  // if (name) {
-  //   inputData = inputData.filter(
-  //     (order) =>
-  //       order.orderNumber.toLowerCase().indexOf(name.toLowerCase()) !== -1 ||
-  //       order.customer.name.toLowerCase().indexOf(name.toLowerCase()) !== -1 ||
-  //       order.customer.email.toLowerCase().indexOf(name.toLowerCase()) !== -1
-  //   );
-  // }
+  if (name) {
+    inputData = inputData.filter(
+      (order) =>
+        order.orderNumber.toLowerCase().indexOf(name.toLowerCase()) !== -1 ||
+        order.customer.name.toLowerCase().indexOf(name.toLowerCase()) !== -1 ||
+        order.customer.email.toLowerCase().indexOf(name.toLowerCase()) !== -1
+    );
+  }
 
   if (status !== 'all') {
     inputData = inputData.filter((order) => order.status === status);

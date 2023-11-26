@@ -12,7 +12,7 @@ export default function OverviewAppPage() {
   return (
     <>
       <Helmet>
-        <title> {t('dashboard')}: {t('app')}</title>
+        <title> {t('dashboard')}: {t('explorer')}</title>
       </Helmet>
 
       <OverviewAppView />

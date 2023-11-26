@@ -209,12 +209,12 @@ export default function BankingQuickTransfer({ title, subheader, list, sx, ...ot
         onChange={handleChangeSlider}
       />
 
-      <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle1' }}>
+      {/* <Stack direction="row" alignItems="center" sx={{ typography: 'subtitle1' }}>
         <Box component="span" sx={{ flexGrow: 1 }}>
           {t('your_balance')}
         </Box>
         {fCurrency(34212)}
-      </Stack>
+      </Stack> */}
 
       <Button
         size="large"
@@ -336,11 +336,14 @@ function ConfirmTransferDialog({
   onBlur,
   onChange,
 }: ConfirmTransferDialogProps) {
+
+  const { t } = useLocales()
+
   return (
     <Dialog open={open} fullWidth maxWidth="xs" onClose={onClose}>
-      <DialogTitle>Transfer to</DialogTitle>
+      <DialogTitle>{t('in_developing')}</DialogTitle>
 
-      <Stack spacing={3} sx={{ px: 3 }}>
+      {/* <Stack spacing={3} sx={{ px: 3 }}>
         <Stack direction="row" alignItems="center" spacing={2}>
           <Avatar src={contactInfo?.avatarUrl} sx={{ width: 48, height: 48 }} />
 
@@ -369,7 +372,7 @@ function ConfirmTransferDialog({
         <Button variant="contained" disabled={amount === 0} onClick={onClose}>
           Confirm & Transfer
         </Button>
-      </DialogActions>
+      </DialogActions> */}
     </Dialog>
   );
 }
