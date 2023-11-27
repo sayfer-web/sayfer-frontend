@@ -14,6 +14,9 @@ import { useSettingsContext } from 'src/components/settings';
 import GameDetailsToolbar from '../games-details-toolbar';
 import GameDetailsContent from '../games-details-content';
 import GameDetailsBookers from '../games-details-bookers';
+import { Button } from '@mui/material';
+import { useLocales } from 'src/locales';
+import { useNavigate } from 'react-router';
 
 // ----------------------------------------------------------------------
 
@@ -22,7 +25,11 @@ type Props = {
 };
 
 export default function GamesDetailsView({ id }: Props) {
+
+  const { t } = useLocales()
   const settings = useSettingsContext();
+
+  const navigate = useNavigate()
 
   console.log(id)
 
@@ -86,6 +93,13 @@ export default function GamesDetailsView({ id }: Props) {
       {currentTab === 'content' && <GameDetailsContent games={currentGame} />}
 
       {currentTab === 'bookers' && <GameDetailsBookers bookers={currentGame?.bookers} />}
+
+      <br /><br />
+      <Container sx={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+        <Button variant="contained" color="success" onClick={() => navigate('/dashboard/wallet')}>
+          {t('buy_token_sfr')}
+        </Button>
+      </Container>
     </Container>
   );
 }

@@ -110,8 +110,10 @@ export default function JwtLoginView() {
     try {
       // setUser('1')
       const userData = await login({ username: user, password: pwd }).unwrap()
+
+      console.log(userData)
       // setUser('2')
-      dispatch(setCredentials({ ...userData, user }))
+      dispatch(setCredentials({ ...userData, user, role: userData.roles }))
       // setUser(userData.token)
       // setPwd('')
       // router.push(returnTo || PATH_AFTER_LOGIN);
@@ -231,8 +233,10 @@ export default function JwtLoginView() {
         InputLabelProps={{}}
         sx={{ 
           "& input:-webkit-autofill": {
-            '-webkit-box-shadow': '0 0 0 100px #000 inset',
-            '-webkit-text-fill-color': '#fff',
+            // '-webkit-box-shadow': ,
+            // '-webkit-text-fill-color': '#fff',
+            WebkitBoxShadow: '0 0 0 100px #000 inset',
+            WebkitTextFillColor: '#fff'
           }
         }}
         required

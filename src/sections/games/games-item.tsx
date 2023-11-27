@@ -1,26 +1,27 @@
-// @mui
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import ListItemText from '@mui/material/ListItemText';
-// routes
+
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
-// utils
+
 import { fDateTime } from 'src/utils/format-time';
 import { fCurrency } from 'src/utils/format-number';
-// types
-// import { ITourItem } from 'src/types/tour';
-// components
+
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
-import CustomPopover, { usePopover } from 'src/components/custom-popover';
 import { shortDateLabel } from 'src/components/custom-date-range-picker';
-import { useLocales } from 'src/locales';
+import CustomPopover, { usePopover } from 'src/components/custom-popover';
+
+import { ITourItem } from 'src/types/tour';
 import { IGameItem } from 'src/types/games';
+import { Link, useNavigate } from 'react-router-dom';
+import { Button } from '@mui/material';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -31,10 +32,12 @@ type Props = {
   onDelete: VoidFunction;
 };
 
-export default function GamesItem({ tour, onView, onEdit, onDelete }: Props) {
-  
+export default function TourItem({ tour, onView, onEdit, onDelete }: Props) {
+
   const { t } = useLocales()
-  
+
+  const navigate = useNavigate()
+
   const popover = usePopover();
 
   const {
@@ -87,59 +90,77 @@ export default function GamesItem({ tour, onView, onEdit, onDelete }: Props) {
         typography: 'subtitle2',
       }}
     >
-      {/* {!!priceSale && (
+      {!!priceSale && (
         <Box component="span" sx={{ color: 'grey.500', mr: 0.25, textDecoration: 'line-through' }}>
           {fCurrency(priceSale)}
         </Box>
-      )} */}
-      {/* {fCurrency(price)} */}
-      {t('free_coins')}
+      )}
+      {fCurrency(price)}
     </Stack>
   );
 
   const renderImages = (
-    <Stack
-      spacing={0.5}
-      direction="row"
-      sx={{
-        p: (theme: any) => theme.spacing(1, 1, 0, 1),
-      }}
-    >
-      <Stack flexGrow={1} sx={{ position: 'relative' }}>
+    <Link
+      style={{ color: '#fff' }}
+      to={`/dashboard/games/${id}`}>
+      <Stack
+        spacing={0.5}
+        direction="row"
+        sx={{
+          p: (theme) => theme.spacing(1, 1, 0, 1),
+        }}
+      >
+        {/* <Stack flexGrow={1} sx={{ position: 'relative' }}>
         {renderPrice}
         {renderRating}
-        <Image alt={images[0]} src={images[0]} sx={{ borderRadius: 1, height: 164, maxWidth: 262 }} />
+      </Stack> */}
+        <Image alt={images[0]} src={images[0]} sx={{ borderRadius: 1, height: 164, width: 1 }} />
+        {/* <Stack spacing={0.5}>
+          <Image alt={images[1]} src={images[1]} ratio="1/1" sx={{ borderRadius: 1, width: 80 }} />
+          <Image alt={images[2]} src={images[2]} ratio="1/1" sx={{ borderRadius: 1, width: 80 }} />
+        </Stack> */}
       </Stack>
-      <Stack spacing={0.5}>
-        <Image alt={images[1]} src={images[1]} ratio="1/1" sx={{ borderRadius: 1, width: 80 }} />
-        <Image alt={images[2]} src={images[2]} ratio="1/1" sx={{ borderRadius: 1, width: 80 }} />
-      </Stack>
-    </Stack>
+    </Link>
   );
 
   const renderTexts = (
-    <ListItemText
-      sx={{
-        p: (theme: any) => theme.spacing(2.5, 2.5, 2, 2.5),
-      }}
-      primary={`${t('posted_date')}: ${fDateTime(createdAt)}`}
-      secondary={
-        <Link component={RouterLink} href={paths.dashboard.games.details(id)} color="inherit">
-          {name}
-        </Link>
-      }
-      primaryTypographyProps={{
-        // typography: 'caption',
-        color: 'text.disabled',
-      }}
-      secondaryTypographyProps={{
-        // mt: 1,
-        noWrap: true,
-        component: 'span',
-        color: 'text.primary',
-        // typography: 'subtitle1',
-      }}
-    />
+    <Stack sx={{ display: 'flex', flexDirection: 'row', padding: 2, justifyContent: 'space-between', alignItems: 'center' }}>
+      {/* <ListItemText
+        sx={{
+          p: (theme) => theme.spacing(2.5, 2.5, 2, 2.5),
+        }}
+        // primary={`Posted date: ${fDateTime(createdAt)}`}
+        secondary={ */}
+      <Link
+        style={{ color: '#fff' }}
+        to={`/dashboard/games/${id}`}>
+        {name}
+      </Link>
+      {/* }
+        primaryTypographyProps={{
+          typography: 'caption',
+          color: 'text.disabled',
+        }}
+        secondaryTypographyProps={{
+          mt: 1,
+          noWrap: true,
+          component: 'span',
+          color: 'text.primary',
+          typography: 'subtitle1',
+        }}
+      /> */}
+      <Button
+        size="medium"
+        color="inherit"
+        variant="outlined"
+        // target="_blank"
+        // rel="noopener"
+        // href={paths.components}
+        endIcon={<Iconify icon="eva:arrow-ios-forward-fill" width={18} sx={{ ml: -0.5 }} />}
+        onClick={() => navigate(`/dashboard/games/${id}`)} >
+        {t('details')}
+      </Button>
+    </Stack>
   );
 
   const renderInfo = (
@@ -147,7 +168,7 @@ export default function GamesItem({ tour, onView, onEdit, onDelete }: Props) {
       spacing={1.5}
       sx={{
         position: 'relative',
-        p: (theme: any) => theme.spacing(0, 2.5, 2.5, 2.5),
+        p: (theme) => theme.spacing(0, 2.5, 2.5, 2.5),
       }}
     >
       <IconButton onClick={popover.onOpen} sx={{ position: 'absolute', bottom: 20, right: 8 }}>
@@ -189,10 +210,12 @@ export default function GamesItem({ tour, onView, onEdit, onDelete }: Props) {
 
         {renderTexts}
 
-        {renderInfo}
+
+
+        {/* {renderInfo}  */}
       </Card>
 
-      <CustomPopover
+      {/* <CustomPopover
         open={popover.open}
         onClose={popover.onClose}
         arrow="right-top"
@@ -205,7 +228,7 @@ export default function GamesItem({ tour, onView, onEdit, onDelete }: Props) {
           }}
         >
           <Iconify icon="solar:eye-bold" />
-          {t('view')}
+          View
         </MenuItem>
 
         <MenuItem
@@ -215,7 +238,7 @@ export default function GamesItem({ tour, onView, onEdit, onDelete }: Props) {
           }}
         >
           <Iconify icon="solar:pen-bold" />
-          {t('edit')}
+          Edit
         </MenuItem>
 
         <MenuItem
@@ -226,9 +249,9 @@ export default function GamesItem({ tour, onView, onEdit, onDelete }: Props) {
           sx={{ color: 'error.main' }}
         >
           <Iconify icon="solar:trash-bin-trash-bold" />
-          {t('delete')}
+          Delete
         </MenuItem>
-      </CustomPopover>
+      </CustomPopover> */}
     </>
   );
 }

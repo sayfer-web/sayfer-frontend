@@ -222,11 +222,11 @@ export default function HomeHero() {
         </StyledTextGradient>
       </m.div>
 
-      <m.div variants={varFade().in}>
+      {/* <m.div variants={varFade().in}>
         <Typography variant="body2" sx={{ textAlign: 'center' }}>
         {t('customer_payouts_are_over')} $739,091
         </Typography>
-      </m.div>
+      </m.div> */}
 
       <br />
 {/* 

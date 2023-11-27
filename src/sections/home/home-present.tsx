@@ -20,302 +20,11 @@ import { useResponsive } from "src/hooks/use-responsive";
 // import { SvgEthereumLogo } from "src/assets/svg/coins/SvgEthereumLogo.tsx"
 // import { SvgLitecoinLogo } from "src/assets/svg/coins/SvgLitecoinLogo.tsx"
 // import { SvgTetherLogo } from "src/assets/svg/coins/SvgTetherLogo.tsx"
-// import { SvgBinanceLogo } from "src/assets/svg/coins/SvgBinanceLogo.tsx"
+// import { ReactComponent as Coin1 } from "src/assets/animations/present/coin1.svg
 
 
 export const HomePresent = () => {
 
-
-  const svgList = [
-    {
-      id: 1,
-      title: 'chart1',
-      style: {
-        width: 100,
-        height: 100,
-        position: 'absolute',
-        top: 200,
-        left: 0,
-        zIndex: 1
-      },
-    },
-    {
-      id: 2,
-      title: 'chart1',
-      style: {
-        width: 100,
-        height: 100,
-        position: 'absolute',
-        top: 160,
-        left: -20,
-        zIndex: 1
-      },
-    },
-    {
-      id: 2,
-      title: 'chart1',
-      style: {
-        width: 100,
-        height: 100,
-        position: 'absolute',
-        top: 120,
-        left: 120,
-        zIndex: 1
-      },
-    },
-    {
-      id: 2,
-      title: 'chart2',
-      style: {
-        width: 200,
-        height: 200,
-        position: 'absolute',
-        top: -20,
-        left: 160,
-        zIndex: 1
-      },
-    },
-    {
-      id: 2,
-      title: 'chart2',
-      style: {
-        width: 200,
-        height: 200,
-        // position: 'absolute',
-        top: -40,
-        left: 0,
-        zIndex: 1
-      },
-    },
-    {
-      id: 2,
-      title: 'chart2',
-      style: {
-        width: 200,
-        height: 200,
-        position: 'absolute',
-        top: -20,
-        left: 40,
-        zIndex: 1
-      },
-    },
-    {
-      id: 2,
-      title: 'chart2',
-      style: {
-        width: 200,
-        height: 200,
-        position: 'absolute',
-        top: -80,
-        left: 280,
-        zIndex: 1
-      },
-    },
-    {
-      id: 3,
-      title: 'coin1',
-      style: {
-        width: 100,
-        height: 100,
-        position: 'absolute',
-        top: 140,
-        left: 380,
-        zIndex: 2,
-      },
-    },
-    {
-      id: 3,
-      title: 'coin1',
-      style: {
-        width: 100,
-        height: 100,
-        position: 'absolute',
-        top: 120,
-        left: 380,
-        zIndex: 2,
-      },
-    },
-    {
-      id: 3,
-      title: 'coin1',
-      style: {
-        width: 100,
-        height: 100,
-        position: 'absolute',
-        top: 100,
-        left: 380,
-        zIndex: 2,
-      },
-    },
-    {
-      id: 3,
-      title: 'coin1',
-      style: {
-        width: 100,
-        height: 100,
-        position: 'absolute',
-        top: 80,
-        left: 380,
-        zIndex: 2,
-      },
-    },
-    {
-      id: 3,
-      title: 'coin1',
-      style: {
-        width: 100,
-        height: 100,
-        position: 'absolute',
-        top: 60,
-        left: 380,
-        zIndex: 2,
-      },
-    },
-    {
-      id: 4,
-      title: 'coin2',
-      style: {
-        width: 100,
-        height: 100,
-        position: 'absolute',
-        top: 0,
-        left: 480,
-        zIndex: 2
-      },
-    },
-    {
-      id: 4,
-      title: 'coin2',
-      style: {
-        width: 100,
-        height: 100,
-        position: 'absolute',
-        top: -20,
-        left: 480,
-        zIndex: 3
-      },
-    },
-    {
-      id: 4,
-      title: 'coin2',
-      style: {
-        width: 100,
-        height: 100,
-        position: 'absolute',
-        top: -40,
-        left: 480,
-        zIndex: 4
-      },
-    },
-    {
-      id: 4,
-      title: 'coin2',
-      style: {
-        width: 100,
-        height: 100,
-        position: 'absolute',
-        top: -60,
-        left: 480,
-        zIndex: 5
-      },
-    },
-    {
-      id: 5,
-      title: 'coin3',
-      style: {
-        width: 100,
-        height: 100,
-        position: 'absolute',
-        top: -10,
-        left: 375,
-        zIndex: 2
-      },
-    },
-    {
-      id: 6,
-      title: 'floor1',
-      style: {
-        width: 100,
-        height: 100,
-        position: 'absolute',
-        top: 0,
-        left: 480,
-        zIndex: 1
-      },
-    },
-    {
-      id: 7,
-      title: 'floor2',
-      style: {
-        width: 300,
-        height: 300,
-        position: 'absolute',
-        top: 60,
-        left: 280,
-        zIndex: 1
-      },
-    },
-    {
-      id: 8,
-      title: 'floor3',
-      style: {
-        width: 36,
-        height: 36,
-        position: 'absolute',
-        top: -80,
-        left: 280,
-        zIndex: 1
-      },
-    },
-    {
-      id: 9,
-      title: 'spotlight',
-      style: {
-        width: 200,
-        height: 200,
-        position: 'absolute',
-        top: -60,
-        left: 328,
-        zIndex: 5
-      },
-    },
-    {
-      id: 10,
-      title: 'web1',
-      style: {
-        width: 1000,
-        height: 1000,
-        position: 'absolute',
-        top: -300,
-        left: -200,
-        zIndex: 0
-      },
-    },
-    {
-      id: 11,
-      title: 'web2',
-      style: {
-        width: 500,
-        height: 500,
-        position: 'absolute',
-        top: -120,
-        left: 60,
-        zIndex: 0
-      },
-    },
-    // {
-    //   id: 12,
-    //   title: 'web3',
-    //   style: {
-    //     width: 1000,
-    //     height: 1000,
-    //     position: 'absolute',
-    //     top: -200,
-    //     left: 280, 
-    //     zIndex: 0
-    //   },
-    // },
-  ]
 
   const mdUp = useResponsive('up', 'md');
 
@@ -337,8 +46,8 @@ export const HomePresent = () => {
             <Image
               disabledEffect
               alt="sidebar"
-              // width={100}
-              height={200}
+              width='10%'
+              height='10%'
               // style={{ top: 100, left: 0 }}
 
               src={`/assets/animations/present/chart2.svg`}
@@ -355,8 +64,8 @@ export const HomePresent = () => {
             <Image
               disabledEffect
               alt="sidebar"
-              // width={100}
-              height={200}
+              width='10%'
+              height='10%'
               // style={{ top: 250, left: -100 }}
 
               src={`/assets/animations/present/chart2.svg`}
@@ -373,8 +82,8 @@ export const HomePresent = () => {
             <Image
               disabledEffect
               alt="sidebar"
-              // width={100}
-              height={200}
+              width='10%'
+              height='10%'
               // style={{ top: 250, left: -100 }}
 
               src={`/assets/animations/present/chart2.svg`}
@@ -392,7 +101,8 @@ export const HomePresent = () => {
               disabledEffect
               alt="sidebar"
               // width={100}
-              height={200}
+              width='10%'
+              height='10%'
               // style={{ top: 250, left: -100 }}
 
               src={`/assets/animations/present/chart2.svg`}
@@ -413,8 +123,8 @@ export const HomePresent = () => {
             <Image  
               disabledEffect
               alt="sidebar"
-              // width={100}
-              height={100}
+              width='10%'
+              height='10%'
               // style={{ top: 250, left: 240}}
               src={`/assets/animations/present/chart1.svg`}
             />
@@ -430,8 +140,8 @@ export const HomePresent = () => {
             <Image
               disabledEffect
               alt="sidebar"
-              // width={100}
-              height={100}
+              width='10%'
+              height='10%'
               // style={{ top: 250, left: 240}}
               src={`/assets/animations/present/chart1.svg`}
             />
@@ -448,7 +158,7 @@ export const HomePresent = () => {
               disabledEffect
               alt="sidebar"
               // width={100}
-              height={100}
+              width='10%'
               // style={{ top: 250, left: 240}}
               src={`/assets/animations/present/chart1.svg`}
             />
@@ -460,7 +170,7 @@ export const HomePresent = () => {
       {/* FLOOR */}
 
 
-      <Box sx={{ position: 'absolute', top: 230, left: -300, zIndex: 5 }}>
+      {/* <Box sx={{ position: 'absolute', top: 230, left: -300, zIndex: 5 }}>
         <m.div 
         // variants={varFade().inDown}
         >
@@ -468,14 +178,14 @@ export const HomePresent = () => {
             <Image
               disabledEffect
               alt="sidebar"
-              // width={100}
-              height={400}
+              width='10%'
+              height='10%'
               // style={{ left: -140 }}
               src={`/assets/animations/present/floor3.svg`}
             />
           </m.div>
         </m.div>
-      </Box>
+      </Box> */}
 
       <Box sx={{ position: 'absolute', top: 320, left: -100, zIndex: 5 }}>
         <m.div 
@@ -485,8 +195,8 @@ export const HomePresent = () => {
             <Image
               disabledEffect
               alt="sidebar"
-              // width={100}
-              height={200}
+              width='105%'
+              height='105%'
               // style={{ left: -140 }}
               src={`/assets/animations/present/floor2.svg`}
             />
@@ -497,7 +207,7 @@ export const HomePresent = () => {
 
       {/* WEB */}
 
-      <Box sx={{ position: 'absolute', top: 350, left: -200, zIndex: 2 }}>
+      {/* <Box sx={{ position: 'absolute', top: 350, left: -200, zIndex: 2 }}>
         <m.div 
         // variants={varFade().inDown}
         >
@@ -543,13 +253,13 @@ export const HomePresent = () => {
               disabledEffect
               alt="sidebar"
               // width={100}
-              height={200}
+              height='100%'
               // style={{ left: -140 }}
               src={`/assets/animations/present/web3.svg`}
             />
           </m.div>
         </m.div>
-      </Box>
+      </Box> */}
       
 
       {/* COIN 3 */}

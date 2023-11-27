@@ -256,7 +256,7 @@ export default function OverviewBankingView() {
               }}
             />
 
-            <BankingRecentTransitions
+            {/* <BankingRecentTransitions
               title={t('recent_transitions')}
               tableData={_bankingRecentTransitions()}
               tableLabels={[
@@ -266,7 +266,7 @@ export default function OverviewBankingView() {
                 { id: 'status', label: t('status') },
                 { id: '' },
               ]}
-            />
+            /> */}
           </Stack>
         </Grid>
 
@@ -277,22 +277,22 @@ export default function OverviewBankingView() {
 
             <BankingQuickTransfer title={t('quick_transfer')} list={_bankingContacts} />
 
-            {/* 
-              <BankingContacts
+            
+              {/* <BankingContacts
                 title="Contacts"
                 subheader="You have 122 contacts"
                 list={_bankingContacts.slice(-5)}
               /> 
-            */}
-            {/* <Stack sx={{ marginTop: 12 }}> */}
+           
+            <Stack sx={{ marginTop: 12 }}>
             <BankingInviteFriends
               price="$5"
               title={`${t('invite_friends')} \n ${t('and_earn')}`}
               description={t('present_egestas')}
-            // img="/assets/illustrations/characters/character_11.png"
+            img="/assets/illustrations/characters/character_11.png"
             />
+          </Stack> */}
           </Stack>
-          {/* </Stack> */}
         </Grid>
       </Grid>
     </Container>

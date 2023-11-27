@@ -144,7 +144,7 @@ export default function HomeBuildings() {
         disabledEffect
         alt="sidebar"
         // width={100}
-        height={mdUp ? 600 : 450}
+        // height={mdUp ? 600 : 300}
         // style={{ top: 100, left: 0 }}
         src={`/assets/animations/building/crypto3.svg`}
       />

@@ -34,6 +34,7 @@ export const HomeNews = () => {
 
   useEffect(() => {
     if (isSuccess) {
+      console.log(news)
       const newNews = news.map((item: any) => {
         return ({
           id: item.id,
@@ -73,7 +74,7 @@ export const HomeNews = () => {
         style={{ borderWidth: 2, borderRadius: 15, borderColor: '#0f0', display: 'flex', justifyContent: 'center', alignItems: 'center', boxShadow: '0px 0px 10px #0f0', color: '#fff', flexDirection: 'column', backgroundColor: '#cccccc11', position: 'relative', gap: 10, paddingLeft: 10, paddingRight: 10, minWidth: 250, height: 250 }}
       >
         {newsList.map(item => (
-          <SwiperSlide style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 40 }}>
+          <SwiperSlide key={item.id} style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 40 }}>
             <m.div style={{ fontSize: 16 }}>
               {item.title}
             </m.div>

@@ -596,7 +596,8 @@
   "registration": "Личный кабинет",
   "logout": "Выйти",
   "show_only_mine": "Мои транзакции",
-  "project_description": "Описание проекта"
+  "project_description": "Описание проекта",
+  "buy_token_sfr": "Купить токен SFR"
 
 
 }

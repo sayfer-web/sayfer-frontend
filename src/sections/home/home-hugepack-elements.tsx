@@ -129,13 +129,13 @@ export default function HomeHugePackElements() {
       component={Paper}
       variant="outlined"
       alignItems="center"
-      spacing={{ xs: 3, md: 5 }}
+      // spacing={{ xs: 3, md: 5 }}
       sx={{
         borderRadius: 2,
         bgcolor: 'unset',
         borderStyle: 'dashed',
-        p: { xs: 3, md: 5 },
-        position: 'relative'
+        // p: { xs: 3, md: 5 },
+        // position: 'relative'
       }}
     >
       
@@ -143,8 +143,9 @@ export default function HomeHugePackElements() {
       <Image
         disabledEffect
         alt="sidebar"
-        // width={100}
-        height={mdUp ? 600 : 400}
+        // width='80%'
+        overflow="visible"
+        // height={mdUp ? 600 : 300}
         // style={{ top: 100, left: 0 }}
         src={`/assets/animations/tree/crypto2.svg`}
       />

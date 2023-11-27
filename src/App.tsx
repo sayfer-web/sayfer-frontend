@@ -61,10 +61,11 @@ import OverviewAppPage from './pages/dashboard/app';
 import { LoadingScreen } from './components/loading-screen';
 import { Suspense, lazy } from 'react';
 import { useSelector } from 'react-redux';
-import { selectCurrentRole, selectCurrentToken } from './app/features/auth/authSlice';
+import { selectCurrentRole, selectCurrentToken, selectCurrentUsername } from './app/features/auth/authSlice';
 import { useAuth } from './hooks/use-auth';
 import Page403 from './pages/403';
 import ComingSoonPage from './pages/coming-soon';
+import { RoleBasedGuard } from './auth/guard';
 
 // ----------------------------------------------------------------------
 
@@ -139,9 +140,15 @@ export default function App() {
 
   // const { username, status, isAdmin } = useAuth()
 
-  let username = 'Sayfer'
-  let status = 'User'
-  console.log(username, status)
+
+
+  const role = useSelector(selectCurrentRole)
+  const username = useSelector(selectCurrentUsername)
+
+
+  // let username = 'Sayfer'
+  let status = role
+  console.log(role)
 
 
   // const charAt = `
@@ -188,11 +195,14 @@ export default function App() {
                     <Route path='login' element={<LoginPage />} />
                     <Route path='registration' element={<RegisterPage />} />
                   </Route>
+
+
+
                   <Route path='/dashboard' element={
                     // <dashBoardRo
                     <DashboardLayout>
                       <Suspense fallback={<LoadingScreen />}>
-                        {status === 'User' ? <Outlet /> : <Page403 />}
+                        {status.includes('user')  ? <Outlet /> : <Page403 />}
                       </Suspense>
                     </DashboardLayout>
                   }>
