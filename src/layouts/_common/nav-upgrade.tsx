@@ -16,6 +16,8 @@ import { useAuth } from 'src/hooks/use-auth';
 import { _mock } from 'src/_mock';
 import { selectCurrentRole, selectCurrentUsername } from 'src/app/features/auth/authSlice';
 import { useSelector } from 'react-redux';
+import { useGetUserByUsernameQuery } from 'src/app/features/users/usersApiSlice';
+import { useEffect, useState } from 'react';
 
 // ----------------------------------------------------------------------
 
@@ -28,6 +30,25 @@ export default function NavUpgrade() {
   // const { username, status } = useAuth()
   const username = useSelector(selectCurrentUsername)
   const role = useSelector(selectCurrentRole)
+
+  const { data, isLoading, isSuccess, isError, error } = useGetUserByUsernameQuery(username)
+
+  const [contractStatus, setContractStatus] = useState('')
+
+  // let contractStatus = ''
+
+  useEffect(() => {
+    console.log(data)
+
+    if (isSuccess) {
+      const { contractStatus: contract } = data
+      console.log(contract)
+      setContractStatus(contract)
+      console.log(contractStatus)
+
+    }
+
+  }, [data])
 
   // let username = 'Sayfer'
   let status = 'User'
@@ -74,7 +95,7 @@ export default function NavUpgrade() {
               borderBottomLeftRadius: 2,
             }}
           >
-            {t('first_level')}
+            {isSuccess && contractStatus}
           </Label>
         </Box>
 
@@ -83,13 +104,13 @@ export default function NavUpgrade() {
             {username}
           </Typography>
 
-          <Typography variant="body2" noWrap sx={{ color: 'text.disabled' }}>
+          {/* <Typography variant="body2" noWrap sx={{ color: 'text.disabled' }}>
             {role}
-          </Typography>
+          </Typography> */}
         </Stack>
 
         <Button variant="contained" href=''>
-          {t('upgrade_to_pro')}
+          {t('upgrade')}
         </Button>
       </Stack>
     </Stack>

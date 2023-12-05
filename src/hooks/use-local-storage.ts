@@ -66,7 +66,7 @@ export const getStorage = (key: string) => {
       value = JSON.parse(result);
     }
   } catch (error) {
-    console.error(error);
+    // console.error(error);
   }
 
   return value;
@@ -76,7 +76,7 @@ export const setStorage = (key: string, value: any) => {
   try {
     window.localStorage.setItem(key, JSON.stringify(value));
   } catch (error) {
-    console.error(error);
+    // console.error(error);
   }
 };
 
@@ -84,6 +84,6 @@ export const removeStorage = (key: string) => {
   try {
     window.localStorage.removeItem(key);
   } catch (error) {
-    console.error(error);
+    // console.error(error);
   }
 };

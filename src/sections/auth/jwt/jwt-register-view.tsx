@@ -32,37 +32,38 @@ import { Input, InputLabel, TextField } from '@mui/material';
 import { useLocales } from 'src/locales';
 import React from 'react';
 import { IMaskInput } from 'react-imask';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 // ----------------------------------------------------------------------
 
 
-interface CustomProps {
-  onChange: (event: { target: { name: string; value: string } }) => void;
-  name: string;
-}
+// interface CustomProps {
+//   onChange: (event: { target: { name: string; value: string } }) => void;
+//   name: string;
+// }
 
-const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
-  function TextMaskCustom(props, ref) {
-    const { onChange, ...other } = props;
-    return (
-      <IMaskInput
-        {...other}
-        mask="+7(#00) 000-00-00"
-        definitions={{
-          '#': /[1-9]/,
-        }}
-        inputRef={ref}
-        onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
-        overwrite
-      />
-    );
-  },
-);
+// const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
+//   function TextMaskCustom(props, ref) {
+//     const { onChange, ...other } = props;
+//     return (
+//       <IMaskInput
+//         {...other}
+//         mask="+7(#00) 000-00-00"
+//         definitions={{
+//           '#': /[1-9]/,
+//         }}
+//         inputRef={ref}
+//         onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
+//         overwrite
+//       />
+//     );
+//   },
+// );
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/
 const PHN_REGEX = /^\(\d{3}\)\s\d{3}-\d{4}$/
-const PHN_REGEX2 = /^\+\d{1}\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/
+const PHN_REGEX2 = /^(\+\d{1,2}\s?)?(\(?\d{1,4}\)?[-.\s]?)?(\d+)[-.\s]?\d+[-.\s]?\d+$/
 
 
 
@@ -90,11 +91,14 @@ export default function JwtRegisterView() {
   const navigate = useNavigate()
 
 
+  const [userReferral, setUserReferral] = useState('')
+  const [validUserReferral, setValidUserReferral] = useState(false)
+
 
   const dispatch = useDispatch()
 
   /* @ts-ingore */
-  const [registration, { isLoading }] = useRegistrationMutation()
+  const [registration, { isSuccess, isLoading, isError, error }] = useRegistrationMutation()
   // const [login] = useLoginMutation()
   // const errRef = useRef(null)
 
@@ -110,6 +114,7 @@ export default function JwtRegisterView() {
 
   const [success, setSuccess] = useState(false)
 
+  const [captchaValid, setCaptchaValid] = useState(false)
 
   // useEffect(() => {
   /* @ts-ignore */
@@ -117,7 +122,7 @@ export default function JwtRegisterView() {
   // }, [])
 
   useEffect(() => {
-    console.log('use effect')
+    // console.log('use effect')
     const result = USER_REGEX.test(user)
     result
       ? setErrorUserMsg('')
@@ -127,13 +132,23 @@ export default function JwtRegisterView() {
   }, [user])
 
   useEffect(() => {
+    // console.log('use effect')
+    const result = USER_REGEX.test(userReferral)
+    result
+      ? setErrorUserReferralMsg('')
+      : setErrorUserReferralMsg('Username должен содержать от 4 до 22 латинских символов')
+
+    setValidUser(result)
+  }, [userReferral])
+
+  useEffect(() => {
     const result = PWD_REGEX.test(pwd)
     result
       ? setErrorPwdMsg('')
       : setErrorPwdMsg('Пароль должен содержать, как минимум, одну строчную, заглавную латинские буквы и цифру')
     setValidPwd(result)
     const match = pwd === matchPwd
-    console.log(match)
+    // console.log(match)
     match
       ? setErrorMatchPwdMsg('')
       : setErrorMatchPwdMsg('Повторите пароль, введённый ранее')
@@ -142,14 +157,23 @@ export default function JwtRegisterView() {
 
 
   useEffect(() => {
-    console.log(phoneNumber)
+    // console.log(phoneNumber)
     const result = PHN_REGEX2.test(phoneNumber)
     result
       ? setErrorPhoneMsg('')
-      : setErrorPhoneMsg('Номер телефона должен состоять из 10 цифр')
+      : setErrorPhoneMsg('Номер телефона введён неверно')
 
     setValidPhoneNumber(result)
   }, [phoneNumber])
+
+
+
+  useEffect(() => {
+    // setErrorMsg('Error')
+    /* @ts-ignore */
+    if(!!error) setErrorMsg(`${error.data.message}`)
+    // console.log('ERROR REG: ', isError, error)
+  }, [isError])
 
 
   // useEffect(() => {
@@ -171,12 +195,16 @@ export default function JwtRegisterView() {
     let regResult = ''
 
 
-    console.log(1)
-    regResult = await registration({ username: user, password: pwd, phoneNumber }).unwrap()
-    console.log(2)
+    // console.log(1)
+    const sendObj = { username: user, password: pwd, phoneNumber, referrer: userReferral }
+    regResult = await registration(sendObj).unwrap()
+    // console.log(2)
+
+    // isError && console.log('ERROR: ', error) && setErrorMsg(error)
+
     // const userData = await login({ username: user, password: pwd }).unwrap()
     // dispatch(setCredentials({ ...userData, user }))
-    console.log(regResult)
+    // console.log(regResult)
     setUser('')
     setPwd('')
     setMatchPwd('')
@@ -219,6 +247,7 @@ export default function JwtRegisterView() {
 
   const [errorMsg, setErrorMsg] = useState('');
   const [errorUserMsg, setErrorUserMsg] = useState('');
+  const [errorUserReferralMsg, setErrorUserReferralMsg] = useState('');
   const [errorPwdMsg, setErrorPwdMsg] = useState('');
   const [errorMatchPwdMsg, setErrorMatchPwdMsg] = useState('');
   const [errorPhoneMsg, setErrorPhoneMsg] = useState('');
@@ -267,7 +296,7 @@ export default function JwtRegisterView() {
   // });
 
 
-  const allInputsIsValid = validUser && validPwd && validMatch && !!phoneNumber && !isLoading
+  const allInputsIsValid = validUser && validPwd && validMatch && !!phoneNumber && !isLoading && captchaValid
 
   const renderHead = (
     <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
@@ -310,6 +339,8 @@ export default function JwtRegisterView() {
     <form onSubmit={handleSubmitReg}>
 
       <Stack direction={{ xs: 'column', sm: 'column' }} spacing={2}>
+
+        <Typography variant="caption"> {t('stars_required')}</Typography>
 
         {/*           
           <RHFTextField name="firstName" label="First name" />
@@ -397,15 +428,58 @@ export default function JwtRegisterView() {
 
         {!!errorPhoneMsg && phoneNumber !== '' && <Alert severity="error">{errorPhoneMsg}</Alert>}
 
-        <InputLabel htmlFor="formatted-text-mask-input">{t('phone_number')}</InputLabel>
+        <TextField
+          type="text"
+          // id="phoneNumber"
+          label={t('phone_number')}
+          value={phoneNumber}
+          // autoComplete="on"
+          required
+          onChange={(value) => setPhoneNumber(value.target.value)}
+        // onFocus={() => toggleFocusPwd(true)}
+        // onBlur={() => toggleFocusPwd(false)}
+        // InputProps={{
+        //   endAdornment: (
+        //     <InputAdornment position="end">
+        //       <IconButton onClick={() => toggleShowMatchPwd(state => !state)} edge="end">
+        //         <Iconify icon={showMatchPwd ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+        //       </IconButton>
+        //     </InputAdornment>
+        //   ),
+        // }}
+        />
+
+        {/* <InputLabel htmlFor="formatted-text-mask-input">{t('phone_number')}</InputLabel>
         <Input
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
           name="textmask"
           id="formatted-text-mask-input"
           inputComponent={TextMaskCustom as any}
+        /> */}
+
+
+        {!!errorUserReferralMsg && userReferral !== '' && <Alert severity="error">{errorUserReferralMsg}</Alert>}
+
+        <TextField
+          type="text"
+          id="username"
+          label={t('username_referral')}
+          ref={userRef}
+          value={userReferral}
+          autoComplete="on"
+          // required
+          onChange={(value) => setUserReferral(value.target.value)}
+          onFocus={() => toggleFocusUser(true)}
+          onBlur={() => toggleFocusUser(false)}
         />
 
+        <ReCAPTCHA
+          // ref={recaptchaRef}
+          sitekey="6LdL6xopAAAAADKWigsqjVAiLHjX3M6Z5GALHOgo"
+          onChange={() => setCaptchaValid(true)}
+          theme="dark"
+        />
 
         <LoadingButton
           fullWidth
@@ -421,7 +495,8 @@ export default function JwtRegisterView() {
           {t('create_account')}
         </LoadingButton>
 
-        {!!errorMsg && <Alert severity="success">{errorMsg}</Alert>}
+        {isError && <Alert severity="error">{errorMsg}</Alert>}
+        {isSuccess && <Alert severity="success">{errorMsg}</Alert>}
 
       </Stack>
     </form>

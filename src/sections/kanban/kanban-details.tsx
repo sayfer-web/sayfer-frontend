@@ -88,7 +88,7 @@ export default function KanbanDetails({
           }
         }
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     },
     [onUpdateTask, task, taskName]

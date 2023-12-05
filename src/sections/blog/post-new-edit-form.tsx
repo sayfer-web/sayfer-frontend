@@ -113,7 +113,7 @@ export default function PostNewEditForm({ currentPost }: Props) {
       // router.push(paths.dashboard.post.root);
       console.info('DATA', data);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 

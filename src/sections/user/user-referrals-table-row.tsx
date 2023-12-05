@@ -30,14 +30,16 @@ type Props = {
   onDeleteRow: VoidFunction;
 };
 
-export default function UserTableRow({
+export default function UserReferralsTableRow({
   row,
   selected,
   onEditRow,
   onSelectRow,
   onDeleteRow,
 }: Props) {
-  const { name, avatarUrl, company, role, status, email, phoneNumber } = row;
+  const { id, name, avatarUrl, company, role, status, email, phoneNumber } = row;
+
+  console.log(row)
 
   const confirm = useBoolean();
 
@@ -48,9 +50,14 @@ export default function UserTableRow({
   return (
     <>
       <TableRow hover selected={selected}>
+
+
         <TableCell padding="checkbox">
           <Checkbox checked={selected} onClick={onSelectRow} />
         </TableCell>
+
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{id}</TableCell>
+
 
         <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
           <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} />
@@ -66,9 +73,8 @@ export default function UserTableRow({
           />
         </TableCell>
 
-        {/* <TableCell sx={{ whiteSpace: 'nowrap' }}>{phoneNumber}</TableCell> */}
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{company}</TableCell>
+        {/* <TableCell sx={{ whiteSpace: 'nowrap' }}>{company}</TableCell> */}
 
         {/* <TableCell sx={{ whiteSpace: 'nowrap' }}>{role}</TableCell> */}
 
@@ -76,11 +82,11 @@ export default function UserTableRow({
           <Label
             variant="soft"
             color={
-              (status === 'Bronze' && 'bronze') ||
-              (status === 'Silver' && 'silver') ||
-              (status === 'Gold' && 'gold') ||
-              (status === 'Platinum' && 'info') ||
-              'default'
+              (status === 'bronze' && 'bronze') ||
+              (status === 'silver' && 'silver') ||
+              (status === 'gold' && 'gold') ||
+              (status === 'platinum' && 'platinum') ||
+              'success'
             }
           >
             {status}
@@ -100,7 +106,7 @@ export default function UserTableRow({
         </TableCell> */}
       </TableRow>
 
-{/* 
+      {/* 
       <UserQuickEditForm currentUser={row} open={quickEdit.value} onClose={quickEdit.onFalse} />
 
       <CustomPopover

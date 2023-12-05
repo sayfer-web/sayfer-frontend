@@ -30,6 +30,7 @@ import React from 'react';
 import { useGetWalletLtcAddressQuery } from 'src/app/features/wallet/walletApiSlice';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useLocales } from 'src/locales';
+import { useResponsive } from 'src/hooks/use-responsive';
 
 // ----------------------------------------------------------------------
 
@@ -47,6 +48,8 @@ export default function WalletRefillFounds({
   ...other
 }: Props) {
 
+  const mdUp = useResponsive('up', 'md');
+
   const { t } = useLocales()
 
   const username = useSelector(selectCurrentUsername)
@@ -60,7 +63,7 @@ export default function WalletRefillFounds({
     !isLoading && setLtcAddress(data?.result)
   }, [data])
 
-  console.log(data)
+  // console.log(data)
 
   const coinsList = [
     {
@@ -154,10 +157,10 @@ export default function WalletRefillFounds({
                   </ListItemIcon>
                   <ListItemText primary={(item.network)} />
                   {/* @ts-ignore */}
-                  {open[item.coinTitle] ? <ExpandLess /> : <ExpandMore />}
+                  {/* {open[item.coinTitle] ? <ExpandLess /> : <ExpandMore />} */}
                 </ListItemButton>
                 {/* @ts-ignore */}
-                <span>{item.address}</span>
+                <p style={{ fontSize: mdUp ? 16 : 12 }}>{item.address}</p>
               </Fragment>
             )
           }

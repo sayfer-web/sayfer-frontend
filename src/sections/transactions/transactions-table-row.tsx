@@ -44,7 +44,7 @@ export default function TransactionsTableRow({
 }: Props) {
   const { items, status, orderNumber, createdAt, customer, totalQuantity, subTotal, txid, receiver } = row;
 
-  console.log('CREATED AT: ', createdAt)
+  // console.log('CREATED AT: ', createdAt)
 
   const confirm = useBoolean();
 

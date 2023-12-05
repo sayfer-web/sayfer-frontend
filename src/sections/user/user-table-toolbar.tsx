@@ -33,6 +33,8 @@ export default function UserTableToolbar({
   roleOptions,
 }: Props) {
 
+  console.log(filters)
+
   const { t } = useLocales()
 
   const popover = usePopover();
@@ -47,7 +49,7 @@ export default function UserTableToolbar({
   const handleFilterRole = useCallback(
     (event: SelectChangeEvent<string[]>) => {
       onFilters(
-        'role',
+        'status',
         typeof event.target.value === 'string' ? event.target.value.split(',') : event.target.value
       );
     },
@@ -90,8 +92,9 @@ export default function UserTableToolbar({
           >
             {roleOptions.map((option) => (
               <MenuItem key={option} value={option}>
-                <Checkbox disableRipple size="small" checked={filters.role.includes(option)} />
+                <Checkbox disableRipple size="small" checked={filters.status.includes(option)} />
                 {option}
+                {/* {console.log(option, filter.role)} */}
               </MenuItem>
             ))}
           </Select>

@@ -92,7 +92,7 @@ export default function KanbanView() {
 
         console.info('Moving to different list!');
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     },
     [board?.columns, board?.ordered]

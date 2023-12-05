@@ -12,7 +12,7 @@ export const authSlice = createSlice({
       state.tokenBalanceSFR = tokenBalanceSFR
     },
     logOut: (state, action) => {
-      console.log(action)
+      // console.log(action)
       state.username = null,
       state.token = null
       state.role = ['Guest']
@@ -25,5 +25,5 @@ export const { setCredentials, logOut } = authSlice.actions
 
 export const selectCurrentUsername = (state: any) => state.auth.username
 export const selectCurrentToken = (state: any) => state.auth.token
-export const selectCurrentRole = (state: any) => state.auth.role``
+export const selectCurrentRole = (state: any) => state.auth.role
 export const selectCurrentTokenBalanceSFR = (state: any) => state.auth.tokenBalanceSFR

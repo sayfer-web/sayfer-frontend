@@ -40,7 +40,7 @@ type Props = {
 
 export default function PostDetailsView({ id }: Props) {
 
-  console.log(id)
+  // console.log(id)
 
   const { t } = useLocales()
 
@@ -76,18 +76,20 @@ export default function PostDetailsView({ id }: Props) {
 
   const { data: currentPost, isLoading, isSuccess, isError, error } = useGetNewsByIdQuery(id)
 
-  console.log(currentPost)
+  // console.log(currentPost)
 
   useEffect(() => {
-    if (isSuccess && !error) {
+    if (isSuccess) {
+
+      // console.log("CURRENT POST:", currentPost)
 
       const newPost = {
-        id: currentPost.id,
-        title: currentPost.title,
+        id: currentPost?.id,
+        title: currentPost?.title,
         // tags?: [''];
         // publish?: '';
-        content: currentPost.content,
-        coverUrl: currentPost.coverUrl,
+        content: currentPost?.content,
+        coverUrl: currentPost?.coverUrl,
         // metaTitle?: string;
         // totalViews?: number;
         // totalShares?: number;
@@ -104,7 +106,7 @@ export default function PostDetailsView({ id }: Props) {
         // }[];
       }
 
-      console.log(newPost)
+      // console.log(newPost)
       setPost(newPost)
     }
   }, [currentPost])

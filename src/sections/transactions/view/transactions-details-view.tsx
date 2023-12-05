@@ -95,7 +95,7 @@ export default function TransactionsDetailsView({ id }: Props) {
 
   useEffect(() => {
 
-    console.log('TRANSACTION: ', transaction)
+    // console.log('TRANSACTION: ', transaction)
 
     if (transaction) {
       const { id: transactionId, txid, address, category, sender, confirmations, receiver: user, tokenType, amount, exchangeRate, status: newStatus, errMsg, createdAt, successedAt } = transaction

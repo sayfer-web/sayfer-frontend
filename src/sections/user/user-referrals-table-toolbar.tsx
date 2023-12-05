@@ -1,38 +1,36 @@
 import { useCallback } from 'react';
 // @mui
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
+import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
 import IconButton from '@mui/material/IconButton';
+import FormControl from '@mui/material/FormControl';
+import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 // types
-import { IOrderTableFilters, IOrderTableFilterValue } from 'src/types/order';
+import { IUserTableFilters, IUserTableFilterValue } from 'src/types/user';
 // components
 import Iconify from 'src/components/iconify';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
 import { useLocales } from 'src/locales';
-import { Checkbox, Switch } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  filters: IOrderTableFilters;
-  onFilters: (name: string, value: IOrderTableFilterValue) => void;
+  filters: IUserTableFilters;
+  onFilters: (name: string, value: IUserTableFilterValue) => void;
   //
-  canReset: boolean;
-  onResetFilters: VoidFunction;
-  onChangeCheckbox: any;
+  roleOptions: string[];
 };
 
-export default function TransactionsTableToolbar({
+export default function UserReferralsTableToolbar({
   filters,
   onFilters,
   //
-  canReset,
-  onResetFilters,
-  onChangeCheckbox,
+  roleOptions,
 }: Props) {
 
   const { t } = useLocales()
@@ -46,16 +44,12 @@ export default function TransactionsTableToolbar({
     [onFilters]
   );
 
-  const handleFilterStartDate = useCallback(
-    (newValue: Date | null) => {
-      onFilters('startDate', newValue);
-    },
-    [onFilters]
-  );
-
-  const handleFilterEndDate = useCallback(
-    (newValue: Date | null) => {
-      onFilters('endDate', newValue);
+  const handleFilterRole = useCallback(
+    (event: SelectChangeEvent<string[]>) => {
+      onFilters(
+        'role',
+        typeof event.target.value === 'string' ? event.target.value.split(',') : event.target.value
+      );
     },
     [onFilters]
   );
@@ -64,7 +58,7 @@ export default function TransactionsTableToolbar({
     <>
       <Stack
         spacing={2}
-        alignItems={{ xs: 'center', md: 'center' }}
+        alignItems={{ xs: 'flex-end', md: 'center' }}
         direction={{
           xs: 'column',
           md: 'row',
@@ -74,42 +68,41 @@ export default function TransactionsTableToolbar({
           pr: { xs: 2.5, md: 1 },
         }}
       >
-
-        <Stack sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center' }}>
-          <Switch defaultChecked={false} onChange={onChangeCheckbox} color="success" />
-          {t('show_only_mine')}
-        </Stack>
-
-        <DatePicker
-          label={t('start_date')}
-          value={filters.startDate}
-          onChange={handleFilterStartDate}
-          slotProps={{
-            textField: {
-              fullWidth: true,
-            },
-          }}
+        {/* <FormControl
           sx={{
-            maxWidth: { md: 200 },
+            flexShrink: 0,
+            width: { xs: 1, md: 200 },
           }}
-        />
+        >
+          <InputLabel>{t('contract_status')}</InputLabel>
 
-        <DatePicker
-          label={t('end_date')}
-          value={filters.endDate}
-          onChange={handleFilterEndDate}
-          slotProps={{ textField: { fullWidth: true } }}
-          sx={{
-            maxWidth: { md: 200 },
-          }}
-        />
+          <Select
+            multiple
+            value={filters.role}
+            onChange={handleFilterRole}
+            input={<OutlinedInput label="Role" />}
+            renderValue={(selected) => selected.map((value) => value).join(', ')}
+            MenuProps={{
+              PaperProps: {
+                sx: { maxHeight: 240 },
+              },
+            }}
+          >
+            {roleOptions.map((option) => (
+              <MenuItem key={option} value={option}>
+                <Checkbox disableRipple size="small" checked={filters.role.includes(option)} />
+                {option}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl> */}
 
         <Stack direction="row" alignItems="center" spacing={2} flexGrow={1} sx={{ width: 1 }}>
           <TextField
             fullWidth
             value={filters.name}
             onChange={handleFilterName}
-            placeholder={t('search_customer_or_number')}
+            placeholder={t('search_dots')}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -123,20 +116,6 @@ export default function TransactionsTableToolbar({
             <Iconify icon="eva:more-vertical-fill" />
           </IconButton>
         </Stack>
-
-        {canReset && (
-          <Button
-            color="error"
-            sx={{ flexShrink: 0 }}
-            onClick={onResetFilters}
-            startIcon={<Iconify icon="solar:trash-bin-trash-bold" />}
-          >
-            Clear
-          </Button>
-        )}
-
-
-
       </Stack>
 
       <CustomPopover

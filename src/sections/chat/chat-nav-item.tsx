@@ -58,7 +58,7 @@ export default function ChatNavItem({ selected, collapse, conversation, onCloseM
 
       router.push(`${paths.dashboard.chat}?id=${conversation.id}`);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }, [conversation.id, mdUp, onCloseMobile, router]);
 

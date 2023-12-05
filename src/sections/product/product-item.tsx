@@ -48,7 +48,7 @@ export default function ProductItem({ product }: Props) {
     try {
       onAddToCart(newProduct);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 

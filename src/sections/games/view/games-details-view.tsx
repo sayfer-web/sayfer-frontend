@@ -31,13 +31,13 @@ export default function GamesDetailsView({ id }: Props) {
 
   const navigate = useNavigate()
 
-  console.log(id)
+  // console.log(id)
 
   // const currentGame = _games()[+id-1];
   const gamesList = _games()
   const currentGame = gamesList.filter((game: any) => game.id === +id)[0];
 
-  console.log(currentGame)
+  // console.log(currentGame)
 
   const [publish, setPublish] = useState(currentGame?.publish);
 

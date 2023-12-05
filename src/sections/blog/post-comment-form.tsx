@@ -43,9 +43,9 @@ export default function PostCommentForm() {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
-      console.info('DATA', data);
+      // console.info('DATA', data);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   });
 

@@ -54,7 +54,7 @@ export default function FirebaseForgotPasswordView() {
       const href = `${paths.auth.firebase.verify}?${searchParams}`;
       router.push(href);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   });
 

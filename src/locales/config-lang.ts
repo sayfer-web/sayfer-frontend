@@ -52,34 +52,34 @@ export const allLangs = [
     adapterLocale: ruRUAdapter,
     icon: 'flagpack:ru',
   },
-  {
-    label: 'French',
-    value: 'fr',
-    systemValue: merge(frFRDate, frFRDataGrid, frFRCore),
-    adapterLocale: frFRAdapter,
-    icon: 'flagpack:fr',
-  },
-  {
-    label: 'Vietnamese',
-    value: 'vi',
-    systemValue: merge(viVNDate, viVNDataGrid, viVNCore),
-    adapterLocale: viVNAdapter,
-    icon: 'flagpack:vn',
-  },
-  {
-    label: 'Chinese',
-    value: 'cn',
-    systemValue: merge(zhCNDate, zhCNDataGrid, zhCNCore),
-    adapterLocale: zhCNAdapter,
-    icon: 'flagpack:cn',
-  },
-  {
-    label: 'Arabic',
-    value: 'ar',
-    systemValue: merge(arSDDataGrid, arSACore),
-    adapterLocale: arSAAdapter,
-    icon: 'flagpack:sa',
-  },
+  // {
+  //   label: 'French',
+  //   value: 'fr',
+  //   systemValue: merge(frFRDate, frFRDataGrid, frFRCore),
+  //   adapterLocale: frFRAdapter,
+  //   icon: 'flagpack:fr',
+  // },
+  // {
+  //   label: 'Vietnamese',
+  //   value: 'vi',
+  //   systemValue: merge(viVNDate, viVNDataGrid, viVNCore),
+  //   adapterLocale: viVNAdapter,
+  //   icon: 'flagpack:vn',
+  // },
+  // {
+  //   label: 'Chinese',
+  //   value: 'cn',
+  //   systemValue: merge(zhCNDate, zhCNDataGrid, zhCNCore),
+  //   adapterLocale: zhCNAdapter,
+  //   icon: 'flagpack:cn',
+  // },
+  // {
+  //   label: 'Arabic',
+  //   value: 'ar',
+  //   systemValue: merge(arSDDataGrid, arSACore),
+  //   adapterLocale: arSAAdapter,
+  //   icon: 'flagpack:sa',
+  // },
 ];
 
 export const defaultLang = allLangs[0]; // English

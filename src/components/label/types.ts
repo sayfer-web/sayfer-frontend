@@ -9,7 +9,11 @@ export type LabelColor =
   | 'info'
   | 'success'
   | 'warning'
-  | 'error';
+  | 'error'
+  | 'bronze'
+  | 'silver'
+  | 'gold'
+  | 'platinum';
 
 export type LabelVariant = 'filled' | 'outlined' | 'soft';
 

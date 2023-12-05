@@ -114,7 +114,7 @@ export default function ReactHookForm({ debug }: Props) {
       reset();
       console.info('DATA', data);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   });
 

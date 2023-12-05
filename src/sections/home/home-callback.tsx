@@ -21,7 +21,8 @@ import React from "react"
 import { useCreateTicketMutation } from "src/app/features/tickets/ticketsApiSlice"
 
 const PHN_REGEX = /^\(\d{3}\)\s\d{3}-\d{4}$/
-const PHN_REGEX2 = /^\+\d{1}\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/
+// const PHN_REGEX2 = /^\+\d{1}\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/
+const PHN_REGEX2 = /^(\+\d{1,2}\s?)?(\(?\d{1,4}\)?[-.\s]?)?(\d+)[-.\s]?\d+[-.\s]?\d+$/
 const USER_REGEX = /^[a-zA-Zа-яА-Я ]+$/
 // const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
@@ -29,30 +30,6 @@ const PHONE_REGEX = /^(?:\+)?\d{1,}$/
 const INVEST_REGEX = /^\d{1,}$/
 const MESSAGE_REGEX = /^[a-zA-Zа-яА-Я0-9 .,!?-]{1,1000}$/
 
-
-
-interface CustomProps {
-  onChange: (event: { target: { name: string; value: string } }) => void;
-  name: string;
-}
-
-const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
-  function TextMaskCustom(props, ref) {
-    const { onChange, ...other } = props;
-    return (
-      <IMaskInput
-        {...other}
-        mask="+7(#00) 000-00-00"
-        definitions={{
-          '#': /[1-9]/,
-        }}
-        inputRef={ref}
-        onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
-        overwrite
-      />
-    );
-  },
-);
 
 export const HomeCallback = () => {
 
@@ -87,6 +64,7 @@ export const HomeCallback = () => {
 
   // const [success]
 
+  const [isValidPhone, setIsValidPhone] = useState(false)
 
   const refName = useRef(null)
 
@@ -125,16 +103,23 @@ export const HomeCallback = () => {
   }, [fieldMessage])
 
   useEffect(() => {
-    console.log(phoneNumber)
-    const result = PHN_REGEX2.test(phoneNumber)
-    result
-      ? setErrorPhoneMsg('')
-      : setErrorPhoneMsg('Номер телефона должен состоять из 10 цифр')
-
-    setValidPhoneNumber(result)
+    // console.log(phoneNumber)
+    const result = PHN_REGEX2.test(phoneNumber) || phoneNumber === ''
+    // console.log(result)
+    if (result) setIsValidPhone(true)
+    else setIsValidPhone(false)
   }, [phoneNumber])
 
-  const [createTicket, { isLoading, isSuccess }] = useCreateTicketMutation()
+  const [createTicket, { isLoading, isSuccess, isError, error }] = useCreateTicketMutation()
+
+
+
+  useEffect(() => {
+    // setErrorMsg('Error')
+    /* @ts-ignore */
+    if (!!error) setErrorMsg(`${error.data.message}`)
+    // console.log('ERROR REG: ', isError, error)
+  }, [isError])
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
@@ -147,23 +132,23 @@ export const HomeCallback = () => {
     // }
     // setSuccess(true)
     // setErrMsg('RESULT')
-    console.log(fieldMessage)
+    // console.log(fieldMessage)
 
     const regResult = await createTicket({ name: fieldName, phoneNumber, email: fieldEmail, investSum: fieldInvest, coverLetter: fieldMessage }).unwrap()
 
     // const userData = await login({ username: user, password: pwd }).unwrap()
     // dispatch(setCredentials({ ...userData, user }))
-    console.log(regResult)
+    // console.log(regResult)
     setFieldName('')
     setFieldEmail('')
     setFieldInvest('')
     setFieldMessage('')
     setPhoneNumber('')
-    setErrorMsg('Successfully send!')
+    setErrorMsg('Success!')
   }
 
 
-  const allFieldsAreValid = isValidName && isValidEmail && isValidInvest && isValidMessage && validPhoneNumber
+  const allFieldsAreValid = isValidName && isValidInvest && isValidMessage && isValidPhone && captchaValid
 
   return (
     <section
@@ -197,21 +182,17 @@ export const HomeCallback = () => {
 
         <form style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 20 }} onSubmit={handleSubmit}>
 
-
-
-          <br />
-
-          {!!errorPhoneMsg && phoneNumber !== '' && <Alert severity="error">{errorPhoneMsg}</Alert>}
+          {/* {!!errorPhoneMsg && phoneNumber !== '' && <Alert severity="error">{errorPhoneMsg}</Alert>} */}
 
           <Stack sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-            <InputLabel htmlFor="formatted-text-mask-input">{t('phone_number')}</InputLabel>
+            {/* <InputLabel htmlFor="formatted-text-mask-input">{t('phone_number')}</InputLabel>
             <Input
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               name="textmask"
               id="formatted-text-mask-input"
               inputComponent={TextMaskCustom as any}
-            />
+            /> */}
           </Stack>
 
 
@@ -269,16 +250,16 @@ export const HomeCallback = () => {
               style={{ display: 'flex', flexDirection: 'column', justifyItems: 'center', gap: 4, flex: 1, width: '100%' }}
             >
               <TextField
-                value={fieldEmail}
-                onChange={(value) => setFieldEmail(value.target.value)}
-                onFocus={() => setIsFocusEmailField(true)}
-                onBlur={() => setIsFocusEmailField(false)}
+                // ref={refName}
+                value={phoneNumber}
+                onChange={(value) => setPhoneNumber(value.target.value)}
+                onFocus={() => setIsFocusNameField(true)}
+                onBlur={() => setIsFocusNameField(false)}
                 id="outlined-basic"
-                label={t('email')}
+                label={t('phone_number')}
                 variant="outlined"
                 // InputLabelProps={{ shrink: true }}
-                helperText={isValidEmail ? '' : 'Введите корректный адрес электронной почты'}
-
+                helperText={!isValidPhone && 'Введены некорректные данные'}
               />
               {/* <label className="text-white text-xl font-medium"
             style={styles.inputLabel} htmlFor="name">
@@ -310,6 +291,18 @@ export const HomeCallback = () => {
           >
 
 
+            {/* <TextField
+              value={fieldEmail}
+              onChange={(value) => setFieldEmail(value.target.value)}
+              onFocus={() => setIsFocusEmailField(true)}
+              onBlur={() => setIsFocusEmailField(false)}
+              id="outlined-basic"
+              label={t('email')}
+              variant="outlined"
+              // InputLabelProps={{ shrink: true }}
+              helperText={isValidEmail ? '' : 'Введите корректный адрес электронной почты'}
+
+            /> */}
 
             <div className="flex flex-col gap-2 w-full"
               // style={styles.inputOutsideBox}
@@ -396,15 +389,18 @@ export const HomeCallback = () => {
               // target="_blank"
               // rel="noopener"
               type="submit"
+            disabled={!allFieldsAreValid}
             >
 
               {t('send')}
             </LoadingButton>
 
-            {!!errorMsg && <Alert severity="success">{errorMsg}</Alert>}
-
-
           </m.div>
+
+
+          {isError && <Alert severity="error">{errorMsg}</Alert>}
+          {isSuccess && <Alert severity="success">{errorMsg}</Alert>}
+
 
         </form>
 

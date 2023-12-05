@@ -137,7 +137,7 @@ export default function JobNewEditForm({ currentJob }: Props) {
       router.push(paths.dashboard.job.root);
       console.info('DATA', data);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   });
 

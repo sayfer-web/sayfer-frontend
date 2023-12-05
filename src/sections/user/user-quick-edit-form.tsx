@@ -86,7 +86,7 @@ export default function UserQuickEditForm({ currentUser, open, onClose }: Props)
       enqueueSnackbar('Update success!');
       console.info('DATA', data);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   });
 

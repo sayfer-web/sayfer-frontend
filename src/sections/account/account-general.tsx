@@ -38,38 +38,13 @@ import Alert from '@mui/material/Alert';
 
 // ----------------------------------------------------------------------
 
-const PHN_REGEX2 = /^\+\d{1}\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/
+const PHN_REGEX2 = /^(\+\d{1,2}\s?)?(\(?\d{1,4}\)?[-.\s]?)?(\d+)[-.\s]?\d+[-.\s]?\d+$/
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
 interface CustomProps {
   onChange: (event: { target: { name: string; value: string } }) => void;
   name: string;
 }
-
-const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
-  function TextMaskCustom(props, ref) {
-    const { onChange, ...other } = props;
-    return (
-      <IMaskInput
-        {...other}
-        mask="+7(#00) 000-0000"
-        definitions={{
-          '#': /[1-9]/,
-        }}
-        inputRef={ref}
-        onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
-        overwrite
-      />
-    );
-  },
-);
-
-
-const FormattedInputs = () => {
-  const [values, setValues] = React.useState({
-    textmask: '(100) 000-0000',
-  });
-}
-
 
 export default function AccountGeneral() {
 
@@ -79,29 +54,43 @@ export default function AccountGeneral() {
   const [updateProfile, { isLoading }] = useUpdateProfileMutation()
 
   const { data: user, error, isLoading: isLoadingUser, isSuccess } = useGetUserByUsernameQuery(username)
-  
+
   const [errorPhoneMsg, setErrorPhoneMsg] = useState('')
   const [validPhoneNumber, setValidPhoneNumber] = useState(false)
 
-  
+  const [errorEmail, setErrorEmail] = useState('')
+  const [validEmail, setValidEmail] = useState(false)
+
   const [phoneNumber, setPhoneNumber] = useState('+7(999) 999-99-99')
   const [email, setEmail] = useState('mail@sayfer.club')
 
   useEffect(() => {
-    console.log(phoneNumber)
+    // console.log(phoneNumber)
     const result = PHN_REGEX2.test(phoneNumber)
+    // console.log(result)
     result
       ? setErrorPhoneMsg('')
-      : setErrorPhoneMsg('Номер телефона должен состоять из 10 цифр')
+      : setErrorPhoneMsg('Номер телефона введён неверно')
 
     setValidPhoneNumber(result)
   }, [phoneNumber])
+
+  useEffect(() => {
+    // console.log(email)
+    const result = EMAIL_REGEX.test(email)
+    // console.log(result)
+    result
+      ? setErrorEmail('')
+      : setErrorEmail('Электронная почта введена неверно')
+
+    setValidEmail(result)
+  }, [email])
 
 
 
   const [errorMsg, setErrorMsg] = useState('')
 
-  const { enqueueSnackbar } = useSnackbar();
+  // const { enqueueSnackbar } = useSnackbar();
 
   // const { user } = useMockedUser();
 
@@ -132,16 +121,17 @@ export default function AccountGeneral() {
   const handleSubmit2 = async (e: any) => {
     e.preventDefault()
 
-    console.log(1)
+    // console.log(1)
     const regResult = await updateProfile({ phoneNumber, email }).unwrap()
-    console.log(2)
+    // console.log(2)
 
-    console.log(regResult)
+    // console.log(regResult)
 
     setErrorMsg('Successfully updated!')
 
   }
 
+  const isButtonReady = validPhoneNumber && !validEmail && !isLoading
 
 
   return (
@@ -151,8 +141,8 @@ export default function AccountGeneral() {
         <Grid xs={12} md={12}>
           <Card sx={{ p: 3 }}>
 
-          {!!errorMsg && <Alert severity="success">{errorMsg}</Alert>}
-          <br />
+            {!!errorMsg && <Alert severity="success">{errorMsg}</Alert>}
+            <br />
 
             <Box
               rowGap={3}
@@ -164,42 +154,71 @@ export default function AccountGeneral() {
               }}
             >
 
-             
+              <Stack sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
 
 
-              <InputLabel htmlFor="formatted-text-mask-input">{t('phone_number')}</InputLabel>
-              <Input
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                name="textmask"
-                id="formatted-text-mask-input"
-                inputComponent={TextMaskCustom as any}
-              />
+                {/* <Stack sx={{ display: 'flex', flexDirection: 'column' }}> */}
+
+                {/* <InputLabel htmlFor="formatted-text-mask-input">{t('phone_number')}</InputLabel> */}
 
 
-              <InputLabel htmlFor="formatted-text-mask-input">{t('email')}</InputLabel>
-              <TextField
-                type="email"
-                id="email"
-                label={t('email')}
-                value={email}
-                
-                autoComplete="on"
-                InputLabelProps={{}}
-                sx={{
-                  "& input:-webkit-autofill": {
-                    '-webkit-box-shadow': '0 0 0 100px #000 inset',
-                    '-webkit-text-fill-color': '#fff',
-                  }
-                }}
-                required
+                <TextField
+                  type="text"
+                  id="phoneNumber"
+                  label={t('phone_number')}
+                  value={phoneNumber}
+                  autoComplete="on"
+                  // InputLabelProps={{}}
+                  sx={{
+                    "& input:-webkit-autofill": {
+                      '-webkit-box-shadow': '0 0 0 100px #000 inset',
+                      '-webkit-text-fill-color': '#fff',
+                    }
+                  }}
+                  required
+                  onChange={(value) => setPhoneNumber(value.target.value)}
+                // onFocus={() => toggleFocusPwd(true)}
+                // onBlur={() => toggleFocusPwd(false)}
+                />
+                {/* </Stack> */}
 
-                onChange={(value) => setEmail(value.target.value)}
-              // onFocus={() => toggleFocusPwd(true)}
-              // onBlur={() => toggleFocusPwd(false)}
-              />
 
-              {/* <TextField
+                {!!errorPhoneMsg && phoneNumber !== '' && <Alert severity="error">{errorPhoneMsg}</Alert>}
+
+
+              </Stack>
+
+              <Stack sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+
+
+                {/* <Stack sx={{ display: 'flex' }}> */}
+
+                {/* <InputLabel htmlFor="formatted-text-mask-input">{t('email')}</InputLabel> */}
+                <TextField
+                  type="email"
+                  id="email"
+                  label={t('email')}
+                  value={email}
+
+                  autoComplete="on"
+                  InputLabelProps={{}}
+                  sx={{
+                    "& input:-webkit-autofill": {
+                      '-webkit-box-shadow': '0 0 0 100px #000 inset',
+                      '-webkit-text-fill-color': '#fff',
+                    }
+                  }}
+                  required
+
+                  onChange={(value) => setEmail(value.target.value)}
+                // onFocus={() => toggleFocusPwd(true)}
+                // onBlur={() => toggleFocusPwd(false)}
+                />
+
+
+                {/* {!!errorEmail && email !== '' && <Alert severity="error">{errorEmail}</Alert>} */}
+
+                {/* <TextField
                 type="email"
                 id="email"
                 label={t('email')}
@@ -217,6 +236,8 @@ export default function AccountGeneral() {
               // onFocus={() => toggleFocusPwd(true)}
               // onBlur={() => toggleFocusPwd(false)}
               /> */}
+                {/* </Stack> */}
+              </Stack>
 
 
 
@@ -258,13 +279,14 @@ export default function AccountGeneral() {
               <RHFTextField name="zipCode" label={t('zip_code')} /> */}
             </Box>
 
-            
+
 
             <Stack spacing={3} alignItems="flex-end" sx={{ mt: 3 }}>
               {/* <RHFTextField name="about" multiline rows={4} label={t('about')} /> */}
 
               <LoadingButton type="submit" variant="contained"
               // loading={isSubmitting}
+              disabled={isButtonReady}
               >
                 {t('save_changes')}
               </LoadingButton>

@@ -74,7 +74,7 @@ export default function AccountChangePassword() {
       : setErrorPwdMsg('Пароль должен содержать, как минимум, одну строчную, заглавную латинские буквы и цифру')
     setValidPwd(result)
     const match = newPwd === matchPwd
-    console.log(match)
+    // console.log(match)
     match
       ? setErrorMatchPwdMsg('')
       : setErrorMatchPwdMsg('Повторите пароль, введённый ранее')
@@ -99,11 +99,11 @@ export default function AccountChangePassword() {
     let regResult = ''
 
 
-    console.log(1)
+    // console.log(1)
     regResult = await updatePassword({ oldPwd, newPwd }).unwrap()
-    console.log(2)
+    // console.log(2)
 
-    console.log(regResult)
+    // console.log(regResult)
     setOldPwd('')
     setNewPwd('')
     setMatchPwd('')

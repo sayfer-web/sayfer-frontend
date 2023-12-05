@@ -49,7 +49,8 @@ import SvgTree from 'src/assets/animations/tree/crypto2.svg'
 
 // ----------------------------------------------------------------------
 
-export default function HomeHugePackElements() {
+/* @ts-ignore */
+export default function HomeHugePackElements({ onScroll = f => f }) {
 
   const { t } = useLocales()
 
@@ -79,13 +80,15 @@ export default function HomeHugePackElements() {
         size="large"
         color="inherit"
         variant="outlined"
-        target="_blank"
-        rel="noopener"
-        href={paths.components}
+        // target="_blank"
+        // rel="noopener"
+        // href={paths.components}
+        onClick={onScroll}
         endIcon={<Iconify icon="eva:arrow-ios-forward-fill" width={18} sx={{ ml: -0.5 }} />}
       >
         {t('details')}
       </Button>
+      {/* <button onClick={onScroll}>Click</button> */}
     </m.div>
   );
 
@@ -138,7 +141,7 @@ export default function HomeHugePackElements() {
         // position: 'relative'
       }}
     >
-      
+
       {/* <HomePresent /> */}
       <Image
         disabledEffect

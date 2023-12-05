@@ -63,7 +63,7 @@ export default function AmplifyVerifyView() {
       await confirmRegister?.(data.email, data.code);
       router.push(paths.auth.amplify.login);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   });
 
@@ -72,7 +72,7 @@ export default function AmplifyVerifyView() {
       startCountdown();
       await resendCodeRegister?.(values.email);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }, [resendCodeRegister, startCountdown, values.email]);
 

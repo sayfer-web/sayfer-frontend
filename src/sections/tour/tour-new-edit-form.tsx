@@ -124,7 +124,7 @@ export default function TourNewEditForm({ currentTour }: Props) {
       router.push(paths.dashboard.tour.root);
       console.info('DATA', data);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   });
 

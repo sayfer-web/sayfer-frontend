@@ -2,7 +2,7 @@ import { alpha } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
-export type ColorSchema = 'primary' | 'secondary' | 'info' | 'success' | 'warning' | 'error';
+export type ColorSchema = 'primary' | 'secondary' | 'info' | 'success' | 'warning' | 'error' | 'gold';
 
 declare module '@mui/material/styles/createPalette' {
   interface TypeBackground {
@@ -100,6 +100,42 @@ const ERROR = {
   contrastText: '#FFFFFF',
 };
 
+const GOLD = {
+  lighter: '#FFD700',
+  light: '#FFD700',
+  main: '#FFD700',
+  dark: '#FFD700',
+  darker: '#FFD700',
+  contrastText: '#FFD700',
+};
+
+const BRONZE = {
+  lighter: '#D2B48C',
+  light: '#D2B48C',
+  main: '#D2B48C',
+  dark: '#D2B48C',
+  darker: '#D2B48C',
+  contrastText: '#D2B48C',
+};
+
+const SILVER = {
+  lighter: '#C0C0C0',
+  light: '#C0C0C0',
+  main: '#C0C0C0',
+  dark: '#C0C0C0',
+  darker: '#C0C0C0',
+  contrastText: '#C0C0C0',
+};
+
+const PLATINUM = {
+  lighter: '#E5E4E2',
+  light: '#E5E4E2',
+  main: '#E5E4E2',
+  dark: '#E5E4E2',
+  darker: '#E5E4E2',
+  contrastText: '#E5E4E2',
+};
+
 const COMMON = {
   common: {
     black: '#000000',
@@ -112,6 +148,10 @@ const COMMON = {
   warning: WARNING,
   error: ERROR,
   grey: GREY,
+  gold: GOLD,
+  bronze: BRONZE,
+  silver: SILVER,
+  platinum: PLATINUM,
   // green: GREEN,
   divider: alpha(GREY[500], 0.2),
   action: {

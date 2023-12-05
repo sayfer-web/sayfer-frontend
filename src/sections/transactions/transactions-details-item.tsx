@@ -41,7 +41,7 @@ export default function TransactionsDetailsItems({
 
   const { t } = useLocales()
 
-  console.log("CACHE: ", id, exchangeRate, totalAmount, subTotal)
+  // console.log("CACHE: ", id, exchangeRate, totalAmount, subTotal)
 
   const [transaction, setTransaction] = useState({
     id,
@@ -79,7 +79,7 @@ export default function TransactionsDetailsItems({
     })
   }, [id])
 
-  console.log('TRANSACTION: ', transaction)
+  // console.log('TRANSACTION: ', transaction)
 
   const renderTotal = (
     <Stack

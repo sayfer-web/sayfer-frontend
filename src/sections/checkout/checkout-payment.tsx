@@ -97,7 +97,7 @@ export default function CheckoutPayment() {
       checkout.onReset();
       console.info('DATA', data);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   });
 

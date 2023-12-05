@@ -80,6 +80,7 @@ const defaultFilters: IUserTableFilters = {
   name: '',
   role: [],
   status: 'all',
+  contractStatus: [],
 };
 
 // ----------------------------------------------------------------------
@@ -102,8 +103,7 @@ export default function UserListView() {
     country: 'country',
     avatarUrl: 'url',
     phoneNumber: '1111111111',
-    status:
-      (index % 2 && 'pending') || (index % 3 && 'banned') || (index % 4 && 'rejected') || 'active',
+    status: 'Bronze',
   }));
 
   const { t } = useLocales()
@@ -118,7 +118,7 @@ export default function UserListView() {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log('USERS: ', users)
+      // console.log('USERS: ', users)
       const newUsers = users.map((user: any, index: number) => {
         return {
           id: `${user.id}`,
@@ -130,16 +130,15 @@ export default function UserListView() {
           address: '0',
           name: user.username,
           isVerified: true,
-          company: 'Mentor',
+          company: user?.referrer || '-',
           country: '0',
           avatarUrl: 'url',
           phoneNumber: user.phoneNumber,
-          status:
-            (index % 2 && 'pending') || (index % 3 && 'banned') || (index % 4 && 'rejected') || 'active',
+          status: user.contractStatus,
         }
       })
 
-      console.log('NEW: ', newUsers)
+      // console.log('NEW: ', newUsers)
 
       setTableData(newUsers)
 
@@ -218,9 +217,10 @@ export default function UserListView() {
   }, []);
 
   const _statuses = [
-    '1 уровень',
-    '2 уровень',
-    '3 уровень',
+    'Bronze',
+    'Silver',
+    'Gold',
+    'Platinum',
   ];
 
   return (

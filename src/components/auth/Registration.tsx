@@ -92,7 +92,7 @@ export const Registration = () => {
       navigate('/welcome')
     } catch (err: any) {
       /* @ts-ignore */
-      if (regResult.message === "User Exist") setErrMsg('User Exist')
+      // if (regResult.message === "User Exist") setErrMsg('User Exists')
     }
   }
 

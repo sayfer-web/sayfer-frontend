@@ -106,7 +106,7 @@ export default function GamesListView() {
 
   const games = _games()
 
-  console.log(games)
+  // console.log(games)
 
   const dataFiltered = applyFilter({
     /* @ts-ignore */
@@ -222,16 +222,16 @@ export default function GamesListView() {
           },
           { name: t('list') },
         ]}
-        action={
-          <Button
-            component={RouterLink}
-            href={paths.dashboard.games.new}
-            variant="contained"
-            startIcon={<Iconify icon="mingcute:add-line" />}
-          >
-            {t('new_game')}
-          </Button>
-        }
+        // action={\
+        //   <Button
+        //     component={RouterLink}
+        //     href={paths.dashboard.games.new}
+        //     variant="contained"
+        //     startIcon={<Iconify icon="mingcute:add-line" />}
+        //   >
+        //     {t('new_game')}
+        //   </Button>
+        // }
         sx={{
           mb: { xs: 3, md: 5 },
         }}

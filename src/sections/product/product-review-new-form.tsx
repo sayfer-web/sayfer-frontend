@@ -62,7 +62,7 @@ export default function ProductReviewNewForm({ onClose, ...other }: Props) {
       onClose();
       console.info('DATA', data);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   });
 

@@ -54,7 +54,7 @@ export default function KanbanColumn({ column, tasks, index }: Props) {
           });
         }
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     },
     [column.id, column.name, enqueueSnackbar]
@@ -64,7 +64,7 @@ export default function KanbanColumn({ column, tasks, index }: Props) {
     try {
       clearColumn(column.id);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }, [column.id]);
 
@@ -76,7 +76,7 @@ export default function KanbanColumn({ column, tasks, index }: Props) {
         anchorOrigin: { vertical: 'top', horizontal: 'center' },
       });
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }, [column.id, enqueueSnackbar]);
 
@@ -87,7 +87,7 @@ export default function KanbanColumn({ column, tasks, index }: Props) {
 
         openAddTask.onFalse();
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     },
     [column.id, openAddTask]
@@ -97,7 +97,7 @@ export default function KanbanColumn({ column, tasks, index }: Props) {
     try {
       updateTask(taskData);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }, []);
 
@@ -110,7 +110,7 @@ export default function KanbanColumn({ column, tasks, index }: Props) {
           anchorOrigin: { vertical: 'top', horizontal: 'center' },
         });
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     },
     [column.id, enqueueSnackbar]

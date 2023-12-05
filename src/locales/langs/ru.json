@@ -435,7 +435,7 @@
   "create_an_account": "Создать новый аккаунт",
   "use_username": "Гостевой пользователь",
   "password": "Пароль",
-  "username": "Имя пользователя",
+  "username": "Никнейм пользователя",
   "forgot_password": "Забыли пароль",
   "already_have_an_account": "Уже имеете аккаунт",
   "get_started_absolutely_free": "Зарегистрируйтесь бесплатно",
@@ -597,7 +597,10 @@
   "logout": "Выйти",
   "show_only_mine": "Мои транзакции",
   "project_description": "Описание проекта",
-  "buy_token_sfr": "Купить токен SFR"
-
-
+  "buy_token_sfr": "Купить токен SFR",
+  "username_referral": "Никнейм приласившего",
+  "stars_required": "* - обязательные поля",
+  "referrals": "Приглашённые",
+  "no_referrals": "Нет приглашенных пользователей",
+  "upgrade": "Повысить контракт"
 }

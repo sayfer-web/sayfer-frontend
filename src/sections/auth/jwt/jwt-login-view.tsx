@@ -29,6 +29,7 @@ import { useDispatch } from 'react-redux';
 import { setCredentials } from 'src/app/features/auth/authSlice';
 import { TextField, makeStyles, withStyles } from '@mui/material';
 import { useLocales } from 'src/locales';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 // ----------------------------------------------------------------------
 
@@ -80,7 +81,7 @@ export default function JwtLoginView() {
 
   /* @ts-ingore */
   // const classes = useStyles('dark');
-  
+
 
   const userRef = useRef(null)
   const errRef = useRef(null)
@@ -90,19 +91,34 @@ export default function JwtLoginView() {
   const [pwd, setPwd] = useState('')
   const [focusPwd, toggleFocusPwd] = useState(false)
   const [errMsg, setErrMsg] = useState('')
+
+  const [errorMsg, setErrorMsg] = useState('');
+
+
+  const [captchaValid, setCaptchaValid] = useState(false)
+
   const navigate = useNavigate()
 
-  const [login, { isLoading }] = useLoginMutation()
+  const [login, { isLoading, isSuccess, isError, error }] = useLoginMutation()
   const dispatch = useDispatch()
 
   // useEffect(() => {
-    /* @ts-ignore */
+  /* @ts-ignore */
   //   useRef.current.focus()
   // }, [])
 
   useEffect(() => {
     setErrMsg('')
   }, [user, pwd])
+
+
+  useEffect(() => {
+    // setErrorMsg('Error')
+    /* @ts-ignore */
+    if (!!error) setErrorMsg(`${error.data.message}`)
+    // console.log('ERROR REG: ', isError, error)
+  }, [isError])
+
 
   const handleSubmit2 = async (e: any) => {
     e.preventDefault()
@@ -111,7 +127,7 @@ export default function JwtLoginView() {
       // setUser('1')
       const userData = await login({ username: user, password: pwd }).unwrap()
 
-      console.log(userData)
+      // console.log(userData)
       // setUser('2')
       dispatch(setCredentials({ ...userData, user, role: userData.roles }))
       // setUser(userData.token)
@@ -132,6 +148,8 @@ export default function JwtLoginView() {
       // errRef.current.focus()
     }
   }
+
+  const isValid = captchaValid && user !== '' && pwd !== ''
 
   // const { login } = useAuthContext();
 
@@ -169,19 +187,19 @@ export default function JwtLoginView() {
   // const onSubmit = handleSubmit(async (data) => {
   //   try {
   //     await  login({ username: data.username, password: data.password }).unwrap()
-      // setUser('1')
-      // const userData = await login({ username: user, password: pwd }).unwrap()
-      // setUser('2')
-      // dispatch(setCredentials({ ...userData, user }))
-      // setUser(userData.token)
-      // setPwd('')
-      // navigate('/welcome')
-      // router.push(returnTo || PATH_AFTER_LOGIN);
-      // } catch (error) {
-      // console.error(error);
-      // reset();
-      // setErrorMsg(typeof error === 'string' ? error : error.message);
-      // }
+  // setUser('1')
+  // const userData = await login({ username: user, password: pwd }).unwrap()
+  // setUser('2')
+  // dispatch(setCredentials({ ...userData, user }))
+  // setUser(userData.token)
+  // setPwd('')
+  // navigate('/welcome')
+  // router.push(returnTo || PATH_AFTER_LOGIN);
+  // } catch (error) {
+  // console.error(error);
+  // reset();
+  // setErrorMsg(typeof error === 'string' ? error : error.message);
+  // }
   // });
 
   const renderHead = (
@@ -211,7 +229,7 @@ export default function JwtLoginView() {
         value={user}
         autoComplete="on"
         InputLabelProps={{}}
-        sx={{ 
+        sx={{
           "& input:-webkit-autofill": {
             '-webkit-box-shadow': '0 0 0 100px #000 inset',
             '-webkit-text-fill-color': '#fff',
@@ -231,7 +249,7 @@ export default function JwtLoginView() {
         value={pwd}
         autoComplete="on"
         InputLabelProps={{}}
-        sx={{ 
+        sx={{
           "& input:-webkit-autofill": {
             // '-webkit-box-shadow': ,
             // '-webkit-text-fill-color': '#fff',
@@ -245,7 +263,7 @@ export default function JwtLoginView() {
         onBlur={() => toggleFocusPwd(false)}
       />
 
-        
+
       {/* <RHFTextField name="email" label="Email address" /> */}
 
       {/* <RHFTextField
@@ -263,6 +281,13 @@ export default function JwtLoginView() {
         }}
       /> */}
 
+      <ReCAPTCHA
+        // ref={recaptchaRef}
+        sitekey="6LdL6xopAAAAADKWigsqjVAiLHjX3M6Z5GALHOgo"
+        onChange={() => setCaptchaValid(true)}
+        theme="dark"
+      />
+
       <Link variant="body2" color="inherit" underline="always" sx={{ alignSelf: 'flex-end' }}>
         {t('forgot_password')}?
       </Link>
@@ -274,9 +299,15 @@ export default function JwtLoginView() {
         type="submit"
         variant="contained"
         loading={isLoading}
+        disabled={!captchaValid}
       >
         {t('login')}
       </LoadingButton>
+
+
+      {isError && <Alert severity="error">{errorMsg}</Alert>}
+      {isSuccess && <Alert severity="success">{errorMsg}</Alert>}
+
     </Stack>
   );
 

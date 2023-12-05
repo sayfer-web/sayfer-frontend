@@ -62,7 +62,7 @@ export default function OverviewBankingView() {
 
   const username = useSelector(selectCurrentUsername)
 
-  console.log('username: ', username)
+  // console.log('username: ', username)
 
 
   const _bankingCreditCard = [

@@ -24,7 +24,7 @@ export default function Auth0LoginView() {
     try {
       await loginWithPopup?.();
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }, [loginWithPopup]);
 
@@ -36,7 +36,7 @@ export default function Auth0LoginView() {
         },
       });
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }, [loginWithPopup]);
 
@@ -48,7 +48,7 @@ export default function Auth0LoginView() {
         },
       });
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }, [loginWithRedirect, returnTo]);
 
@@ -63,7 +63,7 @@ export default function Auth0LoginView() {
         },
       });
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }, [loginWithRedirect, returnTo]);
 

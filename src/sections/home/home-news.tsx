@@ -34,7 +34,7 @@ export const HomeNews = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log(news)
+      // console.log(news)
       const newNews = news.map((item: any) => {
         return ({
           id: item.id,

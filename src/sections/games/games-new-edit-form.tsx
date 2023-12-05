@@ -125,7 +125,7 @@ export default function GamesNewEditForm({ currentGame }: Props) {
       router.push(paths.dashboard.games.root);
       console.info('DATA', data);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   });
 

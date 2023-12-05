@@ -1,4 +1,5 @@
-import { useState, useCallback, useEffect, useLayoutEffect } from 'react';
+import isEqual from 'lodash/isEqual';
+import { useState, useCallback, useEffect } from 'react';
 // @mui
 import { alpha } from '@mui/material/styles';
 import Tab from '@mui/material/Tab';
@@ -14,10 +15,9 @@ import TableContainer from '@mui/material/TableContainer';
 // routes
 import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
+import { RouterLink } from 'src/routes/components';
 // _mock
-import { _orders, ORDER_STATUS_OPTIONS } from 'src/_mock';
-// utils
-import { fTimestamp } from 'src/utils/format-time';
+// import { _roles, USER_STATUS_OPTIONS } from 'src/_mock';
 // hooks
 import { useBoolean } from 'src/hooks/use-boolean';
 // components
@@ -38,15 +38,13 @@ import {
   TablePaginationCustom,
 } from 'src/components/table';
 // types
-// import { IOrderItem, IOrderTableFilters, IOrderTableFilterValue } from 'src/types/order';
+import { IUserItem, IUserTableFilters, IUserTableFilterValue } from 'src/types/user';
 //
-import OrderTableRow from '../transactions-table-row';
-import OrderTableToolbar from '../transactions-table-toolbar';
-import OrderTableFiltersResult from '../transactions-table-filters-result';
+import UserTableRow from '../user-table-row';
+import UserTableToolbar from '../user-table-toolbar';
+import UserTableFiltersResult from '../user-table-filters-result';
 import { useLocales } from 'src/locales';
-import { useNavigate, useNavigation } from 'react-router-dom';
-import { ITransactionItem, ITransactionTableFilters, ITransactionTableFilterValue } from 'src/types/transaction';
-import { useGetAllTransactionsQuery } from 'src/app/features/transactions/transactionsApiSlice';
+import { useGetUserByUsernameQuery, useGetUsersQuery } from 'src/app/features/users/usersApiSlice';
 import { useSelector } from 'react-redux';
 import { selectCurrentUsername } from 'src/app/features/auth/authSlice';
 
@@ -56,139 +54,64 @@ const STATUS_OPTIONS = () => {
 
   const { t } = useLocales()
 
-  return [{ value: 'all', label: t('all') },
-  // { value: 'pending', label: t('pending') },
-  // { value: 'completed', label: t('completed') },
-  // { value: 'cancelled', label: t('cancelled') },
-  // { value: 'refunded', label: t('refunded') },
-  ];
+  return [
+    { value: 'all', label: t('all') },
+    // { value: 'active', label: t('active') },
+    // { value: 'pending', label: t('pending') },
+    // { value: 'banned', label: t('banned') },
+    // { value: 'rejected', label: t('rejected') },
+  ]
 }
+
 
 const TABLE_HEAD = () => {
 
   const { t } = useLocales()
 
   return [
-    { id: 'orderNumber', label: t('order'), width: 116 },
-    { id: 'name', label: t('customer') },
-    { id: 'createdAt', label: t('date'), width: 140 },
-    { id: 'exchangeRate', label: t('exchangeRate'), width: 120, align: 'center' },
-    { id: 'totalAmount', label: t('price'), width: 140 },
-    { id: 'status', label: t('status'), width: 110 },
+    { id: 'name', label: t('username') },
+    // { id: 'phoneNumber', label: t('phone_number'), width: 180 },
+    { id: 'company', label: t('mentor'), width: 220 },
+    // { id: 'role', label: t('contract_status'), width: 180 },
+    { id: 'status', label: t('contract_status'), width: 100 },
     { id: '', width: 88 },
   ];
 }
 
-const defaultFilters: ITransactionTableFilters = {
+const defaultFilters: IUserTableFilters = {
   name: '',
+  role: [],
   status: 'all',
-  startDate: null,
-  endDate: null,
 };
 
 // ----------------------------------------------------------------------
 
-// ----------------------------------------------------------------------
+export default function UserListView() {
 
-export default function TransactionsListView() {
-
-  const { data: transactions, error, isLoading, isSuccess } = useGetAllTransactionsQuery('')
-
-  // let oldTransactions = newTransactions
   const username = useSelector(selectCurrentUsername)
+  // const { data: user, error, isLoading, isSuccess } = useGetUserByUsernameQuery(username)
+  const { data: users, error: error, isLoading: isLoading, isSuccess: isSuccess } = useGetUsersQuery('')
 
-  const [tableData, setTableData] = useState([]);
-
-  const [showOnlyMine, toggleShowOnlyMine] = useState(false)
-
-  const handleToggleShowOnly = () => toggleShowOnlyMine(state => !state)
-
-  // console.log(showOnlyMine)
-  // if(isLoading) oldTransactions = 'Loading...'
-  useEffect(() => {
-
-    if (isSuccess) {
-
-      let result = transactions.map((item: any, idx: number) => {
-
-        const { id, txid, address, category, sender, confirmations, receiver: user, tokenType, amount, exchangeRate, status, errMsg, createdAt, successedAt } = item
-
-        // console.log(createdAt)
-
-        return {
-          id,
-          orderNumber: item.id,
-          createdAt: new Date(successedAt).toISOString(),
-          taxes: 10,
-          items: [{
-            id: '1',
-            sku: 'sky',
-            quantity: 12,
-            name: 'product name',
-            coverUrl: 'url',
-            price: 120,
-          }],
-          history: {
-            orderTime: createdAt,
-            paymentTime: createdAt,
-            deliveryTime: createdAt,
-            completionTime: createdAt,
-            successedAt,
-            createdAt,
-            timeline: [
-              { title: 'Delivery successful', time: createdAt },
-              { title: 'Transporting to [2]', time: createdAt },
-              { title: 'Transporting to [1]', time: createdAt },
-              {
-                title: 'The shipping unit has picked up the goods',
-                time: createdAt,
-              },
-              { title: 'Order has been created', time: createdAt },
-            ],
-          },
-          subTotal: amount*exchangeRate,
-          shipping: 10,
-          discount: 10,
-          customer: {
-            id: '1',
-            name: user || 'Username',
-            email: t('deposit'),
-            avatarUrl: 'avatar',
-            ipAddress: '192.158.1.38',
-          },
-          delivery: {
-            shipBy: 'DHL',
-            speedy: 'Standard',
-            trackingNumber: 'SPX037739199373',
-          },
-          totalAmount: amount ,
-          totalQuantity: exchangeRate,
-          shippingAddress: {
-            fullAddress: '19034 Verna Unions Apt. 164 - Honolulu, RI / 87535',
-            phoneNumber: '365-374-4961',
-          },
-          payment: {
-            cardType: 'mastercard',
-            cardNumber: '**** **** **** 5678',
-          },
-          status
-          // ...data
-        }
-      })
-
-      if(showOnlyMine) {
-        result = result.filter((item: any) => item.customer.name === username)
-      }
-
-      setTableData(result)
-
-      // console.log("TABLE DATA: ", tableData)
-    }
-  }, [transactions, showOnlyMine])
+  const _userList = [...Array(20)].map((_, index) => ({
+    id: `${index}`,
+    zipCode: '85807',
+    state: 'Virginia',
+    city: 'Rancho Cordova',
+    role: '1',
+    email: '1',
+    address: '908 Jack Locks',
+    name: '1',
+    isVerified: true,
+    company: 'mentor',
+    country: 'country',
+    avatarUrl: 'url',
+    phoneNumber: '1111111111',
+    status: 'Bronze',
+  }));
 
   const { t } = useLocales()
 
-  const table = useTable({ defaultOrderBy: 'orderNumber' });
+  const table = useTable();
 
   const settings = useSettingsContext();
 
@@ -196,24 +119,46 @@ export default function TransactionsListView() {
 
   const confirm = useBoolean();
 
+  useEffect(() => {
+    if (isSuccess) {
+      // console.log('USERS: ', users)
+      const newUsers = users.map((user: any, index: number) => {
+        return {
+          id: `${user?.id}`,
+          zipCode: '0',
+          state: '0',
+          city: '0',
+          role: '1',
+          email: user?.email,
+          address: '0',
+          name: user?.username,
+          isVerified: true,
+          company: user?.referrer || '-',
+          country: '0',
+          avatarUrl: 'url',
+          phoneNumber: user?.phoneNumber,
+          status: user?.contractStatus,
+        }
+      }).filter((user: any) => { 
+        console.log(user)
+        return user?.company === username })
+      
 
-  // useEffect(() => {
-  //   setTableData(newTransactions())
-  // }, [oldTransactions])
+      // console.log('NEW: ', newUsers)
+
+      setTableData(newUsers)
+
+    }
+  }, [users])
+
+  const [tableData, setTableData] = useState(_userList);
 
   const [filters, setFilters] = useState(defaultFilters);
 
-  const dateError =
-    filters.startDate && filters.endDate
-      ? filters.startDate.getTime() > filters.endDate.getTime()
-      : false;
-
   const dataFiltered = applyFilter({
-    /* @ts-ignore */
     inputData: tableData,
     comparator: getComparator(table.order, table.orderBy),
     filters,
-    dateError,
   });
 
   const dataInPage = dataFiltered.slice(
@@ -223,13 +168,12 @@ export default function TransactionsListView() {
 
   const denseHeight = table.dense ? 52 : 72;
 
-  const canReset =
-    !!filters.name || filters.status !== 'all' || (!!filters.startDate && !!filters.endDate);
+  const canReset = !isEqual(defaultFilters, filters);
 
   const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
 
   const handleFilters = useCallback(
-    (name: string, value: ITransactionTableFilterValue) => {
+    (name: string, value: IUserTableFilterValue) => {
       table.onResetPage();
       setFilters((prevState) => ({
         ...prevState,
@@ -241,7 +185,7 @@ export default function TransactionsListView() {
 
   const handleDeleteRow = useCallback(
     (id: string) => {
-      const deleteRow = tableData.filter((row: any) => row.id !== id);
+      const deleteRow = tableData.filter((row) => row.id !== id);
       setTableData(deleteRow);
 
       table.onUpdatePageDeleteRow(dataInPage.length);
@@ -250,7 +194,7 @@ export default function TransactionsListView() {
   );
 
   const handleDeleteRows = useCallback(() => {
-    const deleteRows = tableData.filter((row: any) => !table.selected.includes(row.id));
+    const deleteRows = tableData.filter((row) => !table.selected.includes(row.id));
     setTableData(deleteRows);
 
     table.onUpdatePageDeleteRows({
@@ -260,23 +204,12 @@ export default function TransactionsListView() {
     });
   }, [dataFiltered.length, dataInPage.length, table, tableData]);
 
-  const handleResetFilters = useCallback(() => {
-    setFilters(defaultFilters);
-  }, []);
-
-  // const handleViewRow = useCallback(
-  //   (id: string) => {
-  //     router.push(paths.dashboard.order.details(id));
-  //   },
-  //   [router]
-  // );
-
-  // const navigate = useNavigation()
-  const navigate = useNavigate()
-
-  const handleViewRow = (id: string) => {
-    navigate(`/dashboard/transactions/${id}`)
-  }
+  const handleEditRow = useCallback(
+    (id: string) => {
+      router.push(paths.dashboard.user.edit(id));
+    },
+    [router]
+  );
 
   const handleFilterStatus = useCallback(
     (event: React.SyntheticEvent, newValue: string) => {
@@ -285,6 +218,15 @@ export default function TransactionsListView() {
     [handleFilters]
   );
 
+  const handleResetFilters = useCallback(() => {
+    setFilters(defaultFilters);
+  }, []);
+
+  const _statuses = [
+    '1 уровень',
+    '2 уровень',
+    '3 уровень',
+  ];
 
   return (
     <>
@@ -292,16 +234,20 @@ export default function TransactionsListView() {
         <CustomBreadcrumbs
           heading={t('list')}
           links={[
-            {
-              name: t('dashboard'),
-              href: paths.dashboard.root,
-            },
-            {
-              name: t('order'),
-              href: paths.dashboard.transactions.root,
-            },
+            { name: t('dashboard'), href: paths.dashboard.root },
+            { name: t('user'), href: paths.dashboard.user.root },
             { name: t('list') },
           ]}
+          // action={
+          //   <Button
+          //     component={RouterLink}
+          //     href={paths.dashboard.user.new}
+          //     variant="contained"
+          //     startIcon={<Iconify icon="mingcute:add-line" />}
+          //   >
+          //     {t('new_user')}
+          //   </Button>
+          // }
           sx={{
             mb: { xs: 3, md: 5 },
           }}
@@ -328,39 +274,37 @@ export default function TransactionsListView() {
                       ((tab.value === 'all' || tab.value === filters.status) && 'filled') || 'soft'
                     }
                     color={
-                      // (tab.value === 'completed' && 'success') ||
-                      // (tab.value === 'pending' && 'warning') ||
-                      // (tab.value === 'cancelled' && 'error') ||
+                      (tab.value === 'active' && 'success') ||
+                      (tab.value === 'pending' && 'warning') ||
+                      (tab.value === 'banned' && 'error') ||
                       'default'
                     }
                   >
-                    {tab.value === 'all' && isSuccess && transactions.length}
-                    {/* {tab.value === 'completed' &&
-                      _orders().filter((order) => order.status === 'completed').length}
+                    {tab.value === 'all' && _userList.length}
+                    {tab.value === 'active' &&
+                      _userList.filter((user) => user.status === 'active').length}
 
                     {tab.value === 'pending' &&
-                      _orders().filter((order) => order.status === 'pending').length}
-                    {tab.value === 'cancelled' &&
-                      _orders().filter((order) => order.status === 'cancelled').length}
-                    {tab.value === 'refunded' &&
-                      _orders().filter((order) => order.status === 'refunded').length} */}
+                      _userList.filter((user) => user.status === 'pending').length}
+                    {tab.value === 'banned' &&
+                      _userList.filter((user) => user.status === 'banned').length}
+                    {tab.value === 'rejected' &&
+                      _userList.filter((user) => user.status === 'rejected').length}
                   </Label>
                 }
               />
             ))}
           </Tabs>
 
-          <OrderTableToolbar
+          <UserTableToolbar
             filters={filters}
             onFilters={handleFilters}
             //
-            canReset={canReset}
-            onResetFilters={handleResetFilters}
-            onChangeCheckbox={handleToggleShowOnly}
+            roleOptions={_statuses}
           />
 
           {canReset && (
-            <OrderTableFiltersResult
+            <UserTableFiltersResult
               filters={filters}
               onFilters={handleFilters}
               //
@@ -379,11 +323,11 @@ export default function TransactionsListView() {
               onSelectAllRows={(checked) =>
                 table.onSelectAllRows(
                   checked,
-                  tableData.map((row: any) => row.id)
+                  tableData.map((row) => row.id)
                 )
               }
               action={
-                <Tooltip title={t('delete')}>
+                <Tooltip title="Delete">
                   <IconButton color="primary" onClick={confirm.onTrue}>
                     <Iconify icon="solar:trash-bin-trash-bold" />
                   </IconButton>
@@ -403,26 +347,25 @@ export default function TransactionsListView() {
                   onSelectAllRows={(checked) =>
                     table.onSelectAllRows(
                       checked,
-                      tableData.map((row: any) => row.id)
+                      tableData.map((row) => row.id)
                     )
                   }
                 />
 
                 <TableBody>
                   {dataFiltered
-                    .reverse()
                     .slice(
                       table.page * table.rowsPerPage,
                       table.page * table.rowsPerPage + table.rowsPerPage
                     )
                     .map((row) => (
-                      <OrderTableRow
+                      <UserTableRow
                         key={row.id}
                         row={row}
                         selected={table.selected.includes(row.id)}
                         onSelectRow={() => table.onSelectRow(row.id)}
                         onDeleteRow={() => handleDeleteRow(row.id)}
-                        onViewRow={() => handleViewRow(row.id)}
+                        onEditRow={() => handleEditRow(row.id)}
                       />
                     ))}
 
@@ -453,10 +396,10 @@ export default function TransactionsListView() {
       <ConfirmDialog
         open={confirm.value}
         onClose={confirm.onFalse}
-        title={t('delete')}
+        title="Delete"
         content={
           <>
-            {t('are_you_sure_want_to_delete')} <strong> {table.selected.length} </strong> {t('items')}?
+            Are you sure want to delete <strong> {table.selected.length} </strong> items?
           </>
         }
         action={
@@ -468,7 +411,7 @@ export default function TransactionsListView() {
               confirm.onFalse();
             }}
           >
-            {t('delete')}
+            Delete
           </Button>
         }
       />
@@ -482,14 +425,12 @@ function applyFilter({
   inputData,
   comparator,
   filters,
-  dateError,
 }: {
-  inputData: ITransactionItem[];
+  inputData: IUserItem[];
   comparator: (a: any, b: any) => number;
-  filters: ITransactionTableFilters;
-  dateError: boolean;
+  filters: IUserTableFilters;
 }) {
-  const { status, name, startDate, endDate } = filters;
+  const { name, status, role } = filters;
 
   const stabilizedThis = inputData.map((el, index) => [el, index] as const);
 
@@ -503,25 +444,16 @@ function applyFilter({
 
   if (name) {
     inputData = inputData.filter(
-      (order) =>
-        order.orderNumber.toLowerCase().indexOf(name.toLowerCase()) !== -1 ||
-        order.customer.name.toLowerCase().indexOf(name.toLowerCase()) !== -1 ||
-        order.customer.email.toLowerCase().indexOf(name.toLowerCase()) !== -1
+      (user) => user.name.toLowerCase().indexOf(name.toLowerCase()) !== -1
     );
   }
 
   if (status !== 'all') {
-    inputData = inputData.filter((order) => order.status === status);
+    inputData = inputData.filter((user) => user.status === status);
   }
 
-  if (!dateError) {
-    if (startDate && endDate) {
-      inputData = inputData.filter(
-        (order) =>
-          fTimestamp(order.createdAt) >= fTimestamp(startDate) &&
-          fTimestamp(order.createdAt) <= fTimestamp(endDate)
-      );
-    }
+  if (role.length) {
+    inputData = inputData.filter((user) => role.includes(user.role));
   }
 
   return inputData;

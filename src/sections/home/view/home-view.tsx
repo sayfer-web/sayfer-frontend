@@ -1,3 +1,4 @@
+import { useRef, useEffect } from "react"
 import { useScroll } from 'framer-motion';
 // @mui
 import { styled } from '@mui/material/styles';
@@ -27,6 +28,8 @@ type StyledPolygonProps = {
   anchor?: 'top' | 'bottom';
 };
 
+
+
 /* @ts-ignore */
 const StyledPolygon = styled('div')<StyledPolygonProps>(({ anchor = 'top', theme }) => ({
   left: 0,
@@ -53,6 +56,11 @@ const StyledPolygon = styled('div')<StyledPolygonProps>(({ anchor = 'top', theme
 export default function HomeView() {
   const { scrollYProgress } = useScroll();
 
+  const scrollCallbackRef = useRef(null)
+
+  /* @ts-ignore*/
+  const executeScroll = () => scrollCallbackRef?.current?.scrollIntoView({ behavior: 'smooth' });
+
   return (
     <>
       <ScrollProgress scrollYProgress={scrollYProgress} />
@@ -67,19 +75,22 @@ export default function HomeView() {
           bgcolor: '#002102',
         }}
       >
+
+        {/* <button onClick={executeScroll}>Click</button> */}
+
         {/* <HomeAdvantages /> */}
 
         {/* <HomePresent /> */}
 
-        <HomeHugePackElements />
+        <HomeHugePackElements onScroll={executeScroll} />
 
         <Box sx={{ position: 'relative' }}>
           {/* <StyledPolygon style={{ zIndex: 2 }} /> */}
-          <HomeForDesigner />
+          <HomeForDesigner onScroll={executeScroll} />
           {/* <StyledPolygon anchor="bottom" /> */}
         </Box>
 
-        <HomeBuildings />
+        <HomeBuildings onScroll={executeScroll} />
 
         {/* <HomePricing /> */}
 
@@ -93,8 +104,10 @@ export default function HomeView() {
 
         {/* <HomePricing /> */}
 
-        <Box sx={{ }}>
-          <HomeCallback />
+        <Box sx={{}}>
+          <div ref={scrollCallbackRef} >
+            <HomeCallback />
+          </div>
         </Box>
 
         {/* <HomeLookingFor /> */}

@@ -29,16 +29,39 @@ export const HomePresent = () => {
   const mdUp = useResponsive('up', 'md');
 
   const positionMobile = mdUp ? 250 : 135
-  const coinsPositionMobile = mdUp ? 200 : 80
+  const defaultMobile = mdUp ? '25%' : '50%'
+  const layoutMobile = mdUp ? 50 : 380
 
   return (
-    <Box sx={{ position: 'relative', zIndex: 2, minWidth: 400, minHeight: 600, top: 0, left: positionMobile }}>
+    <Box sx={{ 
+      // position: 'relative', 
+      zIndex: 2, 
+    // minWidth: 400, minHeight: 600, 
+    top: 0, left: positionMobile }}>
 
 
       {/* CHART 2 */}
 
 
-      <Box sx={{ position: 'absolute', top: 100, left: 0, zIndex: 10 }}>
+      <Box sx={{ position: 'absolute', top: layoutMobile, right: defaultMobile, zIndex: 10 }}>
+        <m.div 
+        // variants={varFade().inDown}
+        >
+          <m.div animate={{ y: [0, -5, 0] }} transition={{ duration: 8, repeat: Infinity }}>
+            <Image
+              disabledEffect
+              alt="sidebar"
+              width='200%'
+              height='200%'
+              // style={{ top: 100, left: 0 }}
+
+              src={`/assets/animations/present/default.svg`}
+            />
+          </m.div>
+        </m.div>
+      </Box>
+
+      {/* <Box sx={{ position: 'absolute', top: 100, left: 0, zIndex: 10 }}>
         <m.div 
         // variants={varFade().inDown}
         >
@@ -109,12 +132,12 @@ export const HomePresent = () => {
             />
           </m.div>
         </m.div>
-      </Box>
+      </Box> */}
 
 
       {/* CHART 1 */}
       
-     
+{/*      
       <Box sx={{ position: 'absolute', top: 420, left: -120, zIndex: 10 }}>
         <m.div 
         // variants={varFade().inDown}
@@ -164,7 +187,7 @@ export const HomePresent = () => {
             />
           </m.div>
         </m.div>
-      </Box>
+      </Box> */}
 
 
       {/* FLOOR */}
@@ -187,7 +210,7 @@ export const HomePresent = () => {
         </m.div>
       </Box> */}
 
-      <Box sx={{ position: 'absolute', top: 320, left: -100, zIndex: 5 }}>
+      {/* <Box sx={{ position: 'absolute', top: 320, left: -100, zIndex: 5 }}>
         <m.div 
         // variants={varFade().inDown}
         >
@@ -202,7 +225,7 @@ export const HomePresent = () => {
             />
           </m.div>
         </m.div>
-      </Box>
+      </Box> */}
 
 
       {/* WEB */}
@@ -287,7 +310,7 @@ export const HomePresent = () => {
 
 
       {/* COIN 3 */}
-
+{/* 
       <Box sx={{ position: 'absolute', top: 340, left: -10, zIndex: 15 }}>
         <m.div 
         // variants={varFade().inDown}
@@ -346,11 +369,11 @@ export const HomePresent = () => {
             />
           </m.div>
         </m.div>
-      </Box>
+      </Box> */}
 
       {/* VERTICAL COIN */}
 
-      <Box sx={{ position: 'absolute', top: 200, left: 0, zIndex: 15  }}>
+      {/* <Box sx={{ position: 'absolute', top: 200, left: 0, zIndex: 15  }}>
         <m.div 
         // variants={varFade().inDown}
         >
@@ -368,10 +391,10 @@ export const HomePresent = () => {
             />
           </m.div>
         </m.div>
-      </Box>
+      </Box> */}
 
       {/* OTHER COINS */}
-
+{/* 
       <Box sx={{ position: 'absolute', top: 250, left: coinsPositionMobile, zIndex: 10  }}>
         <m.div 
         // variants={varFade().inDown}
@@ -490,10 +513,10 @@ export const HomePresent = () => {
             />
           </m.div>
         </m.div>
-      </Box>
+      </Box> */}
 
       {/* SPOTLIGHT */}
-
+{/* 
       <Box sx={{ position: 'absolute', top: 0, zIndex: 15  }}>
         <m.div 
         // variants={varFade().inDown}
@@ -509,7 +532,7 @@ export const HomePresent = () => {
             />
           </m.div>
         </m.div>
-      </Box>
+      </Box> */}
 
       {/* <Stack style={{ position: 'relative', height: 400 }} spacing={2} direction="row" justifyContent="center">
         {svgList.map((platform) => (

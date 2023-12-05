@@ -67,8 +67,10 @@ export default function PostListView() {
   useEffect(() => {
     if (isSuccess) {
 
+      // console.log(news)
+
       const newNews = news.map((item: any) => {
-        console.log(item)
+        // console.log(item)
         return {
           id: item.id,
           title: item.title,
@@ -89,7 +91,7 @@ export default function PostListView() {
 
 
   const [newPosts, setNewPosts] = useState([{
-    id: '1',
+    id: '8',
     title: 'First News',
     // tags: ['string'],
     // publish: 'published',

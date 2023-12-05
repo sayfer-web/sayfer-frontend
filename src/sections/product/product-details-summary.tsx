@@ -107,7 +107,7 @@ export default function ProductDetailsSummary({
       onGotoStep?.(0);
       router.push(paths.product.checkout);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   });
 
@@ -119,7 +119,7 @@ export default function ProductDetailsSummary({
         subTotal: values.price * values.quantity,
       });
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }, [onAddCart, values]);
 

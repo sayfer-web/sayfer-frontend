@@ -109,7 +109,7 @@ export default function UserNewEditForm({ currentUser }: Props) {
       router.push(paths.dashboard.user.list);
       console.info('DATA', data);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   });
 

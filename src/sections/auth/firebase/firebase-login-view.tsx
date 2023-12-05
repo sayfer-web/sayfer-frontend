@@ -67,9 +67,9 @@ export default function FirebaseLoginView() {
 
       router.push(returnTo || PATH_AFTER_LOGIN);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       reset();
-      setErrorMsg(typeof error === 'string' ? error : error.message);
+      // setErrorMsg(typeof error === 'string' ? error : error.message);
     }
   });
 
@@ -77,7 +77,7 @@ export default function FirebaseLoginView() {
     try {
       await loginWithGoogle?.();
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 
@@ -85,7 +85,7 @@ export default function FirebaseLoginView() {
     try {
       await loginWithGithub?.();
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 
@@ -93,7 +93,7 @@ export default function FirebaseLoginView() {
     try {
       await loginWithTwitter?.();
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 

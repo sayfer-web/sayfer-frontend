@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
@@ -22,6 +22,7 @@ import TextMaxLine from 'src/components/text-max-line';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
 
 import { IPostItem } from 'src/types/blog';
+import { Link } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
 
@@ -37,6 +38,7 @@ export default function PostItemHorizontal({ post }: Props) {
   const smUp = useResponsive('up', 'sm');
 
   const {
+    id,
     title,
     author,
     publish,
@@ -47,6 +49,8 @@ export default function PostItemHorizontal({ post }: Props) {
     totalComments,
     description,
   } = post;
+
+  // console.log(id)
 
   return (
     <>
@@ -67,8 +71,8 @@ export default function PostItemHorizontal({ post }: Props) {
           </Stack>
 
           <Stack spacing={1} flexGrow={1}>
-            <Link color="inherit" component={RouterLink} href={paths.dashboard.post.details(title)}>
-              <TextMaxLine variant="subtitle2" line={2}>
+            <Link to={`/dashboard/post/${id}`}>
+              <TextMaxLine color="white" variant="subtitle2" line={2}>
                 {title}
               </TextMaxLine>
             </Link>

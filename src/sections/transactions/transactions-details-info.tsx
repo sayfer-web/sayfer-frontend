@@ -46,7 +46,7 @@ export default function TransactionsDetailsInfo({ customer, delivery, payment, s
     error: null,
   })
 
-  console.log(customer)
+  // console.log(customer)
 
   const { t } = useLocales()
 

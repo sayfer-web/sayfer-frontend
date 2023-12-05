@@ -54,7 +54,7 @@ export default function AmplifyForgotPasswordView() {
       const href = `${paths.auth.amplify.newPassword}?${searchParams}`;
       router.push(href);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   });
 

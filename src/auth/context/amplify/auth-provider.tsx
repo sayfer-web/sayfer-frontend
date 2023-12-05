@@ -85,7 +85,7 @@ export function AuthProvider({ children }: Props) {
         });
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       dispatch({
         type: Types.INITIAL,
         payload: {

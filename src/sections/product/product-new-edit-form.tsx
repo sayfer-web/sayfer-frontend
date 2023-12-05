@@ -138,7 +138,7 @@ export default function ProductNewEditForm({ currentProduct }: Props) {
       router.push(paths.dashboard.product.root);
       console.info('DATA', data);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   });
 

@@ -90,7 +90,7 @@ export default function CalendarForm({ currentEvent, colorOptions, onClose }: Pr
         reset();
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   });
 
@@ -100,7 +100,7 @@ export default function CalendarForm({ currentEvent, colorOptions, onClose }: Pr
       enqueueSnackbar('Delete success!');
       onClose();
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }, [currentEvent?.id, enqueueSnackbar, onClose]);
 

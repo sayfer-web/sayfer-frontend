@@ -13,7 +13,7 @@ export default function PostDetailsPage() {
 
   const params = useParams();
 
-  console.log('PARAMS: ', params)
+  // console.log('PARAMS: ', params)
 
   const { id } = params;
 

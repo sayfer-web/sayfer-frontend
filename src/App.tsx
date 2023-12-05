@@ -66,6 +66,7 @@ import { useAuth } from './hooks/use-auth';
 import Page403 from './pages/403';
 import ComingSoonPage from './pages/coming-soon';
 import { RoleBasedGuard } from './auth/guard';
+import ReferralsProfilePage from './pages/dashboard/user/referrals';
 
 // ----------------------------------------------------------------------
 
@@ -148,7 +149,7 @@ export default function App() {
 
   // let username = 'Sayfer'
   let status = role
-  console.log(role)
+  // console.log(role)
 
 
   // const charAt = `
@@ -246,6 +247,7 @@ export default function App() {
                       <Route index element={<ComingSoonPage date='03/01/2024 00:00' />} />
                       <Route path='account' element={<UserAccountPage />} />
                       <Route path='list' element={<UserListPage />} />
+                      <Route path='referrals' element={<ReferralsProfilePage />} />
                     </Route>
 
                     {/* <Route path='mail' element={<MailPage />} /> */}

@@ -57,10 +57,10 @@ export default function Header() {
           // backgroundColor: 'rgba(0, 0, 0, 0.2)', // Прозрачный фон
           backdropFilter: 'blur(10px)', // Размытие
           WebkitBackdropFilter: 'blur(10px)', // Для поддержки в Safari
-          // height: {
-          //   xs: HEADER.H_MOBILE,
-          //   md: HEADER.H_DESKTOP,
-          // },
+          height: {
+            xs: HEADER.H_MOBILE,
+            md: HEADER.H_DESKTOP,
+          },
           transition: theme.transitions.create(['height'], {
             easing: theme.transitions.easing.easeInOut,
             duration: theme.transitions.duration.shorter,
@@ -98,7 +98,7 @@ export default function Header() {
             //   </Link>
             // }
           >
-            {/* <Logo /> */}
+            <Logo />
 
           </Badge>
 

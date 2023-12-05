@@ -49,7 +49,7 @@ import SvgTree from 'src/assets/animations/tree/crypto2.svg'
 
 // ----------------------------------------------------------------------
 
-export default function HomeBuildings() {
+export default function HomeBuildings({ onScroll = () => { } }) {
 
   const { t } = useLocales()
 
@@ -79,9 +79,10 @@ export default function HomeBuildings() {
         size="large"
         color="inherit"
         variant="outlined"
-        target="_blank"
-        rel="noopener"
-        href={paths.components}
+        // target="_blank"
+        // rel="noopener"
+        // href={paths.components}
+        onClick={onScroll}
         endIcon={<Iconify icon="eva:arrow-ios-forward-fill" width={18} sx={{ ml: -0.5 }} />}
       >
         {t('details')}
@@ -138,7 +139,7 @@ export default function HomeBuildings() {
         position: 'relative'
       }}
     >
-      
+
       {/* <HomePresent /> */}
       <Image
         disabledEffect

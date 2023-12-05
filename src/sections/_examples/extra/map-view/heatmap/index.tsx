@@ -33,7 +33,9 @@ function MapHeatmap({ ...other }: MapBoxProps) {
 
         selectTime(endTime);
       })
-      .catch((error) => console.error('Could not load data', error));
+      .catch((error) => { 
+        // console.error('Could not load data', error) 
+      });
   }, []);
 
   const data: any = useMemo(
@@ -77,8 +79,8 @@ export default memo(MapHeatmap);
 function filterFeaturesByDay(
   featureCollection:
     | {
-        features: any[];
-      }
+      features: any[];
+    }
     | undefined,
   time: number
 ) {

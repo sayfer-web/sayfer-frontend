@@ -77,7 +77,7 @@ export default function AmplifyNewPasswordView() {
 
       router.push(paths.auth.amplify.login);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   });
 
@@ -86,7 +86,7 @@ export default function AmplifyNewPasswordView() {
       startCountdown();
       await forgotPassword?.(values.email);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }, [forgotPassword, startCountdown, values.email]);
 

@@ -70,7 +70,7 @@ export default function AmplifyRegisterView() {
 
       router.push(href);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       reset();
       setErrorMsg(typeof error === 'string' ? error : error.message);
     }

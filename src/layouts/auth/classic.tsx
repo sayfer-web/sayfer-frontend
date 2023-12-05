@@ -17,6 +17,9 @@ import { bgGradient } from 'src/theme/css';
 // components
 import Logo from 'src/components/logo';
 import { useLocales } from 'src/locales';
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router';
+// import { Button } from '@mui/base';
 
 // ----------------------------------------------------------------------
 
@@ -57,6 +60,8 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
 
   const { t } = useLocales()
 
+  const navigate = useNavigate()
+
   const { method } = useAuthContext();
 
   const theme = useTheme();
@@ -80,10 +85,13 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
         mx: 'auto',
         maxWidth: 480,
         px: { xs: 2, md: 8 },
-        pt: { xs: 15, md: 20 },
+        pt: { xs: 10, md: 10 },
         pb: { xs: 15, md: 0 },
       }}
     >
+      <Box sx={{ paddingBottom: 4, width: '100%', display: 'flex', justifyContent: 'end' }}>
+        <Button color='primary' variant='soft' onClick={() => navigate(-1)}>{t('back')}</Button>
+      </Box>
       {children}
     </Stack>
   );
@@ -107,7 +115,7 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
       <Typography variant="h3" sx={{ maxWidth: 480, textAlign: 'center' }}>
         {title || t('welcome_back')}
       </Typography>
-{/* 
+      {/* 
       <Box
         component="img"
         alt="auth"
@@ -156,7 +164,8 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
 
       {mdUp && renderSection}
 
-      {renderContent}s
+
+      {renderContent}
     </Stack>
   );
 }

@@ -21,7 +21,7 @@ import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
-export default function HomeForDesigner() {
+export default function HomeForDesigner({ onScroll = () => { } }) {
 
   const { t } = useLocales()
 
@@ -75,9 +75,10 @@ export default function HomeForDesigner() {
           size="large"
           variant="contained"
           endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}
-          target="_blank"
-          rel="noopener"
-          href={paths.figma}
+          // target="_blank"
+          // rel="noopener"
+          // href={paths.figma}
+          onClick={onScroll}
         >
           {t('details')}
         </Button>
@@ -86,8 +87,9 @@ export default function HomeForDesigner() {
   );
 
   const renderImg = (
-    <div style={{ zIndex: 20}}>
-    {/* <Box
+    <div style={{ zIndex: 20 }}>
+
+      {/* <Box
       component={m.img}
       src="/assets/images/home/for_designer.webp"
       variants={varFade().in}
@@ -103,7 +105,7 @@ export default function HomeForDesigner() {
         }`,
       }}
     /> */}
-    <HomePresent />
+      <HomePresent />
     </div>
   );
 
@@ -130,13 +132,13 @@ export default function HomeForDesigner() {
     >
       <Container component={MotionViewport}>
         <Grid container>
-          <Grid xs={12} md={6}>
+          <Grid sx={{ height: 777 }} xs={12} md={6}>
             {renderDescription}
           </Grid>
 
           {mdUp && <Grid md={6}>{renderImg}</Grid>}
-          {!mdUp && <div style={{ left: -500}}><HomePresent /></div>}
-          
+          {!mdUp && <div style={{ left: -500 }}><HomePresent /></div>}
+
         </Grid>
       </Container>
     </Box>

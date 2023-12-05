@@ -103,7 +103,7 @@ export default function InvoiceNewEditForm({ currentInvoice }: Props) {
       router.push(paths.dashboard.invoice.root);
       console.info('DATA', JSON.stringify(data, null, 2));
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       loadingSave.onFalse();
     }
   });
@@ -118,7 +118,7 @@ export default function InvoiceNewEditForm({ currentInvoice }: Props) {
       router.push(paths.dashboard.invoice.root);
       console.info('DATA', JSON.stringify(data, null, 2));
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       loadingSend.onFalse();
     }
   });

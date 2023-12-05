@@ -37,7 +37,7 @@ export default function KanbanColumnAdd() {
       }
       openAddColumn.onFalse();
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }, [columnName, openAddColumn]);
 

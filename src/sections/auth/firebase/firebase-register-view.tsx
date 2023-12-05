@@ -70,9 +70,9 @@ export default function FirebaseRegisterView() {
 
       router.push(href);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       reset();
-      setErrorMsg(typeof error === 'string' ? error : error.message);
+      // setErrorMsg(typeof error === 'string' ? error : error.message);
     }
   });
 
@@ -80,7 +80,7 @@ export default function FirebaseRegisterView() {
     try {
       await loginWithGoogle?.();
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 
@@ -88,7 +88,7 @@ export default function FirebaseRegisterView() {
     try {
       await loginWithGithub?.();
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 
@@ -96,7 +96,7 @@ export default function FirebaseRegisterView() {
     try {
       await loginWithTwitter?.();
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 

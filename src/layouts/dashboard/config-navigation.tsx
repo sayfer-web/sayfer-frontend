@@ -147,6 +147,7 @@ export function useNavData() {
               { title: t('account'), path: paths.dashboard.user.account },
               // { title: t('my transactions'), path: paths.dashboard.user.demo.transactions },
               { title: t('all_users'), path: paths.dashboard.user.list },
+              { title: t('referrals'), path: paths.dashboard.user.referrals },
             ],
           },
 

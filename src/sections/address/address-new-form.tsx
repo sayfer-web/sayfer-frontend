@@ -83,7 +83,7 @@ export default function AddressNewForm({ open, onClose, onCreate }: Props) {
       });
       onClose();
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   });
 

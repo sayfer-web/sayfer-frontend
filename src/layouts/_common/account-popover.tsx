@@ -68,7 +68,7 @@ export default function AccountPopover() {
       popover.onClose();
       router.replace('/');
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       enqueueSnackbar('Unable to logout!', { variant: 'error' });
     }
   };
